@@ -1,0 +1,14 @@
+[Unit]
+Description=Quark Rules Updater Service
+After=network.target
+
+[Service]
+Type=simple
+User=camdouglas
+WorkingDirectory=/Users/camdouglas/quark
+ExecStart=/usr/bin/python3 /Users/camdouglas/quark/tools_utilities/scripts/rules_compliance_checker.py
+Restart=on-failure
+RestartSec=30
+
+[Install]
+WantedBy=multi-user.target

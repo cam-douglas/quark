@@ -1,0 +1,175 @@
+# connectome/connectome.yaml
+# Declarative, human-readable connectome spec (module-level + population templates).
+# This is the single source of truth. The manager compiles this into runnable manifests.
+version: 1
+metadata:
+  name: "newborn_connectome"
+  description: "Module graph + population templates; compiled to small-world connectome."
+  authority_order:
+    - .cursor/rules/compliance_review.md   # SUPREME
+    - .cursor/rules/cognitive_brain_roadmap.md
+    - .cursor/rules/roles.md
+  sleep_triggers:
+    cognitive_load_pct: 85
+    memory_usage_pct: 80
+    error_rate_pct: 15
+defaults:
+  small_world:
+    k_nearest: 6        # ring neighbors per node (even integer)
+    rewiring_p: 0.08    # Watts–Strogatz rewiring probability
+  inter_module:
+    projection_density_pct: 1.5   # percent of possible inter-module edges
+    weight_mean: 1.0
+    weight_std: 0.25
+  neuromodulators:
+    dopamine: 1.0
+    serotonin: 1.0
+    norepinephrine: 1.0
+    acetylcholine: 1.0
+
+modules:
+  - id: ARCH
+    label: ArchitectureAgent
+    role: orchestrator
+    population: 64
+    excitatory_ratio: 0.8
+    required_links: [PFC, THA, ATT]
+  - id: PFC
+    label: PrefrontalCortex
+    role: executive_control
+    population: 512
+    excitatory_ratio: 0.8
+    required_links: [THA, BG, WM, DMN, HIP, ATT]
+  - id: BG
+    label: BasalGanglia
+    role: gating_selection
+    population: 256
+    excitatory_ratio: 0.5
+    required_links: [THA, PFC]
+    gate_targets: [WM, THA, PFC]
+  - id: THA
+    label: Thalamus
+    role: relay_hub
+    population: 256
+    excitatory_ratio: 0.9
+    required_links: [PFC, BG, WM, ATT]
+  - id: WM
+    label: WorkingMemory
+    role: short_term_buffers
+    population: 192
+    excitatory_ratio: 0.7
+    required_links: [PFC, THA, BG]
+  - id: DMN
+    label: DefaultModeNetwork
+    role: internal_simulation
+    population: 192
+    excitatory_ratio: 0.85
+    required_links: [PFC, HIP]
+  - id: HIP
+    label: Hippocampus
+    role: episodic_memory
+    population: 192
+    excitatory_ratio: 0.85
+    required_links: [PFC, DMN]
+  - id: ATT
+    label: SalienceAttention
+    role: salience_attention
+    population: 160
+    excitatory_ratio: 0.8
+    required_links: [THA, PFC]
+  # Dormant modules for future activation
+  - id: CB
+    label: Cerebellum
+    role: motor_learning_timing
+    population: 256
+    excitatory_ratio: 0.85
+    required_links: [PFC, THA]
+    activation: false  # Dormant until N1 stage
+  - id: V1
+    label: PrimaryVisualCortex
+    role: visual_processing
+    population: 384
+    excitatory_ratio: 0.8
+    required_links: [THA, ATT]
+    activation: false  # Dormant until sensory inputs enabled
+  - id: A1
+    label: PrimaryAuditoryCortex
+    role: auditory_processing
+    population: 256
+    excitatory_ratio: 0.8
+    required_links: [THA, ATT]
+    activation: false  # Dormant until sensory inputs enabled
+  - id: S1
+    label: PrimarySomatosensoryCortex
+    role: tactile_processing
+    population: 320
+    excitatory_ratio: 0.8
+    required_links: [THA, ATT]
+    activation: false  # Dormant until sensory inputs enabled
+
+policies:
+  topology:
+    enforce_small_world: true
+    enforce_small_world_by_module: true
+    target_clustering_coeff: 0.15
+    max_avg_path_length: 4.5
+    prevent_full_mesh: true
+  e_i_balance:
+    enforce_ratio: true
+    min_inhibitory_ratio: 0.15
+    max_inhibitory_ratio: 0.30
+  gating:
+    bg_controls:
+      - from: BG
+        to: [WM, THA, PFC]
+        mechanism: "RL_gating"
+  routing:
+    thalamic_relays:
+      - from_any: [PFC, WM, ATT]
+        through: THA
+        to_any: [PFC, WM, ATT]
+  weights:
+    clamp_min: 0.01
+    clamp_max: 3.0
+  control:
+    # Task-state routing: who can reconfigure whom
+    control_hierarchy:
+      - controller: ARCH
+        targets: [PFC, THA, BG]
+        operations: ["reconfigure", "gate", "modulate"]
+      - controller: PFC
+        targets: [WM, ATT, DMN]
+        operations: ["gate", "modulate"]
+      - controller: BG
+        targets: [WM, THA, PFC]
+        operations: ["gate"]
+    prevent_self_rewiring: true
+    require_authorization: true
+  energy_budget:
+    total_budget: 10000.0
+    edge_cost_base: 0.01
+    inter_module_multiplier: 1.5
+    enforcement: "warn"  # "strict", "warn", "log"
+  critical_periods:
+    F:  # Fetal stage
+      projection_density_scale: 0.5
+      gating_enabled: false
+      sensory_enabled: false
+      duration_hours: 168  # 1 week
+    N0:  # Neonate
+      projection_density_scale: 0.7
+      gating_enabled: true
+      sensory_enabled: true
+      sleep_cycles: true
+      duration_hours: 336  # 2 weeks
+    N1:  # Early Postnatal
+      projection_density_scale: 1.0
+      gating_enabled: true
+      sensory_enabled: true
+      sleep_cycles: true
+      cerebellar_modulation: true
+      duration_hours: 720  # 1 month
+
+exports:
+  dir: connectome/exports
+  formats: [graphml, json, manifests]

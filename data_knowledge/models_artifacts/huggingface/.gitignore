@@ -1,0 +1,15 @@
+# Cloud Reference File
+# Original: models/.cache/huggingface/.gitignore
+# Size: 252 bytes
+# Hash: e42ec931b26a62e2e6ce9c551a1ab36b
+# Status: ready_for_manual_upload
+# Upload Method: google_drive_web
+
+# This file has been prepared for cloud storage.
+# Manual upload required:
+# 1. Go to: https://drive.google.com/
+# 2. Create folder: "Quark_Project_Cloud"
+# 3. Upload: models/.cache/huggingface/.gitignore
+# 4. Update status in .cloud_references/
+
+# File ready for upload in: files_for_manual_upload/models/.cache/huggingface/.gitignore

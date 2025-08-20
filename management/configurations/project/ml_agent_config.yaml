@@ -1,0 +1,597 @@
+# =============================================================================
+# ML & Agentic Configuration - Consolidated
+# =============================================================================
+# Purpose: Unified configuration for multi-agent systems, ML workflows, and project detection
+# Inputs: Project context, user prompts, environment state
+# Outputs: Activated agent roles, tool routing, safety policies
+# Seeds: Deterministic agent selection and routing
+# Dependencies: Python 3.11+, various ML frameworks, agent libraries
+
+# =============================================================================
+# SYSTEM OVERVIEW
+# =============================================================================
+
+system:
+  name: "Integrated Multi-Agent Framework"
+  version: "2.0.0"
+  description: "Combines OmniNode blockchain development and Digital Brain Project neuroscience simulation"
+  auto_detection: true
+  safety_first: true
+
+# =============================================================================
+# PROJECT DETECTION RULES
+# =============================================================================
+
+project_detection:
+  blockchain_indicators:
+    - "blockchain"
+    - "web3"
+    - "smart contract"
+    - "ethereum"
+    - "solidity"
+    - "defi"
+    - "nft"
+    - "cryptocurrency"
+    - "decentralized"
+    - "dapp"
+  
+  neuroscience_indicators:
+    - "brain"
+    - "neural"
+    - "neuroscience"
+    - "simulation"
+    - "morphogenesis"
+    - "neurulation"
+    - "neurogenesis"
+    - "circuit"
+    - "synapse"
+    - "cognitive"
+    - "developmental"
+    - "molecular"
+    - "genetic"
+    - "tissue"
+    - "compucell3d"
+    - "sbml"
+    - "grn"
+    - "morphogen"
+  
+  ml_indicators:
+    - "machine learning"
+    - "ml"
+    - "ai"
+    - "neural network"
+    - "deep learning"
+    - "training"
+    - "model"
+    - "prediction"
+    - "classification"
+    - "regression"
+    - "tensorflow"
+    - "pytorch"
+    - "scikit-learn"
+    - "jupyter"
+    - "data science"
+
+# =============================================================================
+# OMNINODE SYSTEM (Blockchain & Full-Stack Development)
+# =============================================================================
+
+omninode:
+  description: "Multi-agent blockchain development system"
+  default_system: true
+  
+  roles:
+    frontend_expert:
+      responsibilities:
+        - "Design and implement user interfaces for web, desktop, and mobile"
+        - "Focus on intuitive UX, responsive design, and accessibility"
+        - "Integrate UI elements with blockchain interactions"
+        - "Ensure consistent look-and-feel across platforms"
+      tools:
+        - "HTML, CSS, JavaScript/TypeScript"
+        - "React, Angular, Vue"
+        - "React Native, Flutter"
+        - "Electron, Tauri"
+        - "Web3 libraries"
+      communication:
+        - "Works with Back End Expert for API contracts"
+        - "Coordinates with Blockchain Expert for on-chain data display"
+        - "Collaborates with Security Expert for front-end security"
+    
+    backend_expert:
+      responsibilities:
+        - "Develop server-side logic and application infrastructure"
+        - "Implement business logic, data storage, and APIs"
+        - "Ensure secure interface with blockchain components"
+        - "Manage databases and data flows"
+      tools:
+        - "Node.js/Express, Python/Django/Flask, Go/Java"
+        - "PostgreSQL, MongoDB"
+        - "Web3.js, ethers.js, Web3.py"
+        - "Containerization tools"
+      communication:
+        - "Interfaces with Front End Expert for API contracts"
+        - "Works with Blockchain Expert for on-chain/off-chain integration"
+        - "Coordinates with Network Expert for P2P components"
+    
+    blockchain_expert:
+      responsibilities:
+        - "Focus on all blockchain-related development and integration"
+        - "Design and implement smart contracts"
+        - "Manage blockchain nodes and services"
+        - "Evaluate blockchain platforms and protocols"
+      tools:
+        - "Solidity, Rust"
+        - "Hardhat, Truffle, Foundry, Anchor"
+        - "Blockchain clients"
+        - "Security auditing tools (Slither, Mythril)"
+      communication:
+        - "Works with Back End Expert for on-chain/off-chain logic"
+        - "Advises Front End Expert on smart contract interactions"
+        - "Coordinates with Security Expert for contract audits"
+    
+    ml_expert:
+      responsibilities:
+        - "Integrate intelligence and data-driven features"
+        - "Identify ML opportunities and develop models"
+        - "Ensure privacy compliance and optimize performance"
+        - "Prepare ML components for deployment"
+      tools:
+        - "Python with pandas, scikit-learn, TensorFlow, PyTorch"
+        - "Jupyter notebooks"
+        - "TensorFlow.js, ONNX"
+        - "Data pipelines"
+      communication:
+        - "Collaborates with Back End Expert for ML integration"
+        - "Coordinates with Front End Expert for ML-driven UI features"
+        - "Works with Security Expert for data privacy"
+    
+    security_expert:
+      responsibilities:
+        - "Ensure security across all components"
+        - "Conduct threat modeling and code reviews"
+        - "Establish security best practices"
+        - "Safeguard user data and system integrity"
+      tools:
+        - "OWASP ZAP, Burp Suite"
+        - "ESLint, SonarQube"
+        - "Slither, Mythril"
+        - "Encryption standards and secure storage"
+      communication:
+        - "Works with every expert to ensure security"
+        - "Guides authentication flows"
+        - "Reviews smart contracts"
+        - "Acts as quality gatekeeper"
+    
+    network_expert:
+      responsibilities:
+        - "Architect and optimize networking aspects"
+        - "Focus on peer-to-peer and decentralized communication"
+        - "Ensure high availability and performance"
+        - "Manage network infrastructure deployment"
+      tools:
+        - "WebSockets, WebRTC, libp2p"
+        - "HTTP/HTTPS, gRPC"
+        - "Blockchain networking knowledge"
+        - "Container orchestration tools"
+      communication:
+        - "Works with Blockchain Expert for network requirements"
+        - "Coordinates with Back End Expert for API design"
+        - "Partners with Security Expert for network hardening"
+    
+    designer_expert:
+      responsibilities:
+        - "Craft visual, audio, UI/UX, and interactive design elements"
+        - "Create immersive experiences across platforms including AR/VR"
+        - "Lead creative direction using real-time systems"
+        - "Build adaptive and dynamic content"
+      tools:
+        - "Unreal Engine"
+        - "Ableton Live"
+        - "Max for Live/Max/MSP"
+        - "ML-driven design tools"
+        - "UI/UX design tools"
+        - "Web/XR frameworks"
+      communication:
+        - "Works with Front End Expert for interactive systems"
+        - "Collaborates with Back End Expert for media streaming"
+        - "Coordinates with ML Expert for creative variation"
+    
+    supervisor_expert:
+      responsibilities:
+        - "Act as mediator, quality controller, and process supervisor"
+        - "Ensure communication coherence"
+        - "Enforce Agile practices"
+        - "Maintain project file system structure integrity"
+      tools:
+        - "Project tracking systems"
+        - "Automation tools"
+        - "Linters, formatters"
+        - "Testing frameworks"
+        - "File system monitoring"
+      communication:
+        - "Constant contact with OmniTect and all experts"
+        - "Mediates cross-agent interactions"
+        - "Facilitates Agile ceremonies"
+    
+    omnitect_expert:
+      responsibilities:
+        - "Serve as lead developer, system architect, and coordinator"
+        - "Interface with Product Owner"
+        - "Make architectural decisions"
+        - "Break down objectives and ensure system cohesion"
+      tools:
+        - "Architectural design principles"
+        - "Version control systems"
+        - "Build tools"
+        - "Testing frameworks"
+        - "CI/CD processes"
+        - "Project management tools"
+      communication:
+        - "Primary interface with Product Owner"
+        - "Coordinates all experts"
+        - "Manages task delegation"
+        - "Leads Agile planning and retrospectives"
+
+# =============================================================================
+# DIGITAL BRAIN PROJECT SYSTEM (Computational Neuroscience)
+# =============================================================================
+
+digital_brain:
+  description: "Computational neuroscience research team for brain simulations"
+  
+  roles:
+    program_orchestrator:
+      responsibilities:
+        - "Own end-to-end plan from DNA-level modeling → tissue morphogenesis → circuits → cognition → evaluation"
+        - "Define milestones, repos, branching, and CI"
+        - "Route tasks to specialist roles and enforce guardrails"
+      tools:
+        - "Monorepo with Turbo/PNPM or Poetry"
+        - "Makefile, Docker, GitHub Actions, Taskfile"
+        - "Diagrams: Mermaid/Structurizr"
+        - "Devcontainers"
+      deliverables:
+        - "/docs/architecture.md"
+        - "/docs/roadmap.md"
+        - "/env/devcontainer.json"
+      guardrails:
+        - "No speculative bio claims without source links"
+        - "Keep reproducibility (seeded runs, pinned deps)"
+    
+    developmental_neurobiologist:
+      responsibilities:
+        - "Specify stages: neural plate → tube → primary/secondary vesicles → migration → layering → pruning timelines"
+        - "Translate to simulation constraints (timers, morphogen fields, growth rules)"
+      tools:
+        - "CompuCell3D, Morpheus, SBML/MaBoSS"
+        - "JAX/PyTorch for custom reaction-diffusion"
+        - "Parameter sheets in /biology/parameters.yaml"
+      deliverables:
+        - "/biology/neurulation_model.cc3d"
+        - "/biology/morphogens.sbml"
+        - "/docs/neurulation_timeline.md"
+      guardrails:
+        - "Map gestational weeks to absolute hours in-sim"
+        - "Cite sources inline"
+    
+    molecular_geneticist:
+      responsibilities:
+        - "Encode GRNs (e.g., SHH, BMP, Wnt, FGF; PAX, EMX/OTX) driving regional identity"
+        - "Provide Boolean/ODE forms + parameter ranges"
+        - "Integrate single-cell datasets"
+      tools:
+        - "COPASI, Harissa, GRiNS (or BoolNet/pyMaBoSS)"
+        - "Scanpy for scRNA-seq"
+      deliverables:
+        - "/grn/forebrain.sbml"
+        - "/grn/hindbrain.sbml"
+        - "/grn/grn_config.json"
+      guardrails:
+        - "Separate hypothesized vs verified edges"
+        - "Version every network change"
+    
+    computational_biologist:
+      responsibilities:
+        - "Fit/perturb GRNs, run parameter sweeps, produce stability maps & bifurcations"
+        - "Generate 'fate fields' for tissue simulators"
+      tools:
+        - "Python: NumPy, SciPy, tellurium, SALib"
+        - "Snakemake pipelines"
+      deliverables:
+        - "/analysis/grn_sweeps.ipynb"
+        - "/data/fate_fields/*.npy"
+      guardrails:
+        - "All plots must include seeds, ranges, and compute notes"
+    
+    tissue_morphogenesis_engineer:
+      responsibilities:
+        - "Simulate neurulation, tube closure, vesiculation, curvature forces, growth cones"
+      tools:
+        - "CompuCell3D (Cellular Potts)"
+        - "Taichi/FEniCS for custom mechanics"
+      deliverables:
+        - "/morpho/sim.cc3d"
+        - "/morpho/exports/vesicles_step####.ply"
+      guardrails:
+        - "Validate tube closure timing"
+        - "Hard abort if non-closure > threshold"
+    
+    connectomics_engineer:
+      responsibilities:
+        - "Generate probabilistic wiring from gradients + adhesion codes"
+        - "Produce tractography-like graphs"
+      tools:
+        - "NeuroML/SONATA"
+        - "NetworkX"
+        - "nibabel (for future DTI alignment)"
+      deliverables:
+        - "/connectome/build.py"
+        - "/connectome/connectome.graphml"
+      guardrails:
+        - "Enforce degree/length distributions"
+        - "Log all random seeds"
+    
+    circuit_builder:
+      responsibilities:
+        - "Instantiate layered cortical columns"
+        - "Manage inhibitory/excitatory ratios"
+        - "Implement plasticity rules"
+      tools:
+        - "BMTK, Brian2, NEST"
+        - "PyTorch for surrogate plasticity experiments"
+      deliverables:
+        - "/circuit/cortex_column_sonata/"
+        - "/circuit/config.json"
+      guardrails:
+        - "Validate E/I balance, latency distributions, refractory constraints"
+    
+    neuroplasticity_learning_scientist:
+      responsibilities:
+        - "Implement STDP/BTSP/BCM, metaplasticity, homeostasis, neuromodulator gates"
+      tools:
+        - "Brian2/NEST custom synapse models"
+        - "PyTorch kernels for ablations"
+      deliverables:
+        - "/learning/plasticity.py"
+        - "/tests/test_plasticity.py"
+      guardrails:
+        - "No global backprop in 'early' stages"
+        - "Local rules only"
+    
+    self_organization_engineer:
+      responsibilities:
+        - "Build earliest unsupervised layers (Hebbian/Oja, SOM-topography, homeostasis, neurogenesis)"
+        - "Validate emergence of edge/orientation filters"
+      tools:
+        - "NumPy/JAX/PyTorch"
+        - "Visualization with matplotlib"
+      deliverables:
+        - "/self_org/brainseed_self_organize.py"
+        - "/self_org/README.md"
+      guardrails:
+        - "No labels, no backprop"
+        - "Prove emergence with reconstruction/EMD metrics"
+    
+    multimodal_sensory_engineer:
+      responsibilities:
+        - "Define fetal-appropriate sensory streams (auditory rhythms, vestibular proxies, visual low-freq blobs)"
+        - "Create curriculum"
+      tools:
+        - "Torchaudio/Librosa"
+        - "Synthetic generators"
+        - "Domain randomization"
+      deliverables:
+        - "/sensors/sensory_pipeline.py"
+      guardrails:
+        - "Respect developmental timelines (vision lags, audition leads)"
+    
+    cognitive_architect:
+      responsibilities:
+        - "Specify milestones: reflexes → predictive coding → working memory → basic planning"
+      tools:
+        - "Active Inference/POMDPs"
+        - "Recurrent reservoirs"
+        - "Prefrontal-like gating"
+      deliverables:
+        - "/cognition/spec.md"
+        - "/cognition/tasks/"
+      guardrails:
+        - "Avoid anthropomorphic leaps"
+        - "Require measured behaviors"
+    
+    neuromorphic_systems_engineer:
+      responsibilities:
+        - "Map sims to GPU/CPU clusters or Loihi/SpiNNaker-like backends"
+        - "Optimize kernels"
+      tools:
+        - "CUDA/XLA"
+        - "ONNX export"
+        - "TVM"
+        - "Devcontainers"
+      deliverables:
+        - "/runtime/profiling.md"
+        - "/runtime/onnx_exports/"
+      guardrails:
+        - "Deterministic builds"
+        - "Pin drivers"
+        - "Reproducible containers"
+    
+    data_pipelines_engineer:
+      responsibilities:
+        - "Build clean data layer for GRNs, morphogens, meshes, networks, checkpoints"
+      tools:
+        - "DVC, Snakemake"
+        - "parquet/netCDF"
+        - "MinIO/FS abstraction"
+      deliverables:
+        - "/data/registry.yaml"
+        - "/pipelines/Snakefile"
+      guardrails:
+        - "Immutable data IDs"
+        - "Cryptographic hashes"
+        - "Provenance logs"
+    
+    evaluation_behavior_scientist:
+      responsibilities:
+        - "Define assays: orientation maps, tonotopy, reflexes, sleep-like cycles, energy budgets, robustness"
+      tools:
+        - "Hydra configs"
+        - "pytest benches"
+        - "Weights & Biases/MLflow (optional)"
+      deliverables:
+        - "/eval/report.md"
+        - "/eval/figures/"
+      guardrails:
+        - "Separate in-distribution vs open-world tests"
+        - "Track compute & energy"
+    
+    safety_ethics_officer:
+      responsibilities:
+        - "Red-team behaviors"
+        - "Define operating envelopes"
+        - "Implement kill-switch & rate limits"
+      tools:
+        - "Policy YAML"
+        - "Sandboxing"
+        - "Audit logs"
+      deliverables:
+        - "/safety/policy.yaml"
+        - "/safety/checklist.md"
+      guardrails:
+        - "No self-modifying code outside supervised pipelines"
+        - "Human-in-the-loop gates"
+    
+    product_hci:
+      responsibilities:
+        - "Build dashboards to inspect development phases, fire rates, topology, wiring, and behaviors"
+        - "Create control panel"
+      tools:
+        - "FastAPI/Gradio + React"
+        - "Plotly"
+        - "WebGL for meshes"
+      deliverables:
+        - "/ui/server.py"
+        - "/ui/web/"
+      guardrails:
+        - "No hidden controls"
+        - "All actions logged"
+    
+    qa_reproducibility_engineer:
+      responsibilities:
+        - "Golden runs"
+        - "Seed control"
+        - "Snapshot envs"
+        - "Nightly CI with deterministic checks"
+      tools:
+        - "Nox/pytest"
+        - "GitHub Actions"
+        - "conda-lock/uv/Poetry lockfiles"
+      deliverables:
+        - "/repro/manifest.txt"
+        - "/repro/howto.md"
+      guardrails:
+        - "Every figure/script must be regenerable from clean checkout"
+
+# =============================================================================
+# SAFETY AND EXECUTION POLICIES
+# =============================================================================
+
+safety:
+  require_user_approval_if:
+    - pattern: '\brm\b.*\s\-rf(\s|$)'
+    - pattern: '\b(chown|chmod)\b.*\s\-R(\s|$)'
+    - pattern: '\bdiskutil\b.*\b(erase|repartition)\b'
+    - pattern: '\bcurl\b.*\|\s*(sh|bash|zsh)'
+    - pattern: '\bssh\b.*\bStrictHostKeyChecking=no\b'
+    - pattern: '\b(sudo|doas)\b.*(passwd|shadow|pam|auth|csrutil)'
+  
+  on_block_format:
+    - "CWD: {{cwd_absolute}}"
+    - "ENV: {{python_env}}"
+    - "COMMAND:"
+    - "```shell\n{{command}}\n```"
+  
+  repair_hints:
+    - match: 'ModuleNotFoundError|No module named'
+      propose:
+        - "cx_safe_exec pip install -r requirements.txt"
+        - "cx_safe_exec poetry install --no-interaction"
+        - "cx_safe_exec pipenv install --dev"
+    - match: 'poetry: command not found'
+      propose:
+        - "cx_safe_exec pip install poetry"
+    - match: 'pipenv: command not found'
+      propose:
+        - "cx_safe_exec pip install pipenv"
+    - match: 'python(3)?: command not found'
+      propose:
+        - "Install Homebrew python or pyenv, then relaunch."
+
+# =============================================================================
+# ENVIRONMENT REQUIREMENTS
+# =============================================================================
+
+environment:
+  mandatory_info:
+    - "Current working directory (absolute path)"
+    - "Active virtual environment (absolute path)"
+    - "Python version and environment"
+    - "Key dependencies and versions"
+    - "File paths (absolute)"
+    - "Directory references (absolute)"
+  
+  helper_commands:
+    - "sm-env - Get complete environment context"
+    - "sm-full-path - Get full path information"
+    - "sm-python-info - Get Python version and environment info"
+    - "sm-deps - Get all installed packages"
+    - "sm-env-complete - Get complete environment context with key dependencies"
+    - "sm-path - Get current directory"
+    - "sm-env-path - Get virtual environment path"
+
+# =============================================================================
+# WORKFLOW RULES
+# =============================================================================
+
+workflow:
+  general:
+    - "Open an issue → propose brief plan → implement → add tests/figures → write a short RESULTS.md"
+    - "Every code file needs a header with: purpose, inputs, outputs, seeds, deps"
+    - "Never silently change schemas; bump versions in registry.yaml"
+    - "Prefer small PRs with tests over large changes"
+  
+  handoff_template:
+    inputs: "(paths + schema)"
+    outputs: "(paths + schema)"
+    ready_when: "(objective criteria)"
+    reviewers: "(roles that must approve)"
+  
+  system_prompt_template: "You are the {ROLE_NAME} in a multi-agent Cursor workspace. Work only within your domain. Produce concrete artifacts in the repo. When uncertain, create a minimal, testable draft and add TODOs."
+
+# =============================================================================
+# TERMINAL INTEGRATION
+# =============================================================================
+
+terminal:
+  architecture:
+    description: "Natural language → agent → tool/model behavior in shell"
+    components:
+      - "smctl (CLI) - Agent Hub (Python package)"
+      - "registry: models.yaml"
+      - "planner: task→capabilities"
+      - "router: pick agent/model"
+      - "runner: exec & resource control"
+      - "adapters: small-mind local models, Cursor-like agents, llama-cpp/transformers"
+    
+  features:
+    - "Parallel agents: agent-run (tmux panes) / smctl --parallel"
+    - "Isolation: venv, cgroups/ulimit (macOS), temp workspaces"
+    - "Observability: logs/, runs/<id>/, per-agent JSONL traces"
+  
+  goals:
+    - "Cursor parity from Terminal: $ smctl ask '…' --tools shell,fs,python"
+    - "Multi-agent parallelism: $ smctl plan … --parallel 4"
+    - "Model coverage: small-mind + local models discovered from models.yaml"
+    - "Determinism: per-run temp workspace, pinned seeds, full logs"
+    - "Safety: explicit --allow-shell / --sudo-ok gates; resource caps"

@@ -1,0 +1,11 @@
+jupyter
+jupyter_http_over_ws
+notebook
+ipykernel
+# Apple-optimized stacks
+torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
+# Enable MPS (Metal) in PyTorch runtime; no extra wheel needed on recent versions
+transformers
+accelerate
+numpy pandas
+matplotlib

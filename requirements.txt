@@ -1,0 +1,126 @@
+# Quark Brain Simulation ML Framework - Requirements
+# Core dependencies for brain simulation and ML integration
+
+# Core Python packages
+numpy>=1.24.0
+scipy>=1.10.0
+matplotlib>=3.7.0
+pandas>=2.0.0
+seaborn>=0.12.0
+
+# Machine Learning and Neural Networks
+torch>=2.0.0
+torchvision>=0.15.0
+torchaudio>=2.0.0
+transformers>=4.30.0
+accelerate>=0.20.0
+datasets>=2.12.0
+
+# Neural Simulation
+brian2>=2.5.0
+nengo>=3.2.0
+nest>=3.5.0
+
+# vLLM for high-performance inference
+vllm>=0.2.0
+
+# Network Analysis
+networkx>=3.1
+igraph>=0.10.0
+graphviz>=0.20.0
+
+# Data Processing and Analysis
+scikit-learn>=1.3.0
+scikit-image>=0.21.0
+opencv-python>=4.8.0
+pillow>=10.0.0
+
+# Visualization
+plotly>=5.15.0
+bokeh>=3.2.0
+dash>=2.11.0
+streamlit>=1.25.0
+
+# Configuration and YAML
+pyyaml>=6.0
+configparser>=5.3.0
+python-dotenv>=1.0.0
+
+# API and Web Integration
+requests>=2.31.0
+aiohttp>=3.8.0
+fastapi>=0.100.0
+uvicorn>=0.23.0
+
+# Database and Storage
+sqlalchemy>=2.0.0
+sqlite3
+h5py>=3.8.0
+zarr>=2.15.0
+
+# Scientific Computing
+sympy>=1.12.0
+mpmath>=1.3.0
+numba>=0.57.0
+
+# Development and Testing
+pytest>=7.4.0
+pytest-cov>=4.1.0
+black>=23.7.0
+flake8>=6.0.0
+mypy>=1.5.0
+
+# Documentation
+sphinx>=7.1.0
+sphinx-rtd-theme>=1.3.0
+myst-parser>=2.0.0
+
+# Monitoring and Logging
+loguru>=0.7.0
+wandb>=0.15.0
+tensorboard>=2.13.0
+
+# Cloud and Distributed Computing
+boto3>=1.28.0
+google-cloud-storage>=2.10.0
+dask>=2023.8.0
+ray>=2.6.0
+
+# Bioinformatics (for Alphagenome integration)
+biopython>=1.81.0
+pysam>=0.21.0
+
+# Consciousness and Brain Simulation
+pytorch-geometric>=2.3.0
+torch-scatter>=2.1.0
+torch-sparse>=0.6.0
+
+# Hardware Acceleration
+cupy-cuda11x>=12.0.0; sys_platform != "darwin"
+cupy-cuda12x>=12.0.0; sys_platform != "darwin"
+
+# Optional: Neuromorphic Hardware
+# loihi>=1.0.0  # Intel Loihi support
+# spinnaker>=1.0.0  # SpiNNaker support
+
+# Development Tools
+jupyter>=1.0.0
+ipython>=8.14.0
+notebook>=7.0.0
+
+# File Organization and Utilities
+pathlib2>=2.3.7
+watchdog>=3.0.0
+click>=8.1.0
+
+# Security and Validation
+cryptography>=41.0.0
+passlib>=1.7.4
+
+# Performance Monitoring
+psutil>=5.9.0
+memory-profiler>=0.61.0
+
+# Environment Management
+conda>=23.0.0
+pip>=23.0.0

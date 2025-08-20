@@ -1,0 +1,52 @@
+# Autonomous Code Editing System Requirements
+# ==========================================
+# Purpose: Dependencies for safe autonomous code editing with DeepSeek and Claude APIs
+# Inputs: API keys, safety validation, code generation
+# Outputs: Safe code modifications, validation reports, audit trails
+# Seeds: Deterministic safety enforcement
+# Dependencies: Python 3.8+, async support, cryptographic validation
+
+# Core dependencies
+PyYAML>=6.0
+asyncio-compat>=0.1.2
+
+# API clients
+anthropic>=0.18.0  # Claude API
+openai>=1.0.0      # DeepSeek API (compatible)
+
+# Git integration
+GitPython>=3.1.0
+
+# File handling and validation
+pathlib2>=2.3.0
+watchdog>=3.0.0
+
+# Cryptographic validation
+cryptography>=41.0.0
+hashlib-compat>=1.0.0
+
+# Logging and monitoring
+structlog>=23.0.0
+rich>=13.0.0
+
+# Testing and validation
+pytest>=7.0.0
+pytest-asyncio>=0.21.0
+pytest-cov>=4.0.0
+
+# Code quality
+black>=23.0.0
+flake8>=6.0.0
+mypy>=1.0.0
+
+# Optional: Enhanced monitoring
+prometheus-client>=0.17.0
+grafana-api>=1.0.0
+
+# Optional: Advanced security
+bandit>=1.7.0
+safety>=2.0.0
+
+# Development tools
+pre-commit>=3.0.0
+tox>=4.0.0

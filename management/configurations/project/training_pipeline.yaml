@@ -1,0 +1,343 @@
+# Small-Mind Agent Hub Training Pipeline Configuration
+# This file defines how the system learns and improves exponentially
+
+training_pipeline:
+  name: "Small-Mind Exponential Learning Pipeline"
+  version: "1.0.0"
+  description: "Continuous improvement through feedback loops and cloud-based training"
+  
+  # Data Collection Configuration
+  data_collection:
+    feedback:
+      enabled: true
+      collection_methods:
+        - "automatic_quality_assessment"
+        - "user_ratings"
+        - "execution_metrics"
+        - "performance_analysis"
+      
+      quality_metrics:
+        - "code_quality"
+        - "explanation_quality"
+        - "actionability"
+        - "completeness"
+        - "clarity"
+        - "execution_success"
+        - "response_time"
+        - "resource_usage"
+      
+      thresholds:
+        min_feedback_for_training: 100
+        min_quality_score: 0.3
+        max_error_rate: 0.2
+    
+    metrics:
+      enabled: true
+      collection_frequency: "every_execution"
+      metrics_to_track:
+        - "execution_time"
+        - "memory_usage"
+        - "cpu_usage"
+        - "gpu_usage"
+        - "success_rate"
+        - "error_types"
+        - "response_length"
+        - "complexity_score"
+  
+  # Training Triggers
+  training_triggers:
+    automatic:
+      enabled: true
+      conditions:
+        - "feedback_threshold_reached"
+        - "quality_degradation_detected"
+        - "performance_regression"
+        - "new_capability_requested"
+      
+      thresholds:
+        feedback_count: 100
+        quality_threshold: 0.7
+        performance_threshold: 0.8
+    
+    scheduled:
+      enabled: true
+      intervals:
+        - "hourly": 3600
+        - "daily": 86400
+        - "weekly": 604800
+    
+    manual:
+      enabled: true
+      triggers:
+        - "user_request"
+        - "admin_command"
+        - "emergency_update"
+  
+  # Model Improvement Strategies
+  improvement_strategies:
+    routing_optimization:
+      enabled: true
+      methods:
+        - "feedback_based_routing"
+        - "performance_based_selection"
+        - "complexity_aware_routing"
+        - "user_preference_learning"
+      
+      learning_rate: 0.01
+      update_frequency: "every_training_cycle"
+    
+    intent_detection:
+      enabled: true
+      methods:
+        - "pattern_learning"
+        - "semantic_analysis"
+        - "context_awareness"
+        - "user_behavior_modeling"
+      
+      training_data:
+        - "user_prompts"
+        - "successful_routes"
+        - "user_feedback"
+        - "execution_results"
+    
+    response_quality:
+      enabled: true
+      methods:
+        - "quality_metric_learning"
+        - "response_template_optimization"
+        - "code_generation_improvement"
+        - "explanation_clarity_enhancement"
+      
+      target_metrics:
+        code_quality: 0.9
+        explanation_quality: 0.9
+        actionability: 0.9
+        completeness: 0.9
+        clarity: 0.9
+  
+  # Cloud Training Configuration
+  cloud_training:
+    enabled: true
+    endpoints:
+      primary: "https://api.smallmind.ai/training/v1"
+      backup: "https://backup.smallmind.ai/training/v1"
+      local: "http://localhost:8000/training"
+    
+    authentication:
+      method: "bearer_token"
+      token_refresh: "auto"
+      fallback_auth: "api_key"
+    
+    data_upload:
+      batch_size: 1000
+      compression: "gzip"
+      encryption: "aes256"
+      retry_attempts: 3
+      timeout: 30
+    
+    model_download:
+      enabled: true
+      update_frequency: "after_training"
+      validation: "checksum_verification"
+      rollback: "enabled"
+  
+  # Learning Algorithms
+  learning_algorithms:
+    routing_optimization:
+      algorithm: "reinforcement_learning"
+      framework: "stable_baselines3"
+      hyperparameters:
+        learning_rate: 0.0003
+        batch_size: 64
+        buffer_size: 1000000
+        gamma: 0.99
+        tau: 0.005
+    
+    intent_classification:
+      algorithm: "transformer_fine_tuning"
+      framework: "transformers"
+      model: "distilbert-base-uncased"
+      hyperparameters:
+        learning_rate: 2e-5
+        batch_size: 16
+        epochs: 3
+        warmup_steps: 500
+    
+    quality_assessment:
+      algorithm: "gradient_boosting"
+      framework: "lightgbm"
+      hyperparameters:
+        learning_rate: 0.1
+        num_leaves: 31
+        max_depth: -1
+        min_data_in_leaf: 20
+    
+    response_generation:
+      algorithm: "sequence_to_sequence"
+      framework: "transformers"
+      model: "t5-base"
+      hyperparameters:
+        learning_rate: 5e-5
+        batch_size: 8
+        epochs: 5
+        max_length: 512
+  
+  # Performance Monitoring
+  performance_monitoring:
+    enabled: true
+    metrics:
+      - "accuracy"
+      - "precision"
+      - "recall"
+      - "f1_score"
+      - "response_time"
+      - "resource_usage"
+      - "user_satisfaction"
+      - "error_rate"
+    
+    alerts:
+      enabled: true
+      thresholds:
+        accuracy_drop: 0.05
+        performance_degradation: 0.1
+        error_rate_increase: 0.02
+        resource_usage_spike: 2.0
+    
+    dashboards:
+      enabled: true
+      refresh_rate: "5s"
+      metrics_display:
+        - "real_time_performance"
+        - "training_progress"
+        - "quality_metrics"
+        - "user_feedback"
+        - "system_health"
+  
+  # Exponential Learning Features
+  exponential_learning:
+    enabled: true
+    acceleration_factors:
+      - "feedback_velocity"
+      - "data_quality_improvement"
+      - "model_complexity_adaptation"
+      - "user_interaction_patterns"
+    
+    learning_curves:
+      - "intent_detection_accuracy"
+      - "routing_optimization_speed"
+      - "response_quality_improvement"
+      - "user_satisfaction_growth"
+    
+    adaptation_strategies:
+      - "dynamic_threshold_adjustment"
+      - "adaptive_learning_rates"
+      - "context_aware_training"
+      - "personalized_optimization"
+    
+    convergence_criteria:
+      accuracy_threshold: 0.95
+      improvement_rate: 0.01
+      stability_period: 24  # hours
+      max_iterations: 1000
+  
+  # Safety and Ethics
+  safety:
+    enabled: true
+    constraints:
+      - "no_self_modification"
+      - "no_unauthorized_access"
+      - "no_data_leakage"
+      - "no_biased_learning"
+    
+    monitoring:
+      - "behavior_analysis"
+      - "output_validation"
+      - "resource_limits"
+      - "access_control"
+    
+    fallbacks:
+      - "safe_mode_activation"
+      - "rollback_to_previous_version"
+      - "human_oversight_required"
+      - "emergency_shutdown"
+  
+  # Deployment and Rollout
+  deployment:
+    strategy: "gradual_rollout"
+    stages:
+      - "internal_testing": 0.1
+      - "beta_users": 0.2
+      - "early_adopters": 0.5
+      - "full_deployment": 1.0
+    
+    validation:
+      - "automated_testing"
+      - "performance_benchmarks"
+      - "user_acceptance_testing"
+      - "safety_validation"
+    
+    rollback:
+      enabled: true
+      triggers:
+        - "performance_degradation"
+        - "safety_violation"
+        - "user_complaints"
+        - "system_instability"
+  
+  # Maintenance and Updates
+  maintenance:
+    schedule: "continuous"
+    tasks:
+      - "data_cleanup"
+      - "model_optimization"
+      - "performance_tuning"
+      - "security_updates"
+    
+    cleanup:
+      old_feedback_days: 90
+      old_metrics_days: 30
+      old_models_days: 7
+      max_storage_gb: 100
+    
+    optimization:
+      enabled: true
+      frequency: "weekly"
+      methods:
+        - "hyperparameter_tuning"
+        - "architecture_search"
+        - "data_augmentation"
+        - "ensemble_learning"
+
+# Example usage and configuration
+example_usage:
+  quick_start: |
+    # Enable automatic training
+    export SM_TRAINING_ENABLED=true
+    export SM_CLOUD_ENDPOINT="https://api.smallmind.ai/training"
+    export SM_API_KEY="your_api_key_here"
+    
+    # Run with feedback collection
+    smctl auto "Your question here" --collect-feedback
+    
+    # Check training status
+    smctl training-status
+    
+    # Manual training trigger
+    smctl trigger-training
+  
+  configuration: |
+    # Local training configuration
+    training_pipeline:
+      cloud_training:
+        enabled: false
+        local_endpoint: "http://localhost:8000"
+      
+      data_collection:
+        feedback:
+          min_feedback_for_training: 50
+          quality_threshold: 0.5
+      
+      learning_algorithms:
+        routing_optimization:
+          algorithm: "simple_reinforcement"
+          learning_rate: 0.1

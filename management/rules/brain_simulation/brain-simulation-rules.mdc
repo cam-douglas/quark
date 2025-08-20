@@ -1,0 +1,289 @@
+# 06 Brain Simulation Rules
+*🟡 OPERATIONAL LEVEL (Priority 6-8)*
+
+## 📚 **INTERNAL INDEX & CROSS-REFERENCES**
+
+### **🏛️ SUPREME AUTHORITY REFERENCES**
+- **00-compliance_review.md** - Supreme authority, can override any rule set
+- **00-MASTER_INDEX.md** - Comprehensive cross-referenced index of all rule files
+- **00-HIERARCHY_DOCUMENTATION.md** - Complete hierarchy documentation and guidelines
+- **00-HIERARCHY_ANALYSIS.md** - Comprehensive hierarchy analysis and recommendations
+- **00-HIERARCHY_VISUAL_MAP.md** - Visual representation of the complete hierarchy
+
+### **🔴 EXECUTIVE LEVEL REFERENCES**
+- **01-cognitive_brain_roadmap.md** - Source document for brain simulation architecture
+- **01-index.md** - Main index and navigation system
+- **02-roles.md** - Neuro-architectural framework implementation
+- **02-agi_integration_complete.md** - AGI integration status and completion report
+
+### **🟠 MANAGEMENT LEVEL REFERENCES**
+- **03-master-config.mdc** - Primary coordination layer for brain simulation
+- **03-integrated-rules.mdc** - Integrated rules system and coordination
+- **04-unified_learning_architecture.md** - Autonomous cognitive evolution framework
+- **05-cognitive-brain-rules.mdc** - Brain simulation implementation framework
+
+### **🟡 OPERATIONAL LEVEL REFERENCES**
+- **06-brain-simulation-rules.mdc** - Technical brain simulation details
+- **07-omnirules.mdc** - General development team (parallel system)
+- **08-braincomputer.mdc** - Technical implementation support
+
+### **🟢 SPECIALIZED SYSTEMS REFERENCES**
+- **09-cognitive_load_sleep_system.md** - Performance management and sleep cycles
+- **10-testing_validation_rules.md** - Testing protocols and validation systems
+- **11-validation_framework.md** - Validation systems and frameworks
+- **12-multi_model_validation_protocol.md** - Multi-model validation protocols
+
+### **🔵 INTEGRATION & ROADMAP REFERENCES**
+- **13-integrated_task_roadmap.md** - Task coordination and integration planning
+- **14-master_roadmap_integration.md** - Master roadmap integration and coordination
+- **15-roadmap_integration_summary.md** - Roadmap integration summaries and status
+- **16-biological_agi_blueprint.md** - Biological AGI specifications and blueprint
+
+### **🟣 TECHNICAL IMPLEMENTATION REFERENCES**
+- **17-ml_workflow.md** - Machine learning workflows and processes
+- **18-cloud_computing_rules.md** - Cloud computing specifications and rules
+- **19-testing_protocol.md** - Testing protocols and procedures
+- **20-technicalrules.md** - Technical specifications and rules
+
+### **⚪ UTILITY & SUPPORT REFERENCES**
+- **21-cursor_hierarchy.md** - Cursor hierarchy management
+- **22-activation_triggers.md** - Activation trigger systems
+- **23-enhanced_terminal_rules.md** - Terminal rule enhancements
+- **24-terminal_rules.zsh** - Terminal rule implementations
+
+### **🔘 LEGACY & ARCHIVE REFERENCES**
+- **25-agi_capabilities.md** - AGI capability specifications
+- **26-organization_summary.md** - Organization summaries
+- **27-cursor_hierarchy_summary.md** - Hierarchy summaries
+- **28-unified_learning_integration_summary.md** - Learning integration summaries
+
+### **🟤 CONFIGURATION & TEMPLATES REFERENCES**
+- **29-template_inspector.py** - Template inspection tools
+- **30-mutator.py** - Mutation utilities
+- **31-visualize_graph.py** - Visualization tools
+
+### **🧬 DNA & BIOLOGICAL REFERENCES**
+- **32-dna_controller.py** - DNA controller implementation
+- **33-DNA_CONTROLLER_README.md** - DNA controller documentation
+- **34-requirements_dna.txt** - DNA requirements
+
+### **🔧 SPECIALIZED RULES REFERENCES**
+- **35-rules_general.md** - General rules and guidelines
+- **36-rules_model_behavior.md** - Model behavior rules and specifications
+- **37-rules_security.md** - Security rules and protocols
+
+### **⚙️ UTILITY & CONFIGURATION REFERENCES**
+- **38-explain.mdc** - Explanation system and documentation
+- **39-cursor_rules_updater.service** - Cursor rules updater service configuration
+- **40-markers.json** - Configuration markers and data
+
+### **📦 BACKUP & ARCHIVE REFERENCES**
+- **41-terminal_rules_backup.zsh** - Backup of terminal rules
+- **42-brain_simulation_rules_duplicate.md** - Duplicate brain simulation rules (archive)
+- **43-brain_simulation_rules_duplicate.mdc** - Duplicate brain simulation rules (archive)
+- **44-cognitive_brain_rules_duplicate.md** - Duplicate cognitive brain rules (archive)
+
+### **🔗 QUICK NAVIGATION**
+- **Master Index**: 00-MASTER_INDEX.md
+- **Complete Hierarchy**: 00-COMPLETE_HIERARCHY.md
+- **Compliance Review**: 00-compliance_review.md
+- **Visual Map**: 00-HIERARCHY_VISUAL_MAP.md
+
+---
+
+---
+alwaysApply: true
+---
+## DEVELOPMENTAL PILLARS (5-Stage Progression)
+
+### Pillar 1 – Basic Neural Dynamics
+**Goal**: Establish cortical-subcortical loops
+**Components**: Spiking/RNN units with Hebbian-like plasticity
+**Implementation**: Basic neural networks with learning rules
+**Validation**: Neural dynamics match biological patterns
+
+### Pillar 2 – Gating & Reinforcement
+**Goal**: Implement action selection and reinforcement learning
+**Components**: Basal ganglia-inspired gating with dopamine-like signals
+**Implementation**: RL agents with gating mechanisms
+**Validation**: Learning patterns match reinforcement principles
+
+### Pillar 3 – Working Memory & Control
+**Goal**: Enable context-sensitive routing and working memory
+**Components**: Short-term buffer modules with thalamic relay
+**Implementation**: Memory buffers with control mechanisms
+**Validation**: Memory capacity and duration match biological limits
+
+### Pillar 4 – Meta-Control & Simulation
+**Goal**: Integrate internal simulation with hippocampal memory
+**Components**: DMN-like module for internal counterfactual reasoning
+**Implementation**: Internal simulator with memory integration
+**Validation**: Internal simulation quality and coherence
+
+### Pillar 5 – Proto-Consciousness
+**Goal**: Minimal introspection, agency, and awareness emergence
+**Components**: Architecture Agent integrates signals into global workspace
+**Implementation**: Global workspace with introspection capabilities
+**Validation**: Consciousness-like behaviors and self-awareness
+
+---
+
+## EXPERT ROLES & RESPONSIBILITIES
+
+### Neural Dynamics Engineer
+**Focus**: Implement spiking neurons, Hebbian plasticity, neural dynamics
+**Tools**: PyTorch, JAX, Brian2, NEST for neural simulation
+**Deliverables**: Neural dynamics models, plasticity rules, spiking implementations
+
+### Brain Architecture Engineer
+**Focus**: Design and implement core brain modules and connections
+**Tools**: NetworkX, PyTorch, attention mechanisms, recurrent networks
+**Deliverables**: Brain module implementations, connection patterns, architecture diagrams
+
+### Memory Systems Engineer
+**Focus**: Implement working memory, episodic memory, hippocampal systems
+**Tools**: GRU, LSTM, memory networks, pattern completion algorithms
+**Deliverables**: Memory systems, encoding/retrieval mechanisms, capacity management
+
+### Consciousness Engineer
+**Focus**: Implement proto-consciousness, global workspace, introspection
+**Tools**: Language models, attention mechanisms, self-reflection systems
+**Deliverables**: Consciousness components, introspection mechanisms, awareness systems
+
+### Integration Engineer
+**Focus**: Coordinate all brain components, ensure biological plausibility
+**Tools**: System integration, validation frameworks, biological accuracy checks
+**Deliverables**: Integrated brain simulation, validation reports, performance metrics
+
+### Validation Engineer
+**Focus**: Validate brain simulation against neuroscience benchmarks
+**Tools**: Neuroscience literature, biological validation, performance metrics
+**Deliverables**: Validation reports, biological accuracy assessments, benchmark comparisons
+
+---
+
+## DEVELOPMENT WORKFLOW
+
+### 1. Component Design Phase
+- Design individual brain modules following biological principles
+- Ensure realistic neural connectivity patterns
+- Implement appropriate learning and plasticity mechanisms
+- Validate against neuroscience literature
+
+### 2. Integration Phase
+- Connect modules through realistic neural pathways
+- Establish cortical-subcortical communication loops
+- Implement Architecture Agent coordination
+- Test component interactions and signal flow
+
+### 3. Validation Phase
+- Validate against neuroscience benchmarks
+- Check biological accuracy and plausibility
+- Test performance metrics and emergent behaviors
+- Compare with known brain development patterns
+
+### 4. Testing Phase
+- Test brain simulation performance
+- Validate emergent behaviors and consciousness-like features
+- Check developmental progression through pillars
+- Ensure graceful degradation and error handling
+
+### 5. Iteration Phase
+- Refine components based on validation results
+- Optimize performance and biological accuracy
+- Extend functionality beyond newborn brain
+- Document architecture and implementation details
+
+---
+
+## QUALITY ASSURANCE STANDARDS
+
+### Biological Plausibility
+- All components follow known brain architecture
+- Neural connectivity patterns match biological reality
+- Learning mechanisms align with neuroscience principles
+- Developmental timeline matches real brain development
+
+### Performance Validation
+- Simulation performance meets neuroscience benchmarks
+- Neural dynamics match biological patterns
+- Memory capacity and duration align with biological limits
+- Consciousness-like behaviors emerge naturally
+
+### Integration Testing
+- All brain modules work together coherently
+- Signal flow between components is realistic
+- Architecture Agent coordinates effectively
+- Developmental progression follows biological sequence
+
+### Documentation Standards
+- All code includes biological rationale and references
+- Architecture diagrams show realistic brain connectivity
+- Validation reports include neuroscience benchmarks
+- Implementation details are thoroughly documented
+
+---
+
+## PROJECT STATUS & NEXT STEPS
+
+### Current Status: ✅ NEWBORN BRAIN FOUNDATION READY
+- **Architecture**: 7 core brain modules defined and ready for implementation
+- **Development**: 5-pillar progression system established
+- **Coordination**: Architecture Agent ready to orchestrate all components
+- **Validation**: Biological accuracy framework established
+
+### Immediate Next Steps
+1. **Implement Pillar 1**: Basic neural dynamics with Hebbian plasticity
+2. **Build Core Components**: Start with PFC, Basal Ganglia, and Thalamus
+3. **Establish Integration**: Connect components through realistic pathways
+4. **Begin Validation**: Set up neuroscience benchmarks and testing framework
+
+### Success Criteria
+- **Biological Accuracy**: All components follow known brain architecture
+- **Functional Integration**: All brain modules work together coherently
+- **Developmental Progression**: Clear advancement through 5 pillars
+- **Consciousness Emergence**: Proto-consciousness develops naturally
+- **Extensibility**: Foundation supports growth beyond newborn brain
+
+---
+
+## USAGE GUIDELINES
+
+### For Brain Simulation Development
+- **Describe specific brain components** you want to implement
+- **Reference developmental pillars** for progression guidance
+- **Specify biological accuracy requirements** for validation
+- **Request integration testing** for component coordination
+
+### Example Prompts
+- "Implement basic neural dynamics for Pillar 1 development"
+- "Design PFC module with executive control functions"
+- "Connect basal ganglia and thalamus for gating mechanisms"
+- "Add working memory buffers for Pillar 3 implementation"
+- "Integrate DMN for internal simulation and proto-consciousness"
+
+### Automatic Detection Keywords
+- **Neural Dynamics**: "spiking", "Hebbian", "plasticity", "neural networks"
+- **Brain Components**: "PFC", "basal ganglia", "thalamus", "hippocampus", "DMN"
+- **Development**: "pillar", "developmental", "progression", "stages"
+- **Consciousness**: "awareness", "introspection", "consciousness", "global workspace"
+- **Integration**: "coordination", "architecture agent", "brain modules", "connectivity"
+
+---
+
+# READY FOR BRAIN SIMULATION DEVELOPMENT
+
+Your Cursor workspace is now **consolidated and focused** on brain simulation development with:
+
+✅ **Clear Architecture**: 7 core brain modules with Architecture Agent coordination  
+✅ **Staged Development**: 5-pillar progression from basic dynamics to proto-consciousness  
+✅ **Biological Accuracy**: All components follow neuroscience principles  
+✅ **Quality Standards**: Comprehensive validation and testing framework  
+✅ **Expert Roles**: Specialized engineers for each brain component  
+✅ **Unified Workflow**: Streamlined development process with clear milestones  
+
+**Simply describe your brain simulation needs** - the system will automatically coordinate the appropriate components and development stages!
+description:
+globs:
+alwaysApply: false
+---

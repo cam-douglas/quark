@@ -1,0 +1,35 @@
+# Core dependencies for the enhanced agent hub
+pyyaml>=6.0.0
+psutil>=5.9.0
+pathlib2>=2.3.7
+colorlog>=6.7.0
+structlog>=23.1.0
+
+# Cloud training and async support
+aiohttp>=3.8.0
+asyncio-mqtt>=0.11.0
+
+# Optional dependencies for specific adapters
+# Uncomment as needed:
+
+# Open Interpreter
+# open-interpreter>=0.1.0
+
+# CrewAI
+# crewai>=0.1.0
+
+# LlamaCPP
+# llama-cpp-python>=0.2.0
+
+# Transformers and PyTorch
+# transformers>=4.30.0
+# torch>=2.0.0
+# accelerate>=0.20.0
+# numpy>=1.24.0
+# pandas>=2.0.0
+
+# Development dependencies
+# pytest>=7.0.0
+# black>=23.0.0
+# flake8>=6.0.0
+# mypy>=1.0.0

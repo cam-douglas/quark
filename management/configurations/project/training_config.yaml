@@ -1,0 +1,340 @@
+# 🧠 Unified Training System Configuration
+# This file contains configurations for all training domains in the unified training system
+
+# Brain Development Training Configuration
+brain_development:
+  domain: "brain_development"
+  model_type: "fetal_brain_simulator"
+  dataset_path: "data/brain_development/"
+  batch_size: 16
+  learning_rate: 1e-4
+  epochs: 100
+  device: "auto"  # auto, cuda, cpu
+  save_path: "models/brain_development/"
+  checkpoint_interval: 10
+  validation_interval: 5
+  early_stopping_patience: 15
+  mixed_precision: true
+  distributed_training: false
+  custom_params:
+    simulation_steps: 1000
+    physics_engine: "mujoco"
+    gestational_weeks: [8, 40]
+    brain_regions:
+      - "cerebral_cortex"
+      - "hippocampus"
+      - "cerebellum"
+      - "brainstem"
+      - "thalamus"
+      - "basal_ganglia"
+    morphogen_types:
+      - "shh"
+      - "wnt"
+      - "bmp"
+      - "fgf"
+      - "retinoic_acid"
+
+# Neural Architecture Training Configuration
+neural_architectures:
+  domain: "neural_architectures"
+  model_type: "childlike_learner"
+  dataset_path: "data/neural_architectures/"
+  batch_size: 32
+  learning_rate: 3e-5
+  epochs: 200
+  device: "auto"
+  save_path: "models/neural_architectures/"
+  checkpoint_interval: 20
+  validation_interval: 10
+  early_stopping_patience: 25
+  mixed_precision: true
+  distributed_training: true
+  custom_params:
+    curiosity_weight: 0.1
+    exploration_rate: 0.3
+    novelty_threshold: 0.7
+    emotional_weight: 0.2
+    context_window_size: 512
+    min_word_frequency: 5
+    max_sequence_length: 256
+
+# Cognitive Engine Training Configuration
+cognitive_engines:
+  domain: "cognitive_engines"
+  model_type: "curiosity_engine"
+  dataset_path: "data/cognitive_engines/"
+  batch_size: 24
+  learning_rate: 5e-5
+  epochs: 150
+  device: "auto"
+  save_path: "models/cognitive_engines/"
+  checkpoint_interval: 15
+  validation_interval: 8
+  early_stopping_patience: 20
+  mixed_precision: true
+  distributed_training: false
+  custom_params:
+    synthesis_threshold: 0.7
+    uncertainty_weight: 0.2
+    novelty_weight: 0.3
+    curiosity_decay: 0.95
+    exploration_decay: 0.98
+    reward_shaping: true
+    pattern_memory_size: 1000
+
+# Multi-Agent Training Configuration
+multi_agent:
+  domain: "multi_agent"
+  model_type: "agent_coordinator"
+  dataset_path: "data/multi_agent/"
+  batch_size: 8
+  learning_rate: 1e-4
+  epochs: 300
+  device: "auto"
+  save_path: "models/multi_agent/"
+  checkpoint_interval: 25
+  validation_interval: 12
+  early_stopping_patience: 30
+  mixed_precision: true
+  distributed_training: true
+  custom_params:
+    agent_count: 5
+    communication_channels: 3
+    coordination_weight: 0.2
+    consensus_threshold: 0.7
+    attention_heads: 4
+    message_aggregation: "attention"
+    consensus_method: "voting"
+
+# Research Applications Training Configuration
+research_applications:
+  domain: "research_applications"
+  model_type: "research_assistant"
+  dataset_path: "data/research_applications/"
+  batch_size: 16
+  learning_rate: 2e-5
+  epochs: 100
+  device: "auto"
+  save_path: "models/research_applications/"
+  checkpoint_interval: 10
+  validation_interval: 5
+  early_stopping_patience: 15
+  mixed_precision: true
+  distributed_training: false
+  custom_params:
+    research_domains:
+      - "neuroscience"
+      - "ai"
+      - "psychology"
+      - "biology"
+      - "physics"
+    literature_analysis: true
+    citation_tracking: true
+    hypothesis_generation: true
+    experimental_design: true
+
+# Optimization Training Configuration
+optimization:
+  domain: "optimization"
+  model_type: "performance_optimizer"
+  dataset_path: "data/optimization/"
+  batch_size: 64
+  learning_rate: 1e-3
+  epochs: 50
+  device: "auto"
+  save_path: "models/optimization/"
+  checkpoint_interval: 5
+  validation_interval: 2
+  early_stopping_patience: 10
+  mixed_precision: true
+  distributed_training: true
+  custom_params:
+    optimization_target: "memory_efficiency"
+    target_metric: "throughput"
+    optimization_methods:
+      - "gradient_descent"
+      - "evolutionary"
+      - "bayesian"
+    memory_constraints: true
+    latency_optimization: true
+    energy_efficiency: true
+
+# Global Training Settings
+global_settings:
+  # Logging configuration
+  logging:
+    level: "INFO"
+    format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+    file_handler: true
+    console_handler: true
+  
+  # Data processing
+  data:
+    num_workers: 4
+    pin_memory: true
+    persistent_workers: true
+    prefetch_factor: 2
+  
+  # Model saving
+  model_saving:
+    save_best_only: true
+    save_optimizer: true
+    save_scheduler: true
+    save_metrics: true
+  
+  # Training monitoring
+  monitoring:
+    tensorboard: true
+    wandb: false
+    mlflow: false
+    custom_metrics: true
+  
+  # Hardware optimization
+  hardware:
+    mixed_precision: true
+    gradient_accumulation: 1
+    gradient_clipping: 1.0
+    memory_efficient_attention: true
+  
+  # Validation and testing
+  validation:
+    validation_split: 0.2
+    test_split: 0.1
+    cross_validation: false
+    k_folds: 5
+  
+  # Early stopping and scheduling
+  scheduling:
+    early_stopping: true
+    patience: 10
+    min_delta: 1e-4
+    restore_best_weights: true
+    lr_scheduler: "cosine"
+    warmup_steps: 1000
+  
+  # Distributed training
+  distributed:
+    backend: "nccl"  # nccl, gloo, mpi
+    world_size: 1
+    rank: 0
+    local_rank: 0
+    init_method: "env://"
+    timeout: 1800
+
+# Environment-specific configurations
+environments:
+  development:
+    epochs_multiplier: 0.1
+    batch_size_multiplier: 0.5
+    logging_level: "DEBUG"
+    save_checkpoints: false
+  
+  testing:
+    epochs_multiplier: 0.05
+    batch_size_multiplier: 0.25
+    logging_level: "DEBUG"
+    save_checkpoints: false
+  
+  production:
+    epochs_multiplier: 1.0
+    batch_size_multiplier: 1.0
+    logging_level: "INFO"
+    save_checkpoints: true
+    distributed_training: true
+    mixed_precision: true
+
+# Model-specific hyperparameters
+model_hyperparameters:
+  # Transformer settings
+  transformer:
+    hidden_dim: 512
+    num_layers: 6
+    num_heads: 8
+    dropout: 0.1
+    attention_dropout: 0.1
+    layer_norm_eps: 1e-12
+  
+  # CNN settings
+  cnn:
+    channels: [32, 64, 128, 256]
+    kernel_sizes: [3, 3, 3, 3]
+    strides: [1, 2, 2, 2]
+    padding: [1, 1, 1, 1]
+    pool_sizes: [2, 2, 2, 2]
+  
+  # RNN/LSTM settings
+  rnn:
+    hidden_size: 256
+    num_layers: 2
+    dropout: 0.1
+    bidirectional: true
+  
+  # Attention settings
+  attention:
+    attention_dim: 512
+    num_heads: 8
+    dropout: 0.1
+    use_bias: true
+
+# Loss function configurations
+loss_functions:
+  classification:
+    primary: "cross_entropy"
+    label_smoothing: 0.1
+    focal_loss_alpha: 0.25
+    focal_loss_gamma: 2.0
+  
+  regression:
+    primary: "mse"
+    huber_delta: 1.0
+    smooth_l1_beta: 1.0
+  
+  custom:
+    curiosity_weight: 0.1
+    novelty_weight: 0.3
+    uncertainty_weight: 0.2
+    coordination_weight: 0.2
+    synthesis_weight: 0.1
+
+# Optimizer configurations
+optimizers:
+  adamw:
+    lr: 1e-4
+    betas: [0.9, 0.999]
+    eps: 1e-8
+    weight_decay: 0.01
+    amsgrad: false
+  
+  sgd:
+    lr: 0.01
+    momentum: 0.9
+    weight_decay: 0.0001
+    nesterov: true
+  
+  adagrad:
+    lr: 0.01
+    lr_decay: 0
+    weight_decay: 0
+    eps: 1e-10
+
+# Learning rate scheduler configurations
+schedulers:
+  cosine:
+    T_max: 100
+    eta_min: 0
+    last_epoch: -1
+  
+  step:
+    step_size: 30
+    gamma: 0.1
+    last_epoch: -1
+  
+  exponential:
+    gamma: 0.95
+    last_epoch: -1
+  
+  warmup_cosine:
+    warmup_steps: 1000
+    T_max: 100
+    eta_min: 0
+    last_epoch: -1

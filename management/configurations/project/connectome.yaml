@@ -1,0 +1,59 @@
+# Connectome Configuration (Newborn-Grade Brain)
+# This YAML file defines the modules and wiring for a minimal cognitive brain simulation.
+
+architecture_agent:
+  role: "Global coordinator and entry point of consciousness"
+  inputs: ["pfc", "basal_ganglia", "thalamus", "working_memory", "hippocampus", "dmn"]
+  outputs: ["pfc", "attention", "hippocampus"]
+  description: "Controls global workspace, orchestrates all subsystems."
+
+modules:
+
+  pfc:
+    type: "Executive Control Module"
+    model: "RWKV-tiny"
+    inputs: ["working_memory", "hippocampus", "thalamus"]
+    outputs: ["working_memory", "basal_ganglia", "architecture_agent"]
+    description: "Abstract reasoning, planning, and executive function."
+
+  basal_ganglia:
+    type: "Gating & Selection Module"
+    model: "RL-actor-critic"
+    inputs: ["pfc"]
+    outputs: ["thalamus"]
+    description: "Implements reinforcement-driven gating of signals."
+
+  thalamus:
+    type: "Relay Hub"
+    model: "Mamba-state-space"
+    inputs: ["pfc", "basal_ganglia", "working_memory"]
+    outputs: ["pfc", "working_memory"]
+    description: "Dynamic routing and contextual relay between modules."
+
+  working_memory:
+    type: "Short-Term Buffer"
+    model: "GRU/Nengo buffer"
+    inputs: ["pfc", "thalamus"]
+    outputs: ["pfc", "architecture_agent"]
+    description: "Maintains active thoughts for reasoning and planning."
+
+  hippocampus:
+    type: "Episodic Memory System"
+    model: "Index-based memory store"
+    inputs: ["pfc"]
+    outputs: ["pfc", "dmn"]
+    description: "Stores and retrieves episodic traces for internal simulation."
+
+  dmn:
+    type: "Internal Simulation Module"
+    model: "TinyLlama"
+    inputs: ["hippocampus", "pfc"]
+    outputs: ["pfc", "architecture_agent"]
+    description: "Self-talk, counterfactual imagination, proto-self-awareness."
+
+attention:
+  type: "Salience & Prioritization Network"
+  model: "Signal-scoring heuristic"
+  inputs: ["pfc", "thalamus"]
+  outputs: ["architecture_agent"]
+  description: "Detects novelty and directs cognitive resources."

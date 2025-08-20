@@ -1,0 +1,197 @@
+# Current Directory Structure Configuration
+# Updated after legacy migration and directory consolidation
+# Date: 2025-01-27
+
+current_directory_structure:
+  # Primary Documentation Locations
+  documentation:
+    main: "documentation/"
+    tools_specific: "tools_utilities/documentation/"
+    training_specific: "ml_architecture/training_systems/documentation/"
+    summaries: "documentation/summaries/"
+    reports: "documentation/reports/"
+    docs: "documentation/docs/"
+    
+  # Primary Training Locations
+  training:
+    main: "ml_architecture/training_systems/"
+    research: "data_knowledge/research/notebooks/training/"
+    results: "testing/results_outputs/training/"
+    backup: "development/training_backup/"
+    
+  # Primary Experiments Locations
+  experiments:
+    research: "data_knowledge/research/experiments/"
+    results: "testing/results_outputs/experiments/"
+    backup: "development/cloud_results_backup/experiments/"
+    
+  # Primary Results Locations
+  results:
+    main: "testing/results_outputs/"
+    training: "ml_architecture/training_systems/results/"
+    monitoring: "ml_architecture/training_systems/monitoring/results/"
+    backup: "development/cloud_references_backup/results/"
+    
+  # Primary Models Locations
+  models:
+    main: "data_knowledge/models_artifacts/"
+    results: "testing/results_outputs/models/"
+    agent_systems: "ml_architecture/training_systems/agent_systems/models/"
+    backup: "development/cloud_models_backup/"
+    
+  # Brain Architecture
+  brain_architecture:
+    neural_core: "brain_architecture/neural_core/"
+    brain_hierarchy: "brain_architecture/brain_hierarchy/"
+    advanced_agents: "brain_architecture/neural_core/advanced_agents/"
+    
+  # ML Architecture
+  ml_architecture:
+    training_systems: "ml_architecture/training_systems/"
+    expert_domains: "ml_architecture/expert_domains/"
+    knowledge_systems: "ml_architecture/knowledge_systems/"
+    
+  # Data and Knowledge
+  data_knowledge:
+    research: "data_knowledge/research/"
+    data_repository: "data_knowledge/data_repository/"
+    models_artifacts: "data_knowledge/models_artifacts/"
+    
+  # Testing and Validation
+  testing:
+    frameworks: "testing/testing_frameworks/"
+    results_outputs: "testing/results_outputs/"
+    
+  # Tools and Utilities
+  tools_utilities:
+    scripts: "tools_utilities/scripts/"
+    legacy_migration: "tools_utilities/scripts/legacy_migration/"
+    
+  # Integration
+  integration:
+    applications: "integration/applications/"
+    architecture: "integration/architecture/"
+    
+  # Management
+  management:
+    configurations: "management/configurations/"
+    project_management: "management/project_management/"
+    
+  # Development
+  development:
+    development_stages: "development/development_stages/"
+    deployment: "development/deployment/"
+    logs: "development/"
+    backups: "development/cloud_*_backup/"
+    
+  # Environment Files
+  environment_files:
+    virtual_envs: "environment_files/virtual_envs/"
+    
+  # Backups
+  backups:
+    git: "backups/"
+    cursor_rules: "development/cursor_rules_backup/"
+
+# File Movement Rules (Updated)
+file_movement_rules:
+  scripts:
+    pattern: r".*\.(py|sh|js|ts)$"
+    exclude_if_in: ["brain_architecture", "ml_architecture", "testing", "tools_utilities"]
+    move_to: "tools_utilities/scripts/"
+    
+  configs:
+    pattern: r".*\.(yaml|yml|json|toml|ini)$"
+    exclude_if_in: ["management/configurations", "brain_architecture", "ml_architecture"]
+    move_to: "management/configurations/project/"
+    
+  notebooks:
+    pattern: r".*\.ipynb$"
+    exclude_if_in: ["data_knowledge/research/notebooks"]
+    move_to: "data_knowledge/research/notebooks/"
+    
+  documentation:
+    pattern: r".*(README|GUIDE|MANUAL|DOC).*\.(md|rst|txt)$"
+    exclude_if_in: ["documentation", "tools_utilities/documentation"]
+    move_to: "documentation/"
+    
+  results:
+    pattern: r".*(result|output|log).*\.(json|csv|png|jpg|html)$"
+    exclude_if_in: ["testing/results_outputs", "ml_architecture/training_systems/results"]
+    move_to: "testing/results_outputs/"
+    
+  models:
+    pattern: r".*\.(pth|pt|gguf|bin|safetensors)$"
+    exclude_if_in: ["data_knowledge/models_artifacts", "testing/results_outputs/models"]
+    move_to: "data_knowledge/models_artifacts/"
+    
+  experiments:
+    pattern: r".*(experiment|test_run).*\.(json|csv|png|jpg|html)$"
+    exclude_if_in: ["data_knowledge/research/experiments", "testing/results_outputs/experiments"]
+    move_to: "testing/results_outputs/experiments/"
+
+# Cleanup Rules (Updated)
+cleanup_rules:
+  temp_files:
+    - "*.tmp"
+    - "*.temp"
+    - "*.cache"
+    - "*.log"
+    - "*~"
+    - "*.bak"
+    - "*.swp"
+    - ".DS_Store"
+    
+  max_test_runs: 5
+  max_log_age_days: 30
+  max_cache_size_mb: 1000
+  
+  # Preserve these directories even if empty
+  preserve_empty_dirs:
+    - "brain_architecture/"
+    - "ml_architecture/"
+    - "data_knowledge/"
+    - "testing/"
+    - "tools_utilities/"
+    - "integration/"
+    - "management/"
+    - "documentation/"
+    - "environment_files/"
+    - "backups/"
+
+# Required Directory Structure
+required_directories:
+  brain_simulation_standards:
+    - "brain_architecture/"
+    - "ml_architecture/"
+    - "data_knowledge/"
+    - "testing/"
+    - "tools_utilities/"
+    - "integration/"
+    - "management/"
+    - "documentation/"
+    - "environment_files/"
+    - "backups/"
+    
+  required_files:
+    - "README.md"
+    - "requirements.txt"
+    - "pyrightconfig.json"
+    - ".gitignore"
+
+# Backup Locations (Do not move these)
+backup_locations:
+  - "development/cloud_*_backup/"
+  - "development/cursor_*_backup/"
+  - "development/training_backup/"
+  - "environment_files/virtual_envs/*_backup/"
+  - "backups/"
+
+# Library Package Locations (Do not move these)
+library_locations:
+  - "**/venv/"
+  - "**/env/"
+  - "**/site-packages/"
+  - "**/lib/python*/"
+  - "**/node_modules/"
+  - "**/.git/"
