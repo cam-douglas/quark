@@ -264,3 +264,42 @@ This is a **brain simulation ML framework** with specific architectural requirem
 - **MANDATORY**: All implementations must pass CEA complexity validation
 - **MANDATORY**: All code must be validated against external neuroscience resources
 - **MANDATORY**: All development must follow progressive complexity evolution
+
+### **High-Priority Experimentation & Testing Protocols - SUPREME AUTHORITY**
+**ALL EXPERIMENTATION AND TESTING MUST FOLLOW THE ESTABLISHED QUARK PROTOCOLS**
+
+**Core Testing Requirements:**
+- **Mandatory Protocol Compliance**: All experiments must follow QUARK experimentation protocols
+- **Hybrid SLM+LLM Evaluation**: All testing must include hybrid system validation
+- **Neuroalignment Validation**: All results must be validated against biological plausibility
+- **Performance Tracking**: All experiments must use the established performance tracking framework
+- **Cost Analysis**: All hybrid implementations must include cost-benefit analysis
+- **Continuous Validation**: All testing must be integrated with the main testing frameworks
+
+**Protocol Integration Points:**
+- **Pre-Experiment**: CEA validates experiment design against current stage
+- **During Execution**: Protocols ensure consistent evaluation and data collection
+- **Post-Experiment**: Results must be validated against neuroalignment targets
+- **Cross-Module Validation**: Protocols ensure consistency across all brain modules
+
+**Testing Framework Integration:**
+- **Core Framework**: All experiments must use `testing/testing_frameworks/core/experiment_framework.py`
+- **Protocol Compliance**: All testing must follow `testing/testing_frameworks/quark_experimentation_protocols.md`
+- **Results Storage**: All results must be stored in `testing/results_outputs/experiments/`
+- **Performance Tracking**: All metrics must use the established performance tracking system
+
+**Task Management Integration - SUPREME AUTHORITY**
+**ALL QUARK AGENTS AND SYSTEMS MUST INTEGRATE WITH THE TASK MANAGEMENT FRAMEWORK**
+
+**Core Task Requirements:**
+- **Central Task Hub**: All tasks managed through `tasks/` directory
+- **Directory Status**: Each directory must display current tasks via `TASK_STATUS.md`
+- **Progress Tracking**: Real-time updates must flow to all QUARK components
+- **Agent Coordination**: All agents must check task status before starting work
+- **Task Breakdowns**: Complex tasks must have detailed breakdowns in `tasks/task_breakdowns/`
+
+**Task Integration Points:**
+- **Pre-Work**: All agents must check relevant task status before beginning work
+- **During Work**: All agents must update task progress during execution
+- **Post-Work**: All agents must validate task completion against acceptance criteria
+- **Continuous**: All agents must monitor task dependencies and blockers

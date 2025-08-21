@@ -68,6 +68,14 @@ else
     log_message "ERROR: Workspace cleanup failed with exit code $?"
 fi
 
+# Run Google Drive auto-sync
+log_message "INFO: Running Google Drive auto-sync"
+if python3 gdrive_auto_sync.py >> "$LOG_FILE" 2>&1; then
+    log_message "INFO: Google Drive auto-sync completed successfully"
+else
+    log_message "ERROR: Google Drive auto-sync failed with exit code $?"
+fi
+
 log_message "INFO: Automated maintenance cycle completed"
 
 # Clean up lock file (trap will also handle this)
