@@ -1,0 +1,10 @@
+# Log files - do not track in git
+*.log
+*.log.*
+
+# Log directories
+archive/
+temp/
+
+# Keep this file
+!.gitignore
