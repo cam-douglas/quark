@@ -33,8 +33,8 @@ QUARK_ROOT = Path(__file__).parent.parent.parent
 sys.path.append(str(QUARK_ROOT))
 
 # Import our components
-from ...........................................................ultimate_resource_authority import UltimateResourceAuthority, ResourceLimits, ResourceMetrics, OptimizationAction
-from ...........................................................cloud_offload_authority import CloudOffloadAuthority, CloudProvider, OffloadJob
+from .ultimate_resource_authority import UltimateResourceAuthority, ResourceLimits, ResourceMetrics, OptimizationAction
+from .cloud_offload_authority import CloudOffloadAuthority, CloudProvider, OffloadJob
 
 @dataclass
 class IntegratedResourceConfig:

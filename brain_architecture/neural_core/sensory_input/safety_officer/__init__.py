@@ -13,11 +13,11 @@ Priority: 0 (Supreme Authority)
 Biological Markers: GFAP (structural integrity), NeuN (neuronal identity)
 """
 
-from ...........................................................safety_officer import SafetyOfficer
-from ...........................................................sentinel_agent import SentinelAgent
-from ...........................................................biological_protocols import BiologicalProtocols
-from ...........................................................safety_constraints import SafetyConstraints
-from ...........................................................audit_system import AuditSystem
+from . import safety_officer
+from . import sentinel_agent
+from . import biological_protocols
+from . import safety_constraints
+from . import audit_system
 
 __version__ = "1.0.0"
 __author__ = "Safety & Ethics Officer"
@@ -25,9 +25,9 @@ __priority__ = 0
 __biological_markers__ = ["GFAP", "NeuN"]
 
 __all__ = [
-    "SafetyOfficer",
-    "SentinelAgent", 
-    "BiologicalProtocols",
-    "SafetyConstraints",
-    "AuditSystem"
+    "safety_officer",
+    "sentinel_agent",
+    "biological_protocols",
+    "safety_constraints",
+    "audit_system",
 ]

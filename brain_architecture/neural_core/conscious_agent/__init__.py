@@ -16,20 +16,6 @@ The conscious agent is the central coordinator that integrates all brain modules
 to create a unified brain simulation experience with versioned capability progression.
 """
 
-from ................................................main import *
-from ................................................versions import *
-from ................................................capabilities import *
-from ................................................integrations import *
-from ................................................bridges import *
-from ................................................cloud import *
-from ................................................advanced import *
+from . import main
 
-__all__ = [
-    "main",
-    "versions", 
-    "capabilities",
-    "integrations",
-    "bridges",
-    "cloud",
-    "advanced"
-]
+__all__ = ["main"]

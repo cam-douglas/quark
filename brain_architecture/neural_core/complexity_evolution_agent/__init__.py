@@ -6,12 +6,8 @@ Outputs: Enhanced documentation, updated agent knowledge, connectome consistency
 Dependencies: All roadmap documents, agent communication protocols
 """
 
-from ................................................complexity_evolver import ComplexityEvolutionAgent
-from ................................................document_enhancer import DocumentEnhancer
-from ................................................connectome_synchronizer import ConnectomeSynchronizer
+from . import complexity_evolver
+from . import document_enhancer
+from . import connectome_synchronizer
 
-__all__ = [
-    'ComplexityEvolutionAgent',
-    'DocumentEnhancer', 
-    'ConnectomeSynchronizer'
-]
+__all__ = ["complexity_evolver", "document_enhancer", "connectome_synchronizer"]

@@ -24,9 +24,60 @@ import time
 class RedundancyDetector:
     """Detects redundant files beyond just exact duplicates"""
     
-    def __init__(self, repo_root: str):
+    def __init__(self, repo_root: str, include_dirs: List[str] | None = None, exclude_dirs: List[str] | None = None):
         self.repo_root = Path(repo_root)
         self.similarity_threshold = 0.75  # 75% similarity = redundant
+        self.include_dirs = [self.repo_root / p for p in (include_dirs or [])]
+        self.exclude_dirs = [self.repo_root / p for p in (exclude_dirs or [])]
+
+    def _is_excluded(self, path: Path) -> bool:
+        try:
+            p = path.resolve()
+        except Exception:
+            p = path
+        if self.include_dirs:
+            for inc in self.include_dirs:
+                try:
+                    if p.is_relative_to(inc.resolve()):
+                        return False
+                except Exception:
+                    if str(p).startswith(str(inc)):
+                        return False
+        for ex in self.exclude_dirs:
+            try:
+                if p.is_relative_to(ex.resolve()):
+                    return True
+            except Exception:
+                if str(p).startswith(str(ex)):
+                    return True
+        return False
+
+    def _is_included(self, path: Path) -> bool:
+        if not self.include_dirs:
+            return True
+        try:
+            p = path.resolve()
+        except Exception:
+            p = path
+        for inc in self.include_dirs:
+            try:
+                if p.is_relative_to(inc.resolve()):
+                    return True
+            except Exception:
+                if str(p).startswith(str(inc)):
+                    return True
+        return False
+
+    def _iter_python_files(self):
+        if self.include_dirs:
+            for inc in self.include_dirs:
+                for file_path in inc.rglob("*.py"):
+                    if file_path.is_file() and not self._is_excluded(file_path):
+                        yield file_path
+        else:
+            for file_path in self.repo_root.rglob("*.py"):
+                if file_path.is_file() and not self._is_excluded(file_path):
+                    yield file_path
         
     def find_functional_redundancies(self) -> List[Tuple[str, str, float, str]]:
         """Find files with similar functionality/purpose"""
@@ -35,7 +86,7 @@ class RedundancyDetector:
         # Group files by functionality patterns
         functional_groups = defaultdict(list)
         
-        for file_path in self.repo_root.rglob("*.py"):
+        for file_path in self._iter_python_files():
             if file_path.is_file():
                 functionality = self._extract_functionality(file_path)
                 if functionality:
@@ -119,7 +170,7 @@ class RedundancyDetector:
         # Group files by content patterns
         content_groups = defaultdict(list)
         
-        for file_path in self.repo_root.rglob("*.py"):
+        for file_path in self._iter_python_files():
             if file_path.is_file():
                 content_pattern = self._extract_content_pattern(file_path)
                 if content_pattern:
@@ -200,7 +251,7 @@ class RedundancyDetector:
         # Group files by structural patterns
         structural_groups = defaultdict(list)
         
-        for file_path in self.repo_root.rglob("*.py"):
+        for file_path in self._iter_python_files():
             if file_path.is_file():
                 structure = self._extract_structure(file_path)
                 if structure:
@@ -288,7 +339,7 @@ class RedundancyDetector:
         # Group files by dependency patterns
         dependency_groups = defaultdict(list)
         
-        for file_path in self.repo_root.rglob("*.py"):
+        for file_path in self._iter_python_files():
             if file_path.is_file():
                 dependencies = self._extract_dependencies(file_path)
                 if dependencies:

@@ -14,6 +14,9 @@ from typing import Dict, List, Any, Optional
 from datetime import datetime
 import logging
 
+from .document_enhancer import DocumentEnhancer
+from .connectome_synchronizer import ConnectomeSynchronizer
+
 class ComplexityEvolutionAgent:
     """
     Main agent responsible for progressively enhancing roadmaps, rules, and criteria
@@ -34,14 +37,12 @@ class ComplexityEvolutionAgent:
         
         # Initialize sub-components (with graceful fallback)
         try:
-            from ................................................document_enhancer import DocumentEnhancer
             self.document_enhancer = DocumentEnhancer(project_root)
         except ImportError:
             self.logger.warning("DocumentEnhancer not available - using placeholder")
             self.document_enhancer = None
         
         try:
-            from ................................................connectome_synchronizer import ConnectomeSynchronizer
             self.connectome_synchronizer = ConnectomeSynchronizer(project_root)
         except ImportError as e:
             try: # Try absolute import

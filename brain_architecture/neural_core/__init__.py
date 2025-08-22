@@ -15,15 +15,15 @@ Brain Modules:
 - connectome/: Neural connectivity management
 """
 
-from ................................................prefrontal_cortex import *
-from ................................................basal_ganglia import *
-from ................................................thalamus import *
-from ................................................working_memory import *
-from ................................................hippocampus import *
-from ................................................default_mode_network import *
-from ................................................salience_networks import *
-from ................................................conscious_agent import *
-from ................................................connectome import *
+from . import prefrontal_cortex
+from . import basal_ganglia
+from . import thalamus
+from . import working_memory
+from . import hippocampus
+from . import default_mode_network
+from . import salience_networks
+from . import conscious_agent
+from . import connectome
 
 __all__ = [
     "prefrontal_cortex",

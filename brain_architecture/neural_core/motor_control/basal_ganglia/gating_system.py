@@ -7,9 +7,9 @@ Outputs: Action
 Dependencies: rl_agent, dopamine_system
 """
 
-from ...........................................................rl_agent import QLearningAgent
-from ...........................................................dopamine_system import DopamineSystem
-from ...........................................................architecture import BasalGanglia
+from .rl_agent import QLearningAgent
+from .dopamine_system import DopamineSystem
+from .architecture import BasalGanglia
 import numpy as np
 
 class GatingSystem:

@@ -70,7 +70,11 @@ class ProgressMetrics:
 class IntegratedPruningSystem:
     """Integrated pruning system with user validation and Wolfram optimization"""
 
-    def __init__(self, repo_root: str):
+    def __init__(self, repo_root: str,
+                 fast_mode: bool = False,
+                 include_dirs: List[str] | None = None,
+                 exclude_dirs: List[str] | None = None,
+                 allow_redundancy_in_fast: bool = False):
         self.repo_root = Path(repo_root)
         self.log_file = self.repo_root / 'logs' / 'pruning_operations.log'
         self.progress_log = self.repo_root / 'logs' / 'pruning_progress.log'
@@ -78,6 +82,100 @@ class IntegratedPruningSystem:
         # Initialize mathematical brain core for Wolfram optimization
         self.math_core = MathematicalBrainCore()
         self.progress_metrics = None
+        # Fast mode controls
+        self.fast_mode = fast_mode
+        self.allow_redundancy_in_fast = allow_redundancy_in_fast
+        # Normalize include/exclude lists to absolute Paths
+        self.include_dirs = [self.repo_root / p for p in (include_dirs or [])]
+        default_excludes = [
+            '.git',
+            'fresh_venv',
+            'node_modules',
+            'logs',
+            'tools_utilities/scripts_backup',
+            'tools_utilities/scripts',
+            'data_knowledge/research/notebooks',
+            'data_knowledge/models_artifacts',
+            'tools_utilities/scripts_backup',
+        ]
+        self.exclude_dirs = [self.repo_root / p for p in (exclude_dirs or default_excludes)]
+
+    def _format_duration(self, seconds: float) -> str:
+        if seconds < 60:
+            return f"{seconds:.0f}s"
+        minutes = seconds / 60
+        if minutes < 60:
+            return f"{minutes:.1f} min"
+        hours = minutes / 60
+        return f"{hours:.1f} hr"
+
+    def _estimate_durations(self, total_files: int, python_files: int) -> Dict[str, float]:
+        # Heuristic per-file costs derived from prior runs
+        duplicate_per_file = 0.00012  # s per file
+        backup_per_file = 0.00002     # s per file
+        redundancy_per_py = 0.02      # s per python file (content parsing + grouping)
+
+        duplicates_time = 0.0 if self.fast_mode else duplicate_per_file * total_files
+        backup_time = backup_per_file * total_files
+        do_redundancy = (not self.fast_mode) or self.allow_redundancy_in_fast
+        redundancy_time = (redundancy_per_py * python_files) if do_redundancy else 0.0
+
+        return {
+            'duplicates': duplicates_time,
+            'backup': backup_time,
+            'redundancy': redundancy_time,
+            'total': duplicates_time + backup_time + redundancy_time,
+        }
+
+    def _is_excluded_dir(self, path: Path) -> bool:
+        try:
+            p = path.resolve()
+        except Exception:
+            p = path
+        # Include has precedence: if path is inside any include dir, it's not excluded
+        if self.include_dirs:
+            for inc in self.include_dirs:
+                try:
+                    if p.is_relative_to(inc.resolve()):
+                        return False
+                except Exception:
+                    if str(p).startswith(str(inc)):
+                        return False
+        for ex in self.exclude_dirs:
+            try:
+                if p.is_relative_to(ex.resolve()):
+                    return True
+            except Exception:
+                # Fallback for older Python: compare by prefix
+                if str(p).startswith(str(ex)):
+                    return True
+        return False
+
+    def _is_included_dir(self, path: Path) -> bool:
+        if not self.include_dirs:
+            return True
+        try:
+            p = path.resolve()
+        except Exception:
+            p = path
+        for inc in self.include_dirs:
+            try:
+                inc_res = inc.resolve()
+                # Included if path is inside include dir OR is an ancestor of include dir
+                if p.is_relative_to(inc_res) or inc_res.is_relative_to(p):
+                    return True
+            except Exception:
+                p_str = str(p)
+                inc_str = str(inc)
+                if p_str.startswith(inc_str) or inc_str.startswith(p_str):
+                    return True
+        return False
+
+    def _should_descend_dir(self, path: Path) -> bool:
+        if self._is_excluded_dir(path):
+            return False
+        # If we have include dirs, descend if this dir is included or is an ancestor of an include dir
+        return self._is_included_dir(path)
 
     def log_operation(self, message: str):
         """Log pruning operations"""
@@ -182,6 +280,10 @@ class IntegratedPruningSystem:
         python_files = 0
 
         for root, dirs, files in os.walk(self.repo_root):
+            # Apply fast include/exclude directory filtering in-place for speed
+            root_path = Path(root)
+            # Prune dirs using include/exclude rules, while keeping ancestors of include targets
+            dirs[:] = [d for d in dirs if self._should_descend_dir(root_path / d)]
             for file in files:
                 file_path = Path(root) / file
                 if file_path.is_file():
@@ -194,17 +296,41 @@ class IntegratedPruningSystem:
                     except Exception:
                         continue
 
+        # Provide ETA before heavy analysis steps
+        eta = self._estimate_durations(total_files, python_files)
+        self.log_operation(
+            "⏱️  Estimated durations — "
+            f"duplicates: {self._format_duration(eta['duplicates'])}, "
+            f"backup: {self._format_duration(eta['backup'])}, "
+            f"redundancy: {self._format_duration(eta['redundancy'])}, "
+            f"total: {self._format_duration(eta['total'])}"
+        )
+
         total_size_gb = total_size / (1024**3)
 
         # Find duplicates
-        self.log_operation("🔍 Detecting duplicate files...")
-        duplicates = find_duplicates_optimized(str(self.repo_root))
+        duplicates = []
+        if not self.fast_mode:
+            self.log_operation("🔍 Detecting duplicate files...")
+            duplicates = find_duplicates_optimized(str(self.repo_root))
+        else:
+            self.log_operation("⏭️  Fast mode: Skipping duplicate detection for speed")
 
         # Find backup/cache files
         self.log_operation("🔍 Finding backup and cache files...")
-        backup_files = find_backup_cache_files(str(self.repo_root))
+        backup_files_all = find_backup_cache_files(str(self.repo_root))
+        # Filter backup/cache results to respect include/exclude directories
+        backup_files = []
+        for bf in backup_files_all:
+            p = Path(bf)
+            if self._is_excluded_dir(p):
+                continue
+            if not self._is_included_dir(p):
+                continue
+            backup_files.append(bf)
 
         # Use Wolfram Alpha to optimize redundancy detection parameters
+        # In fast mode, we still compute coarse metrics but skip heavy redundancy checks
         self.log_operation("🧮 Consulting Wolfram Alpha for mathematical optimization...")
         codebase_metrics = {
             'total_files': total_files,
@@ -217,11 +343,19 @@ class IntegratedPruningSystem:
         self.log_operation(f"📊 Wolfram optimization results: {optimization_params}")
 
         # Find redundancies with optimized parameters
-        self.log_operation("🔍 Analyzing functional redundancies with Wolfram-optimized parameters...")
-        detector = RedundancyDetector(str(self.repo_root))
-        # Use Wolfram-optimized similarity threshold
-        detector.similarity_threshold = optimization_params.get('optimal_similarity_threshold', 0.75)
-        redundancies = detector.find_all_redundancies()
+        redundancies = {}
+        do_redundancy = (not self.fast_mode) or self.allow_redundancy_in_fast
+        if do_redundancy:
+            self.log_operation("🔍 Analyzing functional redundancies with Wolfram-optimized parameters...")
+            # Convert include/exclude Paths to repo-relative strings for detector
+            include_rel = [str(p.relative_to(self.repo_root)) for p in self.include_dirs] if self.include_dirs else None
+            exclude_rel = [str(p.relative_to(self.repo_root)) for p in self.exclude_dirs] if self.exclude_dirs else None
+            detector = RedundancyDetector(str(self.repo_root), include_dirs=include_rel, exclude_dirs=exclude_rel)
+            # Use Wolfram-optimized similarity threshold
+            detector.similarity_threshold = optimization_params.get('optimal_similarity_threshold', 0.75)
+            redundancies = detector.find_all_redundancies()
+        else:
+            self.log_operation("⏭️  Fast mode: Skipping redundancy analysis")
 
         elapsed_time = time.time() - start_time
 
@@ -285,26 +419,27 @@ class IntegratedPruningSystem:
                 continue
 
         # Process redundancies with Wolfram-optimized confidence
-        wolfram_threshold = analysis['wolfram_optimization'].get('optimal_similarity_threshold', 0.75)
-        for redundancy_type, type_redundancies in analysis['redundancies'].items():
-            for file1, file2, similarity, reason in type_redundancies:
-                # Add the second file as candidate for consolidation
-                try:
-                    size = Path(file2).stat().st_size
-                    # Use Wolfram-optimized risk assessment
-                    risk_level = "low" if similarity > wolfram_threshold else "medium"
-                    candidates.append(PruningCandidate(
-                        file_path=file2,
-                        file_size=size,
-                        reason=f"Wolfram-optimized redundant: {reason}",
-                        confidence=similarity,
-                        risk_level=risk_level,
-                        category="redundant",
-                        alternative_action="consolidate"
-                    ))
-                    total_size_reduction += size
-                except Exception:
-                    continue
+        if analysis.get('redundancies'):
+            wolfram_threshold = analysis['wolfram_optimization'].get('optimal_similarity_threshold', 0.75)
+            for redundancy_type, type_redundancies in analysis['redundancies'].items():
+                for file1, file2, similarity, reason in type_redundancies:
+                    # Add the second file as candidate for consolidation
+                    try:
+                        size = Path(file2).stat().st_size
+                        # Use Wolfram-optimized risk assessment
+                        risk_level = "low" if similarity > wolfram_threshold else "medium"
+                        candidates.append(PruningCandidate(
+                            file_path=file2,
+                            file_size=size,
+                            reason=f"Wolfram-optimized redundant: {reason}",
+                            confidence=similarity,
+                            risk_level=risk_level,
+                            category="redundant",
+                            alternative_action="consolidate"
+                        ))
+                        total_size_reduction += size
+                    except Exception:
+                        continue
 
         # Calculate total reduction
         total_reduction_gb = total_size_reduction / (1024**3)
@@ -545,11 +680,25 @@ Examples:
                        help='Create pruning plan only')
     parser.add_argument('--repo-root', type=str, default='.',
                        help='Repository root directory')
+    parser.add_argument('--fast', action='store_true',
+                       help='Enable fast analysis mode (skip duplicate checks, exclude heavy dirs)')
+    parser.add_argument('--redundancy-in-fast', action='store_true',
+                       help='Run redundancy analysis even in fast mode (ETA will reflect this)')
+    parser.add_argument('--include-dirs', nargs='*', default=None,
+                       help='Limit analysis to these directories (relative paths)')
+    parser.add_argument('--exclude-dirs', nargs='*', default=None,
+                       help='Additional directories to exclude from analysis (relative paths)')
 
     args = parser.parse_args()
 
     # Initialize system
-    pruning_system = IntegratedPruningSystem(args.repo_root)
+    pruning_system = IntegratedPruningSystem(
+        args.repo_root,
+        fast_mode=args.fast,
+        include_dirs=args.include_dirs,
+        exclude_dirs=args.exclude_dirs,
+        allow_redundancy_in_fast=args.redundancy_in_fast,
+    )
 
     try:
         if args.workflow:

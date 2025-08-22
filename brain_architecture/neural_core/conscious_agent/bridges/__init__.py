@@ -4,8 +4,6 @@ Purpose: Bridge modules for connecting consciousness with external systems and m
 Includes: LLM bridges, neural bridges, external API bridges
 """
 
-from ................................................llama2_consciousness_bridge import *
+from . import llama2_consciousness_bridge
 
-__all__ = [
-    "llama2_consciousness_bridge"
-]
+__all__ = ["llama2_consciousness_bridge"]

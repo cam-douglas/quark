@@ -38,6 +38,7 @@
 - **14-master_roadmap_integration.md** - Master roadmap integration and coordination
 - **15-roadmap_integration_summary.md** - Roadmap integration summaries and status
 - **16-biological_agi_blueprint.md** - Biological AGI specifications and blueprint
+- **../../tasks/HIGH_LEVEL_ROADMAP.md** - High-Level Project Roadmap for AGI Brain Simulation
 
 ### **🟣 TECHNICAL IMPLEMENTATION REFERENCES**
 - **17-ml_workflow.md** - Machine learning workflows and processes

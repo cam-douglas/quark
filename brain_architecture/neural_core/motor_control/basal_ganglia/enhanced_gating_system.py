@@ -11,8 +11,8 @@ import numpy as np
 from typing import Dict, List, Tuple, Optional
 import time
 
-from ...........................................................enhanced_architecture import EnhancedBasalGanglia, EnhancedDopamineSystem
-from ...........................................................actor_critic import ActorCriticAgent, PrioritizedExperienceReplay
+from .enhanced_architecture import EnhancedBasalGanglia, EnhancedDopamineSystem
+from .actor_critic import ActorCriticAgent, PrioritizedExperienceReplay
 
 class EnhancedGatingSystem:
     """

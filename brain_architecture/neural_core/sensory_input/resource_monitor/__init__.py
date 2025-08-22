@@ -19,31 +19,13 @@ Author: Quark Resource Management Team
 Created: 2025-01-21
 """
 
-from ...........................................................ultimate_resource_authority import (
-    UltimateResourceAuthority,
-    ResourceLimits,
-    ResourceMetrics,
-    OptimizationAction,
-    create_ultimate_authority
-)
-
-from ...........................................................cloud_offload_authority import (
-    CloudOffloadAuthority,
-    CloudProvider,
-    CloudResource,
-    OffloadJob,
-    create_cloud_offload_authority
-)
-
-from ...........................................................integrated_resource_manager import (
-    IntegratedResourceManager,
-    IntegratedResourceConfig,
-    create_integrated_resource_manager
-)
+from . import ultimate_resource_authority
+from . import cloud_offload_authority
+from . import integrated_resource_manager
 
 # Simple interface for easy integration
 def create_resource_monitor(enable_cloud_offload: bool = True, 
-                          log_level: str = "INFO") -> IntegratedResourceManager:
+                          log_level: str = "INFO") -> integrated_resource_manager.IntegratedResourceManager:
     """
     Create a comprehensive resource monitor for Mac M2 Max.
     
@@ -55,11 +37,11 @@ def create_resource_monitor(enable_cloud_offload: bool = True,
         IntegratedResourceManager with ultimate authority over resources
     """
     if enable_cloud_offload:
-        return create_integrated_resource_manager()
+        return integrated_resource_manager.create_integrated_resource_manager()
     else:
         # Just local resource management
-        from ...........................................................ultimate_resource_authority import create_ultimate_authority
-        return create_ultimate_authority()
+        from . import ultimate_resource_authority
+        return ultimate_resource_authority.create_ultimate_authority()
 
 # Convenience function for testing frameworks
 def monitor_test_execution(test_function, 
@@ -120,19 +102,7 @@ def monitor_test_execution(test_function,
         }
 
 __all__ = [
-    'UltimateResourceAuthority',
-    'CloudOffloadAuthority', 
-    'IntegratedResourceManager',
-    'ResourceLimits',
-    'ResourceMetrics',
-    'OptimizationAction',
-    'CloudProvider',
-    'CloudResource',
-    'OffloadJob',
-    'IntegratedResourceConfig',
-    'create_ultimate_authority',
-    'create_cloud_offload_authority',
-    'create_integrated_resource_manager',
-    'create_resource_monitor',
-    'monitor_test_execution'
+    "ultimate_resource_authority",
+    "cloud_offload_authority",
+    "integrated_resource_manager",
 ]

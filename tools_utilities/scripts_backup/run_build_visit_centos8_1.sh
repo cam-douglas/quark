@@ -1,3 +1,0 @@
-set -euo pipefail
-
-echo "yes" | /bin/bash build_visit_develop --required --optional --mesagl --mpich --uintah --no-icet --no-moab --no-pidx --no-hdf4 --no-visit --thirdparty-path /home/visit/third-party --makeflags -j4; echo "yes" | /bin/bash build_visit_develop --required --optional --mesagl --mpich --uintah --no-icet --no-moab --no-pidx --no-hdf4 --no-visit --thirdparty-path /home/visit/third-party --makeflags -j4; python build_visit_docker_cleanup.py

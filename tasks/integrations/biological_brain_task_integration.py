@@ -58,32 +58,64 @@ class BiologicalBrainTaskIntegration:
         logger.info("🧠 Biological Brain Task Integration initialized")
     
     def load_central_task_system(self) -> Dict[str, Any]:
-        """Load the central task management system"""
+        """Load the central task management system from the new phase_1_plan.md."""
         try:
-            # Load main task status
-            task_status_file = self.task_system_path / "TASK_STATUS.md"
-            if task_status_file.exists():
-                self.central_tasks = self._parse_task_status_markdown(task_status_file.read_text())
-                logger.info(f"Loaded {len(self.central_tasks)} tasks from central system")
+            plan_file = self.task_system_path / "phase_1_plan.md"
+            if plan_file.exists():
+                self.central_tasks = self._parse_phase_1_plan(plan_file.read_text())
+                logger.info(f"Loaded {len(self.central_tasks)} tasks from the Phase 1 execution plan.")
             else:
-                logger.warning("Central task status file not found")
+                logger.warning(f"Phase 1 plan file not found at {plan_file}")
                 self.central_tasks = {}
-            
-            # Load active tasks
-            active_tasks_dir = self.task_system_path / "active_tasks"
-            if active_tasks_dir.exists():
-                self._load_active_tasks(active_tasks_dir)
-            
-            # Load dependencies
-            dependencies_dir = self.task_system_path / "dependencies"
-            if dependencies_dir.exists():
-                self._load_task_dependencies(dependencies_dir)
-            
+
             return self.central_tasks
-            
+
         except Exception as e:
             logger.error(f"Error loading central task system: {e}")
             return {}
+
+    def _parse_phase_1_plan(self, markdown_content: str) -> Dict[str, Any]:
+        """Parse the phase_1_plan.md file to extract task information."""
+        tasks = {}
+        current_milestone = None
+        task_counter = 1
+
+        for line in markdown_content.split('\n'):
+            milestone_match = re.search(r'## ✅ \*\*Milestone ([\d\.]+): (.*)\*\*', line)
+            task_match = re.search(r'^\d+\.\s+\*\*(.*):\*\*', line)
+            status_match = re.search(r'-\s+\*\*Status\*\*:\s*(.*)', line)
+            deliverable_match = re.search(r'-\s+\*\*Deliverable\*\*:\s*`?([^`]+)`?', line)
+
+            if milestone_match:
+                current_milestone = f"{milestone_match.group(1)}_{milestone_match.group(2).replace(' ', '_')}"
+
+            if task_match and current_milestone:
+                task_id = f"task_{task_counter}"
+                task_title = task_match.group(1).strip()
+                tasks[task_id] = {
+                    'id': task_id,
+                    'title': task_title,
+                    'milestone': current_milestone,
+                    'status': 'unknown',
+                    'deliverable': None,
+                    'priority': 'high' # Defaulting all roadmap tasks to high priority
+                }
+                task_counter += 1
+                current_task_id = task_id
+
+            if status_match and 'current_task_id' in locals() and tasks.get(current_task_id):
+                status = status_match.group(1).strip()
+                if "NOT STARTED" in status:
+                    tasks[current_task_id]['status'] = 'Not Started'
+                elif "PENDING" in status:
+                    tasks[current_task_id]['status'] = 'Blocked'
+                elif "IN PROGRESS" in status:
+                    tasks[current_task_id]['status'] = 'In Progress'
+
+            if deliverable_match and 'current_task_id' in locals() and tasks.get(current_task_id):
+                tasks[current_task_id]['deliverable'] = deliverable_match.group(1).strip()
+                
+        return tasks
     
     def _parse_task_status_markdown(self, markdown_content: str) -> Dict[str, Any]:
         """Parse the main TASK_STATUS.md file to extract task information"""
@@ -275,28 +307,37 @@ class BiologicalBrainTaskIntegration:
         return 'medium'
     
     def _estimate_task_effort(self, task: Dict[str, Any]) -> str:
-        """Estimate effort required for task"""
+        """Estimate effort required for task based on deliverables and title."""
         title = task.get('title', '').lower()
-        content = task.get('content', '').lower()
+        deliverable = task.get('deliverable', '').lower()
         
-        # Simple heuristic based on keywords
-        if any(word in title or word in content for word in ['complete', 'implement', 'deploy', 'establish']):
+        # High effort indicators (creating core code modules)
+        if '.py' in deliverable and ('model' in deliverable or 'system' in deliverable or 'control' in deliverable):
             return 'high'
-        elif any(word in title or word in content for word in ['update', 'modify', 'enhance']):
+        if any(word in title for word in ['implement', 'establish', 'integrate', 'create']):
+            return 'high'
+            
+        # Medium effort indicators (creating configs, scripts, or simpler code)
+        if '.py' in deliverable or '.yaml' in deliverable or '.md' in deliverable:
             return 'medium'
-        else:
-            return 'low'
+        if any(word in title for word in ['define', 'set up', 'model']):
+            return 'medium'
+
+        # Default to low effort
+        return 'low'
     
     def _estimate_cognitive_load(self, task: Dict[str, Any]) -> float:
-        """Estimate cognitive load for task"""
+        """Estimate cognitive load for task based on effort and milestone."""
         effort = self._estimate_task_effort(task)
         effort_scores = {'low': 0.2, 'medium': 0.5, 'high': 0.8}
         
         base_load = effort_scores.get(effort, 0.5)
         
-        # Adjust based on complexity indicators
-        title = task.get('title', '').lower()
-        if any(word in title for word in ['integration', 'framework', 'system']):
+        # Adjust based on milestone - earlier milestones are more foundational and complex
+        milestone = task.get('milestone', '')
+        if milestone.startswith('1.1_Core_Infrastructure'):
+            base_load += 0.15
+        elif milestone.startswith('1.2') or milestone.startswith('1.3'):
             base_load += 0.1
         
         return min(1.0, base_load)

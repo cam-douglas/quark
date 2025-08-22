@@ -4,8 +4,6 @@ Purpose: Cloud-integrated consciousness capabilities and distributed processing
 Includes: Cloud consciousness, distributed awareness, cloud-native operations
 """
 
-from ...........................................................cloud_integrated_consciousness import *
+from . import cloud_integrated_consciousness
 
-__all__ = [
-    "cloud_integrated_consciousness"
-]
+__all__ = ["cloud_integrated_consciousness"]

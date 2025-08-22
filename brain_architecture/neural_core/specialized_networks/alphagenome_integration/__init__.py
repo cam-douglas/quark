@@ -13,15 +13,15 @@ Date: 2025
 License: Apache 2.0 (compatible with AlphaGenome)
 """
 
-from ...........................................................dna_controller import DNAController
-from ...........................................................cell_constructor import CellConstructor
-from ...........................................................genome_analyzer import GenomeAnalyzer
-from ...........................................................biological_simulator import BiologicalSimulator
+from . import dna_controller
+from . import cell_constructor
+from . import genome_analyzer
+from . import biological_simulator
 
 __version__ = "1.0.0"
 __all__ = [
-    "DNAController",
-    "CellConstructor", 
-    "GenomeAnalyzer",
-    "BiologicalSimulator"
+    "dna_controller",
+    "cell_constructor",
+    "genome_analyzer",
+    "biological_simulator",
 ]

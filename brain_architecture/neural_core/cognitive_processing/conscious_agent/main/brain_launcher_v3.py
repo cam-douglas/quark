@@ -20,7 +20,7 @@ from typing import Dict, Any, List, Tuple
 import yaml
 
 # Import neural components for Pillar 1
-from ...........................................................neural_components import SpikingNeuron, HebbianSynapse, STDP, NeuralPopulation, calculate_synchrony, calculate_oscillation_power
+from .neural_components import SpikingNeuron, HebbianSynapse, STDP, NeuralPopulation, calculate_synchrony, calculate_oscillation_power
 
 # ---------------------------
 # Message types

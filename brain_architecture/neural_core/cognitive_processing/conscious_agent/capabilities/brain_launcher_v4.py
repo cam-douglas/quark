@@ -25,9 +25,9 @@ import numpy as np
 
 # Import neural integration components
 try:
-    from ...........................................................neural_integration_layer import NeuralIntegrationLayer, CorticalSubcorticalLoop
-    from ...........................................................biological_validator import BiologicalValidator
-    from ...........................................................neural_components import SpikingNeuron, HebbianSynapse, STDP
+    from .neural_integration_layer import NeuralIntegrationLayer, CorticalSubcorticalLoop
+    from .biological_validator import BiologicalValidator
+    from .neural_components import SpikingNeuron, HebbianSynapse, STDP
 except ImportError:
     # Fallback for direct execution
     from neural_integration_layer import NeuralIntegrationLayer, CorticalSubcorticalLoop
@@ -511,4 +511,5 @@ async def main():
         print(f"Neural metrics exported to: {args.log_csv}")
 
 if __name__ == "__main__":
+    import asyncio
     asyncio.run(main())
