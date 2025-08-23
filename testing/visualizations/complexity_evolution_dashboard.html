@@ -1,0 +1,132 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>🧠 Complexity Evolution Agent - Live Dashboard</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f5f5f5; }
+        .header { text-align: center; margin-bottom: 30px; }
+        .dashboard { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .card { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .full-width { grid-column: 1 / -1; }
+        .metric { display: flex; justify-content: space-between; margin: 10px 0; }
+        .status { padding: 5px 10px; border-radius: 5px; color: white; }
+        .status.ready { background-color: #28a745; }
+        .status.waiting { background-color: #ffc107; }
+        .status.error { background-color: #dc3545; }
+        iframe { width: 100%; height: 400px; border: none; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🧠 Complexity Evolution Agent - Live Dashboard</h1>
+        <p>Real-time monitoring of Quark's complexity evolution and external synchronization</p>
+        <p><strong>Last Updated:</strong> 2025-08-23 18:51:13</p>
+    </div>
+    
+    <div class="dashboard">
+        <div class="card full-width">
+            <h2>📊 Current Status</h2>
+            <div class="metric">
+                <span><strong>Current Stage:</strong></span>
+                <span class="status ready">F - Basic Neural Dynamics</span>
+            </div>
+            <div class="metric">
+                <span><strong>Complexity Factor:</strong></span>
+                <span>1.0x</span>
+            </div>
+            <div class="metric">
+                <span><strong>Evolution Ready:</strong></span>
+                <span class="status ready">
+                    ✅ Ready
+                </span>
+            </div>
+            <div class="metric">
+                <span><strong>Next Stage:</strong></span>
+                <span>N0 - Learning & Consolidation</span>
+            </div>
+            <div class="metric">
+                <span><strong>Complexity Increase:</strong></span>
+                <span>2.5x</span>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2>🔄 Connectome Sync Status</h2>
+            <div class="metric">
+                <span><strong>Status:</strong></span>
+                <span class="status waiting">
+                    No Syncs Performed
+                </span>
+            </div>
+            <div class="metric">
+                <span><strong>Success Rate:</strong></span>
+                <span>0.0%</span>
+            </div>
+            <div class="metric">
+                <span><strong>Last Sync:</strong></span>
+                <span>Never</span>
+            </div>
+            <div class="metric">
+                <span><strong>Avg Validation:</strong></span>
+                <span>0.00</span>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2>📈 Complexity Metrics</h2>
+            <div class="metric">
+                <span><strong>Document Depth:</strong></span>
+                <span>foundational → developmental</span>
+            </div>
+            <div class="metric">
+                <span><strong>Technical Detail:</strong></span>
+                <span>basic → intermediate</span>
+            </div>
+            <div class="metric">
+                <span><strong>Biological Accuracy:</strong></span>
+                <span>core_principles → developmental_patterns</span>
+            </div>
+            <div class="metric">
+                <span><strong>ML Sophistication:</strong></span>
+                <span>fundamental → learning_algorithms</span>
+            </div>
+        </div>
+        
+        <div class="card full-width">
+            <h2>🎯 3D Complexity Landscape</h2>
+            <iframe src="complexity_evolution_3d_landscape.html"></iframe>
+        </div>
+        
+        <div class="card">
+            <h2>🔄 Evolution Timeline</h2>
+            <iframe src="complexity_evolution_timeline.html"></iframe>
+        </div>
+        
+        <div class="card">
+            <h2>📊 Metrics Dashboard</h2>
+            <iframe src="complexity_metrics_dashboard.html"></iframe>
+        </div>
+        
+        <div class="card full-width">
+            <h2>🚀 Recommendations</h2>
+            <ul>
+                <li><strong>Current Focus:</strong> Continue development in F stage</li>
+                <li><strong>Next Milestone:</strong> Prepare for transition to N0 stage</li>
+                <li><strong>Complexity Target:</strong> Increase complexity by 2.5x</li>
+                <li><strong>Document Enhancement:</strong> Upgrade from foundational to developmental</li>
+                <li><strong>Technical Upgrade:</strong> Advance from basic to intermediate</li>
+            </ul>
+        </div>
+    </div>
+    
+    <script>
+        // Auto-refresh every 30 seconds
+        setInterval(() => {
+            location.reload();
+        }, 30000);
+    </script>
+</body>
+</html>
+        

@@ -45,13 +45,8 @@ class ComplexityEvolutionAgent:
         try:
             self.connectome_synchronizer = ConnectomeSynchronizer(project_root)
         except ImportError as e:
-            try: # Try absolute import
-                from connectome_synchronizer import ConnectomeSynchronizer
-                self.connectome_synchronizer = ConnectomeSynchronizer(project_root)
-                self.logger.info("ConnectomeSynchronizer initialized successfully (absolute import)")
-            except ImportError as e2:
-                self.logger.warning(f"ConnectomeSynchronizer not available - using placeholder: {e2}")
-                self.connectome_synchronizer = None
+            self.logger.warning(f"ConnectomeSynchronizer not available - using placeholder: {e}")
+            self.connectome_synchronizer = None
         
         self.logger.info(f"Complexity Evolution Agent initialized for stage: {self.current_stage}")
     

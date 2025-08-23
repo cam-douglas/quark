@@ -42,6 +42,9 @@ class QUARKFirstExperiment:
         # Get the QUARK root directory
         current_dir = os.path.dirname(os.path.abspath(__file__))
         self.quark_root = os.path.dirname(os.path.dirname(current_dir))
+        # Ensure repo root on sys.path so imports like `testing.*` work when exec()'ing modules
+        if self.quark_root not in sys.path:
+            sys.path.insert(0, self.quark_root)
         
         print(f"🧪 Initializing: {self.experiment_name}")
     
@@ -413,8 +416,14 @@ class QUARKFirstExperiment:
     def save_report(self, filename: str = "first_real_experiment_report.md"):
         """Save experiment report to file"""
         report = self.generate_report()
-        
+
+        # Always save into nested reports directory (avoid top-level files)
+        reports_dir = os.path.join(self.quark_root, 'testing', 'testing_frameworks', 'reports')
         try:
+            os.makedirs(reports_dir, exist_ok=True)
+            # If a relative filename was provided, redirect it into reports_dir
+            if not os.path.isabs(filename):
+                filename = os.path.join(reports_dir, os.path.basename(filename))
             with open(filename, 'w') as f:
                 f.write(report)
             print(f"✅ Experiment report saved to {filename}")

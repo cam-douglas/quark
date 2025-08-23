@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>🧠 Quark Conscious Live Dashboard</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            margin: 0; 
+            padding: 20px; 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .header { 
+            text-align: center; 
+            margin-bottom: 30px; 
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .status-bar { 
+            background: rgba(255,255,255,0.1); 
+            padding: 15px; 
+            border-radius: 10px; 
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+        }
+        .grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); 
+            gap: 20px; 
+        }
+        
+        .chart-container[style*="span 2"] {
+            grid-column: span 2;
+        }
+        
+        @media (max-width: 1200px) {
+            .chart-container[style*="span 2"] {
+                grid-column: span 1;
+            }
+        }
+        .chart-container { 
+            background: rgba(255,255,255,0.1); 
+            border-radius: 10px; 
+            padding: 20px; 
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .chart-title { 
+            font-size: 18px; 
+            font-weight: bold; 
+            margin-bottom: 15px; 
+            text-align: center;
+            color: #ffd700;
+        }
+        .metrics { 
+            display: flex; 
+            justify-content: space-between; 
+            margin-bottom: 10px; 
+            font-size: 12px;
+        }
+        .connected { color: #00ff88; font-weight: bold; }
+        .disconnected { color: #ff4757; font-weight: bold; }
+        .running { color: #ffd700; font-weight: bold; }
+        .completed { color: #00ff88; font-weight: bold; }
+        .error { color: #ff4757; font-weight: bold; }
+        
+        .experiment-log {
+            background: rgba(0,0,0,0.3);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        .log-entry {
+            margin: 5px 0;
+            padding: 5px;
+            border-radius: 5px;
+            background: rgba(255,255,255,0.1);
+        }
+        .log-time { color: #ffd700; font-size: 12px; }
+        .log-message { margin-left: 10px; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🧠 Quark Conscious Live Dashboard</h1>
+        <p>Real-time monitoring of all experiments, tests, and demonstrations</p>
+    </div>
+    
+    <div class="status-bar">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div>
+                <strong>Status:</strong> <span id="status" class="disconnected">Disconnected</span>
+                <br><strong>Active Experiments:</strong> <span id="active-count">0</span>
+                <br><strong>Total Data Points:</strong> <span id="total-points">0</span>
+            </div>
+            <div>
+                <strong>Server:</strong> <span id="server-status">Offline</span>
+                <br><strong>Last Update:</strong> <span id="last-update">Never</span>
+            </div>
+        </div>
+    </div>
+    
+    <div id="charts-grid" class="grid"></div>
+    
+    <div class="experiment-log">
+        <h3>📋 Experiment Log</h3>
+        <div id="log-entries"></div>
+    </div>
+
+    <script>
+        // Global state
+        let ws = null;
+        let experiments = {};
+        let totalPoints = 0;
+        let activeExperiments = 0;
+        
+        // WebSocket connection
+        function connect() {
+            ws = new WebSocket('ws://127.0.0.1:8000');
+            
+            ws.onopen = function() {
+                document.getElementById('status').textContent = 'Connected';
+                document.getElementById('status').className = 'connected';
+                document.getElementById('server-status').textContent = 'Online';
+                logMessage('🔗 Connected to Quark live stream server');
+            };
+            
+            ws.onmessage = function(event) {
+                const data = JSON.parse(event.data);
+                console.log('Received data:', data); // Debug logging
+                
+                // Check if this is 3D visualization data
+                if (data.series_id && data.series_id.startsWith('3d_')) {
+                    console.log('Processing 3D visualization:', data.series_id);
+                    handle3DVisualization(data);
+                } else {
+                    updateExperiment(data);
+                }
+                
+                totalPoints++;
+                document.getElementById('total-points').textContent = totalPoints;
+                document.getElementById('last-update').textContent = new Date().toLocaleTimeString();
+            };
+            
+            ws.onclose = function() {
+                document.getElementById('status').textContent = 'Disconnected';
+                document.getElementById('status').className = 'disconnected';
+                document.getElementById('server-status').textContent = 'Offline';
+                logMessage('❌ Disconnected from server');
+                setTimeout(connect, 2000);
+            };
+            
+            ws.onerror = function() {
+                document.getElementById('status').textContent = 'Error';
+                document.getElementById('status').className = 'error';
+                logMessage('⚠️ WebSocket connection error');
+            };
+        }
+        
+        function handle3DVisualization(data) {
+            const { series_id, value, timestamp } = data;
+            
+            console.log('3D visualization data:', data); // Debug logging
+            console.log('Value field:', value); // Debug value field
+            
+            // The plot data should be in the 'value' field
+            const plot_data = value && value.plot_data ? value.plot_data : null;
+            
+            console.log('Extracted plot_data:', plot_data); // Debug plot_data
+            
+            if (!plot_data) {
+                logMessage(`⚠️ No plot_data found for ${series_id}`);
+                console.log('Available keys in value:', value ? Object.keys(value) : 'value is null');
+                return;
+            }
+            
+            if (!plot_data.figure) {
+                logMessage(`⚠️ No figure in plot_data for ${series_id}`);
+                console.log('Available keys in plot_data:', Object.keys(plot_data));
+                return;
+            }
+            
+            logMessage(`🎯 Creating 3D visualization: ${series_id}`);
+            
+            // Create 3D visualization container
+            const grid = document.getElementById('charts-grid');
+            const container = document.createElement('div');
+            container.className = 'chart-container';
+            container.id = `container-${series_id}`;
+            container.style.gridColumn = 'span 2'; // Make 3D charts wider
+            
+            const title = document.createElement('div');
+            title.className = 'chart-title';
+            title.innerHTML = `🎨 ${series_id.replace('3d_', '3D ')} <span class="running">(Live 3D)</span>`;
+            
+            const chartDiv = document.createElement('div');
+            chartDiv.id = `chart-${series_id}`;
+            chartDiv.style.height = '500px'; // Taller for 3D
+            
+            container.appendChild(title);
+            container.appendChild(chartDiv);
+            grid.appendChild(container);
+            
+            // Create 3D Plotly visualization
+            try {
+                Plotly.newPlot(chartDiv.id, plot_data.data, plot_data.layout, {
+                    responsive: true,
+                    displayModeBar: true,
+                    modeBarButtonsToRemove: ['pan2d', 'lasso2d', 'select2d'],
+                    displaylogo: false
+                });
+                
+                logMessage(`✅ 3D visualization created: ${series_id}`);
+                
+                // Add rotation animation
+                const camera = plot_data.layout.scene?.camera;
+                if (camera) {
+                    let angle = 0;
+                    setInterval(() => {
+                        angle += 1;
+                        Plotly.relayout(chartDiv.id, {
+                            'scene.camera': {
+                                eye: {
+                                    x: camera.eye.x * Math.cos(angle * 0.02),
+                                    y: camera.eye.y * Math.sin(angle * 0.02),
+                                    z: camera.eye.z
+                                }
+                            }
+                        });
+                    }, 50);
+                }
+                
+            } catch (error) {
+                logMessage(`❌ Error creating 3D visualization: ${error.message}`);
+                chartDiv.innerHTML = `<div style="color: red; text-align: center; padding: 20px;">Error: ${error.message}</div>`;
+            }
+        }
+        
+        function updateExperiment(data) {
+            const { series_id, step, value, timestamp } = data;
+            
+            // Handle 3D visualizations
+            if (series_id && series_id.startsWith('3d_')) {
+                handle3DVisualization(data);
+                return;
+            }
+            
+            if (!experiments[series_id]) {
+                experiments[series_id] = {
+                    x: [],
+                    y: [],
+                    startTime: Date.now(),
+                    status: 'running'
+                };
+                activeExperiments++;
+                document.getElementById('active-count').textContent = activeExperiments;
+                createExperimentChart(series_id);
+                logMessage(`🚀 New experiment started: ${series_id}`);
+            }
+            
+            experiments[series_id].x.push(step);
+            experiments[series_id].y.push(value);
+            experiments[series_id].lastUpdate = Date.now();
+            
+            // Update chart
+            const chartDiv = document.getElementById(`chart-${series_id}`);
+            if (chartDiv) {
+                Plotly.restyle(chartDiv, {
+                    x: [experiments[series_id].x],
+                    y: [experiments[series_id].y]
+                });
+            }
+            
+            // Check if experiment is still active (within last 5 seconds)
+            setTimeout(() => {
+                if (Date.now() - experiments[series_id].lastUpdate > 5000) {
+                    if (experiments[series_id].status === 'running') {
+                        experiments[series_id].status = 'completed';
+                        activeExperiments--;
+                        document.getElementById('active-count').textContent = activeExperiments;
+                        logMessage(`✅ Experiment completed: ${series_id}`);
+                        
+                        // Update chart title to show completion
+                        const titleDiv = document.getElementById(`title-${series_id}`);
+                        if (titleDiv) {
+                            titleDiv.innerHTML = `🎯 ${series_id} <span class="completed">(Completed)</span>`;
+                        }
+                    }
+                }
+            }, 5000);
+        }
+        
+        function createExperimentChart(seriesId) {
+            const grid = document.getElementById('charts-grid');
+            const container = document.createElement('div');
+            container.className = 'chart-container';
+            container.id = `container-${seriesId}`;
+            
+            const title = document.createElement('div');
+            title.className = 'chart-title';
+            title.id = `title-${seriesId}`;
+            title.innerHTML = `🔬 ${seriesId} <span class="running">(Running)</span>`;
+            
+            const metrics = document.createElement('div');
+            metrics.className = 'metrics';
+            metrics.innerHTML = `
+                <span>Steps: <span id="steps-${seriesId}">0</span></span>
+                <span>Duration: <span id="duration-${seriesId}">0s</span></span>
+            `;
+            
+            const chartDiv = document.createElement('div');
+            chartDiv.id = `chart-${seriesId}`;
+            chartDiv.style.height = '300px';
+            
+            container.appendChild(title);
+            container.appendChild(metrics);
+            container.appendChild(chartDiv);
+            grid.appendChild(container);
+            
+            // Create Plotly chart
+            Plotly.newPlot(chartDiv.id, [{
+                x: [],
+                y: [],
+                type: 'scatter',
+                mode: 'lines+markers',
+                name: seriesId,
+                line: { color: getRandomColor() },
+                marker: { size: 4 }
+            }], {
+                title: `Live: ${seriesId}`,
+                xaxis: { title: 'Step', gridcolor: 'rgba(255,255,255,0.1)' },
+                yaxis: { title: 'Value', gridcolor: 'rgba(255,255,255,0.1)' },
+                plot_bgcolor: 'rgba(0,0,0,0)',
+                paper_bgcolor: 'rgba(0,0,0,0)',
+                font: { color: 'white' }
+            });
+            
+            // Update metrics every second
+            setInterval(() => {
+                const exp = experiments[seriesId];
+                if (exp) {
+                    document.getElementById(`steps-${seriesId}`).textContent = exp.x.length;
+                    const duration = Math.floor((Date.now() - exp.startTime) / 1000);
+                    document.getElementById(`duration-${seriesId}`).textContent = `${duration}s`;
+                }
+            }, 1000);
+        }
+        
+        function getRandomColor() {
+            const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57', '#ff9ff3', '#54a0ff'];
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+        
+        function logMessage(message) {
+            const logDiv = document.getElementById('log-entries');
+            const entry = document.createElement('div');
+            entry.className = 'log-entry';
+            
+            const time = document.createElement('span');
+            time.className = 'log-time';
+            time.textContent = new Date().toLocaleTimeString();
+            
+            const msg = document.createElement('span');
+            msg.className = 'log-message';
+            msg.textContent = message;
+            
+            entry.appendChild(time);
+            entry.appendChild(msg);
+            logDiv.appendChild(entry);
+            
+            // Keep only last 50 entries
+            while (logDiv.children.length > 50) {
+                logDiv.removeChild(logDiv.firstChild);
+            }
+            
+            // Auto-scroll to bottom
+            logDiv.scrollTop = logDiv.scrollHeight;
+        }
+        
+        // Start connection
+        connect();
+        
+        // Auto-refresh connection
+        setInterval(function() {
+            if (ws && ws.readyState === WebSocket.CLOSED) {
+                connect();
+            }
+        }, 5000);
+        
+        // Log dashboard startup
+        logMessage('🚀 Quark Conscious Live Dashboard initialized');
+        logMessage('📊 Waiting for experiments to start...');
+    </script>
+</body>
+</html>

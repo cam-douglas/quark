@@ -5,6 +5,13 @@ Integrates with QUARK's brain architecture and task management system to make in
 about task prioritization, execution timing, and resource allocation.
 """
 
+# Ensure repository root is on sys.path for absolute imports like `testing.*`
+import os, sys
+_here = os.path.dirname(os.path.abspath(__file__))
+_repo_root = os.path.abspath(os.path.join(_here, '..', '..'))
+if _repo_root not in sys.path:
+    sys.path.insert(0, _repo_root)
+
 import numpy as np
 from typing import Dict, List, Any, Optional, Tuple
 from dataclasses import dataclass, field

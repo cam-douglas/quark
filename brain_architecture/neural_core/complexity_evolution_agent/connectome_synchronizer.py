@@ -19,23 +19,11 @@ import yaml
 from pathlib import Path
 
 # Import our API clients
-try:
-    from .api_clients import (
-        OpenAIClient,
-        AnthropicClient,
-        HuggingFaceClient,
-        GoogleAIClient,
-        AWSClient,
-        AzureClient,
-        NVIDIAClient,
-        CloudflareClient,
-    )
-except ImportError:
-    from api_clients import (
-        AllenBrainAtlasClient, HuggingFaceClient, PubMedClient, 
-        PapersWithCodeClient, GitHubClient, WikipediaClient, 
-        PyPIClient, ConsciousnessResearchClient, APIResponse
-    )
+from .api_clients import (
+    AllenBrainAtlasClient, HuggingFaceClient, PubMedClient, 
+    PapersWithCodeClient, GitHubClient, WikipediaClient, 
+    PyPIClient, ConsciousnessResearchClient, APIResponse
+)
 
 @dataclass
 class SyncResult:

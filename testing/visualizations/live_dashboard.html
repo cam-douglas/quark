@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quark Live Dashboard</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .chart { margin: 20px 0; border: 1px solid #ddd; padding: 10px; }
+        .status { color: #666; font-size: 14px; }
+        .connected { color: green; }
+        .disconnected { color: red; }
+    </style>
+</head>
+<body>
+    <h1>🧠 Quark Live Dashboard</h1>
+    <div class="status">
+        Status: <span id="status" class="disconnected">Disconnected</span>
+        <br>Connected series: <span id="series-count">0</span>
+    </div>
+    
+    <div id="charts"></div>
+
+    <script>
+        // WebSocket connection
+        let ws = null;
+        let seriesData = {};
+        let seriesCount = 0;
+        
+        function connect() {
+            ws = new WebSocket('ws://127.0.0.1:8000/ws');
+            
+            ws.onopen = function() {
+                document.getElementById('status').textContent = 'Connected';
+                document.getElementById('status').className = 'connected';
+            };
+            
+            ws.onmessage = function(event) {
+                const data = JSON.parse(event.data);
+                updateChart(data);
+            };
+            
+            ws.onclose = function() {
+                document.getElementById('status').textContent = 'Disconnected';
+                document.getElementById('status').className = 'disconnected';
+                // Reconnect after 2 seconds
+                setTimeout(connect, 2000);
+            };
+            
+            ws.onerror = function() {
+                document.getElementById('status').textContent = 'Error';
+                document.getElementById('status').className = 'disconnected';
+            };
+        }
+        
+        function updateChart(data) {
+            const { series_id, step, value } = data;
+            
+            if (!seriesData[series_id]) {
+                seriesData[series_id] = { x: [], y: [] };
+                seriesCount++;
+                document.getElementById('series-count').textContent = seriesCount;
+                createChart(series_id);
+            }
+            
+            seriesData[series_id].x.push(step);
+            seriesData[series_id].y.push(value);
+            
+            // Update the chart
+            const chartDiv = document.getElementById(`chart-${series_id}`);
+            if (chartDiv) {
+                Plotly.restyle(chartDiv, {
+                    x: [seriesData[series_id].x],
+                    y: [seriesData[series_id].y]
+                });
+            }
+        }
+        
+        function createChart(seriesId) {
+            const chartsDiv = document.getElementById('charts');
+            const chartDiv = document.createElement('div');
+            chartDiv.id = `chart-${seriesId}`;
+            chartDiv.className = 'chart';
+            
+            const title = document.createElement('h3');
+            title.textContent = `Series: ${seriesId}`;
+            chartDiv.appendChild(title);
+            
+            chartsDiv.appendChild(chartDiv);
+            
+            Plotly.newPlot(chartDiv.id, [{
+                x: [],
+                y: [],
+                type: 'scatter',
+                mode: 'lines+markers',
+                name: seriesId
+            }], {
+                title: `Live: ${seriesId}`,
+                xaxis: { title: 'Step' },
+                yaxis: { title: 'Value' }
+            });
+        }
+        
+        // Start connection
+        connect();
+        
+        // Auto-refresh connection if needed
+        setInterval(function() {
+            if (ws && ws.readyState === WebSocket.CLOSED) {
+                connect();
+            }
+        }, 5000);
+    </script>
+</body>
+</html>

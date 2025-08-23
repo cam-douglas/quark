@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>🐛 3D Debug Dashboard</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        body { 
+            font-family: monospace; 
+            margin: 20px; 
+            background: #1a1a1a;
+            color: #00ff00;
+        }
+        .debug-log { 
+            background: #000; 
+            padding: 10px; 
+            border: 1px solid #333; 
+            height: 300px; 
+            overflow-y: auto; 
+            margin: 10px 0;
+        }
+        .message { margin: 2px 0; }
+        .error { color: #ff4444; }
+        .success { color: #44ff44; }
+        .info { color: #4444ff; }
+    </style>
+</head>
+<body>
+    <h1>🐛 3D Visualization Debug Dashboard</h1>
+    <div>Status: <span id="status">Connecting...</span></div>
+    <div>Messages Received: <span id="msg-count">0</span></div>
+    
+    <h3>Debug Log:</h3>
+    <div id="debug-log" class="debug-log"></div>
+    
+    <h3>3D Visualizations:</h3>
+    <div id="viz-container"></div>
+    
+    <script>
+        let messageCount = 0;
+        let ws;
+        
+        function log(message, type = 'info') {
+            const logDiv = document.getElementById('debug-log');
+            const msgDiv = document.createElement('div');
+            msgDiv.className = `message ${type}`;
+            msgDiv.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+            logDiv.appendChild(msgDiv);
+            logDiv.scrollTop = logDiv.scrollHeight;
+            console.log(message);
+        }
+        
+        function connect() {
+            log('Connecting to WebSocket server...', 'info');
+            ws = new WebSocket('ws://127.0.0.1:8000');
+            
+            ws.onopen = function() {
+                document.getElementById('status').textContent = 'Connected';
+                log('✅ Connected to server', 'success');
+            };
+            
+            ws.onmessage = function(event) {
+                messageCount++;
+                document.getElementById('msg-count').textContent = messageCount;
+                
+                try {
+                    const data = JSON.parse(event.data);
+                    log(`📨 Received: ${data.series_id}`, 'info');
+                    
+                    if (data.series_id && data.series_id.startsWith('3d_')) {
+                        log(`🎯 Processing 3D: ${data.series_id}`, 'success');
+                        log(`📊 Data keys: ${Object.keys(data).join(', ')}`, 'info');
+                        
+                        if (data.value) {
+                            log(`🔍 Value keys: ${Object.keys(data.value).join(', ')}`, 'info');
+                            
+                            if (data.value.plot_data) {
+                                log(`📈 Plot data keys: ${Object.keys(data.value.plot_data).join(', ')}`, 'info');
+                                
+                                if (data.value.plot_data.figure) {
+                                    log(`🎨 Creating 3D visualization...`, 'success');
+                                    create3DVisualization(data);
+                                } else {
+                                    log(`❌ No figure in plot_data`, 'error');
+                                }
+                            } else {
+                                log(`❌ No plot_data in value`, 'error');
+                            }
+                        } else {
+                            log(`❌ No value field`, 'error');
+                        }
+                    } else {
+                        log(`📊 Regular data: ${JSON.stringify(data).substring(0, 100)}...`, 'info');
+                    }
+                } catch (e) {
+                    log(`❌ Error parsing message: ${e.message}`, 'error');
+                }
+            };
+            
+            ws.onclose = function() {
+                document.getElementById('status').textContent = 'Disconnected';
+                log('❌ Disconnected from server', 'error');
+            };
+            
+            ws.onerror = function() {
+                log('⚠️ WebSocket error', 'error');
+            };
+        }
+        
+        function create3DVisualization(data) {
+            const { series_id, value } = data;
+            const plot_data = value.plot_data;
+            
+            try {
+                // Create container
+                const container = document.createElement('div');
+                container.id = `viz-${series_id}`;
+                container.style.width = '800px';
+                container.style.height = '600px';
+                container.style.border = '1px solid #333';
+                container.style.margin = '10px 0';
+                
+                const title = document.createElement('h4');
+                title.textContent = `🎨 ${series_id}`;
+                title.style.color = '#00ff00';
+                
+                document.getElementById('viz-container').appendChild(title);
+                document.getElementById('viz-container').appendChild(container);
+                
+                // Create Plotly visualization
+                Plotly.newPlot(container.id, plot_data.data, plot_data.layout, {
+                    responsive: true,
+                    displayModeBar: true
+                });
+                
+                log(`✅ 3D visualization created: ${series_id}`, 'success');
+                
+            } catch (error) {
+                log(`❌ Error creating 3D viz: ${error.message}`, 'error');
+            }
+        }
+        
+        // Start connection
+        connect();
+        
+        log('🚀 Debug dashboard initialized', 'info');
+    </script>
+</body>
+</html>
