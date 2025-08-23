@@ -1,3 +1,4 @@
 \n# Experiment logs\n.mlruns/
 \n# local venv\nfresh_venv/
 \n# large script backups\ntools_utilities/scripts_backup/
+tools_utilities/scripts_backup/
