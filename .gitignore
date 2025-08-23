@@ -19,5 +19,3 @@ brain_architecture/neural_core/connectome/exports/
 **/__pycache__/
 *.pyc
 *.ipynb
-.github/workflows/ci.yml
-.github/workflows/
