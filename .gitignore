@@ -6,3 +6,16 @@ ml_architecture/training_systems/agent_systems/simulation/visit/data/
 ml_architecture/training_systems/agent_systems/simulation/visit/
 ml_architecture/training_systems/development_tools/research/archived/compucell3d/visit/
 ml_architecture/training_systems/**/visit/
+fresh_venv/
+.venv/
+logs/
+tools_utilities/scripts/
+data_knowledge/research/notebooks/
+data_knowledge/models_artifacts/
+data_knowledge/wolfram_data/
+data_knowledge/wolfram_enhanced_training/
+ml_architecture/**/visit/
+brain_architecture/neural_core/connectome/exports/
+**/__pycache__/
+*.pyc
+*.ipynb
