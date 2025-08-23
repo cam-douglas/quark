@@ -5,3 +5,4 @@ tools_utilities/scripts_backup/
 ml_architecture/training_systems/agent_systems/simulation/visit/data/
 ml_architecture/training_systems/agent_systems/simulation/visit/
 ml_architecture/training_systems/development_tools/research/archived/compucell3d/visit/
+ml_architecture/training_systems/**/visit/
