@@ -34,3 +34,26 @@ All important project files have been moved to the `root/` directory for better 
 ---
 
 *This reorganization improves repository navigation while maintaining all functionality. All important files are now logically organized in the `root/` directory.*
+
+## 🧠 Project Summary (Brief)
+QUARK is a modular brain‑simulation and ML framework spanning molecular → morphogenesis → circuits → cognition. It includes biologically inspired modules (hippocampus, basal ganglia, cortex, thalamus), learning/plasticity utilities, and a comprehensive testing harness for reproducible research.
+
+Highlights:
+- Multi‑scale modules across brain architecture and ML systems
+- Reproducibility: pinned deps, deterministic tests, CI‑ready structure
+- Rich evaluation: focused and comprehensive benchmarks
+
+See the full overview in `root/README.md`.
+
+## 🧪 Benchmark Capabilities (Quick Start)
+- Executive Control: `testing/testing_frameworks/01_Executive_Control_Benchmark.py`
+- Working Memory: `testing/testing_frameworks/02_Working_Memory_Benchmark.py`
+- Episodic Memory: `testing/testing_frameworks/03_Episodic_Memory_Benchmark.py`
+- Consciousness Proxy: `testing/testing_frameworks/04_Consciousness_Benchmark.py`
+
+Run examples:
+```bash
+python testing/testing_frameworks/01_Executive_Control_Benchmark.py
+python testing/testing_frameworks/02_Working_Memory_Benchmark.py
+python testing/testing_frameworks/03_Episodic_Memory_Benchmark.py
+```
