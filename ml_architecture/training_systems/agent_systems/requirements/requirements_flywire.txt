@@ -1,0 +1,22 @@
+# FlyWire Integration Requirements
+# Core data processing and simulation
+numpy>=1.20.0
+pandas>=1.3.0
+h5py>=3.1.0
+tables>=3.7.0
+
+# HTTP requests for API access
+requests>=2.25.0
+
+# Visualization
+matplotlib>=3.3.0
+
+# Optional: NEST simulator integration
+# nest>=3.0.0  # Uncomment if NEST is available
+
+# Optional: MuJoCo physics simulator
+# mujoco>=2.0.0  # Uncomment if MuJoCo is available
+
+# Logging and utilities
+logging
+typing

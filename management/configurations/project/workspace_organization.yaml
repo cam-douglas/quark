@@ -1,0 +1,80 @@
+brain_simulation_standards:
+  required_directories:
+  - brain_modules
+  - expert_domains
+  - architecture
+  - development_stages
+  - research_lab
+  - knowledge_systems
+  - configs
+  - docs
+  - tests
+  - summaries
+  - tools_utilities
+  required_files:
+  - README.md
+  - requirements.txt
+  - pyrightconfig.json
+  - .gitignore
+cleanup_rules:
+  max_cache_size_mb: 1000
+  max_log_age_days: 30
+  max_test_runs: 5
+  temp_files:
+  - '*.tmp'
+  - '*.temp'
+  - '*.cache'
+  - '*.log'
+  - '*~'
+  - '*.bak'
+  - '*.swp'
+  - .DS_Store
+file_movement_rules:
+  configs:
+    exclude_if_in:
+    - configs
+    - brain_modules
+    - knowledge_systems
+    move_to: configs/project
+    pattern: .*\.(yaml|yml|json|toml|ini)$
+  documentation:
+    exclude_if_in:
+    - docs
+    - summaries
+    move_to: docs
+    pattern: .*(README|GUIDE|MANUAL|DOC).*\.(md|rst|txt)$
+  notebooks:
+    exclude_if_in:
+    - research_lab/notebooks
+    move_to: research_lab/notebooks
+    pattern: .*\.ipynb$
+  results:
+    exclude_if_in:
+    - results
+    - tests/outputs
+    - summaries
+    move_to: results/experiments
+    pattern: .*(result|output|log).*\.(json|csv|png|jpg|html)$
+  scripts:
+    exclude_if_in:
+    - brain_modules
+    - expert_domains
+    - architecture
+    - tests
+    - tools_utilities
+    move_to: tools_utilities/scripts
+    pattern: .*\.(py|sh|js|ts)$
+ml_framework_standards:
+  code_organization:
+    inference: deployment
+    source: src
+    tests: tests
+    training: training
+    utilities: tools_utilities
+  data_organization:
+    experiments: research_lab/experiments
+    models: models
+    notebooks: research_lab/notebooks
+    processed_data: data/processed
+    raw_data: data/raw
+    results: results

@@ -1,0 +1,291 @@
+# Wikipedia Training Cloud Deployment Configuration
+# ================================================
+# 
+# Large-scale distributed training setup for English Wikipedia dataset
+# Supports AWS, GCP, and Azure with auto-scaling and cost optimization
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: wikipedia-training-config
+  namespace: quark-training
+data:
+  # Training Configuration
+  model_name: "microsoft/DialoGPT-medium"
+  max_sequence_length: "2048"
+  batch_size: "8"
+  gradient_accumulation_steps: "16"
+  num_epochs: "3"
+  learning_rate: "5e-5"
+  warmup_steps: "10000"
+  
+  # Wikipedia Dataset Configuration
+  wikipedia_dump_date: "20240101"
+  min_article_length: "100"
+  max_article_length: "50000"
+  preprocessing_workers: "8"
+  
+  # Cloud Storage Configuration
+  storage_bucket: "quark-wikipedia-training"
+  cache_dir: "/mnt/cache/wikipedia"
+  output_dir: "/mnt/output/models"
+  
+  # Monitoring Configuration
+  wandb_project: "quark-wikipedia-training"
+  logging_steps: "100"
+  save_steps: "5000"
+  eval_steps: "10000"
+
+---
+# AWS EKS Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wikipedia-training-aws
+  namespace: quark-training
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: wikipedia-training
+      cloud: aws
+  template:
+    metadata:
+      labels:
+        app: wikipedia-training
+        cloud: aws
+    spec:
+      containers:
+      - name: training-container
+        image: quark/wikipedia-training:latest
+        resources:
+          requests:
+            memory: "32Gi"
+            cpu: "8"
+            nvidia.com/gpu: "4"
+          limits:
+            memory: "64Gi"
+            cpu: "16"
+            nvidia.com/gpu: "4"
+        env:
+        - name: CLOUD_PROVIDER
+          value: "aws"
+        - name: AWS_REGION
+          value: "us-west-2"
+        - name: S3_BUCKET
+          value: "quark-wikipedia-training"
+        - name: MASTER_ADDR
+          value: "wikipedia-training-master"
+        - name: MASTER_PORT
+          value: "23456"
+        - name: NODE_RANK
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: WORLD_SIZE
+          value: "4"
+        volumeMounts:
+        - name: cache-volume
+          mountPath: /mnt/cache
+        - name: output-volume
+          mountPath: /mnt/output
+        - name: shared-memory
+          mountPath: /dev/shm
+      volumes:
+      - name: cache-volume
+        persistentVolumeClaim:
+          claimName: wikipedia-cache-pvc
+      - name: output-volume
+        persistentVolumeClaim:
+          claimName: wikipedia-output-pvc
+      - name: shared-memory
+        emptyDir:
+          medium: Memory
+          sizeLimit: 16Gi
+      nodeSelector:
+        node-type: gpu-optimized
+        instance-type: p3.8xlarge
+
+---
+# Persistent Volume Claims
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: wikipedia-cache-pvc
+  namespace: quark-training
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 500Gi
+  storageClassName: gp3-ssd
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: wikipedia-output-pvc
+  namespace: quark-training
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 200Gi
+  storageClassName: gp3-ssd
+
+---
+# Service for distributed training coordination
+apiVersion: v1
+kind: Service
+metadata:
+  name: wikipedia-training-master
+  namespace: quark-training
+spec:
+  selector:
+    app: wikipedia-training
+    role: master
+  ports:
+  - port: 23456
+    targetPort: 23456
+    name: training-port
+  - port: 6379
+    targetPort: 6379
+    name: redis-port
+  type: ClusterIP
+
+---
+# Horizontal Pod Autoscaler
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: wikipedia-training-hpa
+  namespace: quark-training
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: wikipedia-training-aws
+  minReplicas: 2
+  maxReplicas: 8
+  metrics:
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 70
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 80
+
+---
+# Job for one-time Wikipedia download and preprocessing
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: wikipedia-download-job
+  namespace: quark-training
+spec:
+  template:
+    spec:
+      containers:
+      - name: downloader
+        image: quark/wikipedia-downloader:latest
+        resources:
+          requests:
+            memory: "8Gi"
+            cpu: "4"
+          limits:
+            memory: "16Gi"
+            cpu: "8"
+        env:
+        - name: WIKIPEDIA_DUMP_DATE
+          value: "20240101"
+        - name: S3_BUCKET
+          value: "quark-wikipedia-training"
+        - name: CACHE_DIR
+          value: "/mnt/cache/wikipedia"
+        volumeMounts:
+        - name: cache-volume
+          mountPath: /mnt/cache
+        command:
+        - python
+        - /app/wiki_extractor.py
+        - --download-only
+        - --output-dir
+        - /mnt/cache/wikipedia
+      volumes:
+      - name: cache-volume
+        persistentVolumeClaim:
+          claimName: wikipedia-cache-pvc
+      restartPolicy: OnFailure
+  backoffLimit: 3
+
+---
+# Monitoring and Logging
+apiVersion: v1
+kind: Service
+metadata:
+  name: wikipedia-training-monitoring
+  namespace: quark-training
+spec:
+  selector:
+    app: training-monitor
+  ports:
+  - port: 3000
+    targetPort: 3000
+    name: grafana
+  - port: 9090
+    targetPort: 9090
+    name: prometheus
+  type: LoadBalancer
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: training-monitor
+  namespace: quark-training
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: training-monitor
+  template:
+    metadata:
+      labels:
+        app: training-monitor
+    spec:
+      containers:
+      - name: grafana
+        image: grafana/grafana:latest
+        ports:
+        - containerPort: 3000
+        env:
+        - name: GF_SECURITY_ADMIN_PASSWORD
+          value: "admin"
+        volumeMounts:
+        - name: grafana-storage
+          mountPath: /var/lib/grafana
+      - name: prometheus
+        image: prom/prometheus:latest
+        ports:
+        - containerPort: 9090
+        volumeMounts:
+        - name: prometheus-config
+          mountPath: /etc/prometheus
+        - name: prometheus-storage
+          mountPath: /prometheus
+      volumes:
+      - name: grafana-storage
+        emptyDir: {}
+      - name: prometheus-storage
+        emptyDir: {}
+      - name: prometheus-config
+        configMap:
+          name: prometheus-config

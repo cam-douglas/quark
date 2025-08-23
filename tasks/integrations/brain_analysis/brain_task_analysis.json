@@ -1,0 +1,200 @@
+{
+  "task_summary": {
+    "task_1": {
+      "id": "task_1",
+      "title": "Define and Implement Data Schemas",
+      "priority": "high",
+      "status": "Not Started",
+      "progress": 0,
+      "due_date": null,
+      "location": null,
+      "owner": null,
+      "estimated_effort": "high",
+      "cognitive_load": 0.9500000000000001,
+      "working_memory_required": 0.6,
+      "biological_compatibility": {
+        "cognitive_load_ok": false,
+        "working_memory_ok": true,
+        "overall_compatible": false
+      }
+    },
+    "task_2": {
+      "id": "task_2",
+      "title": "Set Up Experiment Tracking",
+      "priority": "high",
+      "status": "Not Started",
+      "progress": 0,
+      "due_date": null,
+      "location": null,
+      "owner": null,
+      "estimated_effort": "medium",
+      "cognitive_load": 0.65,
+      "working_memory_required": 0.3,
+      "biological_compatibility": {
+        "cognitive_load_ok": true,
+        "working_memory_ok": true,
+        "overall_compatible": true
+      }
+    },
+    "task_3": {
+      "id": "task_3",
+      "title": "Establish Baseline Simulation Environment",
+      "priority": "high",
+      "status": "Not Started",
+      "progress": 0,
+      "due_date": null,
+      "location": null,
+      "owner": null,
+      "estimated_effort": "high",
+      "cognitive_load": 0.9500000000000001,
+      "working_memory_required": 0.6,
+      "biological_compatibility": {
+        "cognitive_load_ok": false,
+        "working_memory_ok": true,
+        "overall_compatible": false
+      }
+    },
+    "task_4": {
+      "id": "task_4",
+      "title": "Model Thalamic Nuclei",
+      "priority": "high",
+      "status": "Blocked",
+      "progress": 0,
+      "due_date": null,
+      "location": null,
+      "owner": null,
+      "estimated_effort": "high",
+      "cognitive_load": 0.9,
+      "working_memory_required": 0.6,
+      "biological_compatibility": {
+        "cognitive_load_ok": false,
+        "working_memory_ok": true,
+        "overall_compatible": false
+      }
+    },
+    "task_5": {
+      "id": "task_5",
+      "title": "Implement Information Routing",
+      "priority": "high",
+      "status": "Blocked",
+      "progress": 0,
+      "due_date": null,
+      "location": null,
+      "owner": null,
+      "estimated_effort": "high",
+      "cognitive_load": 0.9,
+      "working_memory_required": 0.6,
+      "biological_compatibility": {
+        "cognitive_load_ok": false,
+        "working_memory_ok": true,
+        "overall_compatible": false
+      }
+    },
+    "task_6": {
+      "id": "task_6",
+      "title": "Model Hippocampal Circuit",
+      "priority": "high",
+      "status": "Blocked",
+      "progress": 0,
+      "due_date": null,
+      "location": null,
+      "owner": null,
+      "estimated_effort": "high",
+      "cognitive_load": 0.9,
+      "working_memory_required": 0.6,
+      "biological_compatibility": {
+        "cognitive_load_ok": false,
+        "working_memory_ok": true,
+        "overall_compatible": false
+      }
+    },
+    "task_7": {
+      "id": "task_7",
+      "title": "Implement STDP Learning Rule",
+      "priority": "high",
+      "status": "Blocked",
+      "progress": 0,
+      "due_date": null,
+      "location": null,
+      "owner": null,
+      "estimated_effort": "high",
+      "cognitive_load": 0.9,
+      "working_memory_required": 0.6,
+      "biological_compatibility": {
+        "cognitive_load_ok": false,
+        "working_memory_ok": true,
+        "overall_compatible": false
+      }
+    },
+    "task_8": {
+      "id": "task_8",
+      "title": "Model Basic Gating Mechanism",
+      "priority": "high",
+      "status": "Blocked",
+      "progress": 0,
+      "due_date": null,
+      "location": null,
+      "owner": null,
+      "estimated_effort": "medium",
+      "cognitive_load": 0.5,
+      "working_memory_required": 0.3,
+      "biological_compatibility": {
+        "cognitive_load_ok": true,
+        "working_memory_ok": true,
+        "overall_compatible": true
+      }
+    },
+    "task_9": {
+      "id": "task_9",
+      "title": "Simulate Layered Cortical Sheet",
+      "priority": "high",
+      "status": "Blocked",
+      "progress": 0,
+      "due_date": null,
+      "location": null,
+      "owner": null,
+      "estimated_effort": "medium",
+      "cognitive_load": 0.5,
+      "working_memory_required": 0.3,
+      "biological_compatibility": {
+        "cognitive_load_ok": true,
+        "working_memory_ok": true,
+        "overall_compatible": true
+      }
+    },
+    "task_10": {
+      "id": "task_10",
+      "title": "Implement Homeostatic Plasticity",
+      "priority": "high",
+      "status": "Blocked",
+      "progress": 0,
+      "due_date": null,
+      "location": null,
+      "owner": null,
+      "estimated_effort": "high",
+      "cognitive_load": 0.8,
+      "working_memory_required": 0.6,
+      "biological_compatibility": {
+        "cognitive_load_ok": true,
+        "working_memory_ok": true,
+        "overall_compatible": true
+      }
+    }
+  },
+  "priority_distribution": {
+    "high": 10
+  },
+  "resource_requirements": {},
+  "biological_constraints": {
+    "total_tasks": 10,
+    "high_priority_tasks": 10,
+    "max_concurrent_tasks": 3,
+    "current_cognitive_load": 1.0,
+    "constraints_met": false
+  },
+  "recommendations": [
+    "Reduce concurrent task load to maintain biological constraints",
+    "Focus on highest priority tasks to avoid cognitive overload",
+    "Review tasks that violate biological constraints"
+  ]
+}

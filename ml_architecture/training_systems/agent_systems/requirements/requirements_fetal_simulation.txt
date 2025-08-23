@@ -1,0 +1,44 @@
+# Requirements for Fetal Brain Simulation Tools Integration
+# SmallMind - Enhanced Neurodata System
+
+# Core dependencies
+aiohttp>=3.8.0
+requests>=2.28.0
+numpy>=1.21.0
+pandas>=1.3.0
+asyncio>=3.4.3
+
+# Docker integration for FaBiAN
+docker>=6.0.0
+
+# Scientific computing
+scipy>=1.9.0
+matplotlib>=3.5.0
+seaborn>=0.11.0
+
+# Machine learning and deep learning
+torch>=1.12.0
+torchvision>=0.13.0
+scikit-learn>=1.1.0
+
+# Medical imaging (for FaBiAN integration)
+nibabel>=4.0.0
+SimpleITK>=2.1.0
+opencv-python>=4.6.0
+
+# Neural simulation support
+nest-python>=3.0.0  # NEST simulator Python interface
+
+# Development and testing
+pytest>=7.0.0
+pytest-asyncio>=0.20.0
+black>=22.0.0
+flake8>=5.0.0
+
+# Documentation
+sphinx>=5.0.0
+sphinx-rtd-theme>=1.0.0
+
+# Optional: GPU acceleration
+# cuda-python>=11.0.0  # Uncomment if CUDA is available
+# cupy-cuda11x>=11.0.0  # Uncomment if CUDA 11.x is available

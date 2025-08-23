@@ -1,0 +1,14 @@
+artifact_uri: /Users/camdouglas/quark/mlruns/505953476862620945/3fab790e89374b1fbdf95d900ae92107/artifacts
+end_time: 1755834892109
+entry_point_name: ''
+experiment_id: '505953476862620945'
+lifecycle_stage: active
+run_id: 3fab790e89374b1fbdf95d900ae92107
+run_name: thalamus_sensory_relay
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1755834892041
+status: 3
+tags: []
+user_id: camdouglas

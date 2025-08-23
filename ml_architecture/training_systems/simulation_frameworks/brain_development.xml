@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mujoco model="brain_development">
+  <compiler angle="radian" coordinate="local"/>
+  
+  <worldbody>
+    <!-- Brain regions -->
+    <body name="cortex" pos="0.0 0 0">
+      <geom type="sphere" size="0.1" rgba="0.8 0.8 1.0 0.7"/>
+      <joint type="free"/>
+    </body>
+    <body name="hippocampus" pos="0.3 0 0">
+      <geom type="sphere" size="0.1" rgba="0.8 0.8 1.0 0.7"/>
+      <joint type="free"/>
+    </body>
+    <body name="excitatory_cell_0" pos="0.0 0.0 0.2">
+      <geom type="sphere" size="0.02" rgba="0.2 0.8 0.2 0.8"/>
+      <joint type="free"/>
+    </body>
+    <body name="inhibitory_cell_1" pos="0.1 0.0 0.2">
+      <geom type="sphere" size="0.02" rgba="0.2 0.8 0.2 0.8"/>
+      <joint type="free"/>
+    </body>
+  </worldbody>
+</mujoco>

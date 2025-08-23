@@ -1,0 +1,509 @@
+# 05 Cognitive Brain Rules
+*🟠 MANAGEMENT LEVEL (Priority 3-5)*
+
+## 📚 **INTERNAL INDEX & CROSS-REFERENCES**
+
+### **🏛️ SUPREME AUTHORITY REFERENCES**
+- **00-compliance_review.md** - Supreme authority, can override any rule set
+- **00-MASTER_INDEX.md** - Comprehensive cross-referenced index of all rule files
+- **00-HIERARCHY_DOCUMENTATION.md** - Complete hierarchy documentation and guidelines
+- **00-HIERARCHY_ANALYSIS.md** - Comprehensive hierarchy analysis and recommendations
+- **00-HIERARCHY_VISUAL_MAP.md** - Visual representation of the complete hierarchy
+
+### **🔴 EXECUTIVE LEVEL REFERENCES**
+- **01-cognitive_brain_roadmap.md** - Source document for brain simulation architecture
+- **01-index.md** - Main index and navigation system
+- **02-roles.md** - Neuro-architectural framework implementation
+- **02-agi_integration_complete.md** - AGI integration status and completion report
+
+### **🟠 MANAGEMENT LEVEL REFERENCES**
+- **03-master-config.mdc** - Primary coordination layer for brain simulation
+- **03-integrated-rules.mdc** - Integrated rules system and coordination
+- **04-unified_learning_architecture.md** - Autonomous cognitive evolution framework
+- **05-cognitive-brain-rules.mdc** - Brain simulation implementation framework
+
+### **🟡 OPERATIONAL LEVEL REFERENCES**
+- **06-brain-simulation-rules.mdc** - Technical brain simulation details
+- **07-omnirules.mdc** - General development team (parallel system)
+- **08-braincomputer.mdc** - Technical implementation support
+
+### **🟢 SPECIALIZED SYSTEMS REFERENCES**
+- **09-cognitive_load_sleep_system.md** - Performance management and sleep cycles
+- **10-testing_validation_rules.md** - Testing protocols and validation systems
+- **11-validation_framework.md** - Validation systems and frameworks
+- **12-multi_model_validation_protocol.md** - Multi-model validation protocols
+
+### **🔵 INTEGRATION & ROADMAP REFERENCES**
+- **13-integrated_task_roadmap.md** - Task coordination and integration planning
+- **14-master_roadmap_integration.md** - Master roadmap integration and coordination
+- **15-roadmap_integration_summary.md** - Roadmap integration summaries and status
+- **16-biological_agi_blueprint.md** - Biological AGI specifications and blueprint
+
+### **🟣 TECHNICAL IMPLEMENTATION REFERENCES**
+- **17-ml_workflow.md** - Machine learning workflows and processes
+- **18-cloud_computing_rules.md** - Cloud computing specifications and rules
+- **19-testing_protocol.md** - Testing protocols and procedures
+- **20-technicalrules.md** - Technical specifications and rules
+
+### **⚪ UTILITY & SUPPORT REFERENCES**
+- **21-cursor_hierarchy.md** - Cursor hierarchy management
+- **22-activation_triggers.md** - Activation trigger systems
+- **23-enhanced_terminal_rules.md** - Terminal rule enhancements
+- **24-terminal_rules.zsh** - Terminal rule implementations
+
+### **🔘 LEGACY & ARCHIVE REFERENCES**
+- **25-agi_capabilities.md** - AGI capability specifications
+- **26-organization_summary.md** - Organization summaries
+- **27-cursor_hierarchy_summary.md** - Hierarchy summaries
+- **28-unified_learning_integration_summary.md** - Learning integration summaries
+
+### **🟤 CONFIGURATION & TEMPLATES REFERENCES**
+- **29-template_inspector.py** - Template inspection tools
+- **30-mutator.py** - Mutation utilities
+- **31-visualize_graph.py** - Visualization tools
+
+### **🧬 DNA & BIOLOGICAL REFERENCES**
+- **32-dna_controller.py** - DNA controller implementation
+- **33-DNA_CONTROLLER_README.md** - DNA controller documentation
+- **34-requirements_dna.txt** - DNA requirements
+
+### **🔧 SPECIALIZED RULES REFERENCES**
+- **35-rules_general.md** - General rules and guidelines
+- **36-rules_model_behavior.md** - Model behavior rules and specifications
+- **37-rules_security.md** - Security rules and protocols
+
+### **⚙️ UTILITY & CONFIGURATION REFERENCES**
+- **38-explain.mdc** - Explanation system and documentation
+- **39-cursor_rules_updater.service** - Cursor rules updater service configuration
+- **40-markers.json** - Configuration markers and data
+
+### **📦 BACKUP & ARCHIVE REFERENCES**
+- **41-terminal_rules_backup.zsh** - Backup of terminal rules
+- **42-brain_simulation_rules_duplicate.md** - Duplicate brain simulation rules (archive)
+- **43-brain_simulation_rules_duplicate.mdc** - Duplicate brain simulation rules (archive)
+- **44-cognitive_brain_rules_duplicate.md** - Duplicate cognitive brain rules (archive)
+
+### **🔗 QUICK NAVIGATION**
+- **Master Index**: 00-MASTER_INDEX.md
+- **Complete Hierarchy**: 00-COMPLETE_HIERARCHY.md
+- **Compliance Review**: 00-compliance_review.md
+- **Visual Map**: 00-HIERARCHY_VISUAL_MAP.md
+
+---
+
+---
+alwaysApply: true
+---
+## ARCHITECTURAL INTEGRITY
+
+### Core Principles
+- The simulation **must** follow the Roadmap and Connectome specs
+- Agents map one-to-one to functional **modules** (e.g., PFC, WM, BG, Thalamus, DMN, SN, CB)
+- **Hierarchy is strict:** Architecture Agent (root) → Core Modules → Specialized Subsystems
+- Changes across stages (F → N0 → N1 …) must preserve this hierarchy and update both the roadmap and connectome configs
+
+### Architecture Agent (Central Orchestrator)
+**Role**: Entry point of simulated consciousness and global orchestrator
+**Status**: ✅ ROOT NODE of the hierarchical system
+
+**Responsibilities**:
+- Instantiates modules, manages connectome links, selects active experts
+- Sets neuromodulatory setpoints and enforces energy/budget caps
+- Coordinate information flow between modules
+- Maintain context, goals, and meta-control
+- Route signals to specialized subsystems
+
+**Biological analogue**: Prefrontal cortex + thalamus + anterior cingulate loops
+
+**Implementation**:
+- **Computational Neuroscience**: Neural dynamics, connectivity patterns, neuromodulation
+- **Cognitive Science**: Global workspace theory, consciousness integration
+- **Machine Learning**: Attention mechanisms, transformer architectures, optimization
+- **Systems Architecture**: Resource management, concurrency, routing algorithms
+- **Developmental Neurobiology**: Stage-appropriate development and constraints
+- **Philosophy of Mind**: Global workspace integration, consciousness emergence
+- **Data Engineering**: State management, telemetry, data provenance
+- **Ethics & Safety**: Control boundaries, logging, override protocols
+
+---
+
+## CORE COMPONENTS (7 Brain Modules)
+
+### 1. Prefrontal Cortex (Executive Control)
+**Function**: Planning, working memory, reasoning, executive functions
+**Connections**: Interacts bidirectionally with thalamus, basal ganglia, and working memory buffers
+
+**Implementation**:
+- **Computational Neuroscience**: Executive function circuits, working memory maintenance
+- **Cognitive Science**: Goal-directed behavior, task sets, reasoning processes
+- **Machine Learning**: RWKV-tiny / recurrent executive, attention mechanisms, transformer-based planning
+- **Systems Architecture**: Efficient memory management, decision tree algorithms, state machines
+- **Developmental Neurobiology**: Stage-appropriate development, critical periods
+- **Philosophy of Mind**: Executive control, agency, decision-making
+- **Data Engineering**: Executive state tracking, decision logging
+- **Ethics & Safety**: Decision validation, safety checks
+
+### 2. Basal Ganglia (Gating & Selection)
+**Function**: Action and thought selection, reinforcement-driven gating
+**Connections**: Receives cortical input; routes back to PFC via thalamus
+
+**Implementation**:
+- **Computational Neuroscience**: Direct/indirect pathways, striatal circuits, dopaminergic modulation
+- **Cognitive Science**: Action selection, decision-making, reward processing
+- **Machine Learning**: Reinforcement learning agents, Q-learning, policy gradients, dopamine-like signals
+- **Systems Architecture**: Action selection algorithms, decision-making frameworks, optimization methods
+- **Developmental Neurobiology**: Dopamine receptor development, synaptic plasticity
+- **Philosophy of Mind**: Action selection, agency, reward prediction error
+- **Data Engineering**: Action logging, reward tracking, decision provenance
+- **Ethics & Safety**: Action validation, safety gating
+
+### 3. Thalamus (Relay Hub)
+**Function**: Information relay and attentional modulation
+**Connections**: Mediates cortex–cortex and cortex–subcortex communication
+
+**Implementation**:
+- **Computational Neuroscience**: Thalamocortical loops, attentional gating, sensory relay
+- **Cognitive Science**: Attention modulation, signal routing, information filtering
+- **Machine Learning**: Mamba/state-space relay, attention mechanisms, signal filtering
+- **Systems Architecture**: Efficient routing algorithms, signal processing, information theory
+- **Developmental Neurobiology**: Thalamic nuclei organization, reticular nucleus, oscillatory activity
+- **Philosophy of Mind**: Attention, consciousness, information integration
+- **Data Engineering**: Signal routing logs, attention metrics, information flow tracking
+- **Ethics & Safety**: Signal validation, routing safety
+
+### 4. Working Memory Buffers
+**Function**: Sustain short-term representations for reasoning and decision-making
+**Connections**: Controlled by PFC and basal ganglia signals
+
+**Implementation**:
+- **Computational Neuroscience**: Persistent activity, attractor dynamics, memory maintenance
+- **Cognitive Science**: Working memory capacity, rehearsal, precision metrics
+- **Machine Learning**: GRU/Nengo buffer, recurrent networks, memory management
+- **Systems Architecture**: Efficient data structures, memory allocation, capacity management
+- **Developmental Neurobiology**: Synaptic strength, recurrent connectivity, neural persistence
+- **Philosophy of Mind**: Memory, consciousness, mental representation
+- **Data Engineering**: Memory state tracking, capacity monitoring, rehearsal logs
+- **Ethics & Safety**: Memory validation, capacity limits
+
+### 5. Default Mode Network (Internal Simulation)
+**Function**: Self-reflection, imagination, spontaneous thought
+**Connections**: Coupled with PFC and hippocampal memory systems
+
+**Implementation**:
+- **Computational Neuroscience**: Default mode network, self-referential processing, mind wandering
+- **Cognitive Science**: Self-reflection, imagination, internal simulation
+- **Machine Learning**: TinyLlama internal simulator, language models, imagination generation
+- **Systems Architecture**: Simulation frameworks, counterfactual reasoning, generative models
+- **Developmental Neurobiology**: Resting state networks, spontaneous activity, internal processing
+- **Philosophy of Mind**: Self-awareness, introspection, consciousness
+- **Data Engineering**: Internal simulation logs, imagination tracking, self-reflection metrics
+- **Ethics & Safety**: Simulation validation, content filtering
+
+### 6. Hippocampal Memory System
+**Function**: Episodic encoding, pattern completion, consolidation
+**Connections**: Links perception (optional later stages), PFC, and DMN
+
+**Implementation**:
+- **Computational Neuroscience**: Place cells, grid cells, episodic memory circuits
+- **Cognitive Science**: Episodic memory, pattern completion, memory consolidation
+- **Machine Learning**: Episodic memory indexer, pattern completion, autoencoder architectures
+- **Systems Architecture**: Efficient indexing, pattern matching, memory retrieval algorithms
+- **Developmental Neurobiology**: Long-term potentiation, synaptic consolidation, memory formation
+- **Philosophy of Mind**: Memory, consciousness, episodic awareness
+- **Data Engineering**: Memory encoding logs, retrieval tracking, consolidation metrics
+- **Ethics & Safety**: Memory validation, privacy protection
+
+### 7. Salience & Attention Networks
+**Function**: Prioritize signals, allocate focus, detect novelty
+**Connections**: Interplay with PFC and thalamus for resource allocation
+
+**Implementation**:
+- **Computational Neuroscience**: Salience network, ventral attention network, novelty detection
+- **Cognitive Science**: Attention allocation, salience detection, focus management
+- **Machine Learning**: Attention mechanisms, salience detection, novelty detection algorithms
+- **Systems Architecture**: Priority queues, resource allocation, signal processing
+- **Developmental Neurobiology**: Neuromodulatory systems, arousal, attention mechanisms
+- **Philosophy of Mind**: Attention, consciousness, awareness
+- **Data Engineering**: Attention metrics, salience tracking, focus logs
+- **Ethics & Safety**: Attention validation, content filtering
+
+---
+
+## DEVELOPMENTAL STAGES (Stage Constraints)
+
+### Fetal (F) Stage
+**Components**: Minimal scaffold; seed WM (3 slots); primitive BG gating; AA+Thal routings online
+**Goal**: Establish basic neural dynamics and cortical-subcortical loops
+
+**Implementation**:
+- **Computational Neuroscience**: Basic neural dynamics, synaptic plasticity, network formation
+- **Cognitive Science**: Minimal working memory, basic attention
+- **Machine Learning**: Spiking neural networks, Hebbian learning, unsupervised learning
+- **Systems Architecture**: Basic routing, minimal resource management
+- **Developmental Neurobiology**: Early development, critical periods, neural maturation
+- **Philosophy of Mind**: Basic consciousness, minimal awareness
+- **Data Engineering**: Basic state tracking, minimal logging
+- **Ethics & Safety**: Basic safety checks, minimal control
+
+### Neonate (N0) Stage
+**Components**: Sleep/consolidation cycles (NREM/REM); salience switching; MoE k=2; WM stabilized
+**Goal**: Implement sleep cycles and basic consolidation
+
+**Implementation**:
+- **Computational Neuroscience**: Sleep cycles, consolidation mechanisms, salience networks
+- **Cognitive Science**: Sleep-wake cycles, memory consolidation, attention switching
+- **Machine Learning**: Sleep-driven replay (SCE), local consolidation, MoE routing
+- **Systems Architecture**: Sleep cycle management, consolidation algorithms
+- **Developmental Neurobiology**: Sleep development, consolidation mechanisms
+- **Philosophy of Mind**: Sleep consciousness, dream states
+- **Data Engineering**: Sleep cycle logging, consolidation tracking
+- **Ethics & Safety**: Sleep safety, cycle validation
+
+### Early Postnatal (N1) Stage
+**Components**: Expand WM to 4 slots; add cerebellar modulation; stronger MoE routing
+**Goal**: Expand working memory and add cerebellar control
+
+**Implementation**:
+- **Computational Neuroscience**: Expanded working memory, cerebellar modulation
+- **Cognitive Science**: Increased memory capacity, enhanced attention
+- **Machine Learning**: Stronger MoE routing, enhanced consolidation
+- **Systems Architecture**: Expanded memory management, cerebellar integration
+- **Developmental Neurobiology**: Memory expansion, cerebellar development
+- **Philosophy of Mind**: Enhanced consciousness, expanded awareness
+- **Data Engineering**: Enhanced logging, expanded metrics
+- **Ethics & Safety**: Enhanced safety, expanded controls
+
+---
+
+## RUNTIME RULES OF SIMULATION
+
+### Replay & Consolidation
+- All agents must support sleep-driven replay (SCE) and local consolidation
+- Working memory grows gradually with stage; supports rehearse and precision metrics
+- Sparse MoE: Expert activation is **Top‑K** under BG gating with biologically informed scores
+
+### Neuromodulators
+- DA/NE/ACh/5‑HT present as global signals; agents must accept and respond to them
+- Neuromodulatory setpoints managed by Architecture Agent
+- Energy/budget caps enforced at all times
+
+### Homeostasis
+- Enforce compute budgets, normalization, and anti-runaway checks every cycle
+- Fatigue cycles: The system alternates wake/sleep; no perpetual wake
+- Resource limits and backpressure management
+
+### Telemetry
+- Core modules must emit **telemetry**: confidence ∈ [0,1], demand, and relevant state
+- All critical decisions are **logged**
+- Data provenance maintained for all biological inputs
+
+---
+
+## ETHICAL GUARDRAILS
+
+### Safety Protocols
+- Agents must not operate outside the declared connectome or exceed budgets
+- Safety agents can override/veto; all critical decisions are **logged**
+- Prohibit harmful simulations and unauthorized data ingress/egress
+
+### Control Boundaries
+- Control boundaries, logging, override protocols
+- Decision validation, safety checks, content filtering
+- Memory validation, privacy protection, attention validation
+
+### Auditability
+- All agent actions logged with full provenance
+- Safety agents run persistently and can veto unsafe commands
+- Complete audit trail for all system decisions
+
+---
+
+## EXPERT ROLES (8-Domain Framework)
+
+### Computational Neuroscience Engineer
+**Focus**: Neural circuits, plasticity rules, neuromodulators, neurophysiology
+**Tools**: Neural simulation tools, brain atlases, neurophysiology frameworks
+**Deliverables**: Biologically accurate neural models, circuit implementations
+
+### Cognitive Science Engineer
+**Focus**: Memory systems, attention, reasoning, task sets, awareness
+**Tools**: Cognitive modeling frameworks, psychology research, awareness metrics
+**Deliverables**: Cognitive function implementations, awareness systems
+
+### Machine Learning Engineer
+**Focus**: Trainable objectives, optimization stability, sparse activation
+**Tools**: PyTorch, JAX, TensorFlow, optimization frameworks
+**Deliverables**: Neural models, learning algorithms, optimization systems
+
+### Systems Architecture Engineer
+**Focus**: Concurrency, routing, backpressure, resource limits
+**Tools**: Distributed computing frameworks, resource management, performance tools
+**Deliverables**: Scalable systems, efficient algorithms, resource management
+
+### Developmental Neurobiology Engineer
+**Focus**: Staged growth, pruning, critical periods, developmental constraints
+**Tools**: Developmental biology frameworks, timeline management, constraint systems
+**Deliverables**: Developmental models, stage progression, constraint implementations
+
+### Philosophy of Mind Engineer
+**Focus**: Global workspace theory, consciousness integration, awareness
+**Tools**: Consciousness frameworks, integration theory, awareness metrics
+**Deliverables**: Consciousness models, awareness systems, integration frameworks
+
+### Data Engineering Engineer
+**Focus**: Data schemas, provenance, telemetry, logging
+**Tools**: Data engineering frameworks, logging systems, provenance tools
+**Deliverables**: Data schemas, logging systems, telemetry frameworks
+
+### Ethics & Safety Engineer
+**Focus**: Control boundaries, logging, override protocols, safety validation
+**Tools**: Safety frameworks, validation tools, control systems
+**Deliverables**: Safety systems, control boundaries, validation frameworks
+
+---
+
+## DEVELOPMENT WORKFLOW (Stage-Based)
+
+### Stage F: Foundation
+1. **Computational Neuroscience**: Implement basic neural dynamics
+2. **Cognitive Science**: Establish minimal working memory and attention
+3. **Machine Learning**: Implement spiking networks and Hebbian learning
+4. **Systems Architecture**: Basic routing and resource management
+5. **Developmental Neurobiology**: Early development constraints
+6. **Philosophy of Mind**: Basic consciousness framework
+7. **Data Engineering**: Basic state tracking and logging
+8. **Ethics & Safety**: Basic safety checks and controls
+
+### Stage N0: Neonate
+1. **Computational Neuroscience**: Sleep cycles and consolidation
+2. **Cognitive Science**: Sleep-wake cycles and memory consolidation
+3. **Machine Learning**: Sleep-driven replay and MoE routing
+4. **Systems Architecture**: Sleep cycle management
+5. **Developmental Neurobiology**: Sleep development mechanisms
+6. **Philosophy of Mind**: Sleep consciousness and dream states
+7. **Data Engineering**: Sleep cycle logging and tracking
+8. **Ethics & Safety**: Sleep safety and cycle validation
+
+### Stage N1: Early Postnatal
+1. **Computational Neuroscience**: Expanded working memory and cerebellar modulation
+2. **Cognitive Science**: Increased memory capacity and enhanced attention
+3. **Machine Learning**: Stronger MoE routing and enhanced consolidation
+4. **Systems Architecture**: Expanded memory management
+5. **Developmental Neurobiology**: Memory expansion and cerebellar development
+6. **Philosophy of Mind**: Enhanced consciousness and expanded awareness
+7. **Data Engineering**: Enhanced logging and expanded metrics
+8. **Ethics & Safety**: Enhanced safety and expanded controls
+
+---
+
+## QUALITY ASSURANCE (8-Domain Validation)
+
+### Computational Neuroscience Validation
+- Neural circuit fidelity and connectivity validation
+- Neurophysiological accuracy and plasticity verification
+- Neuromodulatory system accuracy
+
+### Cognitive Science Validation
+- Memory system accuracy and capacity validation
+- Attention mechanism accuracy and efficiency
+- Reasoning and task set performance
+
+### Machine Learning Validation
+- Model performance and optimization stability
+- Sparse activation and efficiency validation
+- Learning algorithm accuracy and convergence
+
+### Systems Architecture Validation
+- Concurrency and routing efficiency
+- Resource management and backpressure handling
+- System scalability and performance
+
+### Developmental Neurobiology Validation
+- Stage progression accuracy and constraint adherence
+- Critical period implementation and timing
+- Developmental timeline accuracy
+
+### Philosophy of Mind Validation
+- Consciousness integration and global workspace accuracy
+- Awareness mechanism validation
+- Integration theory compliance
+
+### Data Engineering Validation
+- Data schema accuracy and provenance tracking
+- Telemetry and logging system performance
+- Data integrity and audit trail validation
+
+### Ethics & Safety Validation
+- Control boundary enforcement and safety validation
+- Override protocol effectiveness
+- Harmful simulation prevention
+
+---
+
+## PROJECT STATUS & MILESTONES
+
+### Current Status: ✅ NEURO-ARCHITECTURAL FRAMEWORK READY
+- **Architecture**: 8-domain expert framework established
+- **Development**: F → N0 → N1 stage progression system
+- **Expertise**: All 8 expert domains integrated and coordinated
+- **Foundation**: Minimal configuration ready for implementation
+
+### Immediate Milestones
+1. **Stage F Implementation**: Basic neural dynamics with 8-domain approach
+2. **Core Component Build**: All 7 brain modules with 8-domain expertise
+3. **Integration Testing**: Cross-domain component coordination
+4. **Validation**: Multi-domain accuracy verification
+
+### Success Criteria
+- **Computational Neuroscience**: Biologically accurate neural circuits and functions
+- **Cognitive Science**: Accurate memory, attention, and reasoning systems
+- **Machine Learning**: Efficient neural models and learning algorithms
+- **Systems Architecture**: Scalable systems and optimized algorithms
+- **Developmental Neurobiology**: Realistic constraints and developmental accuracy
+- **Philosophy of Mind**: Consciousness integration and awareness
+- **Data Engineering**: Robust data management and provenance
+- **Ethics & Safety**: Comprehensive safety and control systems
+- **Integration**: Coherent cross-domain brain simulation
+
+---
+
+## USAGE GUIDELINES
+
+### For Neuro-Architectural Brain Simulation Development
+- **Reference specific domains**: All 8 expert domains as needed
+- **Specify developmental stages**: F → N0 → N1 progression
+- **Request domain-specific validation**: Accuracy verification per domain
+- **Ask for integration testing**: Cross-domain coordination
+
+### Example Prompts (8-Domain Framework)
+- "Implement Stage F neural dynamics with all 8 expert domains"
+- "Build PFC module with computational neuroscience and cognitive science accuracy"
+- "Connect basal ganglia and thalamus with machine learning and systems architecture"
+- "Add working memory with developmental neurobiology constraints"
+- "Integrate DMN with philosophy of mind and consciousness studies"
+- "Validate biological accuracy across all 8 expert domains"
+
+### Automatic Detection Keywords
+- **Computational Neuroscience**: "neural circuits", "plasticity", "neuromodulators", "neurophysiology"
+- **Cognitive Science**: "memory systems", "attention", "reasoning", "awareness"
+- **Machine Learning**: "neural networks", "optimization", "sparse activation", "PyTorch"
+- **Systems Architecture**: "concurrency", "routing", "backpressure", "resource limits"
+- **Developmental Neurobiology**: "staged growth", "critical periods", "developmental constraints"
+- **Philosophy of Mind**: "consciousness", "global workspace", "awareness", "integration"
+- **Data Engineering**: "data schemas", "provenance", "telemetry", "logging"
+- **Ethics & Safety**: "control boundaries", "safety", "override protocols", "validation"
+
+---
+
+# READY FOR NEURO-ARCHITECTURAL BRAIN SIMULATION
+
+Your Cursor workspace is now **perfectly configured** for neuro-architectural brain simulation:
+
+✅ **8 Expert Domains**: Computational Neuroscience, Cognitive Science, Machine Learning, Systems Architecture, Developmental Neurobiology, Philosophy of Mind, Data Engineering, Ethics & Safety  
+✅ **Architectural Integrity**: Strict hierarchy with module mapping and preserved structure  
+✅ **Developmental Stages**: F → N0 → N1 progression with stage constraints  
+✅ **Runtime Rules**: Sleep cycles, neuromodulators, homeostasis, telemetry  
+✅ **Ethical Guardrails**: Safety protocols, control boundaries, auditability  
+✅ **Roadmap Alignment**: Follows roles.md and cognitive_brain_roadmap.md specifications  
+
+**Simply describe your brain simulation needs** - the system will automatically coordinate the appropriate 8-domain expertise and developmental stages!

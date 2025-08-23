@@ -1,0 +1,21 @@
+# Minimal SkyPilot smoke test to validate AWS setup
+name: quark-smoketest
+
+resources:
+  # CPU-only tiny instance; Sky will pick a cheap type (e.g., t3.micro)
+  cpus: 1
+  disk_size: 8
+
+setup: |
+  echo "hello from sky $(python -V 2>/dev/null || true)" > hello.txt
+
+run: |
+  echo "running on $(uname -a)"
+  python - << 'EOF'
+import platform, os
+print('Python:', platform.python_version())
+print('CWD:', os.getcwd())
+print('Files:', os.listdir('.'))
+EOF
+  cat hello.txt
+

@@ -1,0 +1,29 @@
+# Cloud Platform Dependencies for SmallMind
+# Enables training on AWS, Google Cloud, and Azure
+
+# Core cloud dependencies
+boto3>=1.26.0
+botocore>=1.29.0
+
+# Google Cloud Platform
+google-cloud-compute>=1.0.0
+google-cloud-storage>=2.0.0
+google-auth>=2.0.0
+
+# Microsoft Azure
+azure-mgmt-compute>=30.0.0
+azure-identity>=1.10.0
+azure-mgmt-resource>=23.0.0
+
+# Additional cloud utilities
+paramiko>=3.0.0  # SSH connections
+fabric>=2.7.0    # Remote execution
+python-dotenv>=1.0.0  # Environment variables
+
+# Cost monitoring
+boto3-stubs[ec2]>=1.26.0  # AWS type hints
+google-cloud-billing>=1.0.0  # GCP billing
+
+# Optional: Advanced cloud features
+# kubernetes>=26.0.0  # For Kubernetes-based training
+# docker>=6.0.0       # For container-based training

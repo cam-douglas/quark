@@ -1,0 +1,26 @@
+# Speech and Text Generation Dependencies for Enhanced Consciousness Simulator
+
+# Text-to-Speech Engine
+pyttsx3>=2.90
+
+# Speech Recognition
+SpeechRecognition>=3.10.0
+
+# Audio Processing
+PyAudio>=0.2.11
+
+# Visual Display
+pygame>=2.5.0
+
+# Scientific Computing
+numpy>=1.24.0
+matplotlib>=3.7.0
+
+# Additional Dependencies
+# For macOS users, you may need to install portaudio:
+# brew install portaudio
+
+# For Ubuntu/Debian users:
+# sudo apt-get install portaudio19-dev python3-pyaudio
+
+# For Windows users, PyAudio should install automatically

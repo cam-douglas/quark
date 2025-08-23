@@ -1,0 +1,42 @@
+#!/usr/bin/env python3
+"""
+Simple 'ask' launcher for Small-Mind Natural Interface
+
+Usage:
+  ./ask "Your question here"
+  ./ask                    # Interactive mode
+"""
+
+import sys
+import os
+from pathlib import Path
+
+# Add the current directory to Python path
+sys.path.insert(0, str(Path(__file__).parent))
+
+def main():
+    """Launch the natural interface."""
+    try:
+        from natural_interface import NaturalInterface
+        
+        interface = NaturalInterface()
+        
+        if len(sys.argv) > 1:
+            # Command line mode - process single input
+            user_input = " ".join(sys.argv[1:])
+            response = interface.process_natural_input(user_input)
+            print(response)
+        else:
+            # Interactive mode
+            interface.interactive_mode()
+            
+    except ImportError as e:
+        print(f"❌ Error: Could not load Small-Mind system: {e}")
+        print("Make sure you're running this from the agent_hub directory.")
+        sys.exit(1)
+    except Exception as e:
+        print(f"❌ Unexpected error: {e}")
+        sys.exit(1)
+
+if __name__ == "__main__":
+    main()

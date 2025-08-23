@@ -1,0 +1,57 @@
+# Drug Discovery Training Requirements
+# Core ML/DL Libraries
+torch>=2.0.0
+torchvision>=0.15.0
+tensorflow>=2.13.0
+scikit-learn>=1.3.0
+numpy>=1.24.0
+pandas>=2.0.0
+
+# Kaggle Integration
+kaggle>=1.5.16
+opendatasets>=0.1.22
+
+# Chemical Informatics
+rdkit>=2023.03.1
+chembl-webresource-client>=0.10.8
+pubchempy>=1.0.4
+biopython>=1.81
+
+# Molecular Descriptors
+mordred>=1.2.0
+padelpy>=0.1.10
+
+# Visualization
+matplotlib>=3.7.0
+seaborn>=0.12.0
+plotly>=5.15.0
+bokeh>=3.2.0
+py3Dmol>=2.0.3
+
+# Neural Network Utilities
+torch-geometric>=2.3.0
+dgl>=1.1.0
+spektral>=1.2.0
+
+# Brain Simulation
+brian2>=2.5.4
+nest-simulator>=3.4
+neuron>=8.2.3
+nengo>=3.2.0
+
+# Data Processing
+scipy>=1.11.0
+networkx>=3.1
+igraph>=0.10.6
+
+# Progress and Logging
+tqdm>=4.65.0
+wandb>=0.15.0
+tensorboard>=2.13.0
+mlflow>=2.5.0
+
+# Utilities
+pyyaml>=6.0
+requests>=2.31.0
+joblib>=1.3.0
+h5py>=3.9.0

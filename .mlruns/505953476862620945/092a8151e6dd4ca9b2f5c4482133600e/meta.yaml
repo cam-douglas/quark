@@ -1,0 +1,14 @@
+artifact_uri: /Users/camdouglas/quark/mlruns/505953476862620945/092a8151e6dd4ca9b2f5c4482133600e/artifacts
+end_time: 1755837138414
+entry_point_name: ''
+experiment_id: '505953476862620945'
+lifecycle_stage: active
+run_id: 092a8151e6dd4ca9b2f5c4482133600e
+run_name: live_thalamus
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1755837138402
+status: 4
+tags: []
+user_id: camdouglas

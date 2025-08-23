@@ -1,0 +1,9 @@
+# Core Dependencies
+pydantic
+
+# ML & Experiment Tracking
+mlflow
+pyyaml
+
+# Brain Simulation
+brian2

@@ -1,0 +1,9 @@
+# AWS Performance Optimization Dependencies
+boto3>=1.34.0
+botocore>=1.34.0
+requests>=2.31.0
+psutil>=5.9.0
+numpy>=1.24.0
+pandas>=2.0.0
+matplotlib>=3.7.0
+seaborn>=0.12.0

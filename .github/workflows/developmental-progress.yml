@@ -1,0 +1,301 @@
+name: Developmental Progress Tracking
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    # Run weekly on Sundays at 2 AM UTC
+    - cron: '0 2 * * 0'
+  workflow_dispatch:
+
+jobs:
+  developmental-assessment:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r root/requirements.txt
+        pip install pytest pytest-cov coverage
+        
+    - name: Run developmental assessment
+      run: |
+        echo "🧬 Running Developmental Progress Assessment..."
+        
+        # Create assessment script
+        cat > developmental_assessment.py << 'EOF'
+        #!/usr/bin/env python3
+        """
+        Developmental Progress Assessment Script
+        Tracks Quark's developmental age and progress through the 5 pillars
+        """
+        
+        import os
+        import json
+        import datetime
+        from pathlib import Path
+        
+        def check_pillar_status():
+            """Check the status of each developmental pillar"""
+            pillars = {
+                "pillar_1": {"name": "Basic Neural Dynamics", "status": "unknown", "files": []},
+                "pillar_2": {"name": "Gating & Reinforcement", "status": "unknown", "files": []},
+                "pillar_3": {"name": "Working Memory & Control", "status": "unknown", "files": []},
+                "pillar_4": {"name": "Meta-Control & Simulation", "status": "unknown", "files": []},
+                "pillar_5": {"name": "Proto-Consciousness", "status": "unknown", "files": []}
+            }
+            
+            # Check Pillar 1 - Basic Neural Dynamics
+            neural_core_path = Path("brain_architecture/neural_core")
+            if neural_core_path.exists():
+                neural_files = list(neural_core_path.rglob("*.py"))
+                if len(neural_files) > 10:  # Basic threshold
+                    pillars["pillar_1"]["status"] = "complete"
+                    pillars["pillar_1"]["files"] = [str(f) for f in neural_files[:5]]  # Show first 5
+                    
+            # Check Pillar 2 - Gating & Reinforcement
+            basal_ganglia_path = Path("brain_architecture/neural_core/basal_ganglia")
+            if basal_ganglia_path.exists():
+                bg_files = list(basal_ganglia_path.rglob("*.py"))
+                completion_summary = basal_ganglia_path / "PILLAR2_COMPLETION_SUMMARY.md"
+                if completion_summary.exists() and len(bg_files) > 5:
+                    pillars["pillar_2"]["status"] = "complete"
+                    pillars["pillar_2"]["files"] = [str(f) for f in bg_files[:5]]
+                    
+            # Check Pillar 3 - Working Memory & Control
+            working_memory_path = Path("brain_architecture/neural_core/working_memory")
+            if working_memory_path.exists():
+                wm_files = list(working_memory_path.rglob("*.py"))
+                if len(wm_files) > 0:
+                    pillars["pillar_3"]["status"] = "partial"
+                    pillars["pillar_3"]["files"] = [str(f) for f in wm_files]
+                    
+            # Check Pillar 4 - Meta-Control & Simulation
+            dmn_path = Path("brain_architecture/neural_core/default_mode_network")
+            if dmn_path.exists():
+                dmn_files = list(dmn_path.rglob("*.py"))
+                if len(dmn_files) > 0:
+                    pillars["pillar_4"]["status"] = "partial"
+                    pillars["pillar_4"]["files"] = [str(f) for f in dmn_files]
+                else:
+                    pillars["pillar_4"]["status"] = "not_started"
+            else:
+                pillars["pillar_4"]["status"] = "not_started"
+                
+            # Check Pillar 5 - Proto-Consciousness
+            conscious_agent_path = Path("brain_architecture/neural_core/conscious_agent")
+            if conscious_agent_path.exists():
+                ca_files = list(conscious_agent_path.rglob("*.py"))
+                if len(ca_files) > 10:  # More complex threshold
+                    pillars["pillar_5"]["status"] = "partial"
+                    pillars["pillar_5"]["files"] = [str(f) for f in ca_files[:5]]
+                else:
+                    pillars["pillar_5"]["status"] = "not_started"
+            else:
+                pillars["pillar_5"]["status"] = "not_started"
+                
+            return pillars
+            
+        def calculate_developmental_age(pillars):
+            """Calculate developmental age based on pillar completion"""
+            completed_pillars = sum(1 for p in pillars.values() if p["status"] == "complete")
+            partial_pillars = sum(1 for p in pillars.values() if p["status"] == "partial")
+            
+            # Developmental age calculation
+            if completed_pillars >= 2:
+                if partial_pillars >= 1:
+                    return "32-36 weeks gestational (Late Fetal to Early Neonatal)"
+                else:
+                    return "28-32 weeks gestational (Late Fetal)"
+            elif completed_pillars == 1:
+                return "24-28 weeks gestational (Mid Fetal)"
+            else:
+                return "20-24 weeks gestational (Early Fetal)"
+                
+        def generate_report(pillars, developmental_age):
+            """Generate comprehensive developmental report"""
+            report = {
+                "timestamp": datetime.datetime.now().isoformat(),
+                "developmental_age": developmental_age,
+                "pillars": pillars,
+                "summary": {
+                    "completed_pillars": sum(1 for p in pillars.values() if p["status"] == "complete"),
+                    "partial_pillars": sum(1 for p in pillars.values() if p["status"] == "partial"),
+                    "not_started_pillars": sum(1 for p in pillars.values() if p["status"] == "not_started"),
+                    "total_pillars": len(pillars)
+                },
+                "next_milestones": [],
+                "recommendations": []
+            }
+            
+            # Determine next milestones
+            if pillars["pillar_3"]["status"] != "complete":
+                report["next_milestones"].append("Complete Pillar 3: Working Memory & Control")
+            if pillars["pillar_4"]["status"] == "not_started":
+                report["next_milestones"].append("Begin Pillar 4: Meta-Control & Simulation")
+            if pillars["pillar_5"]["status"] == "not_started":
+                report["next_milestones"].append("Begin Pillar 5: Proto-Consciousness")
+                
+            # Generate recommendations
+            if report["summary"]["completed_pillars"] < 3:
+                report["recommendations"].append("Focus on completing current pillar before advancing")
+            if report["summary"]["partial_pillars"] > 0:
+                report["recommendations"].append("Complete partial implementations before starting new pillars")
+                
+            return report
+            
+        def main():
+            print("🧬 Quark Developmental Progress Assessment")
+            print("=" * 50)
+            
+            # Check pillar status
+            pillars = check_pillar_status()
+            
+            # Calculate developmental age
+            developmental_age = calculate_developmental_age(pillars)
+            
+            # Generate report
+            report = generate_report(pillars, developmental_age)
+            
+            # Print summary
+            print(f"📊 Developmental Age: {developmental_age}")
+            print(f"📈 Pillars Complete: {report['summary']['completed_pillars']}/{report['summary']['total_pillars']}")
+            print(f"🔄 Pillars Partial: {report['summary']['partial_pillars']}")
+            print(f"⏳ Pillars Not Started: {report['summary']['not_started_pillars']}")
+            
+            print("\n🎯 Pillar Status:")
+            for pillar_id, pillar in pillars.items():
+                status_emoji = {
+                    "complete": "✅",
+                    "partial": "🔄", 
+                    "not_started": "⏳",
+                    "unknown": "❓"
+                }
+                print(f"  {status_emoji[pillar['status']]} {pillar['name']}: {pillar['status'].title()}")
+                
+            if report["next_milestones"]:
+                print("\n🚀 Next Milestones:")
+                for milestone in report["next_milestones"]:
+                    print(f"  • {milestone}")
+                    
+            if report["recommendations"]:
+                print("\n💡 Recommendations:")
+                for rec in report["recommendations"]:
+                    print(f"  • {rec}")
+                    
+            # Save report
+            report_path = Path("testing/results_outputs/developmental_progress_report.json")
+            report_path.parent.mkdir(parents=True, exist_ok=True)
+            
+            with open(report_path, 'w') as f:
+                json.dump(report, f, indent=2)
+                
+            print(f"\n📄 Report saved to: {report_path}")
+            
+            # Set output variables for GitHub Actions
+            print(f"::set-output name=developmental_age::{developmental_age}")
+            print(f"::set-output name=completed_pillars::{report['summary']['completed_pillars']}")
+            print(f"::set-output name=total_pillars::{report['summary']['total_pillars']}")
+            
+        if __name__ == "__main__":
+            main()
+        EOF
+        
+        # Run assessment
+        python developmental_assessment.py
+        
+    - name: Run tests
+      run: |
+        echo "🧪 Running Developmental Tests..."
+        
+        # Run Pillar 2 tests (basal ganglia)
+        if [ -f "testing/testing_frameworks/test_pillar2_basal_ganglia.py" ]; then
+          python -m pytest testing/testing_frameworks/test_pillar2_basal_ganglia.py -v
+        fi
+        
+        # Run working memory tests
+        if [ -f "brain_architecture/neural_core/working_memory/memory_buffer.py" ]; then
+          python brain_architecture/neural_core/working_memory/memory_buffer.py
+        fi
+        
+    - name: Generate developmental badges
+      run: |
+        echo "🏷️ Generating Developmental Badges..."
+        
+        # Read the assessment results
+        if [ -f "testing/results_outputs/developmental_progress_report.json" ]; then
+          REPORT=$(cat testing/results_outputs/developmental_progress_report.json)
+          COMPLETED=$(echo "$REPORT" | jq -r '.summary.completed_pillars')
+          TOTAL=$(echo "$REPORT" | jq -r '.summary.total_pillars')
+          AGE=$(echo "$REPORT" | jq -r '.developmental_age' | sed 's/ /%20/g')
+          
+          echo "📊 Developmental Progress:"
+          echo "  Age: $AGE"
+          echo "  Pillars: $COMPLETED/$TOTAL complete"
+          
+          # Create badge URLs
+          AGE_BADGE="https://img.shields.io/badge/Developmental%20Age-$AGE-blue.svg"
+          PILLARS_BADGE="https://img.shields.io/badge/Pillars%20Complete-$COMPLETED%2F$TOTAL-orange.svg"
+          
+          echo "🏷️ Badge URLs:"
+          echo "  Age: $AGE_BADGE"
+          echo "  Pillars: $PILLARS_BADGE"
+        fi
+        
+    - name: Upload developmental report
+      uses: actions/upload-artifact@v3
+      with:
+        name: developmental-progress-report
+        path: testing/results_outputs/developmental_progress_report.json
+        
+    - name: Comment on PR
+      if: github.event_name == 'pull_request'
+      uses: actions/github-script@v6
+      with:
+        script: |
+          const fs = require('fs');
+          let report = {};
+          
+          try {
+            const reportPath = 'testing/results_outputs/developmental_progress_report.json';
+            if (fs.existsSync(reportPath)) {
+              report = JSON.parse(fs.readFileSync(reportPath, 'utf8'));
+            }
+          } catch (error) {
+            console.log('Could not read developmental report');
+          }
+          
+          const comment = `## 🧬 Developmental Progress Assessment
+          
+          **Developmental Age**: ${report.developmental_age || 'Unknown'}
+          **Pillars Complete**: ${report.summary?.completed_pillars || 0}/${report.summary?.total_pillars || 5}
+          
+          ### Pillar Status:
+          ${Object.entries(report.pillars || {}).map(([id, pillar]) => {
+            const status = pillar.status;
+            const emoji = status === 'complete' ? '✅' : status === 'partial' ? '🔄' : '⏳';
+            return `${emoji} **${pillar.name}**: ${status.charAt(0).toUpperCase() + status.slice(1)}`;
+          }).join('\n')}
+          
+          ${report.next_milestones?.length > 0 ? `### 🚀 Next Milestones:\n${report.next_milestones.map(m => `• ${m}`).join('\n')}` : ''}
+          
+          ${report.recommendations?.length > 0 ? `### 💡 Recommendations:\n${report.recommendations.map(r => `• ${r}`).join('\n')}` : ''}
+          `;
+          
+          github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: comment
+          });

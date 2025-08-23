@@ -1,0 +1,25 @@
+include README.md
+include LICENSE
+include pyproject.toml
+include setup.py
+include .python-version
+
+# Include configuration files
+recursive-include src/config *.yaml
+recursive-include src/core *.py
+
+# Include documentation
+recursive-include docs *.md *.yaml *.zsh
+
+# Include icon assets (when available)
+include assets/*.ico
+include assets/*.png
+include assets/*.svg
+
+# Exclude development files
+exclude *.pyc
+exclude __pycache__
+exclude .DS_Store
+exclude venv/
+exclude .git/
+exclude .cursor/

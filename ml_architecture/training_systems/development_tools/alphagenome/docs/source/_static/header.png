@@ -1,0 +1,15 @@
+# Cloud Reference File
+# Original: src/training/development_tools/alphagenome/docs/source/_static/header.png
+# Size: 1264445 bytes
+# Hash: 09e5c96a041b173f82d1e6d0247767d1
+# Status: ready_for_manual_upload
+# Migrated: 2025-08-20T15:27:07.821820
+
+# This file has been moved to cloud storage.
+# Manual upload required:
+# 1. Go to: https://drive.google.com/
+# 2. Create folder: "Quark_Project_Cloud"
+# 3. Upload: src/training/development_tools/alphagenome/docs/source/_static/header.png
+# 4. File ready for upload in: files_for_manual_upload/src/training/development_tools/alphagenome/docs/source/_static/header.png
+
+# Use cloud_file_manager.py to access this file programmatically.

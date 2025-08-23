@@ -1,0 +1,10 @@
+# Minimal models.yaml for testing
+models:
+  - id: "test.model"
+    type: "generic"
+    capabilities: ["chat"]
+
+agents:
+  - id: "test.agent"
+    type: "generic"
+    capabilities: ["basic_reasoning"]
