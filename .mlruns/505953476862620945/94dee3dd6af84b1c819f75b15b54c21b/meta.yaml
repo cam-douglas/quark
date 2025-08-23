@@ -1,0 +1,14 @@
+artifact_uri: /Users/camdouglas/quark/mlruns/505953476862620945/94dee3dd6af84b1c819f75b15b54c21b/artifacts
+end_time: 1755839385188
+entry_point_name: ''
+experiment_id: '505953476862620945'
+lifecycle_stage: active
+run_id: 94dee3dd6af84b1c819f75b15b54c21b
+run_name: live_hippocampus
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1755839385018
+status: 4
+tags: []
+user_id: camdouglas

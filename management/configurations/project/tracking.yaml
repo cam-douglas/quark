@@ -1,0 +1,15 @@
+# Experiment Tracking Configuration
+
+# Specify the tracking tool to be used.
+# Options: 'mlflow', 'wandb' (Weights & Biases)
+tool: 'mlflow'
+
+# Configuration for MLflow
+mlflow:
+  # The URI for the MLflow tracking server.
+  # For local tracking, this can be a path to a directory.
+  # For a remote server, use a URL like http://localhost:5000
+  tracking_uri: './mlruns'
+
+  # Default experiment name to use if none is provided.
+  default_experiment_name: 'QuarkBrainSimulation'
