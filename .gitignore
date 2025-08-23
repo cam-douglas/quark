@@ -2,3 +2,4 @@
 \n# local venv\nfresh_venv/
 \n# large script backups\ntools_utilities/scripts_backup/
 tools_utilities/scripts_backup/
+ml_architecture/training_systems/agent_systems/simulation/visit/data/
