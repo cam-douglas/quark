@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quark Stage N0 - Live Benchmark</title>
+    <style>
+        body { margin: 0; font-family: Arial, sans-serif; background-color: #000; color: #fff; }
+        #graph-container { width: 100vw; height: 100vh; }
+        #info {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            padding: 10px;
+            background: rgba(0,0,0,0.7);
+            border-radius: 5px;
+            max-width: 300px;
+        }
+        h1, p { margin: 0 0 10px 0; }
+        .status-dot {
+            height: 10px;
+            width: 10px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="info">
+        <h1>Quark Stage N0 Live Benchmark</h1>
+        <p>
+            <span id="status-dot" class="status-dot" style="background-color: #ff0000;"></span>
+            Status: <span id="status">Connecting...</span>
+        </p>
+        <div id="node-details">
+            <p>Hover over a module to see details.</p>
+        </div>
+    </div>
+    <div id="graph-container"></div>
+
+    <script src="https://unpkg.com/three"></script>
+    <script src="https://unpkg.com/3d-force-graph"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.min.js"></script>
+
+    <script>
+        const graphContainer = document.getElementById('graph-container');
+        const statusEl = document.getElementById('status');
+        const statusDotEl = document.getElementById('status-dot');
+        const nodeDetailsEl = document.getElementById('node-details');
+
+        const Graph = ForceGraph3D()(graphContainer)
+            .backgroundColor('#000011')
+            .nodeLabel('name')
+            .nodeAutoColorBy('group')
+            .linkWidth(1)
+            .linkDirectionalParticles(2)
+            .linkDirectionalParticleWidth(2)
+            .linkDirectionalParticleSpeed(0.006)
+            .onNodeHover(node => {
+                if (node) {
+                    let detailsHtml = `<p><strong>Module:</strong> ${node.name}</p>`;
+                    detailsHtml += `<p><strong>Group:</strong> ${node.group}</p>`;
+                    detailsHtml += `<p><strong>Health:</strong> <span style="color: ${node.color};">${node.health_status}</span></p>`;
+                    for (const [key, value] of Object.entries(node.metrics || {})) {
+                        detailsHtml += `<p><strong>${key.replace(/_/g, ' ')}:</strong> ${value.toFixed ? value.toFixed(3) : value}</p>`;
+                    }
+                    nodeDetailsEl.innerHTML = detailsHtml;
+                } else {
+                    nodeDetailsEl.innerHTML = '<p>Hover over a module to see details.</p>';
+                }
+            });
+            
+        // Setup scene
+        Graph.cameraPosition({ z: 300 });
+
+        // Socket.io connection - connect to the root endpoint
+        const socket = io("http://localhost:8000", { 
+            transports: ["websocket", "polling"],
+            upgrade: true,
+            rememberUpgrade: true
+        });
+
+        socket.on('connect', () => {
+            console.log('Connected to server!');
+            statusEl.textContent = 'Connected';
+            statusDotEl.style.backgroundColor = '#00ff00';
+            socket.emit('request_initial_data');
+        });
+
+        socket.on('disconnect', () => {
+            console.log('Disconnected from server.');
+            statusEl.textContent = 'Disconnected';
+            statusDotEl.style.backgroundColor = '#ff0000';
+        });
+        
+        socket.on('connect_error', (err) => {
+            console.error('Connection error:', err);
+            statusEl.textContent = 'Connection Failed';
+            statusDotEl.style.backgroundColor = '#ff0000';
+        });
+
+        socket.on('update_data', data => {
+            const { nodes, links } = data;
+            
+            const gData = Graph.graphData();
+            
+            // Update existing nodes
+            const nodeMap = new Map(gData.nodes.map(n => [n.id, n]));
+            nodes.forEach(newNode => {
+                const existingNode = nodeMap.get(newNode.id);
+                if (existingNode) {
+                    Object.assign(existingNode, newNode);
+                }
+            });
+            
+            Graph.graphData({ nodes: gData.nodes, links: gData.links });
+            
+            // If it's the first load, set the full data
+            if (gData.nodes.length === 0) {
+                Graph.graphData(data);
+            } else {
+                // For subsequent updates, just update node properties
+                const nodeMap = new Map(Graph.graphData().nodes.map(n => [n.id, n]));
+                data.nodes.forEach(n => {
+                    const existing = nodeMap.get(n.id);
+                    if (existing) {
+                        Object.assign(existing, n, { 
+                            fx: existing.x, 
+                            fy: existing.y, 
+                            fz: existing.z 
+                        });
+                    }
+                });
+                Graph.nodeColor(Graph.nodeColor()); // Trigger re-color
+            }
+        });
+    </script>
+</body>
+</html>

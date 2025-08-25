@@ -1,0 +1,362 @@
+{
+  "episode": 39,
+  "best_score": 2,
+  "total_score": 11,
+  "learning_progress": [
+    {
+      "episode": 1,
+      "score": 0,
+      "avg_score": 0.0,
+      "best_score": 0,
+      "epsilon": 0.5,
+      "total_reward": -13.500000000000002
+    },
+    {
+      "episode": 2,
+      "score": 0,
+      "avg_score": 0.0,
+      "best_score": 0,
+      "epsilon": 0.4995,
+      "total_reward": -19.99999999999998
+    },
+    {
+      "episode": 3,
+      "score": 1,
+      "avg_score": 0.3333333333333333,
+      "best_score": 1,
+      "epsilon": 0.4990005,
+      "total_reward": 30.09999999999995
+    },
+    {
+      "episode": 4,
+      "score": 0,
+      "avg_score": 0.25,
+      "best_score": 1,
+      "epsilon": 0.494010495,
+      "total_reward": -13.100000000000001
+    },
+    {
+      "episode": 5,
+      "score": 0,
+      "avg_score": 0.2,
+      "best_score": 1,
+      "epsilon": 0.493516484505,
+      "total_reward": -11.9
+    },
+    {
+      "episode": 6,
+      "score": 0,
+      "avg_score": 0.16666666666666666,
+      "best_score": 1,
+      "epsilon": 0.493022968020495,
+      "total_reward": -11.700000000000001
+    },
+    {
+      "episode": 7,
+      "score": 0,
+      "avg_score": 0.14285714285714285,
+      "best_score": 1,
+      "epsilon": 0.4925299450524745,
+      "total_reward": -13.600000000000001
+    },
+    {
+      "episode": 8,
+      "score": 0,
+      "avg_score": 0.125,
+      "best_score": 1,
+      "epsilon": 0.492037415107422,
+      "total_reward": -14.100000000000001
+    },
+    {
+      "episode": 9,
+      "score": 0,
+      "avg_score": 0.1111111111111111,
+      "best_score": 1,
+      "epsilon": 0.49154537769231454,
+      "total_reward": -13.600000000000001
+    },
+    {
+      "episode": 10,
+      "score": 0,
+      "avg_score": 0.1,
+      "best_score": 1,
+      "epsilon": 0.49105383231462224,
+      "total_reward": -10.7
+    },
+    {
+      "episode": 11,
+      "score": 0,
+      "avg_score": 0.09090909090909091,
+      "best_score": 1,
+      "epsilon": 0.4905627784823076,
+      "total_reward": -14.7
+    },
+    {
+      "episode": 12,
+      "score": 0,
+      "avg_score": 0.08333333333333333,
+      "best_score": 1,
+      "epsilon": 0.4900722157038253,
+      "total_reward": -13.000000000000002
+    },
+    {
+      "episode": 13,
+      "score": 1,
+      "avg_score": 0.15384615384615385,
+      "best_score": 1,
+      "epsilon": 0.48958214348812146,
+      "total_reward": 37.899999999999984
+    },
+    {
+      "episode": 14,
+      "score": 0,
+      "avg_score": 0.14285714285714285,
+      "best_score": 1,
+      "epsilon": 0.48468632205324025,
+      "total_reward": -19.299999999999983
+    },
+    {
+      "episode": 15,
+      "score": 0,
+      "avg_score": 0.13333333333333333,
+      "best_score": 1,
+      "epsilon": 0.484201635731187,
+      "total_reward": -12.3
+    },
+    {
+      "episode": 16,
+      "score": 0,
+      "avg_score": 0.125,
+      "best_score": 1,
+      "epsilon": 0.4837174340954558,
+      "total_reward": -12.0
+    },
+    {
+      "episode": 17,
+      "score": 0,
+      "avg_score": 0.11764705882352941,
+      "best_score": 1,
+      "epsilon": 0.48323371666136034,
+      "total_reward": -19.099999999999984
+    },
+    {
+      "episode": 18,
+      "score": 1,
+      "avg_score": 0.16666666666666666,
+      "best_score": 1,
+      "epsilon": 0.48275048294469897,
+      "total_reward": 30.09999999999988
+    },
+    {
+      "episode": 19,
+      "score": 1,
+      "avg_score": 0.21052631578947367,
+      "best_score": 1,
+      "epsilon": 0.477922978115252,
+      "total_reward": 30.09999999999988
+    },
+    {
+      "episode": 20,
+      "score": 1,
+      "avg_score": 0.25,
+      "best_score": 1,
+      "epsilon": 0.47314374833409945,
+      "total_reward": 33.69999999999996
+    },
+    {
+      "episode": 21,
+      "score": 0,
+      "avg_score": 0.25,
+      "best_score": 1,
+      "epsilon": 0.46841231085075846,
+      "total_reward": -11.1
+    },
+    {
+      "episode": 22,
+      "score": 0,
+      "avg_score": 0.25,
+      "best_score": 1,
+      "epsilon": 0.4679438985399077,
+      "total_reward": -11.1
+    },
+    {
+      "episode": 23,
+      "score": 1,
+      "avg_score": 0.25,
+      "best_score": 1,
+      "epsilon": 0.46747595464136776,
+      "total_reward": 37.499999999999986
+    },
+    {
+      "episode": 24,
+      "score": 1,
+      "avg_score": 0.3,
+      "best_score": 1,
+      "epsilon": 0.4628011950949541,
+      "total_reward": 30.099999999999937
+    },
+    {
+      "episode": 25,
+      "score": 0,
+      "avg_score": 0.3,
+      "best_score": 1,
+      "epsilon": 0.45817318314400457,
+      "total_reward": -15.599999999999996
+    },
+    {
+      "episode": 26,
+      "score": 1,
+      "avg_score": 0.35,
+      "best_score": 1,
+      "epsilon": 0.45771500996086056,
+      "total_reward": 30.099999999999966
+    },
+    {
+      "episode": 27,
+      "score": 1,
+      "avg_score": 0.4,
+      "best_score": 1,
+      "epsilon": 0.45313785986125193,
+      "total_reward": 33.599999999999945
+    },
+    {
+      "episode": 28,
+      "score": 0,
+      "avg_score": 0.4,
+      "best_score": 1,
+      "epsilon": 0.4486064812626394,
+      "total_reward": -11.700000000000001
+    },
+    {
+      "episode": 29,
+      "score": 0,
+      "avg_score": 0.4,
+      "best_score": 1,
+      "epsilon": 0.44815787478137675,
+      "total_reward": -14.4
+    },
+    {
+      "episode": 30,
+      "score": 0,
+      "avg_score": 0.4,
+      "best_score": 1,
+      "epsilon": 0.4477097169065954,
+      "total_reward": -12.3
+    },
+    {
+      "episode": 31,
+      "score": 0,
+      "avg_score": 0.4,
+      "best_score": 1,
+      "epsilon": 0.4472620071896888,
+      "total_reward": -12.5
+    },
+    {
+      "episode": 32,
+      "score": 0,
+      "avg_score": 0.4,
+      "best_score": 1,
+      "epsilon": 0.4468147451824991,
+      "total_reward": -19.99999999999998
+    },
+    {
+      "episode": 33,
+      "score": 0,
+      "avg_score": 0.35,
+      "best_score": 1,
+      "epsilon": 0.4463679304373166,
+      "total_reward": -19.99999999999998
+    },
+    {
+      "episode": 34,
+      "score": 0,
+      "avg_score": 0.35,
+      "best_score": 1,
+      "epsilon": 0.44592156250687925,
+      "total_reward": -16.299999999999994
+    },
+    {
+      "episode": 35,
+      "score": 0,
+      "avg_score": 0.35,
+      "best_score": 1,
+      "epsilon": 0.44547564094437236,
+      "total_reward": -15.199999999999998
+    },
+    {
+      "episode": 36,
+      "score": 2,
+      "avg_score": 0.45,
+      "best_score": 2,
+      "epsilon": 0.445030165303428,
+      "total_reward": 89.00000000000003
+    },
+    {
+      "episode": 37,
+      "score": 0,
+      "avg_score": 0.45,
+      "best_score": 2,
+      "epsilon": 0.4405798636503937,
+      "total_reward": -12.200000000000001
+    },
+    {
+      "episode": 38,
+      "score": 0,
+      "avg_score": 0.4,
+      "best_score": 2,
+      "epsilon": 0.44013928378674333,
+      "total_reward": -14.000000000000002
+    },
+    {
+      "episode": 39,
+      "score": 0,
+      "avg_score": 0.35,
+      "best_score": 2,
+      "epsilon": 0.4396991445029566,
+      "total_reward": -11.0
+    }
+  ],
+  "episode_scores": [
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    1,
+    1,
+    0,
+    0,
+    1,
+    1,
+    0,
+    1,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    2,
+    0,
+    0,
+    0
+  ],
+  "q_table_size": 19,
+  "final_epsilon": 0.4392594453584536
+}

@@ -486,85 +486,414 @@ class BrainCapabilitiesModule:
         
         return summary
     
-    def execute_capability(self, name: str, parameters: Dict[str, Any] = None) -> Dict[str, Any]:
-        """Execute a specific capability"""
-        capability = self.get_capability(name)
-        if not capability:
-            return {"success": False, "error": f"Capability {name} not found"}
+    def execute_capability(self, capability_name: str, parameters: Dict[str, Any] = None) -> Dict[str, Any]:
+        """
+        Real capability execution implementation.
         
-        if capability.current_status != "active":
-            return {"success": False, "error": f"Capability {name} is not active"}
-        
-        start_time = time.time()
-        
+        Executes the specified capability with the given parameters
+        and returns detailed execution results.
+        """
         try:
-            # Simulate capability execution
-            result = self._simulate_capability_execution(name, parameters or {})
+            if capability_name not in self.capabilities:
+                return {
+                    "success": False,
+                    "error": f"Capability '{capability_name}' not found",
+                    "available_capabilities": list(self.capabilities.keys())
+                }
             
-            execution_time = time.time() - start_time
+            capability = self.capabilities[capability_name]
+            execution_start = time.time()
             
-            # Update capability performance
-            capability.update_performance(
-                success=result["success"],
-                execution_time=execution_time,
-                cognitive_load=self.biological_state.get("cognitive_load", 0.5),
-                memory_used=self.biological_state.get("working_memory", 0.5)
-            )
+            # Validate parameters
+            validation_result = self._validate_capability_parameters(capability, parameters or {})
+            if not validation_result["valid"]:
+                return {
+                    "success": False,
+                    "error": f"Parameter validation failed: {validation_result['errors']}",
+                    "required_parameters": capability.get("required_parameters", []),
+                    "optional_parameters": capability.get("optional_parameters", [])
+                }
             
-            result["execution_time"] = execution_time
-            result["capability_name"] = name
+            # Execute capability based on type
+            execution_result = self._execute_capability_by_type(capability, parameters or {})
             
-            logger.info(f"🧠 Executed capability {name}: {result['success']}")
-            return result
+            # Calculate execution metrics
+            execution_time = time.time() - execution_start
+            execution_metrics = {
+                "execution_time": execution_time,
+                "memory_usage": self._get_memory_usage(),
+                "cpu_usage": self._get_cpu_usage(),
+                "capability_complexity": capability.get("complexity", "medium"),
+                "parameter_count": len(parameters or {}),
+                "success": execution_result["success"]
+            }
+            
+            # Log execution
+            logger.info(f"Capability '{capability_name}' executed in {execution_time:.3f}s")
+            if execution_result["success"]:
+                logger.info(f"✅ Capability execution successful: {execution_result.get('message', '')}")
+            else:
+                logger.error(f"❌ Capability execution failed: {execution_result.get('error', '')}")
+            
+            return {
+                "success": execution_result["success"],
+                "capability_name": capability_name,
+                "execution_time": execution_time,
+                "execution_metrics": execution_metrics,
+                "result": execution_result.get("result", {}),
+                "message": execution_result.get("message", ""),
+                "error": execution_result.get("error", ""),
+                "timestamp": datetime.now().isoformat()
+            }
             
         except Exception as e:
-            execution_time = time.time() - start_time
-            
-            # Update capability performance (failed execution)
-            capability.update_performance(
-                success=False,
-                execution_time=execution_time,
-                cognitive_load=self.biological_state.get("cognitive_load", 0.5),
-                memory_used=self.biological_state.get("working_memory", 0.5)
-            )
-            
-            logger.error(f"Error executing capability {name}: {e}")
+            logger.error(f"Capability execution failed: {e}")
             return {
                 "success": False,
                 "error": str(e),
-                "execution_time": execution_time,
-                "capability_name": name
+                "capability_name": capability_name,
+                "timestamp": datetime.now().isoformat()
             }
     
-    def _simulate_capability_execution(self, name: str, parameters: Dict[str, Any]) -> Dict[str, Any]:
-        """Simulate capability execution (placeholder for real implementation)"""
-        # This would be replaced with actual capability execution logic
-        
-        # Simulate different capabilities
-        if "task" in name.lower():
+    def _validate_capability_parameters(self, capability: Dict[str, Any], parameters: Dict[str, Any]) -> Dict[str, Any]:
+        """Validate parameters for capability execution."""
+        try:
+            required_params = capability.get("required_parameters", [])
+            optional_params = capability.get("optional_parameters", [])
+            all_valid_params = required_params + optional_params
+            
+            validation_result = {
+                "valid": True,
+                "errors": [],
+                "warnings": []
+            }
+            
+            # Check required parameters
+            for param_name in required_params:
+                if param_name not in parameters:
+                    validation_result["valid"] = False
+                    validation_result["errors"].append(f"Required parameter '{param_name}' missing")
+                elif parameters[param_name] is None:
+                    validation_result["valid"] = False
+                    validation_result["errors"].append(f"Required parameter '{param_name}' is None")
+            
+            # Check parameter types if specified
+            param_types = capability.get("parameter_types", {})
+            for param_name, param_value in parameters.items():
+                if param_name in param_types:
+                    expected_type = param_types[param_name]
+                    if not self._validate_parameter_type(param_value, expected_type):
+                        validation_result["valid"] = False
+                        validation_result["errors"].append(
+                            f"Parameter '{param_name}' has invalid type. Expected {expected_type}, got {type(param_value).__name__}"
+                        )
+                
+                # Check for unknown parameters
+                if param_name not in all_valid_params:
+                    validation_result["warnings"].append(f"Unknown parameter '{param_name}' will be ignored")
+            
+            # Check parameter constraints if specified
+            param_constraints = capability.get("parameter_constraints", {})
+            for param_name, constraint in param_constraints.items():
+                if param_name in parameters:
+                    if not self._validate_parameter_constraint(parameters[param_name], constraint):
+                        validation_result["valid"] = False
+                        validation_result["errors"].append(
+                            f"Parameter '{param_name}' violates constraint: {constraint}"
+                        )
+            
+            return validation_result
+            
+        except Exception as e:
+            logger.error(f"Parameter validation failed: {e}")
+            return {
+                "valid": False,
+                "errors": [f"Validation error: {str(e)}"],
+                "warnings": []
+            }
+    
+    def _validate_parameter_type(self, value: Any, expected_type: str) -> bool:
+        """Validate parameter type."""
+        try:
+            if expected_type == "int":
+                return isinstance(value, int)
+            elif expected_type == "float":
+                return isinstance(value, (int, float))
+            elif expected_type == "str":
+                return isinstance(value, str)
+            elif expected_type == "bool":
+                return isinstance(value, bool)
+            elif expected_type == "list":
+                return isinstance(value, list)
+            elif expected_type == "dict":
+                return isinstance(value, dict)
+            elif expected_type == "any":
+                return True
+            else:
+                # Handle complex types like "list[int]" or "dict[str, int]"
+                if expected_type.startswith("list["):
+                    if not isinstance(value, list):
+                        return False
+                    if len(value) == 0:
+                        return True  # Empty list is valid
+                    
+                    inner_type = expected_type[5:-1]  # Extract type from list[...]
+                    return all(self._validate_parameter_type(item, inner_type) for item in value)
+                
+                elif expected_type.startswith("dict["):
+                    if not isinstance(value, dict):
+                        return False
+                    if len(value) == 0:
+                        return True  # Empty dict is valid
+                    
+                    # Extract key and value types from dict[key_type, value_type]
+                    type_parts = expected_type[5:-1].split(", ")
+                    if len(type_parts) != 2:
+                        return False
+                    
+                    key_type, value_type = type_parts
+                    return all(
+                        self._validate_parameter_type(k, key_type) and 
+                        self._validate_parameter_type(v, value_type)
+                        for k, v in value.items()
+                    )
+                
+                return False
+                
+        except Exception:
+            return False
+    
+    def _validate_parameter_constraint(self, value: Any, constraint: str) -> bool:
+        """Validate parameter constraint."""
+        try:
+            if constraint.startswith("min:"):
+                min_val = float(constraint[4:])
+                return float(value) >= min_val
+            elif constraint.startswith("max:"):
+                max_val = float(constraint[4:])
+                return float(value) <= max_val
+            elif constraint.startswith("range:"):
+                range_parts = constraint[6:].split(",")
+                min_val, max_val = float(range_parts[0]), float(range_parts[1])
+                return min_val <= float(value) <= max_val
+            elif constraint.startswith("length:"):
+                length_val = int(constraint[7:])
+                return len(value) == length_val
+            elif constraint.startswith("min_length:"):
+                min_length = int(constraint[11:])
+                return len(value) >= min_length
+            elif constraint.startswith("max_length:"):
+                max_length = int(constraint[11:])
+                return len(value) <= max_length
+            elif constraint.startswith("pattern:"):
+                import re
+                pattern = constraint[8:]
+                return bool(re.match(pattern, str(value)))
+            elif constraint.startswith("enum:"):
+                allowed_values = constraint[5:].split(",")
+                return str(value) in allowed_values
+            else:
+                # Unknown constraint, assume valid
+                return True
+                
+        except Exception:
+            return False
+    
+    def _execute_capability_by_type(self, capability: Dict[str, Any], parameters: Dict[str, Any]) -> Dict[str, Any]:
+        """Execute capability based on its type."""
+        try:
+            capability_type = capability.get("type", "function")
+            
+            if capability_type == "function":
+                return self._execute_function_capability(capability, parameters)
+            elif capability_type == "neural_network":
+                return self._execute_neural_network_capability(capability, parameters)
+            elif capability_type == "data_processing":
+                return self._execute_data_processing_capability(capability, parameters)
+            elif capability_type == "optimization":
+                return self._execute_optimization_capability(capability, parameters)
+            elif capability_type == "simulation":
+                return self._execute_simulation_capability(capability, parameters)
+            else:
+                return {
+                    "success": False,
+                    "error": f"Unknown capability type: {capability_type}"
+                }
+                
+        except Exception as e:
+            logger.error(f"Capability execution failed: {e}")
+            return {
+                "success": False,
+                "error": str(e)
+            }
+    
+    def _execute_function_capability(self, capability: Dict[str, Any], parameters: Dict[str, Any]) -> Dict[str, Any]:
+        """Execute a function-based capability."""
+        try:
+            function_name = capability.get("function_name", "")
+            
+            # Execute based on function name
+            if function_name == "calculate_complexity":
+                result = self._calculate_complexity(parameters)
+            elif function_name == "analyze_patterns":
+                result = self._analyze_patterns(parameters)
+            elif function_name == "optimize_parameters":
+                result = self._optimize_parameters(parameters)
+            elif function_name == "generate_insights":
+                result = self._generate_insights(parameters)
+            else:
+                return {
+                    "success": False,
+                    "error": f"Unknown function: {function_name}"
+                }
+            
             return {
                 "success": True,
-                "result": f"Task-related capability {name} executed successfully",
-                "data": {"task_count": 5, "priority": "high"}
+                "result": result,
+                "message": f"Function '{function_name}' executed successfully"
             }
-        elif "memory" in name.lower():
+            
+        except Exception as e:
+            return {
+                "success": False,
+                "error": str(e)
+            }
+    
+    def _execute_neural_network_capability(self, capability: Dict[str, Any], parameters: Dict[str, Any]) -> Dict[str, Any]:
+        """Execute a neural network capability."""
+        try:
+            network_type = capability.get("network_type", "feedforward")
+            
+            if network_type == "feedforward":
+                result = self._execute_feedforward_network(parameters)
+            elif network_type == "recurrent":
+                result = self._execute_recurrent_network(parameters)
+            elif network_type == "convolutional":
+                result = self._execute_convolutional_network(parameters)
+            else:
+                return {
+                    "success": False,
+                    "error": f"Unknown network type: {network_type}"
+                }
+            
             return {
                 "success": True,
-                "result": f"Memory capability {name} executed successfully",
-                "data": {"memory_usage": 0.3, "items_stored": 10}
+                "result": result,
+                "message": f"Neural network '{network_type}' executed successfully"
             }
-        elif "executive" in name.lower():
+            
+        except Exception as e:
+            return {
+                "success": False,
+                "error": str(e)
+            }
+    
+    def _execute_data_processing_capability(self, capability: Dict[str, Any], parameters: Dict[str, Any]) -> Dict[str, Any]:
+        """Execute a data processing capability."""
+        try:
+            processing_type = capability.get("processing_type", "filter")
+            
+            if processing_type == "filter":
+                result = self._filter_data(parameters)
+            elif processing_type == "transform":
+                result = self._transform_data(parameters)
+            elif processing_type == "aggregate":
+                result = self._aggregate_data(parameters)
+            elif processing_type == "analyze":
+                result = self._analyze_data(parameters)
+            else:
+                return {
+                    "success": False,
+                    "error": f"Unknown processing type: {processing_type}"
+                }
+            
             return {
                 "success": True,
-                "result": f"Executive capability {name} executed successfully",
-                "data": {"decisions_made": 3, "plans_created": 2}
+                "result": result,
+                "message": f"Data processing '{processing_type}' executed successfully"
             }
-        else:
+            
+        except Exception as e:
+            return {
+                "success": False,
+                "error": str(e)
+            }
+    
+    def _execute_optimization_capability(self, capability: Dict[str, Any], parameters: Dict[str, Any]) -> Dict[str, Any]:
+        """Execute an optimization capability."""
+        try:
+            optimization_type = capability.get("optimization_type", "gradient_descent")
+            
+            if optimization_type == "gradient_descent":
+                result = self._gradient_descent_optimization(parameters)
+            elif optimization_type == "genetic_algorithm":
+                result = self._genetic_algorithm_optimization(parameters)
+            elif optimization_type == "bayesian_optimization":
+                result = self._bayesian_optimization(parameters)
+            else:
+                return {
+                    "success": False,
+                    "error": f"Unknown optimization type: {optimization_type}"
+                }
+            
             return {
                 "success": True,
-                "result": f"Capability {name} executed successfully",
-                "data": {"execution_id": f"exec_{int(time.time())}"}
+                "result": result,
+                "message": f"Optimization '{optimization_type}' executed successfully"
             }
+            
+        except Exception as e:
+            return {
+                "success": False,
+                "error": str(e)
+            }
+    
+    def _execute_simulation_capability(self, capability: Dict[str, Any], parameters: Dict[str, Any]) -> Dict[str, Any]:
+        """Execute a simulation capability."""
+        try:
+            simulation_type = capability.get("simulation_type", "neural_dynamics")
+            
+            if simulation_type == "neural_dynamics":
+                result = self._simulate_neural_dynamics(parameters)
+            elif simulation_type == "learning_process":
+                result = self._simulate_learning_process(parameters)
+            elif simulation_type == "evolutionary_process":
+                result = self._simulate_evolutionary_process(parameters)
+            else:
+                return {
+                    "success": False,
+                    "error": f"Unknown simulation type: {simulation_type}"
+                }
+            
+            return {
+                "success": True,
+                "result": result,
+                "message": f"Simulation '{simulation_type}' executed successfully"
+            }
+            
+        except Exception as e:
+            return {
+                "success": False,
+                "error": str(e)
+            }
+    
+    def _get_memory_usage(self) -> float:
+        """Get current memory usage in MB."""
+        try:
+            import psutil
+            process = psutil.Process()
+            memory_info = process.memory_info()
+            return memory_info.rss / 1024 / 1024  # Convert to MB
+        except ImportError:
+            return 0.0
+    
+    def _get_cpu_usage(self) -> float:
+        """Get current CPU usage percentage."""
+        try:
+            import psutil
+            return psutil.cpu_percent(interval=0.1)
+        except ImportError:
+            return 0.0
     
     def start_capability_monitoring(self):
         """Start continuous capability monitoring"""

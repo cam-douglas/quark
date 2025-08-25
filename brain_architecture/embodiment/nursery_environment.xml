@@ -1,0 +1,51 @@
+<!--
+Quark's Nursery: A Safe, Simple Environment for Initial Embodied Learning
+
+World Description:
+- A large, bounded floor plane.
+- A controllable agent (Quark's first body), represented by a blue sphere.
+- A stationary goal object, represented by a green cube.
+- A single light source from above.
+-->
+<mujoco model="nursery">
+  <compiler angle="degree" coordinate="local" inertiafromgeom="true"/>
+  
+  <option integrator="RK4" timestep="0.01"/>
+  
+  <default>
+    <joint armature="1" damping="1" limited="true"/>
+    <geom conaffinity="0" condim="3" density="5.0" friction="1 0.5 0.5" margin="0.01" rgba="0.8 0.6 0.4 1"/>
+  </default>
+  
+  <worldbody>
+    <!-- Arena Floor -->
+    <geom name="floor" pos="0 0 0" size="2 2 0.1" type="plane" conaffinity="1" condim="3" material="MatPlane"/>
+    
+    <!-- Light Source -->
+    <light diffuse=".5 .5 .5" pos="0 0 5" dir="0 0 -1"/>
+    
+    <!-- Quark's Body (Agent) -->
+    <body name="agent" pos="0 0 0.1">
+      <joint type="free" limited="false"/>
+      <geom name="agent_geom" type="sphere" size="0.1" rgba="0.2 0.2 0.8 1" mass="1"/>
+      <!-- This will allow us to read the agent's position easily -->
+      <site name="agent_site" pos="0 0 0" size="0.01"/>
+    </body>
+    
+    <!-- Goal Object -->
+    <body name="goal" pos="1 1 0.1">
+      <joint type="free" limited="false"/>
+      <geom name="goal_geom" type="box" size="0.1 0.1 0.1" rgba="0.2 0.8 0.2 1" mass="1000"/>
+       <!-- This will allow us to read the goal's position easily -->
+      <site name="goal_site" pos="0 0 0" size="0.01"/>
+    </body>
+    
+  </worldbody>
+  
+  <asset>
+    <texture type="skybox" builtin="gradient" rgb1="0.4 0.6 0.8" rgb2="0 0 0" width="32" height="32"/>
+    <texture name="texplane" type="2d" builtin="checker" rgb1=".2 .3 .4" rgb2=".1 0.15 0.2" width="512" height="512"/>
+    <material name="MatPlane" reflectance="0.5" texture="texplane" texrepeat="1 1" texuniform="true"/>
+  </asset>
+  
+</mujoco>

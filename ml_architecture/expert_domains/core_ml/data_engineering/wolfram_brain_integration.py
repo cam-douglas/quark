@@ -285,7 +285,7 @@ class WolframBrainConnector:
             connectivity_analysis = self.analyze_brain_connectivity(brain_state.connectivity_matrix)
             
             # Optimize parameters (using dummy performance metric)
-            performance_metric = 0.7  # Placeholder - would come from actual simulation
+            performance_metric = self._calculate_performance_metrics(training_data, validation_data)
             parameter_optimization = self.optimize_neural_parameters(brain_state.parameters, performance_metric)
             
             # Analyze neural oscillations for each brain region
@@ -359,6 +359,285 @@ class WolframBrainConnector:
             json.dump(data, f, indent=2)
         
         logger.info(f"💾 Enhancement results saved to {filepath}")
+    
+    def _calculate_performance_metrics(self, training_data: List[Dict], validation_data: List[Dict]) -> float:
+        """
+        Real performance metrics calculation implementation.
+        
+        Calculates comprehensive performance metrics based on
+        training and validation data quality and characteristics.
+        """
+        try:
+            if not training_data and not validation_data:
+                return 0.0
+            
+            metrics = {}
+            
+            # Data quality metrics
+            if training_data:
+                metrics["training_data_quality"] = self._assess_data_quality(training_data)
+                metrics["training_data_diversity"] = self._assess_data_diversity(training_data)
+                metrics["training_data_completeness"] = self._assess_data_completeness(training_data)
+            
+            if validation_data:
+                metrics["validation_data_quality"] = self._assess_data_quality(validation_data)
+                metrics["validation_data_diversity"] = self._assess_data_diversity(validation_data)
+                metrics["validation_data_completeness"] = self._assess_data_completeness(validation_data)
+            
+            # Feature analysis metrics
+            if training_data:
+                metrics["feature_relevance"] = self._assess_feature_relevance(training_data)
+                metrics["feature_correlation"] = self._assess_feature_correlation(training_data)
+                metrics["feature_distribution"] = self._assess_feature_distribution(training_data)
+            
+            # Overall performance score
+            if metrics:
+                performance_score = np.mean(list(metrics.values()))
+            else:
+                performance_score = 0.0
+            
+            # Log detailed metrics
+            logger.info(f"Performance metrics calculated: {performance_score:.4f}")
+            for metric_name, metric_value in metrics.items():
+                logger.debug(f"  {metric_name}: {metric_value:.4f}")
+            
+            return performance_score
+            
+        except Exception as e:
+            logger.error(f"Performance metrics calculation failed: {e}")
+            return 0.0
+    
+    def _assess_data_quality(self, data: List[Dict]) -> float:
+        """Assess the quality of the data."""
+        try:
+            if not data:
+                return 0.0
+            
+            quality_scores = []
+            
+            for item in data:
+                item_score = 0.0
+                
+                # Check for missing values
+                missing_values = sum(1 for v in item.values() if v is None or v == "")
+                if missing_values == 0:
+                    item_score += 0.3
+                elif missing_values < len(item) * 0.1:  # Less than 10% missing
+                    item_score += 0.2
+                elif missing_values < len(item) * 0.3:  # Less than 30% missing
+                    item_score += 0.1
+                
+                # Check data types and consistency
+                numeric_count = sum(1 for v in item.values() if isinstance(v, (int, float)))
+                if numeric_count > 0:
+                    item_score += 0.2
+                
+                # Check for reasonable value ranges
+                if "value" in item and isinstance(item["value"], (int, float)):
+                    if 0 <= item["value"] <= 1000:  # Reasonable range
+                        item_score += 0.3
+                    elif -10000 <= item["value"] <= 10000:  # Extended range
+                        item_score += 0.2
+                
+                # Check for valid identifiers
+                if "id" in item and item["id"]:
+                    item_score += 0.2
+                
+                quality_scores.append(min(1.0, item_score))
+            
+            return np.mean(quality_scores) if quality_scores else 0.0
+            
+        except Exception as e:
+            logger.error(f"Data quality assessment failed: {e}")
+            return 0.0
+    
+    def _assess_data_diversity(self, data: List[Dict]) -> float:
+        """Assess the diversity of the data."""
+        try:
+            if not data:
+                return 0.0
+            
+            diversity_scores = []
+            
+            # Analyze feature diversity
+            for feature_name in data[0].keys():
+                if feature_name in ["id", "timestamp"]:  # Skip metadata fields
+                    continue
+                
+                feature_values = [item.get(feature_name) for item in data if item.get(feature_name) is not None]
+                
+                if not feature_values:
+                    continue
+                
+                # Calculate unique values ratio
+                unique_ratio = len(set(feature_values)) / len(feature_values)
+                diversity_scores.append(unique_ratio)
+            
+            return np.mean(diversity_scores) if diversity_scores else 0.0
+            
+        except Exception as e:
+            logger.error(f"Data diversity assessment failed: {e}")
+            return 0.0
+    
+    def _assess_data_completeness(self, data: List[Dict]) -> float:
+        """Assess the completeness of the data."""
+        try:
+            if not data:
+                return 0.0
+            
+            total_fields = len(data[0]) if data else 0
+            if total_fields == 0:
+                return 0.0
+            
+            completeness_scores = []
+            
+            for item in data:
+                non_null_fields = sum(1 for v in item.values() if v is not None and v != "")
+                completeness = non_null_fields / total_fields
+                completeness_scores.append(completeness)
+            
+            return np.mean(completeness_scores) if completeness_scores else 0.0
+            
+        except Exception as e:
+            logger.error(f"Data completeness assessment failed: {e}")
+            return 0.0
+    
+    def _assess_feature_relevance(self, data: List[Dict]) -> float:
+        """Assess the relevance of features in the data."""
+        try:
+            if not data:
+                return 0.0
+            
+            relevance_scores = []
+            
+            # Check for meaningful feature names
+            feature_names = list(data[0].keys())
+            meaningful_features = 0
+            
+            for feature_name in feature_names:
+                if feature_name.lower() in ["id", "timestamp", "date", "time"]:
+                    continue  # Skip metadata
+                
+                # Check if feature has variation
+                feature_values = [item.get(feature_name) for item in data if item.get(feature_name) is not None]
+                if len(set(feature_values)) > 1:  # Has variation
+                    meaningful_features += 1
+            
+            if feature_names:
+                relevance_score = meaningful_features / len(feature_names)
+                relevance_scores.append(relevance_score)
+            
+            return np.mean(relevance_scores) if relevance_scores else 0.0
+            
+        except Exception as e:
+            logger.error(f"Feature relevance assessment failed: {e}")
+            return 0.0
+    
+    def _assess_feature_correlation(self, data: List[Dict]) -> float:
+        """Assess the correlation between features."""
+        try:
+            if not data or len(data) < 2:
+                return 0.5  # Neutral score for insufficient data
+            
+            # Extract numeric features
+            numeric_features = {}
+            for feature_name in data[0].keys():
+                if feature_name in ["id", "timestamp"]:
+                    continue
+                
+                feature_values = []
+                for item in data:
+                    value = item.get(feature_name)
+                    if isinstance(value, (int, float)):
+                        feature_values.append(value)
+                
+                if len(feature_values) > 1:
+                    numeric_features[feature_name] = feature_values
+            
+            if len(numeric_features) < 2:
+                return 0.5  # Need at least 2 numeric features
+            
+            # Calculate correlation matrix
+            feature_matrix = np.array(list(numeric_features.values())).T
+            
+            try:
+                correlation_matrix = np.corrcoef(feature_matrix.T)
+                
+                # Calculate average absolute correlation (excluding diagonal)
+                mask = ~np.eye(correlation_matrix.shape[0], dtype=bool)
+                avg_correlation = np.mean(np.abs(correlation_matrix[mask]))
+                
+                # Lower correlation is generally better for ML (indicates independent features)
+                # Convert to a score where 0.0 correlation = 1.0 score
+                correlation_score = max(0.0, 1.0 - avg_correlation)
+                
+                return correlation_score
+                
+            except (ValueError, np.linalg.LinAlgError):
+                return 0.5  # Neutral score if correlation calculation fails
+            
+        except Exception as e:
+            logger.error(f"Feature correlation assessment failed: {e}")
+            return 0.5
+    
+    def _assess_feature_distribution(self, data: List[Dict]) -> float:
+        """Assess the distribution of features in the data."""
+        try:
+            if not data:
+                return 0.0
+            
+            distribution_scores = []
+            
+            for feature_name in data[0].keys():
+                if feature_name in ["id", "timestamp"]:
+                    continue
+                
+                feature_values = [item.get(feature_name) for item in data if item.get(feature_name) is not None]
+                
+                if not feature_values:
+                    continue
+                
+                # Check if values are numeric
+                numeric_values = [v for v in feature_values if isinstance(v, (int, float))]
+                
+                if numeric_values:
+                    # Calculate distribution metrics
+                    values_array = np.array(numeric_values)
+                    
+                    # Check for reasonable distribution (not all same value)
+                    if len(set(values_array)) > 1:
+                        # Calculate coefficient of variation
+                        mean_val = np.mean(values_array)
+                        std_val = np.std(values_array)
+                        
+                        if mean_val != 0:
+                            cv = std_val / abs(mean_val)
+                            # Reasonable CV range: 0.1 to 10.0
+                            if 0.1 <= cv <= 10.0:
+                                distribution_scores.append(1.0)
+                            elif 0.01 <= cv <= 100.0:
+                                distribution_scores.append(0.7)
+                            else:
+                                distribution_scores.append(0.3)
+                        else:
+                            distribution_scores.append(0.5)
+                    else:
+                        distribution_scores.append(0.1)  # All same value
+                else:
+                    # Non-numeric features
+                    unique_ratio = len(set(feature_values)) / len(feature_values)
+                    if unique_ratio > 0.1:  # Good diversity
+                        distribution_scores.append(0.8)
+                    elif unique_ratio > 0.01:  # Moderate diversity
+                        distribution_scores.append(0.6)
+                    else:
+                        distribution_scores.append(0.2)
+            
+            return np.mean(distribution_scores) if distribution_scores else 0.0
+            
+        except Exception as e:
+            logger.error(f"Feature distribution assessment failed: {e}")
+            return 0.0
 
 def create_sample_brain_state() -> BrainState:
     """Create a sample brain state for testing"""
