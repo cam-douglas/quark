@@ -1,0 +1,80 @@
+{
+  "alphagenome": {
+    "repository_path": "/Users/camdouglas/quark/external/alphagenome",
+    "use_local_fallback": true,
+    "api_key": "AIzaSyDz4S3z6K0lwAi7_vC8gi1_0KOF9xmVtb4",
+    "api_endpoint": "https://api.alphagenome.deepmind.com",
+    "max_requests_per_hour": 1000,
+    "max_sequence_length": 1000000,
+    "default_resolution": "single_bp",
+    "conservation_threshold": 0.6,
+    "regulatory_threshold": 0.5,
+    "neural_gene_sets_enabled": true,
+    "developmental_stages_enabled": true,
+    "morphogen_modeling_enabled": true,
+    "spatial_modeling_enabled": true,
+    "save_predictions": true,
+    "cache_results": true,
+    "export_visualizations": true,
+    "detailed_logging": true,
+    "parallel_processing": true,
+    "max_workers": 4,
+    "memory_limit_gb": 8.0,
+    "cache_directory": "/Users/camdouglas/quark/data_knowledge/models_artifacts/alphagenome_cache",
+    "export_directory": "/Users/camdouglas/quark/data_knowledge/models_artifacts/alphagenome_exports",
+    "log_directory": "/Users/camdouglas/quark/logs/alphagenome"
+  },
+  "biological_rules": {
+    "enforce_valid_transitions": true,
+    "allow_dedifferentiation": false,
+    "stem_cell_renewal_enabled": true,
+    "enforce_temporal_constraints": true,
+    "developmental_stage_duration_hours": {
+      "neural_induction": 8.0,
+      "neural_plate": 4.0,
+      "neural_tube_closure": 16.0,
+      "neural_proliferation": 24.0,
+      "neuronal_migration": 48.0,
+      "differentiation": 72.0,
+      "synaptogenesis": 120.0,
+      "circuit_refinement": 240.0
+    },
+    "enforce_spatial_organization": true,
+    "max_cell_density": 1000.0,
+    "tissue_boundary_enforcement": true,
+    "gene_expression_bounds": [
+      0.0,
+      1.0
+    ],
+    "morphogen_concentration_bounds": [
+      0.0,
+      10.0
+    ],
+    "conservation_weight_factor": 1.5,
+    "validate_biological_accuracy": true,
+    "require_literature_support": true,
+    "error_on_violations": false
+  },
+  "simulation": {
+    "default_time_step": 0.1,
+    "max_simulation_time": 168.0,
+    "save_frequency": 1.0,
+    "spatial_resolution": 10.0,
+    "spatial_dimensions": [
+      1000.0,
+      1000.0,
+      1000.0
+    ],
+    "morphogen_diffusion_enabled": true,
+    "cell_migration_enabled": true,
+    "cell_division_enabled": true,
+    "apoptosis_enabled": true,
+    "real_time_visualization": false,
+    "save_visualization_frames": true,
+    "visualization_resolution": 300,
+    "multithreading_enabled": true,
+    "gpu_acceleration": false,
+    "memory_efficient_mode": true
+  },
+  "last_updated": "2025-08-28T06:43:32.053375"
+}

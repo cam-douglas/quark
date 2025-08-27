@@ -8,6 +8,7 @@ learning locomotion and basic interaction in a MuJoCo simulation.
   <compiler angle="degree" coordinate="local" inertiafromgeom="true"/>
   
   <option integrator="RK4" timestep="0.01"/>
+  <size nconmax="2000" njmax="5000" />
   
   <default>
     <joint armature="1" damping="1" limited="true"/>

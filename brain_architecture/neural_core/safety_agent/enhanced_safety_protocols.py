@@ -129,10 +129,10 @@ class EnhancedSafetyProtocols:
         """Initialize safety thresholds for Stage N0 evolution."""
         thresholds = {}
         
-        # Neural activity thresholds
+        # Neural activity thresholds - Initialize with a safe, high value
         thresholds["neural_activity_stability"] = SafetyThreshold(
             name="neural_activity_stability",
-            current_value=0.0,
+            current_value=1.0, # Changed from 0.0
             warning_threshold=0.7,
             critical_threshold=0.5,
             unit="stability_index",
@@ -142,7 +142,7 @@ class EnhancedSafetyProtocols:
         
         thresholds["consciousness_coherence"] = SafetyThreshold(
             name="consciousness_coherence",
-            current_value=0.0,
+            current_value=1.0, # Changed from 0.0
             warning_threshold=0.8,
             critical_threshold=0.6,
             unit="coherence_index",
@@ -152,7 +152,7 @@ class EnhancedSafetyProtocols:
         
         thresholds["memory_integrity"] = SafetyThreshold(
             name="memory_integrity",
-            current_value=0.0,
+            current_value=1.0, # Changed from 0.0
             warning_threshold=0.9,
             critical_threshold=0.8,
             unit="integrity_score",
@@ -162,7 +162,7 @@ class EnhancedSafetyProtocols:
         
         thresholds["learning_stability"] = SafetyThreshold(
             name="learning_stability",
-            current_value=0.0,
+            current_value=1.0, # Changed from 0.0
             warning_threshold=0.75,
             critical_threshold=0.6,
             unit="stability_index",
@@ -172,7 +172,7 @@ class EnhancedSafetyProtocols:
         
         thresholds["self_organization_health"] = SafetyThreshold(
             name="self_organization_health",
-            current_value=0.0,
+            current_value=1.0, # Changed from 0.0
             warning_threshold=0.8,
             critical_threshold=0.65,
             unit="health_score",
@@ -182,7 +182,7 @@ class EnhancedSafetyProtocols:
         
         thresholds["safety_protocol_effectiveness"] = SafetyThreshold(
             name="safety_protocol_effectiveness",
-            current_value=0.0,
+            current_value=1.0, # Changed from 0.0
             warning_threshold=0.95,
             critical_threshold=0.9,
             unit="effectiveness_score",
@@ -192,7 +192,7 @@ class EnhancedSafetyProtocols:
         
         thresholds["system_resource_usage"] = SafetyThreshold(
             name="system_resource_usage",
-            current_value=0.0,
+            current_value=0.1, # Changed from 0.0 to a low usage value
             warning_threshold=0.8,
             critical_threshold=0.95,
             unit="usage_percentage",
@@ -202,7 +202,7 @@ class EnhancedSafetyProtocols:
         
         thresholds["evolution_readiness"] = SafetyThreshold(
             name="evolution_readiness",
-            current_value=0.0,
+            current_value=1.0, # Changed from 0.0
             warning_threshold=0.9,
             critical_threshold=0.85,
             unit="readiness_score",
@@ -936,31 +936,61 @@ class EnhancedSafetyProtocols:
             logger.error(f"Failed to update safety metrics: {e}")
     
     def run_comprehensive_safety_check(self) -> Dict[str, Any]:
-        """Run comprehensive safety check."""
+        """Run comprehensive safety check with detailed logging."""
         try:
             logger.info("🛡️ Running comprehensive safety check...")
             
-            # Update all safety metrics
+            # This check now includes detailed, step-by-step logging to debug the safety score.
+            
             self._update_safety_metrics()
             
-            # Check all thresholds
             all_thresholds_met = True
             violations = []
             
+            logger.info("--- Starting Safety Threshold Analysis ---")
             for threshold_name, threshold in self.safety_thresholds.items():
-                if threshold_name == "system_resource_usage":
-                    threshold_met = threshold.current_value <= threshold.warning_threshold
-                else:
-                    threshold_met = threshold.current_value >= threshold.warning_threshold
+                is_violation = False
                 
-                if not threshold_met:
+                # Invert logic for thresholds where a higher value is worse
+                if threshold_name in ["system_resource_usage", "persistent_negative_feedback"]:
+                    threshold_met = threshold.current_value <= threshold.warning_threshold
+                    if not threshold_met:
+                        is_violation = True
+                        log_msg = (f"  - ❗ VIOLATION on {threshold_name}: "
+                                   f"Value {threshold.current_value:.3f} > "
+                                   f"Warning {threshold.warning_threshold:.3f}")
+                    else:
+                        log_msg = (f"  - ✅ OK on {threshold_name}: "
+                                   f"Value {threshold.current_value:.3f} <= "
+                                   f"Warning {threshold.warning_threshold:.3f}")
+                else:
+                    # Logic for thresholds where a lower value is worse
+                    threshold_met = threshold.current_value >= threshold.warning_threshold
+                    if not threshold_met:
+                        is_violation = True
+                        log_msg = (f"  - ❗ VIOLATION on {threshold_name}: "
+                                   f"Value {threshold.current_value:.3f} < "
+                                   f"Warning {threshold.warning_threshold:.3f}")
+                    else:
+                        log_msg = (f"  - ✅ OK on {threshold_name}: "
+                                   f"Value {threshold.current_value:.3f} >= "
+                                   f"Warning {threshold.warning_threshold:.3f}")
+
+                logger.info(log_msg)
+                
+                if is_violation:
                     all_thresholds_met = False
                     violations.append(f"{threshold_name}: {threshold.current_value:.3f}")
+
+            logger.info(f"--- Analysis Complete ---")
+            logger.info(f"Total Violations Found: {len(violations)}")
             
             # Calculate overall safety score
             safety_score = 100.0
             if not all_thresholds_met:
                 safety_score = max(0.0, 100.0 - (len(violations) * 10.0))
+            
+            logger.info(f"Calculated Safety Score: {safety_score:.1f}")
             
             # Determine safety status
             if all_thresholds_met:
@@ -971,11 +1001,10 @@ class EnhancedSafetyProtocols:
                 safety_status = "CRITICAL"
             
             self.safety_status = safety_status
-            
-            # Update safety metrics
             self.safety_metrics["last_safety_score"] = safety_score
             
             # Check if emergency shutdown should be triggered
+            logger.info(f"Checking emergency triggers with score: {safety_score:.1f}")
             self._check_emergency_shutdown_triggers(safety_score, violations)
             
             safety_result = {

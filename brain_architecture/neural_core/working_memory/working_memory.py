@@ -50,14 +50,25 @@ class WorkingMemory:
         self._update_cognitive_load()
         return True
     
-    def retrieve(self, query: str) -> Optional[MemoryItem]:
-        """Retrieve memory item based on query"""
+    def retrieve(self, query: str, search_key: str = None) -> Optional[MemoryItem]:
+        """
+        Retrieve memory item based on query.
+        Can perform a simple string search or a more precise key-value search
+        if the content is a dictionary.
+        """
         best_match = None
         best_score = 0.0
         
         for item in self.memory_slots:
-            # Simple content matching (in full implementation would use semantic similarity)
-            if query.lower() in str(item.content).lower():
+            match = False
+            if search_key and isinstance(item.content, dict) and item.content.get('key') == query:
+                # Precise key-based search
+                match = True
+            elif not search_key and query.lower() in str(item.content).lower():
+                # Fallback to simple content string search
+                match = True
+
+            if match:
                 score = item.priority * (1.0 / (time.time() - item.last_accessed + 1))
                 if score > best_score:
                     best_score = score

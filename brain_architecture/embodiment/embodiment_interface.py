@@ -45,9 +45,8 @@ class ConnectionManager:
 # --- FastAPI and WebSocket Setup ---
 app = FastAPI()
 manager = ConnectionManager()
-# Create a single instance of the cognitive core to be shared by all connections
-cognitive_core = EmbodiedCognitiveCore()
-
+# The cognitive_core is now instantiated inside the websocket endpoint
+# to ensure a fresh, correctly initialized instance for each connection.
 
 @app.websocket("/ws/simulation")
 async def websocket_endpoint(websocket: WebSocket):
@@ -55,6 +54,10 @@ async def websocket_endpoint(websocket: WebSocket):
     The main WebSocket endpoint for the brain-body interface.
     Handles communication with the simulation client.
     """
+    # Instantiate a new cognitive core for each connection.
+    # This ensures all safety protocols are correctly re-initialized.
+    cognitive_core = EmbodiedCognitiveCore()
+    
     await manager.connect(websocket)
     try:
         while True:
@@ -62,8 +65,8 @@ async def websocket_endpoint(websocket: WebSocket):
             # Pass sensory data to the cognitive core for processing and safety checks
             cognitive_core.process_sensory_data(sensory_data_str)
             
-            # Generate the next motor command from the cognitive core
-            motor_command_json = cognitive_core.generate_motor_command()
+            # Generate the next motor command from the cognitive core using the sensory data
+            motor_command_json = cognitive_core.generate_motor_command_from_sensory_data(sensory_data_str)
             
             await websocket.send_text(motor_command_json)
             

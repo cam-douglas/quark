@@ -1,0 +1,109 @@
+# Cursor Performance Optimization - Exclude from indexing
+
+# Large data directories
+datasets/
+venv/
+fresh_venv/
+external/
+
+# Python cache and build files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Logs and temporary files
+logs/
+*.log
+state_snapshots/
+.DS_Store
+*.tmp
+*.temp
+
+# Large binary files that don't need indexing
+*.npy
+*.npz
+*.h5
+*.hdf5
+*.pt
+*.pth
+*.bin
+*.model
+*.pkl
+*.pickle
+
+# Media files
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.mp4
+*.avi
+*.mov
+
+# Archive files
+*.zip
+*.tar
+*.tar.gz
+*.rar
+*.7z
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Node modules and dependencies
+node_modules/
+bower_components/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Documentation builds
+docs/_build/
+site/
+
+# Test coverage
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+*.cover
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Large model files
+*.onnx
+*.tflite
+*.pb

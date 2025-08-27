@@ -1,0 +1,22 @@
+{
+    "report_generated_utc": "2025-08-25T04:46:32.684399",
+    "benchmark_run_id": "run_20250825_144632",
+    "results": [
+        {
+            "name": "Working Memory (n-back, n=2)",
+            "description": "Tests the ability to monitor and update working memory content over a sequence of 20 items.",
+            "metrics": {
+                "accuracy": 0.9,
+                "hit_rate": 1.0,
+                "false_alarm_rate": 0.1111,
+                "hits": 2,
+                "misses": 0,
+                "false_alarms": 2,
+                "correct_rejections": 16,
+                "sequence_length": 20,
+                "n_back": 2,
+                "latency_seconds": 0.0
+            }
+        }
+    ]
+}

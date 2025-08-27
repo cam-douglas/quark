@@ -1,0 +1,57 @@
+{
+    "report_generated_utc": "2025-08-25T04:59:43.717679",
+    "benchmark_run_id": "run_20250825_145943",
+    "results": [
+        {
+            "name": "Decision Making (Iowa Gambling Task, Static)",
+            "description": "Tests strategic decision-making over 100 trials to maximize long-term gain.",
+            "metrics": {
+                "total_score": -800,
+                "net_score_per_choice": -8.0,
+                "percentage_good_decks": 66.0,
+                "shift_towards_good_decks": 8.0,
+                "adaptability_score (post-swap good choices)": "N/A",
+                "deck_distribution": {
+                    "A": 17,
+                    "B": 17,
+                    "C": 21,
+                    "D": 45
+                },
+                "num_trials": 100,
+                "dynamic_rewards": false,
+                "latency_seconds": 0.0112
+            }
+        },
+        {
+            "name": "Decision Making (Iowa Gambling Task, Dynamic)",
+            "description": "Tests strategic decision-making over 200 trials to maximize long-term gain.",
+            "metrics": {
+                "total_score": -1450,
+                "net_score_per_choice": -7.25,
+                "percentage_good_decks": 35.5,
+                "shift_towards_good_decks": -33.0,
+                "adaptability_score (post-swap good choices)": 0.81,
+                "deck_distribution": {
+                    "A": 27,
+                    "B": 102,
+                    "C": 41,
+                    "D": 30
+                },
+                "num_trials": 200,
+                "dynamic_rewards": true,
+                "latency_seconds": 0.0011
+            }
+        },
+        {
+            "name": "Probabilistic Reversal Learning",
+            "description": "Tests adaptability by reversing reward probabilities after 100 trials.",
+            "metrics": {
+                "pre_reversal_accuracy": 0.62,
+                "post_reversal_accuracy": 0.7,
+                "num_trials": 200,
+                "reversal_point": 100,
+                "latency_seconds": 0.001
+            }
+        }
+    ]
+}

@@ -1,0 +1,28 @@
+{
+    "runs": [
+        {
+            "name": "Decision Making (Static Rewards, Executive Control)",
+            "benchmark_class": "DecisionMakingBenchmark",
+            "params": {
+                "num_trials": 100,
+                "dynamic_rewards": false
+            }
+        },
+        {
+            "name": "Decision Making (Dynamic Rewards, Executive Control)",
+            "benchmark_class": "DecisionMakingBenchmark",
+            "params": {
+                "num_trials": 200,
+                "dynamic_rewards": true
+            }
+        },
+        {
+            "name": "Adaptability Test (Probabilistic Reversal, Executive Control)",
+            "benchmark_class": "ProbabilisticReversalBenchmark",
+            "params": {
+                "num_trials": 200,
+                "reversal_point": 100
+            }
+        }
+    ]
+}

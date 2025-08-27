@@ -7,3 +7,12 @@ pyyaml
 
 # Brain Simulation
 brian2
+
+huggingface_hub>=0.23.0
+stable-baselines3>=2.3.0
+cloudpickle>=2.2.1
+
+matplotlib
+pandas
+scipy
+smplx

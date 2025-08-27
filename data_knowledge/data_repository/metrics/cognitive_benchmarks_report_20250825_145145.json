@@ -1,0 +1,40 @@
+{
+    "report_generated_utc": "2025-08-25T04:51:45.558985",
+    "benchmark_run_id": "run_20250825_145145",
+    "results": [
+        {
+            "name": "Working Memory (n-back, n=2)",
+            "description": "Tests the ability to monitor and update working memory content over a sequence of 20 items.",
+            "metrics": {
+                "accuracy": 1.0,
+                "hit_rate": 1.0,
+                "false_alarm_rate": 0.0,
+                "hits": 3,
+                "misses": 0,
+                "false_alarms": 0,
+                "correct_rejections": 17,
+                "sequence_length": 20,
+                "n_back": 2,
+                "latency_seconds": 0.0002
+            }
+        },
+        {
+            "name": "Decision Making (Iowa Gambling Task)",
+            "description": "Tests strategic decision-making over 100 trials to maximize long-term gain.",
+            "metrics": {
+                "total_score": 2250,
+                "net_score_per_choice": 22.5,
+                "percentage_good_decks": 61.0,
+                "shift_towards_good_decks": 6.0,
+                "deck_distribution": {
+                    "A": 19,
+                    "B": 20,
+                    "C": 38,
+                    "D": 23
+                },
+                "num_trials": 100,
+                "latency_seconds": 0.0008
+            }
+        }
+    ]
+}

@@ -1,0 +1,20 @@
+{
+  "data_migration": {
+    "old_path": "/Users/camdouglas/quark/data",
+    "new_local_path": "/Users/camdouglas/quark/datasets",
+    "s3_bucket": "quark-tokyo-bucket",
+    "s3_prefix": "datasets/quark_data",
+    "migration_date": "2025-08-28T05:12:55.666794"
+  },
+  "access_methods": {
+    "local_access": "datasets/",
+    "s3_streaming": "s3://quark-tokyo-bucket/datasets/quark_data/",
+    "hybrid": "Use local for frequent access, S3 for archival"
+  },
+  "recommendations": [
+    "Use local path for development and testing",
+    "Stream from S3 for production and large-scale training",
+    "Consider S3 Intelligent Tiering for cost optimization",
+    "Monitor access patterns and adjust caching strategy"
+  ]
+}

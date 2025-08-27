@@ -2,19 +2,23 @@
 """
 A simple Reinforcement Learning agent for Quark's embodied learning.
 """
-import numpy as np
-from collections import deque
-import random
 import torch
 import torch.nn as nn
 import torch.optim as optim
+import torch.nn.functional as F
 from torch.distributions import Normal
-from torch.optim.lr_scheduler import StepLR
+import numpy as np
+from collections import deque
+import random
 
-# Helper function to convert dict state to a tensor
 def _state_to_tensor(state: dict) -> torch.Tensor:
     """Converts a state dictionary to a flattened PyTorch tensor."""
-    state_vector = state['state_vector']
+    if isinstance(state, dict) and 'state_vector' in state:
+        state_vector = state['state_vector']
+    elif isinstance(state, np.ndarray):
+        state_vector = state
+    else:
+        raise TypeError(f"Unsupported state type: {type(state)}")
     return torch.FloatTensor(state_vector).unsqueeze(0)
 
 class PolicyNetwork(nn.Module):
@@ -24,13 +28,13 @@ class PolicyNetwork(nn.Module):
         self.log_std_min = log_std_min
         self.log_std_max = log_std_max
         self.net = nn.Sequential(
-            nn.Linear(state_dim, 128),
+            nn.Linear(state_dim, 256),
             nn.ReLU(),
-            nn.Linear(128, 128),
+            nn.Linear(256, 256),
             nn.ReLU(),
         )
-        self.mean_layer = nn.Linear(128, action_dim)
-        self.log_std_layer = nn.Linear(128, action_dim)
+        self.mean_layer = nn.Linear(256, action_dim)
+        self.log_std_layer = nn.Linear(256, action_dim)
 
     def forward(self, state):
         x = self.net(state)
@@ -44,115 +48,137 @@ class ValueNetwork(nn.Module):
     def __init__(self, state_dim):
         super(ValueNetwork, self).__init__()
         self.net = nn.Sequential(
-            nn.Linear(state_dim, 128),
+            nn.Linear(state_dim, 256),
             nn.ReLU(),
-            nn.Linear(128, 128),
+            nn.Linear(256, 256),
             nn.ReLU(),
-            nn.Linear(128, 1)
+            nn.Linear(256, 1)
         )
 
     def forward(self, state):
         return self.net(state)
 
+class OrnsteinUhlenbeckActionNoise:
+    def __init__(self, mu, sigma=0.15, theta=.2, dt=1e-2, x0=None):
+        self.theta = theta
+        self.mu = mu
+        self.sigma = sigma
+        self.dt = dt
+        self.x0 = x0
+        self.reset()
+
+    def __call__(self):
+        x = self.x_prev + self.theta * (self.mu - self.x_prev) * self.dt + \
+                self.sigma * np.sqrt(self.dt) * np.random.normal(size=self.mu.shape)
+        self.x_prev = x
+        return x
+
+    def reset(self):
+        self.x_prev = self.x0 if self.x0 is not None else np.zeros_like(self.mu)
+
 class BalancingAgent:
     """
-    An Actor-Critic agent that learns to balance the humanoid model.
+    A PPO agent that learns to balance the humanoid model.
     """
-    def __init__(self, state_dim, action_dim, replay_buffer_size=10000, lr=3e-4, gamma=0.99):
-        """
-        Initializes the agent.
-        """
-        self.state_dim = state_dim
-        self.action_dim = action_dim
+    def __init__(self, state_dim, action_dim, lr=1e-4, gamma=0.99, gae_lambda=0.95, ppo_clip=0.2, ppo_epochs=20, batch_size=256):
         self.gamma = gamma
-        
+        self.gae_lambda = gae_lambda
+        self.ppo_clip = ppo_clip
+        self.ppo_epochs = ppo_epochs
+        self.batch_size = batch_size
+
         self.actor = PolicyNetwork(state_dim, action_dim)
         self.critic = ValueNetwork(state_dim)
+        self.optimizer = optim.Adam(list(self.actor.parameters()) + list(self.critic.parameters()), lr=lr)
         
-        self.actor_optimizer = optim.Adam(self.actor.parameters(), lr=lr)
-        self.critic_optimizer = optim.Adam(self.critic.parameters(), lr=lr)
-
-        # Add a learning rate scheduler
-        self.actor_scheduler = StepLR(self.actor_optimizer, step_size=100, gamma=0.99)
-        self.critic_scheduler = StepLR(self.critic_optimizer, step_size=100, gamma=0.99)
+        self.memory = []
+        self.noise = OrnsteinUhlenbeckActionNoise(mu=np.zeros(action_dim))
         
-        self.memory = deque(maxlen=replay_buffer_size)
-        # For reward normalization
-        self.reward_mean = 0
-        self.reward_std = 1
-        self.reward_buffer = deque(maxlen=1000)
+        # Initialize weights for stability
+        self.actor.apply(self._init_weights)
+        self.critic.apply(self._init_weights)
+        
+    def _init_weights(self, m):
+        if isinstance(m, nn.Linear):
+            nn.init.orthogonal_(m.weight, np.sqrt(2))
+            nn.init.constant_(m.bias, 0.0)
 
-    def get_action(self, state: dict) -> np.ndarray:
-        """
-        Given the current state, decide on an action.
-        """
+    def get_action(self, state: dict) -> (np.ndarray, float):
         state_tensor = _state_to_tensor(state)
-        mean, std = self.actor(state_tensor)
-        dist = Normal(mean, std)
-        action = dist.sample()
-        return action.detach().numpy().flatten()
-
-    def store_experience(self, state, action, reward, next_state, done):
-        """Stores an experience tuple in the replay buffer."""
-        self.memory.append((state, action, reward, next_state, done))
-        self.reward_buffer.append(reward)
-
-    def learn(self, batch_size=64):
-        """
-        Samples a batch of experiences from memory and updates the networks.
-        """
-        if len(self.memory) < batch_size:
-            return # Not enough experiences to learn from yet
-
-        # Update reward normalization stats
-        if len(self.reward_buffer) > 1:
-            self.reward_mean = np.mean(self.reward_buffer)
-            self.reward_std = np.std(self.reward_buffer) + 1e-6 # Add epsilon to avoid division by zero
-
-        batch = random.sample(self.memory, batch_size)
-        states, actions, rewards, next_states, dones = zip(*batch)
-
-        # Normalize rewards
-        rewards = (np.array(rewards) - self.reward_mean) / self.reward_std
-
-        # Convert to tensors
-        states = torch.cat([_state_to_tensor(s) for s in states])
-        actions = torch.FloatTensor(np.array(actions))
-        rewards = torch.FloatTensor(rewards).unsqueeze(1)
-        next_states = torch.cat([_state_to_tensor(s) for s in next_states])
-        dones = torch.FloatTensor(dones).unsqueeze(1)
-
-        # --- Update Critic ---
-        state_values = self.critic(states)
-        next_state_values = self.critic(next_states)
-        # TD Target
-        target_values = rewards + self.gamma * next_state_values * (1 - dones)
+        with torch.no_grad():
+            mean, std = self.actor(state_tensor)
+            dist = Normal(mean, std)
+            action = dist.sample()
+            log_prob = dist.log_prob(action).sum()
         
-        critic_loss = nn.MSELoss()(state_values, target_values.detach())
-        
-        self.critic_optimizer.zero_grad()
-        critic_loss.backward()
-        # Clip gradients to prevent exploding gradients
-        torch.nn.utils.clip_grad_norm_(self.critic.parameters(), 0.5)
-        self.critic_optimizer.step()
+        # Add exploration noise
+        action += self.noise()
+        return action.numpy().flatten(), log_prob.item()
 
-        # --- Update Actor ---
-        advantage = (target_values - state_values).detach()
-        # Normalize advantage
-        advantage = (advantage - advantage.mean()) / (advantage.std() + 1e-8)
-        
-        mean, std = self.actor(states)
-        dist = Normal(mean, std)
-        log_probs = dist.log_prob(actions)
-        
-        actor_loss = -(log_probs * advantage).mean()
-        
-        self.actor_optimizer.zero_grad()
-        actor_loss.backward()
-        # Clip gradients to prevent exploding gradients
-        torch.nn.utils.clip_grad_norm_(self.actor.parameters(), 0.5)
-        self.actor_optimizer.step()
+    def store_experience(self, state, action, reward, next_state, done, log_prob):
+        self.memory.append((state, action, reward, next_state, done, log_prob))
 
-        # Step the schedulers
-        self.actor_scheduler.step()
-        self.critic_scheduler.step()
+    def learn(self):
+        if not self.memory:
+            return
+
+        # Convert memory to tensors
+        states = torch.cat([_state_to_tensor(s['state_vector']) for s, a, r, ns, d, lp in self.memory])
+        actions = torch.FloatTensor(np.array([a for s, a, r, ns, d, lp in self.memory]))
+        rewards = torch.FloatTensor([r for s, a, r, ns, d, lp in self.memory]).unsqueeze(1)
+        next_states = torch.cat([_state_to_tensor(ns['state_vector']) for s, a, r, ns, d, lp in self.memory])
+        dones = torch.FloatTensor([d for s, a, r, ns, d, lp in self.memory]).unsqueeze(1)
+        old_log_probs = torch.FloatTensor([lp for s, a, r, ns, d, lp in self.memory]).unsqueeze(1)
+
+        # Calculate advantages using GAE
+        with torch.no_grad():
+            values = self.critic(states)
+            next_values = self.critic(next_states)
+            deltas = rewards + self.gamma * next_values * (1 - dones) - values
+            advantages = torch.zeros_like(rewards)
+            last_advantage = 0
+            for t in reversed(range(len(rewards))):
+                advantages[t] = deltas[t] + self.gamma * self.gae_lambda * last_advantage * (1 - dones[t])
+                last_advantage = advantages[t]
+        
+        # Normalize advantages only if there's more than one value to prevent division by zero
+        if len(advantages) > 1:
+            advantages = (advantages - advantages.mean()) / (advantages.std() + 1e-8)
+        else:
+            advantages = (advantages - advantages.mean()) # No std deviation for a single value
+
+        # PPO Update
+        for _ in range(self.ppo_epochs):
+            for i in range(0, len(self.memory), self.batch_size):
+                batch_indices = slice(i, i + self.batch_size)
+                
+                # Get policy and value for the current batch
+                mean, std = self.actor(states[batch_indices])
+                dist = Normal(mean, std)
+                new_log_probs = dist.log_prob(actions[batch_indices]).sum(dim=1, keepdim=True)
+                
+                state_values = self.critic(states[batch_indices])
+                
+                # Ratio of new to old probabilities
+                ratio = (new_log_probs - old_log_probs[batch_indices]).exp()
+                
+                # Clipped surrogate objective
+                surr1 = ratio * advantages[batch_indices]
+                surr2 = torch.clamp(ratio, 1.0 - self.ppo_clip, 1.0 + self.ppo_clip) * advantages[batch_indices]
+                actor_loss = -torch.min(surr1, surr2).mean()
+                
+                # Critic loss
+                critic_loss = nn.MSELoss()(state_values, (advantages + values)[batch_indices].detach())
+                
+                # Total loss
+                loss = actor_loss + 0.5 * critic_loss
+                
+                # Update
+                self.optimizer.zero_grad()
+                loss.backward()
+                torch.nn.utils.clip_grad_norm_(self.actor.parameters(), 0.5)
+                torch.nn.utils.clip_grad_norm_(self.critic.parameters(), 0.5)
+                self.optimizer.step()
+
+        # Clear memory after learning
+        self.memory = []
