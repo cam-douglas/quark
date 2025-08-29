@@ -9,6 +9,8 @@ This folder contains the **machine-readable task lists** used by the Quark state
 | `tasks_low.yaml`    | Nice-to-have / background tasks |
 | `tasks_archive.yaml`| Completed / obsolete tasks |
 
+Current counts: high=10, medium=2, low=3, archive=10 (this run)
+
 Each YAML file is a list of task objects:
 ```yaml
 - id: TASK_001
