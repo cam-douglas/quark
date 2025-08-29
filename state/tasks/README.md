@@ -24,3 +24,18 @@ Each YAML file is a list of task objects:
 ```
 
 Raw historical task markdowns are moved to `state/tasks/archive/` in Phase 2.
+
+## Folder Overview
+| Folder | Docs |
+|--------|------|
+| research | 4 |
+| metrics | 1 |
+| core | 5 |
+| goals | 1 |
+| experiments | 2 |
+| dependencies | 1 |
+| __pycache__ | 0 |
+| integrations | 11 |
+| task_templates | 1 |
+| active_tasks | 2 |
+| completed_tasks | 1 |
