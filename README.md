@@ -78,6 +78,13 @@ The project includes a rich set of benchmarks for evaluating cognitive and biolo
 - **Episodic Memory**: `testing/testing_frameworks/03_Episodic_Memory_Benchmark.py`
 - **Consciousness Proxy**: `testing/testing_frameworks/04_Consciousness_Benchmark.py`
 
+Documentation index: `docs/INDEX.md`
+
+Run smoke tests:
+```bash
+pytest -c config/testing/pytest.ini
+```
+
 Run examples:
 ```bash
 python3 testing/testing_frameworks/01_Executive_Control_Benchmark.py
