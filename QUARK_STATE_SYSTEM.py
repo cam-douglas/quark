@@ -72,6 +72,8 @@ import os
 sys.path.append(os.getcwd())
 from quark_state_system.autonomous_agent import AutonomousAgent
 from quark_state_system.prompt_guardian import PromptGuardian
+# --- Docs helper ---
+from utilities.doc_utils import INDEX_PATH
 # --- END NEW IMPORTS ---
 
 def show_system_overview():
@@ -326,6 +328,7 @@ def main():
             run_tasks_overview()
         elif command == "help":
             show_help()
+            print(f"\n📚 Documentation index available at: {INDEX_PATH}\n")
         else:
             print(f"❌ Unknown command: {command}")
             print("Use 'python QUARK_STATE_SYSTEM.py help' for available commands")
