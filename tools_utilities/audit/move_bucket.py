@@ -27,16 +27,14 @@ def load_mapping(csv_path: Path) -> List[tuple[str, str]]:
 
 def move(src: Path, dst: Path, dry_run: bool):
     if dry_run:
-        dst = TMP_ROOT / dst
+        # In dry-run mode we don’t materialise copies; we only log intention.
+        print(f"    [dry-run] would copy {src} → {dst}")
+        return
+
+    # confirm mode – perform real move (via copy then delete)
     dst.parent.mkdir(parents=True, exist_ok=True)
-    print(f"MOVE {src} → {dst}")
-    if not dry_run:
-        shutil.move(src, dst)
-    else:
-        if src.is_dir():
-            shutil.copytree(src, dst, dirs_exist_ok=True)
-        else:
-            shutil.copy2(src, dst)
+    shutil.copytree(src, dst, dirs_exist_ok=True)
+    shutil.rmtree(src)
 
 
 def main():
