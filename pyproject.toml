@@ -10,6 +10,5 @@ description = "Quark neuroscience / ML framework"
 readme = "README.md"
 requires-python = ">=3.10"
 
-[tool.setuptools.packages.find]
-include = ["brain*", "ml*", "state*", "utilities*"]
-exclude = ["audit_outputs*", "data*", "logs*", "external*", "root*", "management*"]
+[tool.setuptools]
+packages = ["brain", "ml", "state", "utilities"]
