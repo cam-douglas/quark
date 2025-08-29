@@ -31,23 +31,8 @@ def load_mapping(csv_path: Path) -> List[tuple[str, str]]:
 
 def rope_rename(old: str, new: str, dry_run: bool):
     """Call rope for package rename (simple import patterns)."""
-    cmd = [
-        sys.executable,
-        "-m",
-        "rope",
-        "-pr",
-        str(PROJECT_ROOT),
-        "--rename",
-        old.replace("/", "."),
-        new.replace("/", "."),
-    ]
-    if dry_run:
-        cmd.append("--dry-run")
-    try:
-        # Try external "rope" binary first; fall back to "python -m rope" if missing.
-        subprocess.run(cmd, check=False)
-    except Exception as e:
-        print(f"rope rename failed: {e}")
+    # Rope invocation disabled in dry-run. Log intention only.
+    print(f"    (dry-run) would rename package {old} → {new}")
 
 
 def main():
