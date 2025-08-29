@@ -33,6 +33,10 @@ def main():
         audit_dir = tmp_path / "tools_utilities" / "audit"
         csv = PROJECT_ROOT / f"audit_outputs/mapping_bucket_{args.bucket}.csv"
 
+        # Install requirements & refactor tools
+        run_cmd(["python", "-m", "pip", "install", "-r", "requirements.txt"], cwd=tmp_path)
+        # Ensure rope & bowler are available for import rewriting
+        run_cmd(["python", "-m", "pip", "install", "rope", "bowler"], cwd=tmp_path)
         # Rewrite imports
         run_cmd(["python", str(audit_dir / "rewrite_bucket.py"), str(csv), "--dry-run"], cwd=tmp_path)
         # Move files
