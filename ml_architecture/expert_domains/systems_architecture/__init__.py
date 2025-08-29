@@ -1,1 +1,0 @@
-# systems_architecture module

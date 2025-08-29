@@ -1,7 +1,0 @@
-{
-    "model_name": "simple_balance_full",
-    "nq": 25,
-    "nv": 24,
-    "action_dim": 18
-}
-
