@@ -1,3 +1,20 @@
+# Large artifacts and run outputs (kept out of GitHub due to size limits)
+data/models/
+data/knowledge/models_artifacts/
+data/development_tools/visit_integration_outputs/
+tests/visualizations/outputs/
+utilities/tools_utilities/audit/audit_outputs/
+state/quark_state_system/s3_*
+
+# Local caches/lockfiles from external tools
+data/knowledge/models_artifacts/huggingface/
+
+# OS/editor noise
+.DS_Store
+.idea/
+.vscode/
+__pycache__/
+*.pyc
 # Venv
 venv/
 fresh_venv/
