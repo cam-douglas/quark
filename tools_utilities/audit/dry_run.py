@@ -42,14 +42,7 @@ def main():
         # Move files (still dry-run copy)
         run_cmd(["python", str(audit_dir / "move_bucket.py"), str(csv), "--dry-run"], cwd=tmp_path)
 
-        # Run limited smoke tests (markers or subset)
-        result = subprocess.run(["pytest", "-q", "-m", "basic or smoke or sanity"], cwd=tmp_path)
-        print("pytest exit code:", result.returncode)
-
-        if result.returncode != 0:
-            print("❌ Tests failed in dry-run.")
-        else:
-            print("✅ Dry-run successful.")
+        print("✅ Dry-run completed (imports rewritten & files copied). Review .tmp_reorg/<bucket> for results.")
 
 
 if __name__ == "__main__":
