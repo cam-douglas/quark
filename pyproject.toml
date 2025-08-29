@@ -11,7 +11,7 @@ readme = "README.md"
 requires-python = ">=3.10"
 
 [tool.setuptools]
-packages = ["brain", "ml", "state", "utilities"]
+packages = ["brain.architecture", "ml.architecture", "state.quark_state_system", "utilities.tools_utilities"]
 
 [tool.setuptools.package-dir]
 "" = "."
