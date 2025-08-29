@@ -6,7 +6,7 @@
   description: "# \U0001F517 Central Task System Integration Status **Status**: \U0001F504\
     \ INTEGRATING - Actively connecting with existing QUARK systems **Last Updated**:\
     \ August 21, 2025 **Next Review**: Daily **Integration [...]"
-  source_path: state/tasks/INTEGRATION_STATUS.md
+  source_path: state/tasks/integration/INTEGRATION_STATUS.md
 - id: PHASE_TODO_BREAKDOWN
   title: "QUARK Roadmap TODO Breakdown (Phases 1\u20134)"
   priority: high
@@ -15,7 +15,7 @@
   description: "# QUARK Roadmap TODO Breakdown (Phases 1\u20134) Purpose: granular,\
     \ verifiable tasks with acceptance gates. All items start as pending to avoid\
     \ overconfidence. Aligns with [...]"
-  source_path: state/tasks/PHASE_TODO_BREAKDOWN.md
+  source_path: state/tasks/core/PHASE_TODO_BREAKDOWN.md
 - id: BENCHMARK_EXPERIMENT_TODOS
   title: "\U0001F9E0 QUARK Benchmark Experiment TODOs & Development Tasks"
   priority: high
@@ -24,7 +24,7 @@
   description: "# \U0001F9E0 QUARK Benchmark Experiment TODOs & Development Tasks\
     \ ## \U0001F4CB Overview This document contains all the development tasks, recommendations,\
     \ and improvement areas identified from the comprehensive [...]"
-  source_path: state/tasks/BENCHMARK_EXPERIMENT_TODOS.md
+  source_path: state/tasks/research/BENCHMARK_EXPERIMENT_TODOS.md
 - id: HIGH_LEVEL_ROADMAP
   title: 'Project Quark: High-Level AGI Brain Simulation Roadmap'
   priority: high
@@ -33,7 +33,7 @@
   description: '# Project Quark: High-Level AGI Brain Simulation Roadmap This document
     outlines the strategic roadmap for Project Quark, detailing the major phases of
     development from foundational neural [...]'
-  source_path: state/tasks/HIGH_LEVEL_ROADMAP.md
+  source_path: state/tasks/integration/HIGH_LEVEL_ROADMAP.md
 - id: BRAIN_INTEGRATION_SUMMARY
   title: "\U0001F9E0 Brain-Task Integration Complete"
   priority: high
@@ -42,7 +42,7 @@
   description: "# \U0001F9E0 Brain-Task Integration Complete **Status**: \u2705 FULLY\
     \ INTEGRATED - Brain's automatic goal system connected to central task management\
     \ **Last Updated**: August 21, 2025 **Integration Type**: [...]"
-  source_path: state/tasks/BRAIN_INTEGRATION_SUMMARY.md
+  source_path: state/tasks/core/BRAIN_INTEGRATION_SUMMARY.md
 - id: BRAIN_CAPABILITY_AWARENESS_REPORT
   title: "\U0001F9E0 Brain Capability Awareness Report"
   priority: high
@@ -60,7 +60,7 @@
   description: "# \U0001F9E0 Biological Brain Agent - Task Management Integration\
     \ **Status**: \u2705 FULLY INTEGRATED - Biological brain agent connected to central\
     \ task management **Last Updated**: August 21, 2025 [...]"
-  source_path: state/tasks/integrations/BIOLOGICAL_BRAIN_INTEGRATION_SUMMARY.md
+  source_path: state/tasks/core/BRAIN_INTEGRATION_SUMMARY.md
 - id: BRAIN_GOAL_INTEGRATION
   title: "\U0001F9E0 Brain Goal System Integration"
   priority: high

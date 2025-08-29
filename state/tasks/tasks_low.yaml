@@ -6,7 +6,7 @@
   description: "# \U0001F680 Project Quark: Phase 1 Execution Plan - Foundational\
     \ Scaffolding **Status**: \U0001F7E2 NOT STARTED **Roadmap Phase**: Phase 1: Foundational\
     \ Scaffolding (Developmental Stage: Fetal) **Primary Goal**: [...]"
-  source_path: state/tasks/phase_1_plan.md
+  source_path: state/tasks/research/phase_1_plan.md
 - id: SELF_LEARNING_CAPABILITIES_SUMMARY
   title: "\U0001F9E0 Self-Learning Brain Capabilities - ENHANCED"
   priority: low

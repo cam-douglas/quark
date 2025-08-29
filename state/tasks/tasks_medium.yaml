@@ -6,7 +6,7 @@
   description: "# \U0001F9E0 Actual Capability Learning - COMPLETE **Status**: \u2705\
     \ FULLY OPERATIONAL - Brain actually learns new capabilities **Last Updated**:\
     \ August 21, 2025 **Integration Type**: Real-time biological [...]"
-  source_path: state/tasks/ACTUAL_LEARNING_COMPLETE.md
+  source_path: state/tasks/research/ACTUAL_LEARNING_COMPLETE.md
 - id: BRAIN_CAPABILITIES_INTEGRATION_SUMMARY
   title: "\U0001F9E0 Brain Capabilities Integration - Complete"
   priority: medium
