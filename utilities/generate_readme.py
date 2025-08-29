@@ -24,7 +24,9 @@ from typing import Optional, List
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 STATE_FILE = REPO_ROOT / "state/quark_state_system/QUARK_STATE.md"
-README_FILE = REPO_ROOT / "README.md"
+# Prefer the user's absolute README path if it exists; otherwise, use repo root.
+ABS_README = Path("/Users/camdouglas/quark/README.md")
+README_FILE = ABS_README if ABS_README.exists() else (REPO_ROOT / "README.md")
 
 
 def read_text_safe(path: Path) -> str:
