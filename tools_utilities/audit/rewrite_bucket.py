@@ -43,14 +43,10 @@ def rope_rename(old: str, new: str, dry_run: bool):
         cmd.append("--dry-run")
     try:
         # Try external "rope" binary first; fall back to "python -m rope" if missing.
-        result = subprocess.run(cmd, check=False)
-        if result.returncode == 127:  # command not found
-            py_cmd = [sys.executable, "-m", "rope"] + cmd[2:]  # keep flags
-            subprocess.run(py_cmd, check=False)
-    except FileNotFoundError:
-        # Final fallback using module invocation
-        py_cmd = [sys.executable, "-m", "rope"] + cmd[2:]
+        py_cmd = [sys.executable, "-m", "rope"] + cmd[2:]  # always use module form
         subprocess.run(py_cmd, check=False)
+    except Exception as e:
+        print(f"rope rename failed: {e}")
 
 
 def main():

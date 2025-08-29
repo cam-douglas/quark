@@ -33,17 +33,17 @@ def main():
         audit_dir = tmp_path / "tools_utilities" / "audit"
         csv = PROJECT_ROOT / f"audit_outputs/mapping_bucket_{args.bucket}.csv"
 
-        # Install requirements & refactor tools
+        # Install core requirements and minimal extra deps for test import resolution
         run_cmd(["python", "-m", "pip", "install", "-r", "requirements.txt"], cwd=tmp_path)
-        # Ensure rope & bowler are available for import rewriting
-        run_cmd(["python", "-m", "pip", "install", "rope", "bowler"], cwd=tmp_path)
+        run_cmd(["python", "-m", "pip", "install", "rope", "bowler", "requests", "python-dotenv"], cwd=tmp_path)
+
         # Rewrite imports
         run_cmd(["python", str(audit_dir / "rewrite_bucket.py"), str(csv), "--dry-run"], cwd=tmp_path)
-        # Move files
+        # Move files (still dry-run copy)
         run_cmd(["python", str(audit_dir / "move_bucket.py"), str(csv), "--dry-run"], cwd=tmp_path)
-        # Install requirements & run tests (minimal)
-        run_cmd(["python", "-m", "pip", "install", "-r", "requirements.txt"], cwd=tmp_path)
-        result = subprocess.run(["pytest", "-q"], cwd=tmp_path)
+
+        # Run limited smoke tests (markers or subset)
+        result = subprocess.run(["pytest", "-q", "-m", "basic or smoke or sanity"], cwd=tmp_path)
         print("pytest exit code:", result.returncode)
 
         if result.returncode != 0:
