@@ -101,6 +101,7 @@ def show_system_overview():
     print("   python QUARK_STATE_SYSTEM.py execute       - RUN THE AUTONOMOUS AGENT")
     print("   python QUARK_STATE_SYSTEM.py status        - Quick status")
     print("   python QUARK_STATE_SYSTEM.py recommendations - Get guidance")
+    print("   python QUARK_STATE_SYSTEM.py tasks         - Show immediate tasks & gates")
     print("   python QUARK_STATE_SYSTEM.py sync          - Sync all files")
     print("   python check_quark_state.py                - Direct status check")
     print("   cat quark_state_system/QUARK_STATE.md      - Read full state")
@@ -176,6 +177,71 @@ def run_prompt_validation():
         print(f"❌ Error running prompt guardian: {e}")
 
 
+def run_tasks_overview():
+    """Show immediate next tasks and gates (entry-point focused)."""
+    print("📋 QUARK TASKS & GATES")
+    print("=" * 40)
+    tasks_file = Path("quark_state_system/QUARK_CURRENT_TASKS.md")
+    breakdown_file = Path("tasks/PHASE_TODO_BREAKDOWN.md")
+
+    # Show entry-point immediate tasks from QUARK_CURRENT_TASKS.md
+    if tasks_file.exists():
+        print("\n— Immediate Next Tasks (from QUARK_CURRENT_TASKS.md):")
+        try:
+            section = []
+            capture = False
+            for line in tasks_file.read_text(encoding="utf-8").splitlines():
+                if line.strip().lower().startswith("#### immediate next tasks"):
+                    capture = True
+                    continue
+                if capture:
+                    if line.strip().startswith("---") or line.strip() == "":
+                        # stop on section break or blank after we've captured items
+                        if section:
+                            break
+                    if line.strip().startswith("- ENT-"):
+                        section.append(line.strip())
+            if section:
+                for item in section:
+                    print(f"  {item}")
+            else:
+                print("  (No ENT-* tasks found. Check the state file.)")
+        except Exception as e:
+            print(f"  ⚠️ Could not parse immediate tasks: {e}")
+    else:
+        print("  ⚠️ quark_state_system/QUARK_CURRENT_TASKS.md not found")
+
+    # Show gates from PHASE_TODO_BREAKDOWN.md
+    if breakdown_file.exists():
+        print("\n— Entry-Point Gates (from tasks/PHASE_TODO_BREAKDOWN.md):")
+        try:
+            gates = []
+            capture = False
+            for line in breakdown_file.read_text(encoding="utf-8").splitlines():
+                if line.strip().lower().startswith("## entry points"):
+                    capture = True
+                    continue
+                if capture:
+                    if line.strip().lower().startswith("tasks:"):
+                        # After listing Ready-when, we can stop
+                        break
+                    if line.strip().startswith("- "):
+                        gates.append(line.strip())
+            if gates:
+                for g in gates:
+                    print(f"  {g}")
+            else:
+                print("  (No gates section found. Check the breakdown doc.)")
+        except Exception as e:
+            print(f"  ⚠️ Could not parse gates: {e}")
+    else:
+        print("  ⚠️ tasks/PHASE_TODO_BREAKDOWN.md not found")
+
+    print("\nPaths:")
+    print("  • quark_state_system/QUARK_CURRENT_TASKS.md")
+    print("  • tasks/PHASE_TODO_BREAKDOWN.md")
+
+
 def activate_driver_mode():
     """Explains the new active driver mode."""
     print("🚀 QUARK ACTIVE DRIVER MODE IS NOW THE DEFAULT")
@@ -208,12 +274,12 @@ def show_help():
     print("=" * 50)
     print()
     print("COMMANDS:")
-    print("   run-continuous  - Run the Autonomous Agent continuously until all goals are complete.")
-    print("   activate        - Explains and enables the active, self-determined driver mode (DEFAULT)")
-    print("   execute         - Activate the Autonomous Agent for one goal cycle")
+    print("   continuous      - Run the Autonomous Agent continuously until all goals are complete.")
+    print("   execute         - (OR: proceed, continue, evolve) Activate the Autonomous Agent for one goal cycle")
     print("   validate        - Run a sample validation with the Prompt Guardian")
     print("   status          - Quick status check (same as check_quark_state.py)")
     print("   recommendations - Get QUARK's intelligent recommendations")
+    print("   tasks           - Show immediate next tasks and entry-point gates")
     print("   sync            - Synchronize all state files")
     print("   help            - Show this help message")
     print("   (no args)       - Show system overview")
@@ -248,14 +314,16 @@ def main():
             run_recommendations()
         elif command == "sync":
             run_sync()
-        elif command == "execute":
+        elif command in ["execute", "proceed", "continue", "evolve"]:
             run_autonomous_agent()
         elif command == "validate":
             run_prompt_validation()
         elif command == "activate":
             activate_driver_mode()
-        elif command == "run-continuous":
+        elif command == "continuous":
             run_continuous_automation()
+        elif command == "tasks":
+            run_tasks_overview()
         elif command == "help":
             show_help()
         else:
