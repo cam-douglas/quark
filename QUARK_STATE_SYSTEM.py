@@ -71,7 +71,9 @@ from pathlib import Path
 import os
 sys.path.append(os.getcwd())
 from quark_state_system.autonomous_agent import AutonomousAgent
+# task handling
 from quark_state_system.prompt_guardian import PromptGuardian
+from quark_state_system import task_loader
 # --- Docs helper ---
 from utilities.doc_utils import INDEX_PATH
 # --- END NEW IMPORTS ---
@@ -313,7 +315,9 @@ def main():
         if command == "status":
             run_quick_status()
         elif command == "recommendations":
-            run_recommendations()
+            print("🔮 TOP PRIORITY TASKS")
+            for t in task_loader.next_actions():
+                print(f"- [{t['priority'].upper()}] {t['title']} (id={t['id']})")
         elif command == "sync":
             run_sync()
         elif command in ["execute", "proceed", "continue", "evolve"]:
