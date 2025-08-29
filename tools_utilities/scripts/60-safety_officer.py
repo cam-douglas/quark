@@ -1,1 +1,0 @@
-../../brain_modules/safety_officer/safety_officer.py

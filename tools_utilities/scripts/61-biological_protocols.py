@@ -1,1 +1,0 @@
-../../brain_modules/safety_officer/biological_protocols.py

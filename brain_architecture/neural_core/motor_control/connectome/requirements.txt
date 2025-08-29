@@ -1,4 +1,0 @@
-# connectome/requirements.txt
-networkx>=3.2.1
-PyYAML>=6.0.1
-watchdog>=4.0.0

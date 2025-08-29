@@ -1,8 +1,0 @@
-{
-  "state": "SLEEPING",
-  "emergency_level": 2,
-  "sleep_reason": "Safety score 10.0 below emergency threshold",
-  "sleep_timestamp": 1756099675.949908,
-  "shutdown_trigger_code": "SAFETY_SCORE_CRITICAL",
-  "last_updated": 1756099675.9499352
-}
