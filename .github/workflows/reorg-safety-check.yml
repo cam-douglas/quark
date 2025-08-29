@@ -1,0 +1,43 @@
+name: Reorg Safety Check
+
+on:
+  pull_request:
+    branches: [ reorg_phase3 ]
+
+jobs:
+  safety:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install project (editable)
+        run: |
+          pip install --upgrade pip
+          pip install -e .
+          pip install pytest bowler rope
+
+      - name: Dry-run import rewrite
+        run: |
+          python utilities/tools_utilities/audit/rewrite_bucket.py \
+            utilities/tools_utilities/audit/audit_outputs/path_mapping_final.csv \
+            --dry-run > audit_dry_run.log
+
+      - name: Dry-run link updater
+        run: |
+          python utilities/tools_utilities/audit/link_updater.py \
+            --map utilities/tools_utilities/audit/audit_outputs/path_mapping_final.csv \
+            --dry-run >> audit_dry_run.log
+
+      - name: Run tests
+        run: pytest -q -c config/testing/pytest.ini
+
+      - name: Archive reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: reorg-phase3-reports
+          path: audit_dry_run.log
