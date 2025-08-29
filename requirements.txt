@@ -36,6 +36,9 @@ boto3
 botocore
 fastapi
 uvicorn
+plotly
+requests
+websockets
 # Minimal dependencies for HumanML3D processing
 pandas
 spacy

@@ -428,3 +428,11 @@ validation_framework:
 ### **Scalability**: Cloud-ready architecture planned
 
 **This enhanced roadmap provides a clear path to complete brain simulation with comprehensive testing, biological accuracy validation, and scalable cloud deployment!**
+
+### **ML Integration Milestone (Phase 2 Complete)**
+* `/brain/ml` package skeleton established.
+* Mapping table for safe consolidation created (`docs/reports/ml_path_mapping_phase2.md`).
+* Conventions documented (`docs/conventions/brain_ml_conventions.md`).
+* Adapter strategy drafted to maintain compatibility during migration.
+
+> Next steps: Phase 3 – copy validated modules and update import paths.
