@@ -32,7 +32,23 @@ def load_mapping(csv_path: Path) -> List[tuple[str, str]]:
 def rope_rename(old: str, new: str, dry_run: bool):
     """Call rope for package rename (simple import patterns)."""
     # Rope invocation disabled in dry-run. Log intention only.
-    print(f"    (dry-run) would rename package {old} → {new}")
+    if args.execute:
+        # Use bowler for advanced import rewrite
+        bowler_cmd = [
+            sys.executable,
+            "-m",
+            "bowler",
+            "-m",
+            "ql",
+            "-f",
+            f"from {old} import",
+            "-f",
+            f"import {old}",
+            "-w",
+        ]
+        subprocess.run(bowler_cmd, check=False)
+    else:
+        print(f"    (dry-run) would rename package {old} → {new}")
 
 
 def main():
@@ -40,7 +56,10 @@ def main():
     parser.add_argument("csv_path", type=Path)
     parser.add_argument("--dry-run", action="store_true", help="show changes only, no writes")
     parser.add_argument("--confirm", action="store_true", help="actually write changes (unsafe)")
+    parser.add_argument("--execute", action="store_true", help="Apply bowler refactor to codebase")
     args = parser.parse_args()
+    if args.dry_run and args.execute:
+        parser.error("--dry-run and --execute are mutually exclusive")
 
     mapping = load_mapping(args.csv_path)
     print(f"Loaded {len(mapping)} mapping rows from {args.csv_path}")
