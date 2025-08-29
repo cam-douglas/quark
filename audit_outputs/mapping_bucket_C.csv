@@ -1,0 +1,16 @@
+old_path,new_path
+quark_state_system,state/quark_state_system
+tasks,state/tasks
+autonomous_agent.py,state/autonomous_agent.py
+tools_utilities,utilities/tools_utilities
+gym,utilities/gym
+optimization,utilities/optimization
+testing,tests
+docs,docs/general
+documentation,docs/legacy
+data_knowledge,data/knowledge
+datasets,data/datasets
+models,data/models
+external,external
+mlruns,external/mlruns
+state_snapshots,external/state_snapshots
