@@ -1,6 +1,8 @@
 # 🚀 QUARK: A Self-Determined, Biologically-Compliant AGI Framework
 
-QUARK is a modular brain-simulation and AGI framework that is now managed by an **autonomous, roadmap-driven core**. The system is designed to evolve according to a series of strategic roadmaps while strictly adhering to biological and safety constraints defined by the AlphaGenome integration.
+> **Project Overview**  
+> QUARK is a modular brain-simulation and machine-learning platform that spans molecular genetics → morphogenesis → micro-circuits → cognition.  
+> It emphasises biological fidelity, reproducibility and a roadmap-driven autonomous development process.
 
 ---
 
@@ -69,24 +71,25 @@ python3 QUARK_STATE_SYSTEM.py help
 
 ---
 
-## 🧪 Benchmark Capabilities
+## 📁 Repository Layout (high-level)
 
-The project includes a rich set of benchmarks for evaluating cognitive and biological components.
+| Path | Purpose |
+|------|---------|
+| `brain/` | Core brain simulation and architecture code |
+| `ml/` | Machine-learning training systems |
+| `state/` | Quark state-system logic & tasks |
+| `docs/` | Project documentation (see [`docs/INDEX.md`](docs/INDEX.md)) |
+| `tests/` | Smoke + regression tests |
+| `config/testing/pytest.ini` | Pytest config used by CI |
 
-- **Executive Control**: `testing/testing_frameworks/01_Executive_Control_Benchmark.py`
-- **Working Memory**: `testing/testing_frameworks/02_Working_Memory_Benchmark.py`
-- **Episodic Memory**: `testing/testing_frameworks/03_Episodic_Memory_Benchmark.py`
-- **Consciousness Proxy**: `testing/testing_frameworks/04_Consciousness_Benchmark.py`
+---
 
-Documentation index: `docs/INDEX.md`
+## 🧪 Benchmarks & Tests
 
-Run smoke tests:
+Run the smoke & docs regression tests:
+
 ```bash
 pytest -c config/testing/pytest.ini
 ```
 
-Run examples:
-```bash
-python3 testing/testing_frameworks/01_Executive_Control_Benchmark.py
-python3 testing/testing_frameworks/02_Working_Memory_Benchmark.py
-```
+Benchmarks live under `tests/benchmarking/` and `tests/cognitive_benchmarks/`.
