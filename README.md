@@ -1,5 +1,7 @@
 # 🚀 QUARK: A Self-Determined, Biologically-Compliant AGI Framework
 
+[![reorg-safety-check](https://github.com/cam-douglas/quark/actions/workflows/reorg-safety-check.yml/badge.svg)](https://github.com/cam-douglas/quark/actions/workflows/reorg-safety-check.yml)
+
 > **Project Overview**  
 > QUARK is a modular brain-simulation and machine-learning platform that spans molecular genetics → morphogenesis → micro-circuits → cognition.  
 > It emphasises biological fidelity, reproducibility and a roadmap-driven autonomous development process.
@@ -93,3 +95,13 @@ pytest -c config/testing/pytest.ini
 ```
 
 Benchmarks live under `tests/benchmarking/` and `tests/cognitive_benchmarks/`.
+
+---
+
+## 📋 Contributing Tasks
+
+To add a new task for the autonomous agent:
+
+1. Open the YAML file matching the priority in `state/tasks/` (e.g. `tasks_high.yaml`).
+2. Append a new dictionary using the schema in `state/tasks/README.md`.
+3. Commit the change and open a PR – CI will validate that the YAML parses.
