@@ -1,0 +1,3 @@
+[submodule "external/hrm"]
+	path = external/hrm
+	url = https://github.com/sapientinc/HRM
