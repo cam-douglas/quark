@@ -1,107 +1,52 @@
-# 🚀 QUARK: A Self-Determined, Biologically-Compliant AGI Framework
 
-[![reorg-safety-check](https://github.com/cam-douglas/quark/actions/workflows/reorg-safety-check.yml/badge.svg)](https://github.com/cam-douglas/quark/actions/workflows/reorg-safety-check.yml)
+# 🚀 QUARK: Technical Whitepaper
 
-> **Project Overview**  
-> QUARK is a modular brain-simulation and machine-learning platform that spans molecular genetics → morphogenesis → micro-circuits → cognition.  
-> It emphasises biological fidelity, reproducibility and a roadmap-driven autonomous development process.
+## Overview
 
----
+Quark is a modular brain-simulation and machine-learning platform spanning molecular genetics → tissue morphogenesis → micro-circuits → cognition. It emphasizes biological fidelity, rigorous testing, and reproducible workflows governed by the Quark State System.
 
-## 🤖 **New Operational Mode: The Quark Active Driver**
+## Current State (via Quark State System)
 
-**The Quark system is now in a continuous, self-determined execution mode.**
+Current Development Stage: (not found)
+Overall Progress: (unknown)
+Next Major Milestone: (unknown)
 
-All interactions and development are orchestrated by the **Quark Driver** (`quark_state_system/quark_driver.py`), a new core component that ensures every action is aligned with the project's strategic goals.
 
-### How It Works:
-1.  **Roadmap-Driven**: The system's primary directive comes from a unified understanding of all project roadmaps (`management/rules/roadmap/`).
-2.  **Biologically Compliant**: Every action is validated by a **Compliance Engine** (`brain_modules/alphagenome_integration/compliance_engine.py`) to ensure it follows the centralized biological rules (`management/rules/biological_constraints.py`).
-3.  **Autonomous Execution**: A new **Autonomous Agent** (`quark_state_system/autonomous_agent.py`) is responsible for formulating and executing plans to achieve the next roadmap goal.
-4.  **Prompt Guardian**: Every prompt is intercepted and validated by a **Prompt Guardian** (`quark_state_system/prompt_guardian.py`) to ensure alignment and safety.
-
----
-
-## 🚀 **Getting Started: Interacting with the Active System**
-
-The main entry point for all operations remains `QUARK_STATE_SYSTEM.py`.
-
-### 1. Check the Current Goal
-To understand the system's current priority, simply ask:
-> "what is quarks next steps according to the state system?"
-
-### 2. Automating the System
-You have two primary ways to drive the system forward:
-
-**A) Step-by-Step Automation (Recommended):**
-Use a generic prompt to authorize the agent to execute the *next single task*.
-> "proceed"
-> "continue"
-> "evolve"
-
-The agent will execute one goal and then wait for your next command.
-
-**B) Continuous Full Automation:**
-To run the agent continuously until all roadmap goals are complete, use the following command:
-```bash
-python3 QUARK_STATE_SYSTEM.py run-continuous
-```
-
-### 3. All Available Commands
-```bash
-# Get an explanation of the new active driver mode
-python3 QUARK_STATE_SYSTEM.py activate
-
-# Run the full automation loop
-python3 QUARK_STATE_SYSTEM.py run-continuous
-
-# Execute a single roadmap goal
-python3 QUARK_STATE_SYSTEM.py execute
-
-# Check the system's current status
-python3 QUARK_STATE_SYSTEM.py status
-
-# Get intelligent recommendations (based on old system)
-python3 QUARK_STATE_SYSTEM.py recommendations
-
-# Manually sync the state files
-python3 QUARK_STATE_SYSTEM.py sync
-
-# See all commands
-python3 QUARK_STATE_SYSTEM.py help
-```
-
----
-
-## 📁 Repository Layout (high-level)
-
-| Path | Purpose |
-|------|---------|
-| `brain/` | Core brain simulation and architecture code |
-| `ml/` | Machine-learning training systems |
-| `state/` | Quark state-system logic & tasks |
-| `docs/` | Project documentation (see [`docs/INDEX.md`](docs/INDEX.md)) |
-| `tests/` | Smoke + regression tests |
-| `config/testing/pytest.ini` | Pytest config used by CI |
-
----
-
-## 🧪 Benchmarks & Tests
-
-Run the smoke & docs regression tests:
+### Operate the State System
 
 ```bash
-pytest -c config/testing/pytest.ini
+python QUARK_STATE_SYSTEM.py status
+python QUARK_STATE_SYSTEM.py recommendations
+python QUARK_STATE_SYSTEM.py sync
 ```
 
-Benchmarks live under `tests/benchmarking/` and `tests/cognitive_benchmarks/`.
+## Benchmarks & Capabilities
 
----
+- tests/cognitive_benchmarks/: working memory, decision-making, reversal learning
+- tests/testing_frameworks/: automated validation, live streaming, system health
+- tests/simulations/: embodiment and physics hooks
+- CI: .github/workflows/ci.yml (runs smoke + benchmark stubs)
 
-## 📋 Contributing Tasks
 
-To add a new task for the autonomous agent:
+## Architecture
 
-1. Open the YAML file matching the priority in `state/tasks/` (e.g. `tasks_high.yaml`).
-2. Append a new dictionary using the schema in `state/tasks/README.md`.
-3. Commit the change and open a PR – CI will validate that the YAML parses.
+- brain/: multi-scale brain architecture (embodiment, learning, neural_core)
+- brain/modules/: integration modules (alphagenome, mathematical, etc.)
+- brain/simulator/: runtime simulators and entrypoints
+- data/: models, datasets, and simulation frameworks (heavy artifacts ignored)
+- state/quark_state_system/: autonomous agent, task loader, state orchestration
+- docs/: specifications, roadmaps, historical and integration guides
+- tests/: benchmarks, visualizations, and CI-friendly checks
+
+
+## Development & Reproducibility
+
+- Python 3.11, pinned deps in requirements.txt
+- CI: GitHub Actions in .github/workflows/ (tests and artifacts)
+- Heavy artifacts are ignored via .gitignore (models, large outputs)
+- Deterministic runs preferred; seeds where applicable
+
+## Documentation Index
+
+See docs/INDEX.md for a curated map of specifications, guides, and historical reports.
+
