@@ -77,8 +77,11 @@ def sync_tasks():
     from state.quark_state_system import task_loader
     before = len(list(task_loader.get_tasks()))
     task_loader.sync_with_roadmaps(status_snapshot())
+    # granular tasks from master roadmap
+    master = RD_DIR / "master_roadmap.md"
+    added = task_loader.generate_tasks_from_master(master)
     after = len(list(task_loader.get_tasks()))
-    log(f"Tasks synced (before={before}, after={after})")
+    log(f"Tasks synced (before={before}, after={after}, added_from_master={added})")
 
 
 # ---------------------------------------------------------------------------

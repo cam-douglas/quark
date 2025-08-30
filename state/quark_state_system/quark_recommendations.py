@@ -24,11 +24,49 @@ class QuarkRecommendationsEngine:
     """
     
     def __init__(self):
-        # Structured state
-        self.status_map = roadmap_ctrl.get_roadmap_status_map()
-        self.next_tasks = list(loader.next_actions(limit=5))
+        """Initialise but defer expensive look-ups to a refresh call."""
+        self.status_map: dict = {}
+        self.next_tasks: list = []
         # Back-compat placeholder so any legacy code referencing current_state works.
         self.current_state: dict = {}
+
+    # ------------------------------------------------------------------
+    # Refresh helpers – always fetch the latest roadmap + task snapshot
+    # ------------------------------------------------------------------
+
+    def _refresh_state(self, limit: int = 5):
+        """Refresh internal caches and return any **new** tasks generated via roadmap sync."""
+        # Roadmap status may change between invocations (e.g. new commits).
+        from importlib import reload
+
+        # 1. Always reload the task_loader module so we get fresh on-disk YAML.
+        tl = reload(loader)  # type: ignore[assignment]
+
+        # Clear existing registry & YAML files before regeneration
+        tl.reset_all()
+
+        # Snapshot tasks **before** sync to detect what gets added.
+        before_titles = {t.get("title") for t in tl.get_tasks()}
+
+        # 2. Capture latest roadmap status snapshot.
+        self.status_map = roadmap_ctrl.status_snapshot()
+
+        # 3. Sync roadmap items → tasks (may create new tasks).
+        tl.sync_with_roadmaps(self.status_map)
+
+        # 3b. Generate fine-grained tasks from master roadmap '🚧 In Progress' sections.
+        from pathlib import Path
+        master_path = Path("management/rules/roadmaps/master_roadmap.md")
+        added_from_master = tl.generate_tasks_from_master(master_path)
+
+        # Identify tasks newly created by both sync steps.
+        after_tasks = list(tl.get_tasks())
+        created_tasks = [t for t in after_tasks if t.get("title") not in before_titles]
+
+        # 4. Update convenience list of next high-priority actions.
+        self.next_tasks = list(tl.next_actions(limit=limit))
+
+        return created_tasks
 
     # Remove _load_current_state and associated regex methods
 
@@ -145,6 +183,10 @@ class QuarkRecommendationsEngine:
         """
         query_lower = user_query.lower()
 
+        # Always start with a fresh snapshot so every command ("next steps", "tasks",
+        # "recommendations", …) reflects the latest git workspace state.
+        created_tasks = self._refresh_state()
+
         # First handle explicit status/help queries
         if "status" in query_lower or "state" in query_lower:
             return self.get_current_status_summary()
@@ -160,11 +202,13 @@ class QuarkRecommendationsEngine:
 
         # Unified keyword → context mapping
         KEYWORDS = {
-            "development": ["recommend", "next step", "do next", "continue", "proceed"],
+            "development": ["recommend", "recommendation", "next step", "next steps", "do next", "continue", "proceed"],
             "testing": ["test", "validate", "benchmark"],
             "evolution": ["evolve", "evolution", "stage"],
             "roadmap": ["roadmap", "milestone", "phase"],
-            "tasks": ["task", "todo", "to do", "agenda"],
+            # accept both "quark tasks" and "quarks tasks" plus plural/possessive variants
+            "tasks": ["task", "tasks", "quark tasks", "quarks tasks", "todo", "todos", "todo's", "to do", "to do's", "agenda", "next steps", "quark next steps", "quarks next steps", "quark to do", "quarks to do"],
+            "integrate": ["integrate", "ingest", "add resource"],
         }
 
         def detect_context() -> str:
@@ -175,10 +219,59 @@ class QuarkRecommendationsEngine:
 
         context = detect_context()
 
-        # Special handling for tasks-only requests
+        # When the user explicitly asks for tasks, show **only the tasks freshly
+        # generated from the roadmap sync** (ignoring the pre-existing registry)
+        # so the list is always aligned with the latest roadmap view.
         if context == "tasks":
-            actions = self.get_next_priority_actions()
-            return "\n".join(actions)
+            from collections import defaultdict
+            from importlib import reload as _reload
+            tl = _reload(loader)
+
+            priority_grouped: dict[str, list[dict]] = {"high": [], "medium": [], "low": []}
+            for t in tl.get_tasks(status="pending"):
+                priority_grouped.get(t.get("priority", "medium"), priority_grouped["medium"]).append(t)
+
+            lines: list[str] = []
+            for prio_label in ("high", "medium", "low"):
+                tasks = priority_grouped[prio_label]
+                if not tasks:
+                    continue
+                lines.append(prio_label.upper() + ":")
+                # group inside each priority by pillar
+                by_pillar = defaultdict(list)
+                for task in tasks:
+                    title = task["title"]
+                    if title.lower().startswith("pillar"):
+                        pillar = title.split("▶")[0].strip()
+                    else:
+                        pillar = "Misc"
+                    by_pillar[pillar].append(title)
+
+                for pillar in sorted(by_pillar.keys()):
+                    lines.append(f"  {pillar}:")
+                    for item in by_pillar[pillar]:
+                        lines.append(f"    - {item}")
+
+            if not lines:
+                lines.append("✅ All roadmap tasks completed!")
+
+            return "\n".join(lines)
+
+        # Handle resource integration command
+        if context == "integrate":
+            # Extract the resource path/uri after the keyword 'integrate'
+            import re, shlex, subprocess, sys
+            m = re.search(r"integrate\s+(.+)$", query_lower)
+            if not m:
+                return "⚠️  Usage: quark integrate <path_or_uri>"
+            resource = m.group(1).strip()
+            if not resource:
+                return "⚠️  Provide a path or URI to integrate."
+            try:
+                subprocess.run([sys.executable, "-m", "state.quark_state_system.integrate_cli", resource], check=True)
+                return f"✅ Integration triggered for {resource}"
+            except subprocess.CalledProcessError as e:
+                return f"❌ Integration failed: {e}"
 
         recommendations = self.get_recommendations(context)
         next_actions = self.get_next_priority_actions()

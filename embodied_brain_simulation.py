@@ -30,6 +30,8 @@ from brain.architecture.neural_core.cognitive_systems.self_learning_orchestrator
 from brain.architecture.safety.safety_guardian import SafetyGuardian
 # from brain.architecture.neural_core.motor_control.robotics_motor_controller import RoboticsMotorController
 from brain.architecture.neural_core.learning.llm_guided_training_pipeline import LLMGuidedTrainingPipeline
+from brain.architecture.neural_core.cognitive_systems.resource_manager import ResourceManager
+from brain.architecture.neural_core.cognitive_systems.callback_hub import hub
 from brain.tools.goal_poll import log_next_goal
 log_next_goal("[Roadmap|Embodied]")
 
@@ -85,6 +87,10 @@ class EmbodiedBrainSimulation:
         self._last_step_speed = 0.0
         # Interrupt handling
         self._interrupt_event = threading.Event()
+        self.resource_manager = ResourceManager(auto_scan=False)
+        def _on_resource(event, data):
+            logger.info("[EmbodiedSim] Event %s: %s", event, data)
+        hub.register(_on_resource)
 
     def _install_signal_handlers(self):
         """Install SIGINT (Ctrl+C) handler to trigger interactive prompt."""

@@ -65,6 +65,7 @@ QUICK START:
 import sys
 import subprocess
 from pathlib import Path
+import re
 
 # --- NEW IMPORTS ---
 # Ensure both project root and ./state are on PYTHONPATH
@@ -96,7 +97,7 @@ def _lazy_import(path: str, attr: str):
 # sync/update commands.
 # They are fetched via _lazy_import inside the respective functions.
 # goal handling
-from state.quark_state_system import goal_manager
+from state.quark_state_system import goal_manager, ask_quark
 from management.rules.roadmaps.roadmap_controller import status_snapshot
 # Roadmaps
 from management.rules.roadmaps.roadmap_controller import get_all_roadmaps
@@ -159,13 +160,9 @@ def run_recommendations():
     print("🎯 QUARK RECOMMENDATIONS")
     print("=" * 40)
     try:
-        result = subprocess.run([sys.executable, "quark_state_system/quark_recommendations.py"], 
-                              capture_output=True, text=True, check=True)
-        print(result.stdout)
-    except subprocess.CalledProcessError as e:
-        print(f"❌ Error running recommendations: {e}")
-        print(f"Output: {e.stdout}")
-        print(f"Error: {e.stderr}")
+        print(ask_quark("quark recommendations"))
+    except Exception as e:
+        print(f"❌ Error getting recommendations: {e}")
 
 def run_sync():
     """Run the state synchronization."""
@@ -222,67 +219,12 @@ def run_tasks_overview():
         task_loader.sync_with_roadmaps(status_snapshot())
     except Exception as sync_err:
         print(f"⚠️  Task sync failed – proceeding with cached tasks: {sync_err}")
-    print("📋 QUARK TASKS & GATES")
+    print("📋 QUARK TASKS (Generated from Roadmap)")
     print("=" * 40)
-    tasks_file = Path("quark_state_system/QUARK_CURRENT_TASKS.md")
-    breakdown_file = Path("tasks/PHASE_TODO_BREAKDOWN.md")
-
-    # Show entry-point immediate tasks from QUARK_CURRENT_TASKS.md
-    if tasks_file.exists():
-        print("\n— Immediate Next Tasks (from QUARK_CURRENT_TASKS.md):")
-        try:
-            section = []
-            capture = False
-            for line in tasks_file.read_text(encoding="utf-8").splitlines():
-                if line.strip().lower().startswith("#### immediate next tasks"):
-                    capture = True
-                    continue
-                if capture:
-                    if line.strip().startswith("---") or line.strip() == "":
-                        # stop on section break or blank after we've captured items
-                        if section:
-                            break
-                    if line.strip().startswith("- ENT-"):
-                        section.append(line.strip())
-            if section:
-                for item in section:
-                    print(f"  {item}")
-            else:
-                print("  (No ENT-* tasks found. Check the state file.)")
-        except Exception as e:
-            print(f"  ⚠️ Could not parse immediate tasks: {e}")
-    else:
-        print("  ⚠️ quark_state_system/QUARK_CURRENT_TASKS.md not found")
-
-    # Show gates from PHASE_TODO_BREAKDOWN.md
-    if breakdown_file.exists():
-        print("\n— Entry-Point Gates (from tasks/PHASE_TODO_BREAKDOWN.md):")
-        try:
-            gates = []
-            capture = False
-            for line in breakdown_file.read_text(encoding="utf-8").splitlines():
-                if line.strip().lower().startswith("## entry points"):
-                    capture = True
-                    continue
-                if capture:
-                    if line.strip().lower().startswith("tasks:"):
-                        # After listing Ready-when, we can stop
-                        break
-                    if line.strip().startswith("- "):
-                        gates.append(line.strip())
-            if gates:
-                for g in gates:
-                    print(f"  {g}")
-            else:
-                print("  (No gates section found. Check the breakdown doc.)")
-        except Exception as e:
-            print(f"  ⚠️ Could not parse gates: {e}")
-    else:
-        print("  ⚠️ tasks/PHASE_TODO_BREAKDOWN.md not found")
-
-    print("\nPaths:")
-    print("  • quark_state_system/QUARK_CURRENT_TASKS.md")
-    print("  • tasks/PHASE_TODO_BREAKDOWN.md")
+    try:
+        print(ask_quark("quark tasks"))
+    except Exception as e:
+        print(f"❌ Error generating tasks overview: {e}")
 
 
 def activate_driver_mode():
@@ -385,8 +327,16 @@ def main():
             run_prompt_validation()
         elif command == "activate":
             activate_driver_mode()
-        elif command == "continuous":
-            run_continuous_automation()
+        elif tokens and tokens[0] == "continuous":
+            # Support optional numeric limit: `continuous 3` executes first 3 tasks of phase
+            if len(tokens) > 1 and tokens[1].isdigit():
+                limit = int(tokens[1])
+                print(f"🚀 Running continuous-phase automation (limit={limit})")
+                from state.quark_state_system.quark_driver import QuarkDriver
+                driver = QuarkDriver(os.getcwd())
+                driver.run_phase_tasks(limit)
+            else:
+                run_continuous_automation()
         elif command == "tasks":
             run_tasks_overview()
         elif command == "help":

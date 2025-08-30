@@ -1,246 +1,245 @@
-# Cursor Project Rules (.cursorrules)
+# ────────────────────────────────────────────────────────────────────────────
+# Cursor Project Rules  (machine-friendly)
+# Every directive uses the form  “ALWAYS …”  for easy parsing.
+# Blocks are separated by   ## SECTION   lines.
+# ────────────────────────────────────────────────────────────────────────────
 
-> Drop this file at the root of your repo as `.cursorrules`. It makes Cursor ask smart follow‑up questions and produce consistent, high‑quality code.
+## 🚀 PERFORMANCE & TODO DISCIPLINE (GLOBAL)
+ALWAYS call `_print_todo_snapshot()` at the very start of `QuarkDriver.process_prompt`.
+ALWAYS update task status via `todo_write` on every success or failure path.
+ALWAYS call `update_memory` when a task is mentioned only in chat.
+ALWAYS read large files with `offset/limit` or `read_text_cached`.
+ALWAYS batch independent edits/searches with `multi_tool_use.parallel`.
+ALWAYS pass non-interactive flags (`--quiet`, `--yes`) to long-running commands.
+ALWAYS verify wall-clock latency (driver prints timing table) and keep average ≤ 2 s.
+ALWAYS keep roadmap YAMLs (`tasks_high.yaml`, `tasks_medium.yaml`, `tasks_low.yaml`) in sync with the master roadmap; any update to one side MUST immediately propagate to the other via the task_loader.
+ALWAYS refrain from marking a task complete until it has been validated as complete (tests pass or user approval).
+ALWAYS break tasks into small, numbered steps and reference the total count (e.g., "step 2 of 8") in conversational output *important* Always avoid gaps and monitor for overconfidence.
+ALWAYS execute code automatically in the foreground; background jobs are disallowed except the user explicitly requests otherwise.
+ALWAYS prompt for explicit approval before any file deletion or move operation.
 
----
+## 🗺️ MARKDOWN & CROSS-LINK AWARENESS (GLOBAL)
+ALWAYS at session start run `glob_file_search("**/*.md")` to collect Markdown paths.
+ALWAYS batch-read first 120 lines of each Markdown file in parallel.
+ALWAYS read `README.md` in any directory before reading source files there.
+ALWAYS embed relative links to relevant docs when generating/updating Markdown.
+ALWAYS verify that each embedded link resolves; warn if not.
 
-## 🌐 Global Principles
-- Treat every user request like a ** Jira-style ticket **. If details are missing, **ask targeted questions before generating code**.
-- Default to **smallest working slice (MVP)** first, then propose iterative extensions.
-- Be explicit about **files to create/modify/delete**, and show complete file contents.
-- Prefer **deterministic, reproducible** solutions (pin versions, include setup steps, and sample data where useful).
-- Respect privacy: if the user says **local-only/no external calls**, do not use online APIs or send telemetry.
+## 🛑 DOCUMENTATION-FIRST GUARD (GLOBAL)
+ALWAYS complete the Markdown discovery phase before any code-editing tool call.
+ALWAYS abort code edits and prompt the user if any README/Markdown fails to load.
+ALWAYS track `markdown_discovery_complete = True/False` and enforce the guard.
 
----
+## 🚫 REDUNDANT-CODE GUARD (GLOBAL)
+ALWAYS, before creating a new file or adding >15 lines:
+ALWAYS run `codebase_search` (“Where is X functionality already implemented?”).
+ALWAYS run `grep` for matching symbols.
+ALWAYS reuse or extend existing code if ≥60 % of behaviour matches.
+ALWAYS document why new code is needed when no match exists.
+ALWAYS raise an internal assertion if Steps 1–4 are skipped.
 
-## ❓ When Information Is Missing — Ask First
-If the prompt lacks any of the following, **ask concise bullet questions** (group them) and wait for answers.
+## 🧱 ARCHITECTURE & QUALITY (GLOBAL)
+ALWAYS write statically-typed Python and run `mypy --strict`.
+ALWAYS satisfy Ruff/flake8 + black + isort with no warnings.
+ALWAYS include Google/NumPy docstrings for every public symbol.
+ALWAYS validate all inputs; never log secrets; follow least privilege.
+ALWAYS add/update unit tests with ≥2 edge cases.
+ALWAYS keep coverage ≥90 % (`pytest --cov`).
+ALWAYS benchmark hot paths when algorithmic complexity changes.
+ALWAYS update docs and embed relative links when behaviour changes.
+ALWAYS make atomic commits with Conventional Commit messages.
+ALWAYS keep PRs <400 LOC; stack larger changes.
+ALWAYS run lint → type-check → tests → coverage → build in CI.
+ALWAYS fail CI on any warning; publish coverage & benchmark deltas.
+ALWAYS write advanced tests that exercise edge cases, invalid input, performance limits, and unexpected behaviour scenarios.
 
-**Universal Checklist**
-1) **Goal/Outcome**: What exactly should exist when done?
-2) **Scope**: Single file, multi-file, or repo-wide? New project or existing?
-3) **Tech Stack**: Languages, frameworks, versions, runtime (e.g., Python 3.11, Node 20, Mac M2).
-4) **I/O Contracts**: Inputs, outputs, schemas, interfaces, endpoints, CLIs.
-5) **Constraints**: Performance limits, memory/latency budget, security/privacy requirements, offline-only?
-6) **Dependencies**: Allowed/banned libraries; license constraints.
-7) **Dev UX**: File names/structure, code style, testing framework, linting/formatting.
-8) **Deliverables**: Full files? README? Tests? Demo script? Example dataset?
-9) **Acceptance Tests**: How will we verify this works? Provide steps/commands.
+## 🛰️ / 💾 MODEL RETRIEVAL & LOADING (GLOBAL)
+ALWAYS prefer remote inference (HF endpoints / TGI) when local storage isn’t required.
+ALWAYS respect `HF_ENDPOINT` / `HF_TOKEN` / proxy variables.
+ALWAYS fall back to progressive shard download (`snapshot_download(resume_download=True)`).
+ALWAYS stream datasets with `datasets.load_dataset(..., streaming=True)`.
+ALWAYS load local weights with `device_map="auto"` and `torch_dtype=float16` if supported.
+ALWAYS memory-map weights (`low_cpu_mem_usage=True`).
+ALWAYS abort load if estimated footprint >55 GB on M2 Max.
+ALWAYS log model name, device_map, dtype, peak RAM/VRAM usage.
+ALWAYS avoid duplicate weight files inside repo; reference cache or `data/models/`.
 
-**Context Capture** (ask only if relevant)
-- What files already exist that I must integrate with? Any architectural boundaries?
-- Are we refactoring or greenfield?
-- Target deployment: local script, Docker, serverless, mobile, web, desktop?
+## 🧍‍♂️ MODE-SPECIFIC BEHAVIOURS
+### CHAT / PLAN MODE
+ALWAYS ask scaffold questions when prompt is ambiguous.
+ALWAYS treat the keyword "evolve" as an instruction to proceed with Quark’s recommendations provided they are backed by current scientific literature, and ensure Quark’s overarching goal to evolve and advance science remains active.
+### EDIT / REFACTOR MODE
+ALWAYS minimise diff and preserve behaviour unless asked.
+### GENERATE CODE MODE
+ALWAYS implement MVP first; add TODOs for stretch goals.
+### FIX / DEBUG MODE
+ALWAYS reproduce the bug with a minimal case and state root cause.
+ALWAYS provide both fix **and** regression test.
+ALWAYS debug in foreground until resolved; pause only for needed info.
+ALWAYS list exact paths for delete/move ops and wait for user approval.
+### EXPLAIN MODE
+ALWAYS summarise the overall flow at a high level *only after* tasks/goals are complete, and ensure that the underlying tasks and recommendations remain highly technical and specific (the user does not need to read every task detail, only the final summary).
+### COMMIT MESSAGE MODE
+ALWAYS use Conventional Commits (`feat:`, `fix:`, `docs:`…).
+### TEST MODE
+ALWAYS cover core paths + ≥2 edge cases; avoid brittle assertions.
+ALWAYS execute tests with `pytest -q --durations=10` and fix any slow (>1 s) test.
+ALWAYS execute every test the agent creates and resolve any errors before proceeding.
+ALWAYS create integration tests for every new integration; unit + performance tests for ML modules.
+### DOCS / README MODE
+ALWAYS include overview, setup, usage, configuration, examples, troubleshooting.
 
-When asking questions, **bundle them** into 5–10 bullets max, tailored to the request.
+## 🧠 QUARK PROJECT SPECIFIC RULES
+ALWAYS respect directory schema:
+  • `brain/`  – neural core + ML sub-systems (`brain/ml/`)
+  • `data_knowledge/` – data & models
+  • `tests/` – test suites & benchmarks
+  • `tools_utilities/` – helper scripts
+  • `management/` – configs & project management (`management/rules/`)
+  • `state/` – runtime agent state
+  • `docs/` – all documentation
+  • `repo_indexes/` – generated manifests
+ALWAYS note that historical dirs (`brain_architecture/`, `integration/`) no longer exist; do NOT recreate.
+ALWAYS follow file-type routing:
+  • Scripts → `tools_utilities/scripts/`
+  • Configs → `management/configurations/project/`
+  • Notebooks → `docs/notebooks/`
+  • Documentation → `docs/`
+  • Results → `tests/results_outputs/`
+  • Models → `data/models/`
+  • Experiments → `tests/results_outputs/experiments/`
+ALWAYS obey TOP-LEVEL PLACEMENT GUARD:
+  • Never create files at repo root unless core entry-points (`README.md`, `pyproject.toml`, `QUARK_STATE_SYSTEM.py`).
+ALWAYS include tests with new code; maintain directory structure; preserve backups.
 
----
+## 📂 MANAGEMENT / RULES LOADER
+ALWAYS read every file in `management/rules/` and load its contents into memory **before** responding to the first user prompt in a session.
 
-## 🧭 Prompt Scaffolds (Auto‑Ask Templates)
-Use the following templates to **prompt the user for details** before coding when their message is short/vague.
+## 🆘 GOOD FOLLOW-UP QUESTIONS (META)
+ALWAYS ask target-ed, bundled questions when any of the Universal Checklist items is missing (goal, scope, tech stack, etc.).
+ALWAYS apply every rule in this file to the **current codebase as well as all future changes**; if an existing file violates a rule, refactor or document an exception before proceeding.
 
-### 1) General Feature / Fix
-- **Goal & scope**?
-- **Tech stack & versions**?
-- **Existing files/APIs to integrate with**?
-- **Inputs/outputs** (types, shape, examples)?
-- **Constraints** (perf, security, offline, memory, time)?
-- **Libraries allowed/banned**?
-- **Testing** (unit/e2e, framework)?
-- **Deliverables** (full files, docs, scripts)?
+# ---------------------------------------------------------------------------
+# Simulation Entry Points
+# ---------------------------------------------------------------------------
+ALWAYS treat `brain/architecture/brain_simulator.py` and `embodied_brain_simulation.py` as the PRIMARY entry points for Quark brain simulations.
+ALWAYS ensure all **new and existing** brain-related or biologically-informed ML modules integrate with these simulators, or include a written rationale explaining why integration is not applicable.
+ALWAYS design such integrations around executive-function pathways (prefrontal cortex, decision layers, etc.) when applicable.
 
-### 2) Web App / Frontend
-- Framework (React/Next/Vue/Svelte)? Router? State (Redux/Zustand/Signals)?
-- Styling (Tailwind/Chakra/VanillaCSS). Design system?
-- API endpoints & data shapes. Auth model.
-- Accessibility, i18n, SEO requirements.
-- Build/deploy target (Vercel/Netlify/Docker).
+# ---------------------------------------------------------------------------
+# Biological Compliance – Alphagenome Integration (must remain last in block)
+# ---------------------------------------------------------------------------
+ALWAYS enforce **Alphagenome Criteria** for any code that interfaces with
+ biological simulation, genetic algorithms, or brain-module ML components.
 
-### 3) Backend / API
-- Runtime (Node/Express, FastAPI, Django, Go, Rust). DB (Postgres, SQLite, Mongo) & schema.
-- AuthN/AuthZ, rate limits, idempotency, pagination.
-- Observability: logging, metrics, tracing.
-- Migrations, seeds, local dev data.
+ALWAYS load the following reference implementations into memory at session
+ start so the agent can replicate their coding patterns and validation logic:
+  • `brain/modules/alphagenome_integration/biological_simulator.py`
+  • `brain/modules/alphagenome_integration/dna_controller.py`
+  • `brain/modules/alphagenome_integration/genome_analyzer.py`
+  • `brain/modules/alphagenome_integration/cell_constructor.py`
 
-### 4) Data / ML / LLM
-- Task (train, fine‑tune, RAG, evaluation, agent, batch job).
-- Models (exact names/versions), context length, quantization.
-- Datasets (source, size, license), preprocessing, splits.
-- Eval metrics, baselines, and success criteria.
-- **Air‑gapped/local‑only?** No external calls if specified.
+ALWAYS, before modifying or extending biological code, verify compliance with
+ Alphagenome domain rules (naming conventions, unit balances, biological
+ constraints) and cite the specific rule in commit messages.
 
-### 5) DevOps / CLI / Scripts
-- Inputs/flags, expected outputs, exit codes.
-- Target OS/shell, dependencies, idempotency.
-- CI/CD integration, Dockerfile, Compose, Makefile.
+ALWAYS include edge-case biological tests (e.g., malformed genome strings,
+ boundary diffusion parameters) when touching these modules.
 
----
+ALWAYS load supporting documentation `docs/alphagenome_integration_readme.md` at
+ session start so design decisions remain aligned with the written spec.
 
-## 🧩 Output Format Rules
-- Always show **complete file contents** for any new/modified file.
-- Precede code with: `// FILE: <path>`
-- For multi-file changes, output in sequence with clear file headers.
-- Include a short **RUN GUIDE** (setup, commands, test steps) at the end.
+# ---------------------------------------------------------------------------
+# Safety & Emergency Compliance (must follow Alphagenome block)
+# ---------------------------------------------------------------------------
+ALWAYS pre-load the following safety-critical modules and documents at session
+ start to ensure all code changes respect shutdown / guardrail logic:
+  • `management/emergency/emergency_control.py`
+  • `management/emergency/emergency_shutdown_system.py`
+  • `brain/architecture/safety/safety_guardian.py`
+  • `docs/safety_officer_readme.md`  (links must be kept up-to-date)
+  • `docs/SCIENTIFIC_ENHANCEMENT_IMPLEMENTATION_SUMMARY.md`
 
-**Example Header**
-```text
-// FILE: src/app.ts
-<full code>
-// FILE: test/app.test.ts
-<full code>
-```
+ALWAYS update relative links inside `docs/safety_officer_readme.md` whenever
+ file paths change.
 
----
+# ---------------------------------------------------------------------------
+# Brain Directory Indexing
+# ---------------------------------------------------------------------------
+ALWAYS at session start run `glob_file_search("brain/**/*.py")` (target = repo
+ root, head_limit high) to build a manifest of all neural-core and ML files.
 
-## 🔁 Mode‑Specific Behaviors
+Rationale: Guarantees biomechanical fidelity across the AGI brain simulation
+ stack by enforcing a single canonical implementation style.
 
-### Chat / Plan Mode
-- If the request is ambiguous, **ask the Scaffold questions** before coding.
-- Produce a brief plan with milestones and acceptance checks.
+# ---------------------------------------------------------------------------
+# Data Storage & Knowledge Base Placement
+# ---------------------------------------------------------------------------
+ALWAYS store any single file or directory exceeding 200 MB inside an
+ appropriate subdirectory of `data/` (e.g., `data/datasets/`, `data/models/`).
 
-### Edit / Refactor Mode
-- Minimize diff. Preserve behavior unless explicitly asked to change.
-- Explain non‑obvious tradeoffs in comments.
+ALWAYS keep core source code lightweight; when a module depends on large data
+ (>200 MB) it MUST reference the asset via a relative path under `data/` and
+ document this linkage in the module docstring or README.
 
-### Generate Code Mode
-- Implement **MVP first**. Put TODOs for stretch goals.
-- Provide tests and sample data if asked or implied.
+ALWAYS place Quark’s knowledge base exclusively under
+ `data/data_knowledge/`.  Any dependency or linked asset ≤200 MB that forms
+ part of the knowledge base lives there; auxiliary scripts, configs, or docs
+ belong in their normal directories and should reference the knowledge files
+ via relative links.
 
-### Fix / Debug Mode
-- Reproduce with a minimal case. State root cause.
-- Provide the fix **and** a regression test.
+NEVER commit large binaries to other top-level directories; instead move them
+ into `data/` and update all paths accordingly.
 
-### Explain Mode
-- Summarize at a high level, then dive into key sections with pointers to lines/files.
+ # ---------------------------------------------------------------------------
 
-### Commit Message Mode
-- Use Conventional Commits. Example: `feat(api): add POST /tasks with validation`
 
-### Test Mode
-- Cover core paths + 1–2 edge cases. Avoid brittle assertions.
 
-### Docs / README Mode
-- Include: overview, setup, usage, configuration, examples, troubleshooting.
+# ---------------------------------------------------------------------------
+# Engineering Roles (reference for multi-agent Cursor workspace)
+# ---------------------------------------------------------------------------
+# NOTE: Descriptive; not parsed as actionable ALWAYS lines except lead rules.
 
----
+ALWAYS maintain role-specific files under `management/rules/roles/` with the
+ following header:
+  • Purpose, inputs, outputs, seeds, dependencies.
 
-## 🧱 Architecture & Quality
-- Favor modular design, clear boundaries, small pure functions.
-- Add **pre-commit hooks** (lint/format/test) when appropriate.
-- Security: validate all inputs; never log secrets; follow principle of least privilege.
-- Performance: measure; avoid premature optimization; document known limits.
+ALWAYS include in each role file the shared *Cursor AI Role Prompt*:
+  "You are the {ROLE_NAME} in a multi-agent Cursor workspace. Work only within
+   your domain. Produce concrete artifacts in the repo. When uncertain, create
+   a minimal, testable draft and add TODOs. Prefer small PRs with tests over
+   large changes."
 
----
+ALWAYS follow the generic workflow:
+  1. Open an issue → propose brief plan → implement code/docs/tests.
+  2. Add figures or RESULTS.md where applicable.
+  3. Never silently change schemas; bump versions in `data/registry.yaml`.
 
-## 🔐 Local‑Only / Air‑Gapped (If User Says So)
-- **Do not** call external APIs or model endpoints.
-- Select only local libraries/models; include download/setup instructions if needed.
+# High-level roles (abbreviated responsibilities & deliverables)
+# Program Orchestrator (Lead Systems Architect) – owns end-to-end plan, repos,
+# branching, CI; delivers `/docs/architecture.md`, `/docs/roadmap.md`.
+# Developmental Neurobiologist – stages & timelines; delivers
+# `/biology/neurulation_model.cc3d`, `/docs/neurulation_timeline.md`.
+# Molecular Geneticist – GRNs; delivers `/grn/*.sbml`, `/grn/grn_config.json`.
+# Computational Biologist – fate fields; delivers `/data/fate_fields/*.npy`.
+# Tissue & Morphogenesis Engineer – neurulation sims; delivers `/morpho/*.cc3d`.
+# Connectomics Engineer – wiring graphs; delivers `/connectome/connectome.graphml`.
+# Circuit Builder – microcircuits; delivers `/circuit/*`.
+# Neuroplasticity & Learning Scientist – plasticity rules; delivers
+# `/learning/plasticity.py`, tests.
+# Self-Organization Engineer – proto-cortex self-org; delivers `/self_org/*`.
+# Multimodal Sensory Engineer – sensory generators; delivers `/sensors/*.py`.
+# Cognitive Architect – high-level cognition specs; delivers `/cognition/*`.
+# Neuromorphic/Systems Engineer – runtime optimization; delivers `/runtime/*`.
+# Data & Pipelines Engineer – data layer; delivers `/data/registry.yaml`.
+# Evaluation & Behavior Scientist – assay benches; delivers `/eval/*`.
+# Safety & Ethics Officer – guardrails & kill-switch; delivers `/safety/*`.
+# Product & HCI – dashboards & UI; delivers `/ui/*`.
+# QA & Reproducibility Engineer – deterministic CI; delivers `/repro/*`.
 
----
+Rationale: Provides a canonical mapping of specialist roles to directory
+structure and deliverables so Cursor agents can route tasks appropriately.
 
-## 🧠 Domain Packs (Targeted Question Bundles)
-Use these packs to ask **the right questions quickly** based on the task type.
+# ---------------------------------------------------------------------------
 
-**Agents / Tool‑Use / Orchestration**
-- Roles, tools allowed, safety rules, max recursion/depth, timeouts.
-- Memory/RAG source, retrieval strategy, evaluation harness.
-
-**Audio / Music Tech**
-- DAW/host (Ableton/Max for Live/VST/AU), sample rates, real‑time constraints.
-- Plugin format targets and OS support.
-
-**Security / Crypto / PGP**
-- Threat model, key management, allowed ciphers, audit/logging, UX for secrets.
-
-**Education / Curriculum**
-- Audience level, pacing, assessments, examples preferred (text vs visuals).
-
----
-
-## ✅ Acceptance Checklist (done‑ness)
-Before finishing, ensure you:
-- [ ] Met the stated goal and constraints
-- [ ] Provided full file contents
-- [ ] Included run/test steps
-- [ ] Added minimal tests or examples if relevant
-- [ ] Documented assumptions & TODOs
-
----
-
-## ✍️ Quick Ticket Template (Cursor should auto‑use if user asks for code)
-```
-Task: <one‑line outcome>
-Context: <what exists / constraints>
-Stack: <language, runtime, versions>
-Requirements:
-  - <functional requirement>
-  - <non‑functional: perf/security>
-I/O:
-  - Input: <shape/example>
-  - Output: <shape/example>
-Deliverables:
-  - Files: <list>
-  - Tests/Docs: <yes/no>
-Acceptance:
-  - <exact steps to verify>
-```
-
----
-
-## 🤖 Auto‑Responder Logic (behavioral rules)
-- If prompt ≤ 2 sentences or missing key fields → **ask the relevant Scaffold/Domain Pack questions first**.
-- If the user explicitly says "generate now" → proceed with **MVP** using sensible defaults and list assumptions up front.
-- If the user asks for "full files only" → output complete files without extra prose, but still include a short RUN GUIDE.
-- If conflicts/ambiguity remain → present **two options** with pros/cons and ask which to choose.
-
----
-
-## 🧪 Minimal Defaults (when user allows defaults)
-- **Node**: Node 20, pnpm, TypeScript strict, ESLint + Prettier
-- **Python**: 3.11, uv/poetry, Ruff, pytest
-- **React**: Next.js + App Router, Tailwind, React Testing Library
-- **Backend**: FastAPI or Express + Zod/Valibot validation
-- **DB**: SQLite for local dev; Prisma/SQLModel migration scripts
-- **CI**: GitHub Actions (lint → test → build)
-
----
-
-## 🆘 Examples of Good Follow‑Ups (what to ask me)
-- "Which do you prefer: FastAPI+SQLModel or Express+Prisma? Any constraints?"
-- "Is this library allowed under your licensing policy?"
-- "Do we need offline/air‑gapped operation?"
-- "What are success metrics (throughput, latency, accuracy)?"
-- "Should I include a Dockerfile and CI workflow?"
-
----
-
-## 🧠 **QUARK PROJECT SPECIFIC RULES**
-
-### **Brain Simulation ML Framework Context**
-This is a **brain simulation ML framework** with specific architectural requirements:
-
-**Core Directories (DO NOT MODIFY STRUCTURE):**
-- `brain_architecture/` - Neural core and brain hierarchy
-- `ml_architecture/` - Training systems and expert domains  
-- `data_knowledge/` - Research, data repository, models
-- `testing/` - Testing frameworks and results
-- `tools_utilities/` - Scripts and utilities
-- `integration/` - Applications and architecture
-- `management/` - Configurations and project management
-- `documentation/` - All documentation and summaries
-
-**File Organization Rules:**
-- **Scripts** → `tools_utilities/scripts/`
-- **Configs** → `management/configurations/project/`
-- **Notebooks** → `data_knowledge/research/notebooks/`
-- **Documentation** → `documentation/`
-- **Results** → `testing/results_outputs/`
-- **Models** → `data_knowledge/models_artifacts/`
-- **Experiments** → `testing/results_outputs/experiments/`
-
-**Special Requirements:**
-- Always include tests with code creation
-- Use simulation technologies where possible
-- Follow the established brain simulation architecture
-- Maintain the consolidated directory structure
-- Preserve backup directories and virtual environments
+# End of Rules

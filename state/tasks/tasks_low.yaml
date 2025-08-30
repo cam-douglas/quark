@@ -1,51 +1,28 @@
-- id: PHASE_1_PLAN
-  title: "\U0001F680 Project Quark: Phase 1 Execution Plan - Foundational Scaffolding"
-  priority: low
-  status: pending
-  roadmap_stage: ''
-  description: "# \U0001F680 Project Quark: Phase 1 Execution Plan - Foundational\
-    \ Scaffolding **Status**: \U0001F7E2 NOT STARTED **Roadmap Phase**: Phase 1: Foundational\
-    \ Scaffolding (Developmental Stage: Fetal) **Primary Goal**: [...]"
-  source_path: state/tasks/research/phase_1_plan.md
-- id: SELF_LEARNING_CAPABILITIES_SUMMARY
-  title: "\U0001F9E0 Self-Learning Brain Capabilities - ENHANCED"
-  priority: low
-  status: pending
-  roadmap_stage: ''
-  description: "# \U0001F9E0 Self-Learning Brain Capabilities - ENHANCED **Status**:\
-    \ \u2705 FULLY OPERATIONAL - Brain with self-learning capabilities **Last Updated**:\
-    \ August 21, 2025 **Integration Type**: Real-time [...]"
-  source_path: state/tasks/integrations/SELF_LEARNING_CAPABILITIES_SUMMARY.md
-- id: CAPABILITY_DISCOVERY_SUMMARY
-  title: "\U0001F9E0 Brain Capability Discovery & Learning - COMPLETE"
-  priority: low
-  status: pending
-  roadmap_stage: ''
-  description: "# \U0001F9E0 Brain Capability Discovery & Learning - COMPLETE **Status**:\
-    \ \u2705 FULLY OPERATIONAL - Brain that learns new capabilities **Last Updated**:\
-    \ August 21, 2025 **Integration Type**: Real-time [...]"
-  source_path: state/tasks/integrations/CAPABILITY_DISCOVERY_SUMMARY.md
-- id: roadmap-26
+- id: roadmap-1
   title: '---'
   status: pending
   priority: low
-- id: roadmap-27
+- id: roadmap-2
   title: 'AGI System Design: Main Rules for Cursor (Expanded)'
   status: pending
   priority: low
-- id: roadmap-28
+- id: roadmap-3
+  title: 'Project Quark: High-Level AGI Brain Simulation Roadmap'
+  status: pending
+  priority: low
+- id: roadmap-4
   title: See also [Roadmaps Index](ROADMAPS_INDEX.md)
   status: pending
   priority: low
-- id: roadmap-29
+- id: roadmap-5
   title: "\U0001F9E0 AGI-INTEGRATED BIOLOGICAL BRAIN SIMULATION ROADMAP"
   status: pending
   priority: low
-- id: roadmap-30
+- id: roadmap-6
   title: "\U0001F9E0 BIOLOGICAL AGI DEVELOPMENT ROADMAP"
   status: pending
   priority: low
-- id: roadmap-31
+- id: roadmap-7
   title: "\U0001F9E0 ENHANCED BRAIN SIMULATION ROADMAP"
   status: pending
   priority: low

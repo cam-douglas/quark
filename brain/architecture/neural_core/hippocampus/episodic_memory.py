@@ -10,6 +10,17 @@ from dataclasses import dataclass, field
 import time
 from collections import defaultdict
 
+# Optional E8 lattice memory integration
+from brain._bootstrap import USE_E8_MEMORY
+
+if USE_E8_MEMORY:
+    try:
+        from brain.architecture.neural_core.cognitive_systems.memory_providers.e8_adapter import (
+            E8MemoryAdapter,
+        )
+    except Exception:  # fallback to None if deps missing
+        E8MemoryAdapter = None  # type: ignore
+
 @dataclass
 class MemoryEpisode:
     """Represents an episodic memory"""
@@ -42,6 +53,16 @@ class EpisodicMemory:
         # Memory storage
         self.episodes: Dict[str, MemoryEpisode] = {}
         self.patterns: Dict[str, MemoryPattern] = {}
+
+        # ---------------------------------------------------------------
+        # Kaleidescope adapter (optional)
+        # ---------------------------------------------------------------
+        self._e8_adapter = None
+        if USE_E8_MEMORY and E8MemoryAdapter is not None:
+            try:
+                self._e8_adapter = E8MemoryAdapter()
+            except Exception:
+                self._e8_adapter = None
         
         # Neural representations
         self.episode_neurons = np.random.rand(max_episodes, pattern_dim)
@@ -72,6 +93,11 @@ class EpisodicMemory:
         
         # Store episode
         self.episodes[episode_id] = episode
+
+        # Feed into Kaleidescope if enabled
+        if self._e8_adapter is not None:
+            text_repr = str(content)
+            self._e8_adapter.store(text_repr, metadata={"episode_id": episode_id})
         
         # Index by context
         for context_key, context_value in context.items():
@@ -138,8 +164,14 @@ class EpisodicMemory:
         
         return features
     
-    def retrieve_episode(self, query: Dict[str, Any], max_results: int = 5) -> List[MemoryEpisode]:
-        """Retrieve episodes based on query"""
+    def retrieve_episode(self, query: Dict[str, Any] | str, max_results: int = 5):
+        # E8 lattice retrieval first if enabled
+        if isinstance(query, str) and self._e8_adapter is not None:
+            res = self._e8_adapter.query(query, top_k=max_results)
+            if res:
+                eps = [self.episodes.get(r[2].get("episode_id")) for r in res]
+                return [e for e in eps if e]
+        
         query_features = self._extract_query_features(query)
         
         # Score episodes based on similarity

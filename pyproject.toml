@@ -10,7 +10,14 @@ description = "Quark neuroscience / ML framework"
 readme = "README.md"
 requires-python = ">=3.10"
 
+[project.entry-points."quark.resource_plugins"]
+noop = "brain.architecture.neural_core.cognitive_systems.plugins.noop_plugin:NoOpPlugin"
+
 [tool.setuptools]
 
 [tool.setuptools.package-dir]
 "" = "."
+
+pyyaml = "^6.0"
+license-checker = "^0.9"
+watchdog = "^4.0"

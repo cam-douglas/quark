@@ -18,6 +18,8 @@ from brain_modules.alphagenome_integration.compliance_engine import ComplianceEn
 from .prompt_guardian import PromptGuardian
 from . import task_loader
 
+from utilities.performance_utils import profile_timing
+
 class AutonomousAgent:
     """A self-determined agent that executes roadmap goals."""
 
@@ -33,17 +35,20 @@ class AutonomousAgent:
         self.compliance = ComplianceEngine()
         print("✅ Autonomous Agent Initialized. Ready to execute roadmap.")
 
-    def execute_next_goal(self):
+    @profile_timing("AutonomousAgent.execute_next_goal")
+    def execute_next_goal(self) -> bool:
         """
         Fetches the next goal from the roadmap, validates it, and executes a
-        placeholder action. This method is the main loop of the agent.
+        placeholder action. Returns ``True`` if a goal was executed and ``False``
+        if no actionable goal was remaining. This makes it easier for driver
+        wrappers (e.g., continuous-phase execution) to know when to halt.
         """
         print("\n--- Starting New Goal Cycle ---")
         goal = self.roadmap.get_next_actionable_goal()
 
         if not goal:
             print("AGENT: No further goals to execute. System is up-to-date with roadmaps.")
-            return
+            return False
 
         print(f"AGENT: Preparing to execute goal: '{goal['task']}'")
 
@@ -68,6 +73,9 @@ class AutonomousAgent:
             # Mark the goal as "skipped" or "failed" in a real system.
             # For now, we just report it as if it were done to not get stuck.
             self.roadmap.report_progress(goal)
+
+        # If we reached here, we attempted some form of progress on the goal
+        return True
 
 
     def _formulate_plan_for_goal(self, goal: dict) -> dict:

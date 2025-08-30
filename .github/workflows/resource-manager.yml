@@ -1,0 +1,27 @@
+name: resource-manager
+
+on:
+  push:
+    paths:
+      - 'brain/architecture/neural_core/cognitive_systems/**'
+      - 'tests/resource_manager/**'
+      - '.github/workflows/resource-manager.yml'
+  pull_request:
+    paths:
+      - 'brain/architecture/neural_core/cognitive_systems/**'
+      - 'tests/resource_manager/**'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install poetry
+        run: pip install poetry
+      - name: Install deps
+        run: poetry install --no-interaction
+      - name: Run resource manager tests
+        run: poetry run pytest tests/resource_manager -q
