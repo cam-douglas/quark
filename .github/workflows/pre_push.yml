@@ -1,0 +1,29 @@
+name: Roadmap Pre-Push CI
+
+on:
+  pull_request:
+  push:
+    branches: [ main ]
+
+jobs:
+  roadmap-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyyaml pytest
+      - name: Run roadmap/task sync script
+        run: |
+          python tools_utilities/scripts/pre_push_update.py
+      - name: Validate links
+        run: |
+          python tools_utilities/scripts/link_validate.py management/rules/roadmaps
+      - name: Run tests
+        run: |
+          pytest -q tests/hooks/test_pre_push_update.py

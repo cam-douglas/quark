@@ -30,6 +30,8 @@ from brain.architecture.neural_core.cognitive_systems.self_learning_orchestrator
 from brain.architecture.safety.safety_guardian import SafetyGuardian
 # from brain.architecture.neural_core.motor_control.robotics_motor_controller import RoboticsMotorController
 from brain.architecture.neural_core.learning.llm_guided_training_pipeline import LLMGuidedTrainingPipeline
+from brain.tools.goal_poll import log_next_goal
+log_next_goal("[Roadmap|Embodied]")
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)

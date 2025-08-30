@@ -1,0 +1,90 @@
+"""GoalManager – single source for roadmap-driven goals.
+
+API:
+    next_goal()   -> Dict | None  (highest-priority pending task)
+    complete(id)  -> None          (mark task as completed)
+
+On every call, it refreshes tasks by syncing with roadmap status so the
+view is always up-to-date.
+"""
+from __future__ import annotations
+from pathlib import Path
+from typing import Dict, Optional
+
+from management.rules.roadmaps.roadmap_controller import status_snapshot
+from . import task_loader
+
+
+# ---------------------------------------------------------------------------
+# Public helpers
+# ---------------------------------------------------------------------------
+
+def _refresh():
+    """Sync tasks with roadmap status each time we query goals."""
+    task_loader.sync_with_roadmaps(status_snapshot())
+
+
+def next_goal() -> Optional[Dict]:
+    """Return the highest-priority pending task or None."""
+    _refresh()
+    tasks = task_loader.next_actions(limit=1)
+    return tasks[0] if tasks else None
+
+
+def complete(task_id: str) -> None:
+    """Mark a task as completed in memory and YAML files."""
+    for task in task_loader._TASKS:  # pylint: disable=protected-access
+        if task.get("id") == task_id:
+            task["status"] = "completed"
+            break
+    # Persist change by rewriting YAML it belongs to
+    prio = task.get("priority", "medium")
+    fp = task_loader._PRIORITY_FILES[prio]  # type: ignore[attr-defined]
+    data = [t for t in task_loader._TASKS if t.get("priority") == prio]
+    fp.write_text(task_loader.yaml.safe_dump(data, sort_keys=False))
+
+# ------------------------ Runtime helpers ----------------------------------
+
+_CURRENT: Optional[Dict] = None  # cached goal
+
+
+def poll_goal() -> Optional[Dict]:
+    """Non-blocking fetch used by simulators each timestep."""
+    global _CURRENT  # noqa: PLW0603
+    if _CURRENT and _CURRENT.get("status") == "completed":
+        _CURRENT = None
+    if not _CURRENT:
+        _CURRENT = next_goal()
+    return _CURRENT
+
+
+def urgency_scalar(goal: Dict) -> float:
+    """Return a simple urgency value based on priority."""
+    return {"high": 1.0, "medium": 0.6, "low": 0.2, "chat": 0.8}.get(goal.get("priority", "medium"), 0.5)
+
+
+# ------------------------ Status logging ------------------------------------
+
+import json, time, threading, pathlib
+
+
+def _status_writer():
+    log_dir = pathlib.Path("state/logs")
+    log_dir.mkdir(parents=True, exist_ok=True)
+    fp = log_dir / "goal_status.json"
+    while True:
+        snap = {
+            "current": _CURRENT,
+            "stats": {
+                "pending": len(list(task_loader.get_tasks(status="pending"))),
+                "completed": len(list(task_loader.get_tasks(status="completed"))),
+            },
+            "ts": time.time(),
+        }
+        fp.write_text(json.dumps(snap, indent=2))
+        time.sleep(60)  # every minute
+
+
+def start_background_logger():
+    t = threading.Thread(target=_status_writer, daemon=True)
+    t.start()

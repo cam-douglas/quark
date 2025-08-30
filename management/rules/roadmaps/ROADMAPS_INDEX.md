@@ -1,0 +1,12 @@
+# 🗺️ Quark Roadmaps – Comprehensive Index
+
+Auto-generated. Run the generator script or rerun this command when roadmaps change.
+
+| # | Title | Relative Path | Status |
+|---|---|---|---|
+| 1 | AGI System Design: Main Rules for Cursor (Expanded) | UNIFIED_AGI_MASTER_ROADMAP_FINAL.md | — |
+| 2 | Project Quark: High-Level AGI Brain Simulation Roadmap | HIGH_LEVEL_ROADMAP.md | — |
+| 3 | See also [Roadmaps Index](ROADMAPS_INDEX.md) | master_roadmap.md | ✅ Integration Status |
+| 4 | 🧠 AGI-INTEGRATED BIOLOGICAL BRAIN SIMULATION ROADMAP | AGI_INTEGRATED_ROADMAP.md | Phase 1 preparation |
+| 5 | 🧠 BIOLOGICAL AGI DEVELOPMENT ROADMAP | BIOLOGICAL_AGI_DEVELOPMENT_ROADMAP.md | — |
+| 6 | 🧠 ENHANCED BRAIN SIMULATION ROADMAP | ENHANCED_ROADMAP_IMPLEMENTATION.md | — |
