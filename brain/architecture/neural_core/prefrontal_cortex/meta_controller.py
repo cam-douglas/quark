@@ -20,8 +20,28 @@ class MetaController:
         """
         self.extrinsic_weight = extrinsic_weight
         self.intrinsic_weight = intrinsic_weight
+        self._pending_tasks = []  # NEW: tasks from advanced planner
         print(f"🌟 Meta-Controller initialized with weights (Extrinsic: {extrinsic_weight}, Intrinsic: {intrinsic_weight})")
 
+    # ------------------------------------------------------------------
+    # Task ingestion (from Advanced Planner)
+    # ------------------------------------------------------------------
+    def ingest_tasks(self, tasks):
+        """Receive list of task dicts from Advanced Planner."""
+        if isinstance(tasks, list):
+            self._pending_tasks.extend(tasks)
+
+    def get_pending_tasks(self):
+        return list(self._pending_tasks)
+
+    def pop_next_task(self):
+        if self._pending_tasks:
+            return self._pending_tasks.pop(0)
+        return None
+
+    # ------------------------------------------------------------------
+    # Reward blending
+    # ------------------------------------------------------------------
     def blend_rewards(self, extrinsic_reward: float, intrinsic_reward: float) -> float:
         """
         Combines the extrinsic and intrinsic rewards into a single value.

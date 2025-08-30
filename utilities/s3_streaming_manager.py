@@ -26,20 +26,26 @@ class S3StreamingManager:
         files_to_upload = []
         total_upload_size = 0
         
+        self.logger.info("Counting local files to scan...")
+        total_files = sum(1 for f in local_dir_path.rglob('*') if f.is_file())
+        self.logger.info(f"Found {total_files} total files to check against S3.")
+
         self.logger.info("Scanning local files and S3 to determine files to upload...")
-        for local_file_path in local_dir_path.rglob('*'):
-            if local_file_path.is_file():
-                s3_key = f"{s3_prefix}/{local_file_path.relative_to(local_dir_path)}"
-                try:
-                    self.s3_client.head_object(Bucket=self.bucket_name, Key=s3_key)
-                except ClientError as e:
-                    if e.response['Error']['Code'] == '404':
-                        file_size = local_file_path.stat().st_size
-                        files_to_upload.append({'path': local_file_path, 'key': s3_key, 'size': file_size})
-                        total_upload_size += file_size
-                    else:
-                        self.logger.error(f"Error checking file on S3 {s3_key}: {e}")
-                        return False
+        with tqdm(total=total_files, unit='file', desc="Scanning files") as pbar:
+            for local_file_path in local_dir_path.rglob('*'):
+                if local_file_path.is_file():
+                    pbar.update(1)
+                    s3_key = f"{s3_prefix}/{local_file_path.relative_to(local_dir_path)}"
+                    try:
+                        self.s3_client.head_object(Bucket=self.bucket_name, Key=s3_key)
+                    except ClientError as e:
+                        if e.response['Error']['Code'] == '404':
+                            file_size = local_file_path.stat().st_size
+                            files_to_upload.append({'path': local_file_path, 'key': s3_key, 'size': file_size})
+                            total_upload_size += file_size
+                        else:
+                            self.logger.error(f"Error checking file on S3 {s3_key}: {e}")
+                            return False
 
         if not files_to_upload:
             self.logger.info("✅ All files are already synced to S3.")

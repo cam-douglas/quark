@@ -49,8 +49,19 @@ class SelfLearningOrchestrator:
         raw_data = self._seek_knowledge(knowledge_gap)
 
         if raw_data:
-            knowledge_object = self.knowledge_hub.assimilate(raw_data)
-            self._inject_knowledge(brain_modules, knowledge_object)
+            # raw_data is a dict with keys: source, content, type, citation (optional)
+            try:
+                k_objects = self.knowledge_hub.assimilate(
+                    raw_data["content"],
+                    source=raw_data.get("source", "unknown"),
+                    citation=raw_data.get("citation", ""),
+                )
+            except Exception as e:
+                logger.error(f"KnowledgeHub.assimilate failed: {e}")
+                return
+
+            for k_obj in k_objects:
+                self._inject_knowledge(brain_modules, k_obj)
         else:
             logger.warning(f"No information found for knowledge gap: {knowledge_gap}")
 
@@ -98,11 +109,15 @@ class SelfLearningOrchestrator:
         """
         Injects assimilated knowledge into the appropriate brain modules.
         """
-        if knowledge.type == "declarative" and "hippocampus" in brain_modules:
-            brain_modules["hippocampus"].inject_knowledge(knowledge)
-            logger.info("Injected declarative knowledge into Hippocampus.")
-        elif knowledge.type == "procedural" and "rl_agent" in brain_modules:
-            brain_modules["rl_agent"].inject_knowledge(knowledge)
-            logger.info("Injected procedural knowledge into RL Agent.")
+        if knowledge.k_type == "declarative" or getattr(knowledge.k_type, "value", None) == "declarative":
+            if "hippocampus" in brain_modules:
+                brain_modules["hippocampus"].inject_knowledge(knowledge)
+                logger.info("Injected declarative knowledge into Hippocampus.")
+        elif knowledge.k_type == "procedural" or getattr(knowledge.k_type, "value", None) == "procedural":
+            if "rl_agent" in brain_modules:
+                brain_modules["rl_agent"].inject_knowledge(knowledge)
+                logger.info("Injected procedural knowledge into RL Agent.")
         else:
-            logger.warning(f"Could not inject knowledge of type '{knowledge.type}'. No suitable module found.")
+            logger.warning(
+                f"Could not inject knowledge of type '{knowledge.k_type}'. No suitable module found."
+            )

@@ -64,3 +64,19 @@ Pending tasks: 21
 * Chat-specified tasks live in `chat_tasks.yaml`.
 
 <!-- ROADMAP_STATUS_END -->
+
+## 🔄 Resource Manager
+Quark includes a self-service **Resource Manager** that automatically validates,
+places, and hot-loads external datasets, models, and code:
+
+```bash
+# List unapproved resources in /data
+quark rm scan
+
+# Approve a pending resource by id
+quark rm approve <RID>
+```
+
+CI status ![Resource-Manager](https://github.com/<ORG>/<REPO>/actions/workflows/resource-manager.yml/badge.svg)
+
+See `docs/RESOURCE_MANAGER_GUIDE.md` for full details.

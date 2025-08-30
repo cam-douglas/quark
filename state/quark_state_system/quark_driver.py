@@ -11,11 +11,27 @@ compliant, and goal-driven AGI development system.
 import os, sys
 from typing import Dict, Any
 
-sys.path.append(os.getcwd())
+# Agile helper utils
+from state.quark_state_system.agile_utils import parse_continuous
 
+# Ensure project root is on path so "state." imports work when running standalone
+PROJECT_ROOT = os.getcwd()
+if PROJECT_ROOT not in sys.path:
+    sys.path.append(PROJECT_ROOT)
+
+# Ensure legacy absolute import alias so submodules can use "quark_state_system.*"
+import importlib, types
+try:
+    _sq = importlib.import_module('state.quark_state_system')
+    import sys as _sys
+    _sys.modules.setdefault('quark_state_system', _sq)
+except ModuleNotFoundError:
+    pass
+
+# Now safe to import
 from state.quark_state_system import ask_quark
-from quark_state_system.autonomous_agent import AutonomousAgent
-from quark_state_system.prompt_guardian import PromptGuardian
+from state.quark_state_system.autonomous_agent import AutonomousAgent
+from state.quark_state_system.prompt_guardian import PromptGuardian
 
 class QuarkDriver:
     """The active driver that orchestrates the agent and guardian."""
@@ -46,8 +62,19 @@ class QuarkDriver:
 
         print(f"DRIVER: Current high-priority goal is: '{self.current_goal['task']}'")
 
-        # If the prompt is generic, default to the agent's plan.
-        if prompt_text.lower() in ["proceed", "continue", "next", "evolve"]:
+        prompt_lower = prompt_text.lower()
+
+        # --- Agile continuous directive -------------------------------------
+        cont_n = parse_continuous(prompt_text)
+        if cont_n is not None:
+            print(f"DRIVER: 'continuous + {cont_n}' directive detected → executing that many tasks")
+            self.run_phase_tasks(cont_n)
+            self.refresh_goal()
+            print("DRIVER: Phase execution complete. Awaiting further input…")
+            return
+
+        # Generic proceed keywords ------------------------------------------
+        if prompt_lower in ["proceed", "continue", "next", "evolve"]:
             print("DRIVER: Generic prompt detected. Activating autonomous agent for next goal.")
             self.agent.execute_next_goal()
         else:
@@ -70,6 +97,11 @@ class QuarkDriver:
         self.refresh_goal()
         print("="*60)
 
+        # 🔬  Print timing breakdown for this prompt cycle
+        from utilities.performance_utils import print_timing_breakdown, reset_timing_registry
+        print_timing_breakdown(limit=8)
+        reset_timing_registry()
+
     def run_continuous(self):
         """
         Runs the agent in a continuous loop until all roadmap goals are completed.
@@ -83,6 +115,54 @@ class QuarkDriver:
             self.process_prompt("proceed")
         
         print("\n🎉🎉 AUTOMATION COMPLETE: All roadmap goals have been executed. 🎉🎉")
+
+    # ---------------------------------------------------------------------
+    # NEW: Run only current phase tasks (bounded by *max_tasks*)
+    # ---------------------------------------------------------------------
+
+    def run_phase_tasks(self, max_tasks: int = 5):
+        """Run up to *max_tasks* consecutive goals for the current roadmap phase.
+
+        The *phase* is determined implicitly by whatever ordering the
+        ``RoadmapController`` presents – we simply stop after *max_tasks* or
+        when no further goals remain. Any errors inside ``execute_next_goal``
+        are printed by the agent but do **not** halt this loop.
+        """
+
+        executed = 0
+        while executed < max_tasks:
+            attempts = 0
+            success = False
+            while attempts < 3 and not success:
+                try:
+                    progressed = self.agent.execute_next_goal()
+                    success = bool(progressed)
+                except Exception as exc:
+                    attempts += 1
+                    print(f"DRIVER: ERROR during goal execution attempt #{attempts}: {exc}\nDRIVER: Retrying…")
+                else:
+                    if not progressed:
+                        # No more tasks available – break outer loop entirely.
+                        success = False
+                        break
+            if not success:
+                print("DRIVER: Unable to resolve errors after 3 attempts – skipping to next task.")
+                # Decide whether to continue to next task or halt – continue per user request.
+            else:
+                executed += 1
+        print(f"DRIVER: Executed {executed} tasks in current phase (limit {max_tasks}).")
+
+    # ---------------------------------------------------------------------
+    # Internal: refresh cached current_goal from roadmap controller
+    # ---------------------------------------------------------------------
+
+    def refresh_goal(self):
+        """Update ``self.current_goal`` with the roadmap's next actionable goal."""
+        try:
+            self.current_goal = self.agent.roadmap.get_next_actionable_goal()
+        except Exception as exc:
+            print(f"DRIVER: ERROR refreshing current goal: {exc}")
+            self.current_goal = None
 
     def _generate_action_from_prompt(self, prompt_text: str) -> Dict[str, Any]:
         """Placeholder for an LLM that would parse a prompt into a structured action."""

@@ -31,6 +31,9 @@ from brain.architecture.neural_core.prefrontal_cortex.meta_controller import Met
 from brain.architecture.neural_core.working_memory.working_memory import WorkingMemory
 from brain.architecture.neural_core.conscious_agent.global_workspace import GlobalWorkspace
 from brain.architecture.neural_core.cerebellum.cerebellum import Cerebellum
+from brain.architecture.neural_core.cognitive_systems.resource_manager import ResourceManager  # NEW
+from brain.architecture.neural_core.cognitive_systems.knowledge_hub import KnowledgeHub
+from brain.architecture.neural_core.cognitive_systems.callback_hub import hub  # NEW
 
 # AlphaGenome Integration for biologically compliant brain construction
 # AlphaGenome integrations are optional and can be disabled via env.
@@ -330,8 +333,54 @@ class BrainSimulator:
         self.topico = TopiCoAdapter() if (self.use_topico and TopiCoAdapter) else None
         self.fuse = FuseAdapter() if (self.use_fuse and FuseAdapter) else None
 
+        # Initialize Resource Manager (lazy)
+        self.resource_manager = ResourceManager(auto_scan=False)
+
+        # --- Advanced Planner (LLM) Integration ---  NEW
+        try:
+            from state.quark_state_system import advanced_planner as _adv_planner
+            self._planner_fn = _adv_planner.plan
+            print("📝 Advanced Planner available – tasks can be generated on demand.")
+        except Exception as e:
+            self._planner_fn = None
+            print(f"⚠️ Advanced Planner unavailable: {e}")
+
+        # ---- Callback listener ----
+        def _on_resource(event, data):
+            print(f"[BrainSimulator] Event {event}: {data}")
+        hub.register(_on_resource)
+
         # Set the initial developmental stage in relevant modules
         print("✅ Brain Simulator initialized successfully with biologically compliant architecture.")
+
+    # ------------------------------------------------------------------
+    # External QA Facade
+    # ------------------------------------------------------------------
+    def ask(self, question: str, *, top_k: int = 3) -> str:
+        """Answer a natural-language *question* using memory and LLM fallback."""
+        if not question or not isinstance(question, str):
+            return "I need a question to answer."
+
+        try:
+            result = self.knowledge_hub.retrieve(
+                question, episodic_memory=self.hippocampus, top_k=top_k
+            )
+            episodes = result.get("episodes", [])
+            if episodes:
+                # Return the content of the top episode (simple heuristic)
+                content = episodes[0].content
+                if isinstance(content, dict) and "text" in content:
+                    return content["text"]
+                return str(content)
+
+            llm_ans = result.get("llm_answer")
+            if llm_ans:
+                return llm_ans
+        except Exception as e:
+            import logging
+
+            logging.getLogger(__name__).error(f"BrainSimulator.ask failed: {e}")
+        return "I'm not sure about that yet."
 
     def _construct_brain_from_bio_spec(self, bio_spec: Dict[str, Any]):
         """
@@ -386,6 +435,8 @@ class BrainSimulator:
         if final_cell_dist.get(CellType.NEURON.value, 0) > 0:
             print("   - Neurons are present. Initializing core cognitive modules.")
             self.hippocampus = EpisodicMemory()
+            # Knowledge hub for ingestion & retrieval
+            self.knowledge_hub = KnowledgeHub()
             # Initialize a simple tabular RL agent with sensible defaults
             # Use a modest discrete state space size; actions derived from embodiment action dimension
             num_actions = self.act_dim if self.act_dim is not None else 16
@@ -732,6 +783,34 @@ class BrainSimulator:
             }
 
         return outputs
+
+    # ------------------------------------------------------------------
+    # Task Planning API (LLM-powered)
+    # ------------------------------------------------------------------
+    def generate_subtasks(self, bullet: str, priority: str = "medium") -> None:
+        """Generate subtasks for *bullet* and broadcast them.
+
+        The tasks are sent to:
+        • GlobalWorkspace.broadcast({"tasks": tasks})
+        • MetaController.ingest_tasks(tasks)
+        """
+        if not self._planner_fn:
+            print("⚠️ Advanced Planner unavailable – cannot generate subtasks.")
+            return
+        tasks = self._planner_fn(bullet)
+        if not tasks:
+            print("⚠️ Planner returned no tasks.")
+            return
+        # Stamp priority if provided
+        for t in tasks:
+            t.setdefault("priority", priority)
+        # Broadcast to global workspace
+        if hasattr(self, "global_workspace"):
+            self.global_workspace.broadcast({"tasks": tasks, "source": "advanced_planner"})
+        # Feed meta-controller
+        if hasattr(self, "meta_controller") and hasattr(self.meta_controller, "ingest_tasks"):
+            self.meta_controller.ingest_tasks(tasks)
+        print(f"✅ Generated {len(tasks)} tasks for bullet: '{bullet[:40]}...' and broadcasted.")
 
     def _update_profiling_data(self, t_start, t_vision, t_sensory, t_proto, t_ppo_select, t_motor, t_cognitive, t_learning):
         self.profiling_data['vision'] = self.profiling_data.get('vision', 0) + (t_vision - t_start)
