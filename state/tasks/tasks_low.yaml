@@ -25,3 +25,27 @@
     \ \u2705 FULLY OPERATIONAL - Brain that learns new capabilities **Last Updated**:\
     \ August 21, 2025 **Integration Type**: Real-time [...]"
   source_path: state/tasks/integrations/CAPABILITY_DISCOVERY_SUMMARY.md
+- id: roadmap-26
+  title: '---'
+  status: pending
+  priority: low
+- id: roadmap-27
+  title: 'AGI System Design: Main Rules for Cursor (Expanded)'
+  status: pending
+  priority: low
+- id: roadmap-28
+  title: See also [Roadmaps Index](ROADMAPS_INDEX.md)
+  status: pending
+  priority: low
+- id: roadmap-29
+  title: "\U0001F9E0 AGI-INTEGRATED BIOLOGICAL BRAIN SIMULATION ROADMAP"
+  status: pending
+  priority: low
+- id: roadmap-30
+  title: "\U0001F9E0 BIOLOGICAL AGI DEVELOPMENT ROADMAP"
+  status: pending
+  priority: low
+- id: roadmap-31
+  title: "\U0001F9E0 ENHANCED BRAIN SIMULATION ROADMAP"
+  status: pending
+  priority: low

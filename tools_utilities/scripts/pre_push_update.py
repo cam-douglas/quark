@@ -94,7 +94,9 @@ def roadmap_summary() -> str:
     done = sum(1 for s in snap.values() if s == "done")
     progress = sum(1 for s in snap.values() if s == "progress")
     planned = sum(1 for s in snap.values() if s == "planned")
-    pending_tasks = len(list(__import__('state.quark_state_system.task_loader').state.quark_state_system.task_loader.get_tasks(status="pending")))
+    from importlib import import_module
+    task_loader = import_module('state.quark_state_system.task_loader')
+    pending_tasks = sum(1 for _ in task_loader.get_tasks(status="pending"))
     abstract = textwrap.dedent(f"""
     **Roadmap Status**  
     Date: {datetime.date.today()}  

@@ -108,6 +108,14 @@ def status_snapshot() -> Dict[str, str]:
         snapshot[mr.get("title", "Master Roadmap")] = ";".join(s["status"] for s in mr.get("statuses", []))
     return snapshot
 
+# ---------------------------------------------------------------------------
+# Back-compat: legacy helpers
+# ---------------------------------------------------------------------------
+
+def get_roadmap_status_map() -> Dict[str, str]:  # pragma: no cover
+    """Legacy alias – maps to status_snapshot() for older callers."""
+    return status_snapshot()
+
 
 if __name__ == "__main__":
     import json, sys
