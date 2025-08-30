@@ -51,32 +51,3 @@ python QUARK_STATE_SYSTEM.py sync
 
 See docs/INDEX.md for a curated map of specifications, guides, and historical reports.
 
-
-
-<!-- ROADMAP_STATUS_START -->
-**Roadmap Status**  
-Date: 2025-08-30  
-Roadmaps: 7 (✅ 0 · 🚧 0 · 📋 0)  
-Pending tasks: 21
-
-* Use `python QUARK_STATE_SYSTEM.py \"update roadmap\"` after editing roadmap files.  
-* Top priorities surfaced via `recommendations` command.  
-* Chat-specified tasks live in `chat_tasks.yaml`.
-
-<!-- ROADMAP_STATUS_END -->
-
-## 🔄 Resource Manager
-Quark includes a self-service **Resource Manager** that automatically validates,
-places, and hot-loads external datasets, models, and code:
-
-```bash
-# List unapproved resources in /data
-quark rm scan
-
-# Approve a pending resource by id
-quark rm approve <RID>
-```
-
-CI status ![Resource-Manager](https://github.com/<ORG>/<REPO>/actions/workflows/resource-manager.yml/badge.svg)
-
-See `docs/RESOURCE_MANAGER_GUIDE.md` for full details.
