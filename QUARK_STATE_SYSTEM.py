@@ -67,12 +67,34 @@ import subprocess
 from pathlib import Path
 
 # --- NEW IMPORTS ---
-# Add the project root to the path to allow for our custom module imports
+# Ensure both project root and ./state are on PYTHONPATH
 import os
+from pathlib import Path
 sys.path.append(os.getcwd())
-from quark_state_system.autonomous_agent import AutonomousAgent
-# task handling
-from quark_state_system.prompt_guardian import PromptGuardian
+STATE_DIR = Path(__file__).resolve().parent / "state"
+sys.path.append(str(STATE_DIR))
+
+# --- Module alias & lazy import helpers ------------------------------------
+import sys as _sys
+from importlib import import_module
+
+# Ensure legacy code importing `quark_state_system.*` continues to work
+try:
+    import state.quark_state_system as _sq
+    _sys.modules.setdefault("quark_state_system", _sq)
+except ModuleNotFoundError:
+    pass
+
+# -- Lazy wrappers ----------------------------------------------------------
+
+def _lazy_import(path: str, attr: str):
+    mod = import_module(path)
+    return getattr(mod, attr)
+
+# Note: AutonomousAgent and PromptGuardian are only needed in specific
+# commands. We defer their import to avoid heavy dependencies during simple
+# sync/update commands.
+# They are fetched via _lazy_import inside the respective functions.
 # goal handling
 from state.quark_state_system import goal_manager
 from management.rules.roadmaps.roadmap_controller import status_snapshot
@@ -164,6 +186,7 @@ def run_autonomous_agent():
     print("=" * 40)
     project_root = os.getcwd()
     try:
+        AutonomousAgent = _lazy_import("state.quark_state_system.autonomous_agent", "AutonomousAgent")
         agent = AutonomousAgent(project_root)
         agent.execute_next_goal()
         print("\nAGENT: Goal cycle complete.")
@@ -176,6 +199,7 @@ def run_prompt_validation():
     print("=" * 40)
     project_root = os.getcwd()
     try:
+        PromptGuardian = _lazy_import("state.quark_state_system.prompt_guardian", "PromptGuardian")
         guardian = PromptGuardian(project_root)
         # This is a sample prompt and action for demonstration purposes.
         # In a real integration, this would come from the user input.
@@ -188,6 +212,16 @@ def run_prompt_validation():
 
 def run_tasks_overview():
     """Show immediate next tasks and gates (entry-point focused)."""
+    # Always sync tasks with the latest roadmap snapshot so the list reflects
+    # the current *master_roadmap* status before we display anything. This keeps
+    # the CLI output aligned with roadmap progress even if the YAML files are
+    # stale or the user hasn't run an explicit `update roadmap` recently.
+    try:
+        from management.rules.roadmaps.roadmap_controller import status_snapshot
+        from state.quark_state_system import task_loader
+        task_loader.sync_with_roadmaps(status_snapshot())
+    except Exception as sync_err:
+        print(f"⚠️  Task sync failed – proceeding with cached tasks: {sync_err}")
     print("📋 QUARK TASKS & GATES")
     print("=" * 40)
     tasks_file = Path("quark_state_system/QUARK_CURRENT_TASKS.md")
@@ -315,7 +349,13 @@ def show_help():
 def main():
     """Main entry point for the QUARK state system."""
     if len(sys.argv) > 1:
-        command = sys.argv[1].lower()
+        # Support natural-language multi-word commands.
+        # If the user prefixes with 'run quark state system', strip it.
+        tokens = [t.lower() for t in sys.argv[1:]]
+        if tokens[:4] == ["run", "quark", "state", "system"]:
+            tokens = tokens[4:]
+        command_raw = " ".join(tokens)
+        command = command_raw.replace("-", " ").lower().strip()
         
         if command == "status":
             run_quick_status()
@@ -332,7 +372,7 @@ def main():
                 print(f"- [{t['priority'].upper()}] {t['title']} (id={t['id']})")
             if not tasks:
                 print("(All roadmap tasks are completed 🎉)")
-        elif command == "sync":
+        elif command in ["sync", "sync quark", "sync quark state"]:
             run_sync()
         elif command in ["proceed", "continue", "evolve", "execute"]:
             nxt = goal_manager.next_goal()
@@ -352,20 +392,15 @@ def main():
         elif command == "help":
             show_help()
             print(f"\n📚 Documentation index available at: {INDEX_PATH}\n")
-        elif command.replace('-', ' ').lower() == "update roadmap":
-            print("🔄 Updating roadmap index & tasks …")
-            # regenerate index
+        elif command in ["update roadmap", "update quark", "update quark state", "refresh roadmap"]:
+            print("🔄 Running full state refresh (roadmap index, task sync, README update)…")
             from subprocess import run, CalledProcessError
             try:
-                run([sys.executable, "tools_utilities/scripts/generate_roadmap_index.py"], check=True)
+                run([sys.executable, "tools_utilities/scripts/pre_push_update.py"], check=True)
             except CalledProcessError as e:
-                print(f"❌ Failed to regenerate roadmap index: {e}")
-
-            # sync tasks
-            from management.rules.roadmaps.roadmap_controller import status_snapshot
-            from state.quark_state_system import task_loader
-            task_loader.sync_with_roadmaps(status_snapshot())
-            print("✅ Roadmap index regenerated and tasks synced.")
+                print(f"❌ State refresh failed: {e}")
+            else:
+                print("✅ Quark state refreshed (index, tasks, README).")
 
         elif command in ["add-chat-task", "add to tasks", "update tasks"]:
             title = " ".join(sys.argv[2:]) if len(sys.argv) > 2 else None

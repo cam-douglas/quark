@@ -2,7 +2,7 @@
 
 🧠 UNIFIED AGI–BIOLOGICAL BRAIN SIMULATION MASTER ROADMAP
 
-A single, production-ready document that merges and reconciles: [AGI_INTEGRATED_ROADMAP.md](management/rules/roadmaps/AGI_INTEGRATED_ROADMAP.md), [ENHANCED_ROADMAP_IMPLEMENTATION.md](management/rules/roadmaps/ENHANCED_ROADMAP_IMPLEMENTATION.md), [HIGH_LEVEL_ROADMAP.md](management/rules/roadmaps/HIGH_LEVEL_ROADMAP.md), [BIOLOGICAL_AGI_DEVELOPMENT_ROADMAP.md](management/rules/roadmaps/BIOLOGICAL_AGI_DEVELOPMENT_ROADMAP.md), and [UNIFIED_AGI_MASTER_ROADMAP_FINAL.md](management/rules/roadmaps/UNIFIED_AGI_MASTER_ROADMAP_FINAL.md). It blends human-readable guidance with machine-readable specs for direct use in engineering and ML training pipelines.
+A single, production-ready document that merges and reconciles: [AGI_INTEGRATED_ROADMAP.md](AGI_INTEGRATED_ROADMAP.md), [ENHANCED_ROADMAP_IMPLEMENTATION.md](ENHANCED_ROADMAP_IMPLEMENTATION.md), [HIGH_LEVEL_ROADMAP.md](HIGH_LEVEL_ROADMAP.md), [BIOLOGICAL_AGI_DEVELOPMENT_ROADMAP.md](BIOLOGICAL_AGI_DEVELOPMENT_ROADMAP.md), and [UNIFIED_AGI_MASTER_ROADMAP_FINAL.md](UNIFIED_AGI_MASTER_ROADMAP_FINAL.md). It blends human-readable guidance with machine-readable specs for direct use in engineering and ML training pipelines.
 
 🎯 Executive Summary
 
@@ -15,7 +15,7 @@ AGI Capability Domains (10): Integrated across architecture & evaluation
 
 Enhanced Brain Launcher: agi_enhanced_brain_launcher.py _(TODO: file not found)_ (entrypoint)
 
-AGI Connectome Config: [agi_enhanced_connectome.yaml](management/configurations/project/agi_enhanced_connectome.yaml) (module graph + neuromodulation buses)
+AGI Connectome Config: [agi_enhanced_connectome.yaml](../../configurations/project/agi_enhanced_connectome.yaml) (module graph + neuromodulation buses)
 
 Optimization Level: High efficiency & robustness (sparse / hierarchical / caching)
 
@@ -636,7 +636,7 @@ Targets: 50%+ coverage, stable cloud burst, replay fidelity
 
 Entry: [brain_simulator.py](../../../brain/architecture/brain_simulator.py) or [embodied_brain_simulation.py](../../../embodied_brain_simulation.py)
 
-Configs: [agi_enhanced_connectome.yaml](management/configurations/project/agi_enhanced_connectome.yaml)
+Configs: [agi_enhanced_connectome.yaml](../../configurations/project/agi_enhanced_connectome.yaml)
 
 Packages:
 
