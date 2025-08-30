@@ -73,6 +73,9 @@ sys.path.append(os.getcwd())
 from quark_state_system.autonomous_agent import AutonomousAgent
 # task handling
 from quark_state_system.prompt_guardian import PromptGuardian
+# goal handling
+from state.quark_state_system import goal_manager
+from management.rules.roadmaps.roadmap_controller import status_snapshot
 # Roadmaps
 from management.rules.roadmaps.roadmap_controller import get_all_roadmaps
 from quark_state_system import task_loader
@@ -316,14 +319,27 @@ def main():
         
         if command == "status":
             run_quick_status()
-            print("\n🗺️  Roadmaps loaded:", len(get_all_roadmaps()))
+            snap = status_snapshot()
+            total = len(snap)
+            remaining = sum(1 for s in snap.values() if s not in ("done", "✅"))
+            print(f"\n🗺️  Roadmaps: {total} (remaining {remaining})")
+            pending = list(task_loader.get_tasks(status="pending"))
+            print(f"📋 Tasks pending: {len(pending)}")
         elif command == "recommendations":
-            print("🔮 TOP PRIORITY TASKS")
-            for t in task_loader.next_actions():
+            print("🔮 TOP PRIORITY TASKS (Roadmap-driven)")
+            tasks = task_loader.next_actions()
+            for t in tasks:
                 print(f"- [{t['priority'].upper()}] {t['title']} (id={t['id']})")
+            if not tasks:
+                print("(All roadmap tasks are completed 🎉)")
         elif command == "sync":
             run_sync()
-        elif command in ["execute", "proceed", "continue", "evolve"]:
+        elif command in ["proceed", "continue", "evolve", "execute"]:
+            nxt = goal_manager.next_goal()
+            if nxt:
+                print(f"🚀 Proceeding with next roadmap goal: {nxt['title']} (prio={nxt['priority']})")
+            else:
+                print("✅ No pending roadmap goals – system is up-to-date.")
             run_autonomous_agent()
         elif command == "validate":
             run_prompt_validation()
@@ -336,6 +352,33 @@ def main():
         elif command == "help":
             show_help()
             print(f"\n📚 Documentation index available at: {INDEX_PATH}\n")
+        elif command.replace('-', ' ').lower() == "update roadmap":
+            print("🔄 Updating roadmap index & tasks …")
+            # regenerate index
+            from subprocess import run, CalledProcessError
+            try:
+                run([sys.executable, "tools_utilities/scripts/generate_roadmap_index.py"], check=True)
+            except CalledProcessError as e:
+                print(f"❌ Failed to regenerate roadmap index: {e}")
+
+            # sync tasks
+            from management.rules.roadmaps.roadmap_controller import status_snapshot
+            from state.quark_state_system import task_loader
+            task_loader.sync_with_roadmaps(status_snapshot())
+            print("✅ Roadmap index regenerated and tasks synced.")
+
+        elif command in ["add-chat-task", "add to tasks", "update tasks"]:
+            title = " ".join(sys.argv[2:]) if len(sys.argv) > 2 else None
+            if not title:
+                print("⚠️  Provide a task title: python QUARK_STATE_SYSTEM.py add-chat-task \"My new task\"")
+                sys.exit(1)
+            from state.quark_state_system.chat_tasks import add_chat_task
+            added = add_chat_task(title)
+            if added.get("duplicate"):
+                print("ℹ️  Task already exists – duplicate skipped.")
+            else:
+                print(f"✅ Chat task added: {title} (priority=medium)")
+            
         else:
             print(f"❌ Unknown command: {command}")
             print("Use 'python QUARK_STATE_SYSTEM.py help' for available commands")

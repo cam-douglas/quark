@@ -23,7 +23,8 @@ from brain.architecture.neural_core.motor_control.basal_ganglia.dopamine_system 
 from brain.architecture.neural_core.proto_cortex.layer_sheet import LayerSheet
 from brain.architecture.neural_core.hippocampus.sleep_consolidation_engine import SleepConsolidationEngine
 from brain.architecture.neural_core.salience_networks.basic_salience_network import BasicSalienceNetwork
-from brain.architecture.neural_core.specialized_networks.default_mode_network.proto_dmn import ProtoDMN
+# Updated path: default mode network moved under neural_core/default_mode_network
+from brain.architecture.neural_core.default_mode_network.proto_dmn import ProtoDMN
 from brain.architecture.neural_core.cognitive_systems.world_model import SimpleWorldModel
 from brain.architecture.neural_core.cognitive_systems.limbic_system import LimbicSystem
 from brain.architecture.neural_core.prefrontal_cortex.meta_controller import MetaController
@@ -102,6 +103,9 @@ except Exception:
 	FuseAdapter = None
 
 from transformers import AutoTokenizer, AutoModelForCausalLM
+from brain.tools.goal_poll import log_next_goal
+
+log_next_goal()
 
 class BrainSimulator:
     """The master controller for orchestrating all brain modules."""
