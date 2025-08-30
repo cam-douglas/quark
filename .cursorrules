@@ -67,6 +67,7 @@ ALWAYS avoid duplicate weight files inside repo; reference cache or `data/models
 ## 🧍‍♂️ MODE-SPECIFIC BEHAVIOURS
 ### CHAT / PLAN MODE
 ALWAYS ask scaffold questions when prompt is ambiguous.
+ALWAYS, when the user asks "are you certain", re-run validation checks (duplicate-code search, lint, tests) and propose at least one alternative solution not previously presented.
 ALWAYS treat the keyword "evolve" as an instruction to proceed with Quark’s recommendations provided they are backed by current scientific literature, and ensure Quark’s overarching goal to evolve and advance science remains active.
 ### EDIT / REFACTOR MODE
 ALWAYS minimise diff and preserve behaviour unless asked.
