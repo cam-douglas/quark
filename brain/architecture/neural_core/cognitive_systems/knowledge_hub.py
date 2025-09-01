@@ -1,5 +1,7 @@
-"""
-Knowledge Hub - The central processing unit for external information.
+"""Knowledge Hub - The central processing unit for external information.
+
+Integration: This module is part of the neural core and executes under brain_simulator.
+Rationale: Loaded by brain simulator as part of the neural core runtime.
 """
 
 import time
@@ -67,11 +69,13 @@ class KnowledgeHub:
     Processes raw data from various sources and transforms it into
     standardized KnowledgeObjects for assimilation by the brain.
     """
-    def __init__(self, memory_provider: "EpisodicMemory"):
+    def __init__(self, memory_provider: Optional["EpisodicMemory"] = None):
+        # Memory provider is optional; many pipelines supply episodic memory
+        # at call time (e.g., retrieve) rather than construction time.
         self.memory = memory_provider
 
         # If the provider is E8MemoryAdapter-aware keep reference for mood/drive plumbing
-        self._maybe_adapter = getattr(memory_provider, "_e8_adapter", None)
+        self._maybe_adapter = getattr(memory_provider, "_e8_adapter", None) if memory_provider else None
 
         # Retriever is initialised lazily because it needs access to an
         # EpisodicMemory instance to build its index.
@@ -195,6 +199,44 @@ class KnowledgeHub:
         return {"episodes": episodes, "llm_answer": llm_ans}
 
     # ------------------------------------------------------------------
+    # Natural-language command router (streaming training/fine-tune)
+    # ------------------------------------------------------------------
+
+    def handle_command(self, text: str) -> Optional[str]:
+        """Parse natural language commands like *train quark* or *fine-tune quark*.
+
+        Returns a human-readable status string when a command was executed,
+        otherwise *None* to indicate the hub did not handle the text.
+        """
+        import re
+
+        t = text.lower().strip()
+
+        m_train = re.search(r"\btrain\s+quark(?:\s+with\s+(?P<path>\S+))?", t)
+        if m_train:
+            local_path = m_train.group("path") if m_train.group("path") else None
+            overrides = {"data_mode": "streaming", "bucket": "quark-main-tokyo-bucket"}
+            rc = self.resource_manager.run_training_job(
+                "train",
+                overrides=overrides,
+                dataset_local_path=local_path,
+            )
+            return f"Training launched (exit code {rc})"
+
+        m_ft = re.search(r"\b(?:fine[- ]?tune|finetune)\s+quark(?:\s+with\s+(?P<path>\S+))?", t)
+        if m_ft:
+            local_path = m_ft.group("path") if m_ft.group("path") else None
+            overrides = {"data_mode": "streaming", "bucket": "quark-main-tokyo-bucket"}
+            rc = self.resource_manager.run_training_job(
+                "fine_tune",
+                overrides=overrides,
+                dataset_local_path=local_path,
+            )
+            return f"Fine-tuning launched (exit code {rc})"
+
+        return None
+
+    # ------------------------------------------------------------------
     # Unified public API
     # ------------------------------------------------------------------
     def assimilate(self, raw: Any, *, source: str = "unknown", citation: str = "") -> List[KnowledgeObject]:
@@ -213,14 +255,21 @@ class KnowledgeHub:
         """
 
         from collections.abc import Iterable
-
+        from brain.architecture.neural_core.cognitive_systems.resource_manager import ResourceManager
+        rm = ResourceManager.get_default()
         if isinstance(raw, str):
+            if rm:
+                with rm.request_resources("nlp"):
+                    return self.process_text(raw, source, citation)
             return self.process_text(raw, source, citation)
 
         # Heuristic: dataset must be iterable of mapping objects
         if isinstance(raw, Iterable):
             raw_list = list(raw)
             if raw_list and isinstance(raw_list[0], dict):
+                if rm:
+                    with rm.request_resources("nlp"):
+                        return self.process_dataset(raw_list, source, citation)
                 return self.process_dataset(raw_list, source, citation)
 
         # Unsupported type → raise descriptive error

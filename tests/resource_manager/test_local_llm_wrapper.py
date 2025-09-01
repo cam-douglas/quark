@@ -7,15 +7,19 @@ present.
 """
 
 from pathlib import Path
-import os
+
 import pytest
+
+pytestmark = pytest.mark.heavy
 
 MODEL_DIR = Path("/Users/camdouglas/quark/data/models/llama2_7b_chat_uncensored")
 
 pytest.importorskip("transformers", reason="transformers not installed – skip LLM tests")
 
 if not MODEL_DIR.exists():
-    pytest.skip("Local Llama2 model not present – skipping LLM integration tests", allow_module_level=True)
+    pytest.skip(
+        "Local Llama2 model not present – skipping LLM integration tests", allow_module_level=True
+    )
 
 from brain.architecture.neural_core.cognitive_systems.local_llm_wrapper import LocalLLMWrapper
 from state.quark_state_system import advanced_planner

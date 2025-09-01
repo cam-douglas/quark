@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
-"""
-Simplified Emergency Shutdown System for Quark
+"""Simplified Emergency Shutdown System for Quark
 
 This is a simplified version that won't freeze.
 Human control is ALWAYS maintained.
+
+Integration: Not simulator-integrated; governance, rules, and roadmap processing.
+Rationale: Consumed by state system to guide behavior; no direct simulator hooks.
 """
 
 import os

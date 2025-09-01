@@ -1,3 +1,9 @@
+
+
+"""
+Integration: Support utilities used by brain/state; indirectly integrated where imported.
+Rationale: Shared helpers (performance, IO, streaming) used across runtime components.
+"""
 import boto3
 import logging
 from pathlib import Path
@@ -84,3 +90,111 @@ class S3StreamingManager:
         except Exception as e:
             self.logger.error(f"❌ Failed to upload directory {local_directory}: {e}")
             return False
+
+# -----------------------------------------------------------------------------
+# Lightweight Streaming Utilities (added 2025-09-01)
+# -----------------------------------------------------------------------------
+from collections import OrderedDict
+import asyncio, time
+import botocore
+import aiohttp
+import aiofiles
+
+class _LRUDiskCache:
+    """Least-recently-used on-disk cache capped by `max_bytes`."""
+
+    def __init__(self, cache_dir: str | Path, max_bytes: int = 20 * 1024**3):
+        self.root = Path(cache_dir).expanduser().resolve()
+        self.root.mkdir(parents=True, exist_ok=True)
+        self.max_bytes = max_bytes
+        self._index: OrderedDict[str, int] = OrderedDict()  # key -> size bytes
+        self._refresh_index()
+
+    def _refresh_index(self):
+        self._index.clear()
+        total = 0
+        for p in sorted(self.root.rglob("*")):
+            if p.is_file():
+                size = p.stat().st_size
+                self._index[str(p)] = size
+                total += size
+        self._trim(total)
+
+    def _trim(self, current: int):
+        while current > self.max_bytes and self._index:
+            path_str, size = self._index.popitem(last=False)
+            try:
+                Path(path_str).unlink(missing_ok=True)
+                current -= size
+            except Exception:
+                break
+
+    def get_path(self, key: str) -> Path:
+        path = self.root / key
+        path.parent.mkdir(parents=True, exist_ok=True)
+        if path.exists():
+            # move to end (most recently used)
+            size = path.stat().st_size
+            self._index.pop(str(path), None)
+            self._index[str(path)] = size
+        return path
+
+
+class StreamingManager:
+    """On-demand downloader with async prefetch + disk-based LRU cache.
+
+    Example
+    -------
+    >>> sm = StreamingManager(bucket="quark-main-tokyo-bucket")
+    >>> with sm.open("datasets/myset/train-00001.parquet") as fh:
+    ...     data = fh.read()
+    """
+
+    def __init__(self, bucket: str, cache_dir: str = "~/.cache/quark_stream", max_cache_gb: int = 20):
+        self.bucket = bucket
+        self.s3 = boto3.client("s3")
+        self.cache = _LRUDiskCache(cache_dir, max_cache_gb * 1024**3)
+        self.logger = logging.getLogger(__name__ + ".stream")
+
+    # ------------------------------------------------------------------
+    # Public helpers
+    # ------------------------------------------------------------------
+    def open(self, key: str, binary: bool = True):
+        """Return a readable file handle. Downloads to cache if missing."""
+        path = self.cache.get_path(key)
+        if not path.exists():
+            self._download(path, key)
+        mode = "rb" if binary else "r"
+        return path.open(mode)
+
+    async def prefetch(self, keys: list[str]):
+        """Asynchronously download a list of keys into the cache."""
+        loop = asyncio.get_event_loop()
+        await asyncio.gather(*(loop.run_in_executor(None, self._download, self.cache.get_path(k), k) for k in keys))
+
+    # ------------------------------------------------------------------
+    # Internal
+    # ------------------------------------------------------------------
+    _MAX_RETRIES = 5
+
+    def _download(self, path: Path, key: str):
+        if path.exists():
+            return  # already cached
+
+        tmp_path = path.with_suffix(".part")
+        tmp_path.parent.mkdir(parents=True, exist_ok=True)
+
+        for attempt in range(1, self._MAX_RETRIES + 1):
+            try:
+                self.s3.download_file(self.bucket, key, str(tmp_path))
+                tmp_path.rename(path)
+                self.logger.debug("Downloaded %s to %s", key, path)
+                return
+            except botocore.exceptions.BotoCoreError as e:
+                self.logger.warning("Download failed (%d/%d) for %s: %s", attempt, self._MAX_RETRIES, key, e)
+                if attempt == self._MAX_RETRIES:
+                    self.logger.error("Giving up on %s", key)
+                    if tmp_path.exists():
+                        tmp_path.unlink(missing_ok=True)
+                    raise
+                time.sleep(2 ** attempt)  # exponential back-off

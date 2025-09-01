@@ -1,0 +1,51 @@
+# docs
+
+Path: `docs`
+
+Purpose: Documentation: architecture, integration guides, specifications, and reports.
+
+## Subdirectories
+- historical/
+- maintenance/
+- notebooks/
+- overview/
+- reports/
+- setup_guides/
+- specs/
+
+## Files
+- AUTO_LLM_BRAIN_INTEGRATION.md
+- BALSA_TRAINING_README.md
+- CLOUD_COGNITIVE_INTEGRATION_README.md
+- CLOUD_OFFLOAD_README.md
+- CLOUD_STORAGE_STRATEGY.md
+- CONTINUOUS_MODE.md
+- DATASET_INTEGRATION_README.md
+- DBRX_CLOUD_INTEGRATION_GUIDE.md
+- DBRX_INTEGRATION_GUIDE.md
+- DNA_CONTROLLER_README.md
+- DRUG_DISCOVERY_TRAINING_README.md
+- Docker.rst
+- E8_KALEIDESCOPE_INTEGRATION.md
+- ENHANCED_ROADMAP_IMPLEMENTATION.md
+- FULL_WIKIPEDIA_IMPLEMENTATION_SUMMARY.md
+- FULL_WIKIPEDIA_TRAINING_GUIDE.md
+- GLE_WIN32_README.txt
+- GPT5_KNOWLEDGE_BASE_TRAINER.md
+- IMPORT_UPDATE_REPORT.md
+- INDEX.md
+- KNOWLEDGE_BASE_INTEGRATION.md
+- LLAMA2_BRAIN_INTEGRATION.md
+- NEMOTRON_INTEGRATION_GUIDE.md
+- PseudocolorPlot_1.rst
+- README-msi_1.txt
+- README-paraDIS_lib.txt
+- README.md
+- RESOURCE_MANAGER_GUIDE.md
+- RESOURCE_MONITOR_SETUP.md
+- RULES_ORGANIZATION_SUMMARY.md
+- (+29 more)
+
+## Links
+- [Root README](README.md)
+- [Repo Index](repo_index.json)

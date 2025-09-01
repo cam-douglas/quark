@@ -41,3 +41,14 @@ If you distribute Quark with the flag on you must comply with GPL-3.0 for deriva
 ---
 
 _Last updated: {{DATE}}_
+
+## Test policy
+
+Fast local/CI runs skip heavy-import tests using the marker:
+```bash
+pytest -m "not heavy" -q  # excludes brain_simulator smoke test
+```
+A dedicated CI job executes the heavy group:
+```bash
+pytest -m heavy -q tests/brain_simulator
+```

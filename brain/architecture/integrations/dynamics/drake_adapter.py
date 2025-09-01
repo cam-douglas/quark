@@ -1,7 +1,9 @@
-"""
-Drake Adapter
+"""Drake Adapter
 Rigid-body dynamics, planning tools placeholder.
 Source: https://github.com/RobotLocomotion/drake
+
+Integration: This module is indirectly invoked by simulators/agents through adapter or tooling calls.
+Rationale: Adapter layer used by simulators to interface external libraries.
 """
 
 class DrakeAdapter:

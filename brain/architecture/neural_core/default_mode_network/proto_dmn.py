@@ -1,6 +1,8 @@
-"""
-Proto Default Mode Network (DMN) - Phase 2 Prototype
+"""Proto Default Mode Network (DMN) - Phase 2 Prototype
 Handles internal simulation and replay of learned patterns.
+
+Integration: This module is part of the neural core and executes under brain_simulator.
+Rationale: Loaded by brain simulator as part of the neural core runtime.
 """
 
 import numpy as np

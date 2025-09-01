@@ -4,6 +4,9 @@
 Usage:
     python tools_utilities/scripts/link_validate.py [path ...]
 If no path is supplied, defaults to management/rules/roadmaps/ directory.
+
+Integration: Not simulator-integrated; repository tooling for indexing, validation, or CI.
+Rationale: Executed by developers/CI to maintain repo health; not part of runtime simulator loop.
 """
 from __future__ import annotations
 import re

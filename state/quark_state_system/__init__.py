@@ -6,6 +6,9 @@ external code can simply do::
     from state.quark_state_system import next_steps
 
 and remain agnostic to the file-system re-organisation.
+
+Integration: Indirect integration via QuarkDriver and AutonomousAgent; orchestrates simulator runs.
+Rationale: State system validates, plans, and triggers actions that the simulator executes.
 """
 from importlib import import_module
 from types import ModuleType

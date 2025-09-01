@@ -4,6 +4,9 @@ The implementation is intentionally minimalistic to avoid adding large
 third-party libraries (e.g., scikit-learn) into the core brain package.
 If you later decide to switch to a more sophisticated encoder, replace
 this module while keeping the public interface intact.
+
+Integration: This module is part of the neural core and executes under brain_simulator.
+Rationale: Loaded by brain simulator as part of the neural core runtime.
 """
 
 from __future__ import annotations

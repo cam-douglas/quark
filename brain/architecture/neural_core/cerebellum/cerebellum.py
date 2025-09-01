@@ -1,6 +1,8 @@
-"""
-Cerebellum Module - Phase 3 Prototype
+"""Cerebellum Module - Phase 3 Prototype
 Provides fine-tuning and coordination for motor and cognitive actions.
+
+Integration: This module is part of the neural core and executes under brain_simulator.
+Rationale: Loaded by brain simulator as part of the neural core runtime.
 """
 
 from typing import Any

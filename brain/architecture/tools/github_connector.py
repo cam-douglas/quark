@@ -1,5 +1,7 @@
-"""
-A connector for the GitHub API to search for code and repositories.
+"""A connector for the GitHub API to search for code and repositories.
+
+Integration: This module is indirectly invoked by simulators/agents through adapter or tooling calls.
+Rationale: Operational tooling invoked by agents/simulators when required.
 """
 
 import requests

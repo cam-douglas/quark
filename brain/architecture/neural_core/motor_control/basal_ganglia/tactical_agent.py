@@ -1,3 +1,9 @@
+
+
+"""
+Integration: This module is part of the neural core and executes under brain_simulator.
+Rationale: Loaded by brain simulator as part of the neural core runtime.
+"""
 # brain_architecture/neural_core/motor_control/basal_ganglia/tactical_agent.py
 """
 Purpose: Implements a Reinforcement Learning agent specialized for rapid,

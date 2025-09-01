@@ -1,6 +1,8 @@
-"""
-Basic Salience Network - Phase 2 Prototype
+"""Basic Salience Network - Phase 2 Prototype
 Detects novel or important stimuli to guide attention.
+
+Integration: This module is part of the neural core and executes under brain_simulator.
+Rationale: Loaded by brain simulator as part of the neural core runtime.
 """
 
 import numpy as np

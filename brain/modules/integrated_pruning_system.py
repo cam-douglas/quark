@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-"""
-Integrated Biological Pruning System
+"""Integrated Biological Pruning System
 ===================================
 
 Combines fast duplicate detection, comprehensive redundancy analysis,
@@ -10,6 +9,9 @@ and real-time progress rate logging.
 
 Author: Quark Brain Architecture
 Date: 2024
+
+Integration: Not directly invoked by brain simulator; participates via imports or supporting workflows.
+Rationale: Module is used by other components; no standalone simulator hook is required.
 """
 
 import os
@@ -22,7 +24,10 @@ from datetime import datetime, timedelta
 import shutil
 
 # Import our specialized modules
-from fast_duplicate_detector import find_duplicates_optimized, find_backup_cache_files
+try:
+    from brain.modules.fast_duplicate_detector import find_duplicates_optimized, find_backup_cache_files
+except Exception:
+    from fast_duplicate_detector import find_duplicates_optimized, find_backup_cache_files  # type: ignore
 from redundancy_detector import RedundancyDetector
 
 # Import Wolfram mathematical optimization

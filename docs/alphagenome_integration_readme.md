@@ -393,3 +393,19 @@ For issues or questions:
 ---
 
 **Note**: This integration provides both real AlphaGenome capabilities and comprehensive simulation modes, ensuring your brain simulation can continue development regardless of API availability.
+
+## ✅ Compliance Checklist (Alphagenome Criteria)
+
+- Interfaces with biological simulation or brain-module ML components follow Alphagenome domain rules
+  - Naming conventions and unit balances verified
+  - Biological constraints enforced (markers, stages, diffusion limits)
+- Edge-case tests included (malformed genome strings, boundary diffusion parameters)
+- Reference modules loaded at session start:
+  - `brain/modules/alphagenome_integration/biological_simulator.py`
+  - `dna_controller.py`, `genome_analyzer.py`, `cell_constructor.py`
+- Design aligns with this document and `.cursorrules`
+
+## 🔗 Simulator Integration Rationale
+
+- Primary integration via `brain/architecture/brain_simulator.py` APIs during development and analysis.
+- For offline analyses, results are persisted and consumed by the simulator on load; rationale documented here.

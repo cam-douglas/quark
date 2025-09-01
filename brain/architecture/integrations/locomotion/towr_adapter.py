@@ -1,7 +1,9 @@
-"""
-TOWR Adapter
+"""TOWR Adapter
 Trajectory Optimization for legged robots (gait seeds/footstep plans).
 Source: https://github.com/ethz-adrl/towr
+
+Integration: This module is indirectly invoked by simulators/agents through adapter or tooling calls.
+Rationale: Adapter layer used by simulators to interface external libraries.
 """
 from typing import Dict
 import numpy as np

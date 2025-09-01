@@ -1,9 +1,11 @@
-"""
-Dataset Integration Module for Quark's Learning Systems
+"""Dataset Integration Module for Quark's Learning Systems
 Integrates training datasets from:
 1. LLM-IK: Inverse kinematics solutions from LLMs
 2. LLM Articulated Manipulation: Human demonstrations and LLM planning data
 3. PartNet-Mobility: Large-scale articulated object dataset
+
+Integration: This module is part of the neural core and executes under brain_simulator.
+Rationale: Loaded by brain simulator as part of the neural core runtime.
 """
 
 import os

@@ -1,0 +1,8 @@
+652f0e2d8c1555c3:
+  approved: true
+  integrated_path: /Users/camdouglas/quark/data/models/llama2_7b_chat_uncensored
+  license: null
+  name: llama2_7b_chat_uncensored
+  path: /Users/camdouglas/quark/data/models/llama2_7b_chat_uncensored
+  size_bytes: 107816253624
+  type: model

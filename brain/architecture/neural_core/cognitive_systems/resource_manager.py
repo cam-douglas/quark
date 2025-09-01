@@ -1,22 +1,13 @@
-# FILE HEADER
+
+
 """
+Integration: This module is part of the neural core and executes under brain_simulator.
+Rationale: Loaded by brain simulator as part of the neural core runtime.
+
 Resource Manager
 ----------------
-Purpose:
-    Centralized module responsible for registering, sandbox-validating, and integrating external
-    "resources" (code, datasets, models, configs) into the Quark brain infrastructure.
-Inputs:
-    • register_resource(path: str, metadata: dict | None) – called by ingestion pipeline or manually
-Outputs:
-    • Integration of the resource into correct repo directory + callback into active simulators.
-Seeds / Reproducibility:
-    All hash operations default to SHA-256; random sampling seeded by `QUARK_SEED` env var.
-Dependencies:
-    Standard library only for the MVP (hashlib, shutil, pathlib, importlib).
-TODOs:
-    – Add plugin discovery for domain-specific integrators
-    – Add async queue & background worker
-    – Add configurable storage backend (SQLite / YAML)
+Centralized module responsible for registering, sandbox-validating, and integrating external
+"resources" (code, datasets, models, configs) into the Quark brain infrastructure.
 """
 
 from __future__ import annotations
@@ -41,10 +32,13 @@ except ImportError:  # Optional dependency; fallback
         pass
 import subprocess, tempfile
 import re
+# New imports for streaming training integration
+from shutil import which
+
 # ---------------------------------------------------------------------------
 # Constants & Globals
 # ---------------------------------------------------------------------------
-_REPO_ROOT = Path(__file__).resolve().parents[5]  # /quark
+_REPO_ROOT = Path(__file__).resolve().parents[4]  # /quark
 _DATA_DIR = _REPO_ROOT / "data"
 _CONFIG_DIR = _REPO_ROOT / "management" / "configurations" / "resource_manager"
 _CONFIG_DIR.mkdir(parents=True, exist_ok=True)
@@ -101,6 +95,22 @@ class ResourceManager:
 
         self.plugins = get_plugins()
 
+        # ------------------------------------------------------------------
+        # Lightweight resource buckets (CPU/RAM placeholder)
+        # ------------------------------------------------------------------
+        import threading
+
+        self.BUCKET_LIMITS = {
+            "nlp": int(os.environ.get("QUARK_RM_NLP_LIMIT", 2)),
+            "io": int(os.environ.get("QUARK_RM_IO_LIMIT", 4)),
+            "background": int(os.environ.get("QUARK_RM_BG_LIMIT", 8)),
+        }
+        # Convert zeros / negatives to 1
+        self._semaphores = {
+            name: threading.BoundedSemaphore(value=max(1, cap))
+            for name, cap in self.BUCKET_LIMITS.items()
+        }
+
         # Start autoscan if enabled in default config
         if auto_scan:
             self.autoscanner = AutoScanner(_DATA_DIR, interval_sec)
@@ -108,9 +118,161 @@ class ResourceManager:
         else:
             self.autoscanner = None
 
+        # Register as global default if none exists
+        if not getattr(ResourceManager, "_DEFAULT", None):
+            ResourceManager._DEFAULT = self
+
+    # ------------------------------------------------------------------
+    # Streaming-aware training / fine-tuning launcher (Phase 3)
+    # ------------------------------------------------------------------
+
+    def _launch_quark_cli(self, verb: str, overrides: dict[str, str] | None = None) -> int:
+        """Run quark_cli with the given verb ("train" or "fine-tune")."""
+        overrides = overrides or {}
+        cli_path = _REPO_ROOT / "tools_utilities/scripts/quark_cli.py"
+        if not cli_path.exists():
+            logger.error("quark_cli.py not found at %s", cli_path)
+            return 1
+
+        override_args = []
+        for k, v in overrides.items():
+            override_args += ["--override", f"{k}={v}"]
+
+        cmd = [sys.executable, str(cli_path), f"{verb} quark"] + override_args
+        logger.info("Launching %s", " ".join(cmd))
+        try:
+            completed = subprocess.run(cmd, check=False)
+            return completed.returncode
+        except Exception as e:
+            logger.error("Failed to launch quark_cli: %s", e)
+            return 1
+
+    # Public API
+    def run_training_job(self, task_type: str, overrides: Optional[dict[str, str]] = None, dataset_local_path: Optional[str] = None) -> int:
+        """Unified entry for training or fine-tuning.
+
+        Parameters
+        ----------
+        task_type : str
+            "train" or "fine_tune" / "finetune" (case-insensitive).
+        overrides : dict, optional
+            Key-value pairs forwarded to quark_cli via --override.
+        """
+        task_type_l = task_type.lower()
+
+        # If caller passes a local dataset path, convert to S3-relative prefix
+        if dataset_local_path:
+            local_p = Path(dataset_local_path).expanduser().resolve()
+            try:
+                relative = local_p.relative_to(_REPO_ROOT)
+            except ValueError:
+                # Path outside repo – fall back to basename
+                relative = local_p.name
+            prefix = str(relative).strip("/") + "/"
+            overrides = overrides.copy() if overrides else {}
+            overrides.setdefault("train_prefix", prefix)
+
+        if task_type_l in {"train", "training"}:
+            return self._launch_quark_cli("train", overrides)
+        elif task_type_l in {"fine_tune", "finetune", "fine-tune"}:
+            return self._launch_quark_cli("fine-tune", overrides)
+        else:
+            logger.warning("Unknown task_type %s – falling back to legacy path", task_type)
+            # legacy behaviour placeholder
+            return 0
+
+    # ------------------------------------------------------------------
+    # Model checkpoint persistence
+    # ------------------------------------------------------------------
+    def register_model_checkpoint(self, ckpt_path: Path, name: str = "latest-quark-model") -> Path:
+        """Copy checkpoint to /data/models/ and update registry."""
+        dest_dir = _REPO_ROOT / "data" / "models"
+        dest_dir.mkdir(parents=True, exist_ok=True)
+        dest_path = dest_dir / ckpt_path.name
+        try:
+            shutil.copy2(ckpt_path, dest_path)
+            # update registry
+            self.registry.setdefault("models", {})[name] = str(dest_path)
+            import yaml, datetime
+            self._registry_path.write_text(yaml.safe_dump(self.registry))
+            logger.info("Stored model %s at %s", name, dest_path)
+            return dest_path
+        except Exception as e:
+            logger.error("Failed to store checkpoint: %s", e)
+            return ckpt_path
+
+    # ------------------------------------------------------------------
+    # StreamingManager access helper
+    # ------------------------------------------------------------------
+    def get_streaming_manager(self, bucket: str):
+        """Return (and cache) a StreamingManager for *bucket*."""
+        from utilities.s3_streaming_manager import S3StreamingManager as _SM  # local import to avoid heavy deps on import time
+        if not hasattr(self, "_sm_cache"):
+            self._sm_cache = {}
+        if bucket not in self._sm_cache:
+            self._sm_cache[bucket] = _SM(bucket_name=bucket)
+        return self._sm_cache[bucket]
+
+    # ------------------------------------------------------------------
+    # Global accessor
+    # ------------------------------------------------------------------
+    _DEFAULT = None  # type: Optional["ResourceManager"]
+
+    @classmethod
+    def get_default(cls) -> "ResourceManager | None":
+        return cls._DEFAULT
+
     # ------------------------------------------------------------------
     # Public API
     # ------------------------------------------------------------------
+    from contextlib import contextmanager
+
+    @contextmanager
+    def request_resources(self, bucket: str = "background"):
+        """Context-manager to reserve a resource token from *bucket*.
+
+        Usage::
+            with resource_manager.request_resources("nlp"):
+                heavy_llm_call()
+        """
+        sem = self._semaphores.get(bucket, self._semaphores["background"])
+        acquired = sem.acquire(timeout=float(os.environ.get("QUARK_RM_TIMEOUT", "300")))
+        if not acquired:
+            raise RuntimeError(f"ResourceManager timeout waiting for bucket '{bucket}'.")
+        try:
+            yield
+        finally:
+            sem.release()
+
+    # ------------------------------------------------------------------
+    def set_bucket_limit(self, bucket: str, limit: int):
+        if limit <= 0:
+            raise ValueError("limit must be positive")
+        import threading
+        diff = limit - self.BUCKET_LIMITS.get(bucket, 0)
+        if bucket not in self._semaphores:
+            self._semaphores[bucket] = threading.BoundedSemaphore(value=limit)
+        else:
+            # Adjust semaphore by releasing or acquiring to match new capacity
+            sem = self._semaphores[bucket]
+            if diff > 0:
+                for _ in range(diff):
+                    sem.release()
+            elif diff < 0:
+                for _ in range(-diff):
+                    sem.acquire(blocking=False)
+        self.BUCKET_LIMITS[bucket] = limit
+
+    def get_stats(self):
+        """Return current bucket utilisation stats."""
+        out = {}
+        for name, sem in self._semaphores.items():
+            out[name] = {
+                "capacity": self.BUCKET_LIMITS[name],
+                "available": sem._value,  # noqa: SLF001 – internal ok for stats
+            }
+        return out
+
     def register_resource(self, path: str | Path, metadata: Optional[Dict[str, Any]] = None) -> str:
         """Hash the resource, persist minimal metadata, and attempt integration.
 
@@ -171,8 +333,23 @@ class ResourceManager:
                 return
 
         # --- Decide placement directory ---
+        # Prefer explicit domain from metadata when provided
+        domain = None
+        t = meta.get("type") if isinstance(meta, dict) else None
+        if isinstance(t, str):
+            t_lower = t.lower()
+            # Map common types to directory names
+            mapping = {
+                "model": "models",
+                "dataset": "datasets",
+                "mesh": "meshes",
+                "memory": "memories",
+                "misc": "misc",
+            }
+            domain = mapping.get(t_lower)
+
         if size > 200 * 2**20:
-            target_base = _DATA_DIR / self._infer_domain(src)
+            target_base = _DATA_DIR / (domain or self._infer_domain(src))
         else:
             target_base = _REPO_ROOT / "brain" / "externals" / src.stem
         target_base.mkdir(parents=True, exist_ok=True)
@@ -190,6 +367,16 @@ class ResourceManager:
             return
         except ValueError:
             pass  # need to copy
+
+        # Test-mode gate to avoid heavy copies during CI/unit tests
+        if os.environ.get("QUARK_SKIP_MODEL_COPY_FOR_TESTS", "") == "1":
+            meta["integrated_path"] = str(src)
+            meta["approved"] = True
+            self._persist_registry()
+            logger.info("Test mode: skipping copy for %s", src)
+            hub.emit("resource_integrated", id=resource_id, path=str(src))
+            self._notify_simulators(resource_id, meta)
+            return
 
         target = target_base / src.name
 

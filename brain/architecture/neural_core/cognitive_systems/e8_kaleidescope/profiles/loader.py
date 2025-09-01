@@ -1,6 +1,17 @@
 
+
+
+"""
+Integration: This module is part of the neural core and executes under brain_simulator.
+Rationale: Loaded by brain simulator as part of the neural core runtime.
+"""
 import importlib.util, os, yaml
-from .base_interfaces import SemanticsPlugin, PromptPack
+try:
+    # Package import (preferred)
+    from brain.architecture.neural_core.cognitive_systems.e8_kaleidescope.profiles.base_interfaces import SemanticsPlugin, PromptPack
+except Exception:
+    # Fallback to relative when loaded as a package module
+    from .base_interfaces import SemanticsPlugin, PromptPack  # type: ignore
 
 def _load_py(path: str):
     spec = importlib.util.spec_from_file_location("plugin_mod", path)

@@ -1,7 +1,10 @@
-import tempfile
 from pathlib import Path
 
-from brain.architecture.neural_core.cognitive_systems.resource_manager import ResourceManager, compute_sha256
+from brain.architecture.neural_core.cognitive_systems.resource_manager import (
+    ResourceManager,
+    compute_sha256,
+)
+
 
 def test_register_and_approve(tmp_path):
     # Create a dummy small file
@@ -16,6 +19,7 @@ def test_register_and_approve(tmp_path):
     meta = rm.registry[rid]
     assert meta["approved"] is True
     assert Path(meta["integrated_path"]).exists()
+
 
 def test_hash_util(tmp_path):
     f = tmp_path / "data.bin"

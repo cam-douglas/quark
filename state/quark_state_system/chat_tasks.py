@@ -11,7 +11,11 @@ def _next_chat_id() -> str:
 
 
 def add_chat_task(title: str, priority: str = "medium") -> Dict:
-    """Append a chat-driven task (if not duplicate) and persist to YAML."""
+    """Append a chat-driven task (if not duplicate) and persist to YAML.
+
+Integration: Indirect integration via QuarkDriver and AutonomousAgent; orchestrates simulator runs.
+Rationale: State system validates, plans, and triggers actions that the simulator executes.
+"""
     if any(t.get("title") == title for t in task_loader._TASKS):
         return {"duplicate": True}
 

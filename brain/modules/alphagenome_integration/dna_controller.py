@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
-"""
-DNA Controller Module for AlphaGenome Integration
+"""DNA Controller Module for AlphaGenome Integration
 Controls DNA sequence analysis and regulatory prediction using Google DeepMind's AlphaGenome
 Follows biological development criteria for Quark project
+
+Integration: This module participates in biological workflows via BiologicalSimulator and related analyses.
+Rationale: Biological modules used via BiologicalSimulator and downstream analyses.
 """
 
 import sys

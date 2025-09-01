@@ -1,7 +1,9 @@
-"""
-Brain Stem
+"""Brain Stem
 The most fundamental component of the brain, responsible for regulating autonomic
 functions and acting as the primary signal relay between the brain and the body.
+
+Integration: This module is part of the neural core and executes under brain_simulator.
+Rationale: Loaded by brain simulator as part of the neural core runtime.
 """
 from typing import Dict, Any
 

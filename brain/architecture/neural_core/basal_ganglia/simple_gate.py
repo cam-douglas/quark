@@ -4,6 +4,9 @@
 Implements a *focused selection* mechanism (Mink 1996) where multiple
 candidate action channels compete.  The gate forwards only the channel
 with the highest salience above a threshold.
+
+Integration: This module is part of the neural core and executes under brain_simulator.
+Rationale: Loaded by brain simulator as part of the neural core runtime.
 """
 
 from __future__ import annotations

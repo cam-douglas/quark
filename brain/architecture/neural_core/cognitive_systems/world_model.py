@@ -1,6 +1,8 @@
-"""
-World Model - Phase 3 Prototype
+"""World Model - Phase 3 Prototype
 A simple predictive model of the environment to detect novelty.
+
+Integration: This module is part of the neural core and executes under brain_simulator.
+Rationale: Loaded by brain simulator as part of the neural core runtime.
 """
 
 import numpy as np

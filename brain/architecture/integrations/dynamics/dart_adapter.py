@@ -1,7 +1,9 @@
-"""
-DART Adapter
+"""DART Adapter
 Dynamics and kinematics placeholder.
 Source: https://github.com/dartsim/dart
+
+Integration: This module is indirectly invoked by simulators/agents through adapter or tooling calls.
+Rationale: Adapter layer used by simulators to interface external libraries.
 """
 
 class DARTAdapter:

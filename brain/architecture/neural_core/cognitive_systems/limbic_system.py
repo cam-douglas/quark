@@ -1,7 +1,9 @@
-"""
-Limbic System
+"""Limbic System
 Generates objective motivational signals based on sensory input and goal achievement.
 This system explicitly avoids creating negative emotional states.
+
+Integration: This module is part of the neural core and executes under brain_simulator.
+Rationale: Loaded by brain simulator as part of the neural core runtime.
 """
 import numpy as np
 from typing import Dict, Any

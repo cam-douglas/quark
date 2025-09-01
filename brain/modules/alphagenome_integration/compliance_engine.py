@@ -1,5 +1,4 @@
-"""
-AlphaGenome Compliance Engine
+"""AlphaGenome Compliance Engine
 
 This engine is responsible for enforcing the biological constraints defined in 
 management/rules/biological_constraints.py.
@@ -7,6 +6,9 @@ management/rules/biological_constraints.py.
 It provides a set of validation functions that other modules, particularly the 
 Autonomous Agent, can use to ensure all actions are compliant with the project's
 biological and safety rules before execution.
+
+Integration: This module participates in biological workflows via BiologicalSimulator and related analyses.
+Rationale: Biological modules used via BiologicalSimulator and downstream analyses.
 """
 import management.rules.biological_constraints as constraints
 

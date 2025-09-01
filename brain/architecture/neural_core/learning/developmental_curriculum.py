@@ -1,6 +1,8 @@
-"""
-Developmental Motor Curriculum System
+"""Developmental Motor Curriculum System
 Trains Quark like a human baby with progressive motor milestones
+
+Integration: This module is part of the neural core and executes under brain_simulator.
+Rationale: Loaded by brain simulator as part of the neural core runtime.
 """
 
 import numpy as np

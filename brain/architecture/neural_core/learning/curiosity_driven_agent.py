@@ -1,6 +1,8 @@
-"""
-Curiosity-Driven Reinforcement Learning Agent
+"""Curiosity-Driven Reinforcement Learning Agent
 An agent that is intrinsically motivated to explore novel states and actions.
+
+Integration: This module is part of the neural core and executes under brain_simulator.
+Rationale: Loaded by brain simulator as part of the neural core runtime.
 """
 import numpy as np
 from collections import defaultdict

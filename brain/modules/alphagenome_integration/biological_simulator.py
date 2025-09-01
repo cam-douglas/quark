@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
-"""
-Biological Simulator Module for AlphaGenome Integration
+"""Biological Simulator Module for AlphaGenome Integration
 Simulates biological development processes using AlphaGenome regulatory predictions
 Integrates DNA controller, cell constructor, and genome analyzer for comprehensive simulation
 Follows biological development criteria for Quark project
+
+Integration: This module participates in biological workflows via BiologicalSimulator and related analyses.
+Rationale: Biological modules used via BiologicalSimulator and downstream analyses.
 """
 
 import sys

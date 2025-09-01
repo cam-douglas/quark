@@ -1,5 +1,12 @@
-import importlib, sys, types, subprocess, pathlib, shutil, os
+import importlib
+import pathlib
+import shutil
+import subprocess
+import sys
+
 import pytest
+
+pytestmark = pytest.mark.heavy
 
 PROJECT_ROOT = pathlib.Path(__file__).resolve().parents[2]
 SCRIPT = PROJECT_ROOT / "tools_utilities" / "scripts" / "pre_push_update.py"
@@ -9,10 +16,12 @@ def test_script_runs_without_error(tmp_path):
     # copy repo subset to tmp to avoid mutating real files
     tmp_repo = tmp_path / "repo"
     shutil.copytree(PROJECT_ROOT, tmp_repo, dirs_exist_ok=True)
-    result = subprocess.run([
-        sys.executable,
-        str(tmp_repo / "tools_utilities" / "scripts" / "pre_push_update.py"),
-    ])
+    result = subprocess.run(
+        [
+            sys.executable,
+            str(tmp_repo / "tools_utilities" / "scripts" / "pre_push_update.py"),
+        ]
+    )
     assert result.returncode == 0
 
 

@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
-"""
-Direct MuJoCo Simulation Runner for Quark
+"""Direct MuJoCo Simulation Runner for Quark
 
 This script provides a self-contained way to run and visualize Quark's
 embodied agent in a MuJoCo simulation, bypassing the need for a separate
 server/client architecture. It directly integrates the cognitive core with
 the simulation loop and renders using the native MuJoCo viewer.
+
+Integration: Not directly invoked by brain simulator; participates via imports or supporting workflows.
+Rationale: Module is used by other components; no standalone simulator hook is required.
 """
 
 import mujoco

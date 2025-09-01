@@ -6,6 +6,9 @@ API:
 
 On every call, it refreshes tasks by syncing with roadmap status so the
 view is always up-to-date.
+
+Integration: Indirect integration via QuarkDriver and AutonomousAgent; orchestrates simulator runs.
+Rationale: State system validates, plans, and triggers actions that the simulator executes.
 """
 from __future__ import annotations
 from pathlib import Path
@@ -13,6 +16,8 @@ from typing import Dict, Optional
 
 from management.rules.roadmaps.roadmap_controller import status_snapshot
 from . import task_loader
+from state.quark_state_system.advanced_planner import plan as llm_plan
+from brain.tools.task_bridge import TASK_BRIDGE
 
 
 # ---------------------------------------------------------------------------
@@ -28,7 +33,20 @@ def next_goal() -> Optional[Dict]:
     """Return the highest-priority pending task or None."""
     _refresh()
     tasks = task_loader.next_actions(limit=1)
-    return tasks[0] if tasks else None
+    if not tasks:
+        return None
+    task = tasks[0]
+    # Auto-break large task into sub-goals using planner
+    if len(task["title"].split()) > 12:
+        try:
+            sub = llm_plan(task["title"])
+            if sub:
+                # replace with first subtask and push remainder back into pool
+                task_loader.push_front([s["title"] for s in sub[1:]])  # type: ignore
+                task["title"] = sub[0]["title"]
+        except Exception:  # pragma: no cover – fallback silently
+            pass
+    return task
 
 
 def complete(task_id: str) -> None:
@@ -36,6 +54,7 @@ def complete(task_id: str) -> None:
     for task in task_loader._TASKS:  # pylint: disable=protected-access
         if task.get("id") == task_id:
             task["status"] = "completed"
+            TASK_BRIDGE.mark_done(task["title"])  # propagate DONE to roadmap/chat files
             break
     # Persist change by rewriting YAML it belongs to
     prio = task.get("priority", "medium")

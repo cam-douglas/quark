@@ -5,6 +5,9 @@ Sources:
 - Task YAMLs via state.quark_state_system.task_loader
 
 Produces/overwrites QUARK_STATE.md located in same directory.
+
+Integration: Indirect integration via QuarkDriver and AutonomousAgent; orchestrates simulator runs.
+Rationale: State system validates, plans, and triggers actions that the simulator executes.
 """
 from __future__ import annotations
 
@@ -16,7 +19,7 @@ from importlib import import_module
 roadmap_ctrl = import_module("management.rules.roadmaps.roadmap_controller")
 loader = import_module("state.quark_state_system.task_loader")
 
-REPORT_PATH = Path(__file__).resolve().parent / "QUARK_STATE.md"
+REPORT_PATH = Path(__file__).resolve().parent / "quark_state_system.md"
 
 
 def build_report() -> str:

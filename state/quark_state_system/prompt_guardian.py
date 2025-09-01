@@ -1,9 +1,11 @@
-"""
-Quark Prompt Guardian
+"""Quark Prompt Guardian
 
 This module acts as a crucial validation layer between user prompts and the execution
 backend. It ensures that every action taken is compliant with the project's unified
 roadmap and biological constraints before it is allowed to proceed.
+
+Integration: Indirect integration via QuarkDriver and AutonomousAgent; orchestrates simulator runs.
+Rationale: State system validates, plans, and triggers actions that the simulator executes.
 """
 import os
 import sys

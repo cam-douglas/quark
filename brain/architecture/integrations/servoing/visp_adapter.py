@@ -1,7 +1,9 @@
-"""
-ViSP Adapter
+"""ViSP Adapter
 Visual servoing helper for image-based or position-based control.
 Source: https://github.com/lagadic/visp
+
+Integration: This module is indirectly invoked by simulators/agents through adapter or tooling calls.
+Rationale: Adapter layer used by simulators to interface external libraries.
 """
 from typing import Optional
 import numpy as np

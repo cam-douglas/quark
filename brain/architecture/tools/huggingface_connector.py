@@ -1,5 +1,7 @@
-"""
-A connector for the Hugging Face Hub API to search for models and datasets.
+"""A connector for the Hugging Face Hub API to search for models and datasets.
+
+Integration: This module is indirectly invoked by simulators/agents through adapter or tooling calls.
+Rationale: Operational tooling invoked by agents/simulators when required.
 """
 
 from huggingface_hub import HfApi

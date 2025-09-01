@@ -1,11 +1,15 @@
 #!/usr/bin/env python3
 """Regenerate management/rules/roadmaps/ROADMAPS_INDEX.md.
 Run this script whenever roadmap docs change.
-"""
-from pathlib import Path
-import sys
 
-def main() -> None:
+Integration: Not simulator-integrated; repository tooling for indexing, validation, or CI.
+Rationale: Executed by developers/CI to maintain repo health; not part of runtime simulator loop.
+"""
+import sys, time
+from pathlib import Path
+from filelock import FileLock, Timeout
+
+def _generate() -> None:
     root = Path(__file__).resolve().parents[2] / "management" / "rules" / "roadmaps"
     index_file = root / "ROADMAPS_INDEX.md"
     rows = []
@@ -29,6 +33,15 @@ def main() -> None:
         table += f'| {i} | {t} | {p} | {s} |\n'
     index_file.write_text(header+table, encoding='utf-8')
     print(f'ROADMAPS_INDEX.md updated with {len(rows)} entries')
+
+
+def main() -> None:
+    lock_path = Path(__file__).with_suffix('.lock')
+    try:
+        with FileLock(lock_path, timeout=2):
+            _generate()
+    except Timeout:
+        print("[generate_roadmap_index] Another process holds the lock – skipping regeneration.", file=sys.stderr)
 
 if __name__ == '__main__':
     main()

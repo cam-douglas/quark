@@ -7,6 +7,9 @@ Usage:
   quark rm reject  <RID>       # blacklist a resource by id
 
 This thin CLI delegates to ResourceManager.
+
+Integration: Not simulator-integrated; repository tooling for indexing, validation, or CI.
+Rationale: Executed by developers/CI to maintain repo health; not part of runtime simulator loop.
 """
 import argparse
 import sys

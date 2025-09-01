@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
-"""
-Comprehensive Integration Tests for AlphaGenome Integration
+"""Comprehensive Integration Tests for AlphaGenome Integration
 Tests all components individually and as an integrated system
+
+Integration: This module participates in biological workflows via BiologicalSimulator and related analyses.
+Rationale: Biological modules used via BiologicalSimulator and downstream analyses.
 """
 
 import unittest

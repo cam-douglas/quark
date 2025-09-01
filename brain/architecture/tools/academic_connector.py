@@ -1,5 +1,7 @@
-"""
-A connector for academic journal APIs like NCBI and IEEE.
+"""A connector for academic journal APIs like NCBI and IEEE.
+
+Integration: This module is indirectly invoked by simulators/agents through adapter or tooling calls.
+Rationale: Operational tooling invoked by agents/simulators when required.
 """
 
 import requests

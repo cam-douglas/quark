@@ -1,6 +1,8 @@
-"""
-Oculomotor Cortex
+"""Oculomotor Cortex
 Controls eye movements (camera gaze) to focus on salient features.
+
+Integration: This module is part of the neural core and executes under brain_simulator.
+Rationale: Loaded by brain simulator as part of the neural core runtime.
 """
 import numpy as np
 from typing import Dict, Any, Tuple

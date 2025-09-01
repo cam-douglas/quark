@@ -1,5 +1,7 @@
-"""
-Self-Learning Orchestrator - The executive for knowledge acquisition.
+"""Self-Learning Orchestrator - The executive for knowledge acquisition.
+
+Integration: This module is part of the neural core and executes under brain_simulator.
+Rationale: Loaded by brain simulator as part of the neural core runtime.
 """
 
 import logging
@@ -19,9 +21,14 @@ class SelfLearningOrchestrator:
     Identifies knowledge gaps, seeks information using various tools,
     and passes it to the KnowledgeHub for processing.
     """
-    def __init__(self):
+    from collections import deque
+
+    _WINDOW = 5  # epochs
+    _PLATEAU_TOL = 0.002  # loss improvement threshold
+
+    def __init__(self, knowledge_hub: KnowledgeHub):
         """Initializes the orchestrator and its tools."""
-        self.knowledge_hub = KnowledgeHub()
+        self.khub = knowledge_hub
         self.academic_connector = AcademicConnector()
         self.recently_researched = set()
         # Instantiate all our data gathering tools
@@ -30,6 +37,31 @@ class SelfLearningOrchestrator:
         self.github = GitHubConnector()
         self.huggingface = HuggingFaceConnector()
         self.academic = AcademicConnector()
+
+    # ------------------------------------------------------------------
+    # Meta-learning trigger
+    # ------------------------------------------------------------------
+    def maybe_trigger_self_training(self, metrics: dict[str, float]) -> None:
+        """Track loss and invoke fine-tune when learning plateaus.
+
+        Rule: maintain a moving window of the last `_WINDOW` epoch losses; if
+        the best loss in the window is not at least `_PLATEAU_TOL` lower than
+        the earliest loss, and we have seen ≥10 k samples, trigger fine-tune.
+        """
+        loss = metrics.get("loss", 0.0)
+        seen = metrics.get("samples_seen", 0)
+
+        if not hasattr(self, "_loss_hist"):
+            self._loss_hist = self.__class__.deque(maxlen=self._WINDOW)  # type: ignore[attr-defined]
+
+        self._loss_hist.append(loss)
+        if len(self._loss_hist) < self._WINDOW:
+            return  # need more data
+
+        earliest = self._loss_hist[0]
+        best = min(self._loss_hist)
+        if earliest - best < self._PLATEAU_TOL and seen >= 10_000:
+            self.khub.handle_command("fine-tune quark")
 
     def seek_and_assimilate(self, brain_modules: Dict[str, Any], brain_status: Dict[str, Any], topic_hint: str = None):
         """
@@ -51,7 +83,7 @@ class SelfLearningOrchestrator:
         if raw_data:
             # raw_data is a dict with keys: source, content, type, citation (optional)
             try:
-                k_objects = self.knowledge_hub.assimilate(
+                k_objects = self.khub.assimilate(
                     raw_data["content"],
                     source=raw_data.get("source", "unknown"),
                     citation=raw_data.get("citation", ""),

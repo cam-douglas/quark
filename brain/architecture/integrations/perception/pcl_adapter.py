@@ -1,7 +1,9 @@
-"""
-PCL Adapter
+"""PCL Adapter
 Point cloud utilities placeholder.
 Source: https://github.com/PointCloudLibrary/pcl
+
+Integration: This module is indirectly invoked by simulators/agents through adapter or tooling calls.
+Rationale: Adapter layer used by simulators to interface external libraries.
 """
 import numpy as np
 

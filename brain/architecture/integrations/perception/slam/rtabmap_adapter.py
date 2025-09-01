@@ -1,7 +1,9 @@
-"""
-RTAB-Map Adapter
+"""RTAB-Map Adapter
 RGB-D Graph SLAM incremental update placeholder with safe fallback.
 Source: https://github.com/introlab/rtabmap
+
+Integration: This module is indirectly invoked by simulators/agents through adapter or tooling calls.
+Rationale: Adapter layer used by simulators to interface external libraries.
 """
 from typing import Dict, Any
 

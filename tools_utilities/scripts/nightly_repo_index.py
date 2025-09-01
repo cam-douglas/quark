@@ -7,6 +7,9 @@ snapshots under `<repo_root>/repo_indexes/`.  A copy of the most recent index
 is also written to `<repo_root>/repo_index.json` for convenience.
 
 The script is self-contained: only Python standard-library imports are used.
+
+Integration: Not simulator-integrated; repository tooling for indexing, validation, or CI.
+Rationale: Executed by developers/CI to maintain repo health; not part of runtime simulator loop.
 """
 from __future__ import annotations
 

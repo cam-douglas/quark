@@ -10,6 +10,9 @@ Returns a list of dicts: [{"title": str, "priority": "high|medium|low"}, ...]
 The planner attempts to load a local Transformer-based LLM (Mistral-7B,
 Llama-2, etc.) via HuggingFace 🤗. If no model is available, it falls back to a
 very simple heuristic so that the pipeline never breaks.
+
+Integration: Indirect integration via QuarkDriver and AutonomousAgent; orchestrates simulator runs.
+Rationale: State system validates, plans, and triggers actions that the simulator executes.
 """
 
 import logging

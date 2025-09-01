@@ -106,6 +106,89 @@ from quark_state_system import task_loader
 from utilities.doc_utils import INDEX_PATH
 # --- END NEW IMPORTS ---
 
+# --- Roadmap Task Template Loader -----------------------------------------
+import yaml
+TASK_TMPL_PATH = Path("management/configurations/project/roadmap_task_format.yaml")
+if TASK_TMPL_PATH.exists():
+    with TASK_TMPL_PATH.open("r", encoding="utf-8") as _f:
+        _task_cfg = yaml.safe_load(_f)
+    ROADMAP_TASK_TMPL: str = _task_cfg["roadmap_task_format"].get("task_template", "")
+    ROADMAP_USE_MARKERS: bool = _task_cfg["roadmap_task_format"].get("use_markers", True)
+else:
+    ROADMAP_TASK_TMPL = "Task: {milestone}\n• Biological Goal: {goal}\n• Acceptance KPI: {kpi}\n• Suggested Method (SOTA ML): {method}"
+    ROADMAP_USE_MARKERS = True
+# --------------------------------------------------------------------------
+# Canonical roadmap path (single source of truth)
+MASTER_ROADMAP: Path = Path("management/rules/roadmap/MASTER_ROADMAP.md").resolve()
+# --------------------------------------------------------------------------
+
+# --------------------------------------------------------------------------
+# Roadmap status updater
+# --------------------------------------------------------------------------
+
+
+def _compute_status(md_text: str) -> str:
+    """Return Planned / In Progress / Complete for given roadmap markdown."""
+    # Collect task lines (milestones, goals, SOTA practices)
+    task_lines = [ln for ln in md_text.splitlines() if ln.strip().startswith("* [")]
+    if not task_lines:
+        return "Planned"
+    done_flags = ["DONE" in ln for ln in task_lines]
+    if all(done_flags):
+        return "Complete"
+    if any(done_flags):
+        return "In Progress"
+    return "Planned"
+
+
+status_pat = re.compile(r"\*\*Roadmap Status:\*\*\s*(.+)")
+
+
+def _mark_done(text: str) -> str:
+    """Append DONE to milestone/goal/practice bullet lines missing it."""
+    new_lines = []
+    for ln in text.splitlines():
+        if ln.strip().startswith("* [") and "DONE" not in ln:
+            ln = ln + " DONE"
+        new_lines.append(ln)
+    return "\n".join(new_lines)
+
+
+def update_roadmap_statuses() -> None:
+    """Scan roadmap markdown files and update Roadmap Status tags based on DONE markers."""
+    from management.rules.roadmap import roadmap_controller
+
+    for meta in roadmap_controller.get_all_roadmaps():
+        if meta["format"] != "markdown":
+            continue
+        path = Path(meta["path"])
+        text = path.read_text(encoding="utf-8")
+        new_status = _compute_status(text)
+        # Replace or insert status line
+        if new_status == "Complete":
+            text = _mark_done(text)
+        if status_pat.search(text):
+            text = status_pat.sub(f"**Roadmap Status:** 📋 {new_status}", text)
+        else:
+            # insert after canonical header if missing
+            lines = text.splitlines()
+            insert_idx = 0
+            for i, ln in enumerate(lines[:20]):
+                if ln.startswith("> **Canonical"):
+                    insert_idx = i + 1
+                    break
+            lines.insert(insert_idx, f"**Roadmap Status:** 📋 {new_status}")
+            text = "\n".join(lines)
+        path.write_text(text, encoding="utf-8")
+
+
+# Hook into task sync or CLI
+if __name__ == "__main__":
+    if len(sys.argv) > 1 and sys.argv[1] == "update-roadmap-status":
+        update_roadmap_statuses()
+        print("Roadmap statuses updated.")
+
+
 def show_system_overview():
     """Display the QUARK state system overview."""
     print("🧠 QUARK STATE SYSTEM - MAIN ENTRY POINT")
@@ -369,6 +452,153 @@ def main():
             print("Use 'python QUARK_STATE_SYSTEM.py help' for available commands")
     else:
         show_system_overview()
+
+# --------------------------------------------------------------------------
+# Recommendation & Task generation
+# --------------------------------------------------------------------------
+
+TASK_DIR = Path("state/tasks")
+TASK_DIR.mkdir(parents=True, exist_ok=True)
+
+
+def _extract_priority_tasks(md_text: str) -> list[str]:
+    """Return ordered list of bullet lines from three priority sections."""
+    lines = md_text.splitlines()
+    capture = False
+    tasks = []
+    for ln in lines:
+        if ln.startswith("**Engineering Milestones") or ln.startswith("**Biological Goals") or ln.startswith("**SOTA ML Practices"):
+            capture = True
+            continue
+        if capture and ln.startswith("**"):
+            capture = False  # next section reached
+        if capture and ln.strip().startswith("* "):
+            tasks.append(ln.strip("* "))
+    return tasks
+
+
+def _write_task_yaml(filename: str, task_lines: list[str]):
+    path = TASK_DIR / filename
+    import yaml, datetime
+    data = {"generated": str(datetime.date.today()), "tasks": task_lines}
+    path.write_text(yaml.safe_dump(data), encoding="utf-8")
+
+
+def generate_recommendations():
+    """Identify in-progress roadmap, surface top tasks, and populate YAML files."""
+    from management.rules.roadmap import roadmap_controller
+
+    in_progress = None
+    for meta in roadmap_controller.get_all_roadmaps():
+        if meta["format"] != "markdown":
+            continue
+        text = Path(meta["path"]).read_text(encoding="utf-8")
+        if "**Roadmap Status:** 📋 In Progress" in text:
+            in_progress = (meta["path"], text)
+            break
+    if not in_progress:
+        print("No roadmap marked In Progress.")
+        return []
+
+    path, md = in_progress
+    tasks = _extract_priority_tasks(md)
+    top = tasks[:5]
+
+    # Split remainder into high/medium/low thirds
+    remaining = tasks[5:]
+    n = len(remaining)
+    hi = remaining[: n // 3]
+    med = remaining[n // 3 : 2 * n // 3]
+    lo = remaining[2 * n // 3 :]
+
+    _write_task_yaml("tasks_high.yaml", hi)
+    _write_task_yaml("tasks_medium.yaml", med)
+    _write_task_yaml("tasks_low.yaml", lo)
+
+    return top
+
+
+# CLI helper
+if __name__ == "__main__":
+    if len(sys.argv) > 1 and sys.argv[1] == "recommendations":
+        top = generate_recommendations()
+        for t in top:
+            print("-", t)
+        sys.exit(0)
+
+# --------------------------------------------------------------------------
+# Ad-hoc Chat Task Management
+# --------------------------------------------------------------------------
+
+CHAT_TASKS_DIR = TASK_DIR  # reuse state/tasks/
+ARCHIVE_PATH = TASK_DIR / "tasks_archive.yaml"
+
+
+def _unique_chat_filename(title: str) -> Path:
+    base = title.lower().replace(" ", "_")[:30]
+    i = 1
+    while True:
+        path = CHAT_TASKS_DIR / f"chat_tasks_{base}_{i}.yaml"
+        if not path.exists():
+            return path
+        i += 1
+
+
+def create_chat_tasks(title: str, items: list[str]):
+    """Create new chat task YAML with provided items."""
+    path = _unique_chat_filename(title)
+    import yaml, datetime
+    data = {"created": str(datetime.date.today()), "title": title, "tasks": items}
+    path.write_text(yaml.safe_dump(data), encoding="utf-8")
+    print(f"Chat tasks file created: {path}")
+
+
+def get_latest_chat_file() -> Path | None:
+    files = sorted(CHAT_TASKS_DIR.glob("chat_tasks_*.yaml"), key=lambda p: p.stat().st_mtime, reverse=True)
+    return files[0] if files else None
+
+
+def task_status():
+    """Show remaining chat tasks; archive completed ones."""
+    import yaml
+    chat_file = get_latest_chat_file()
+    if not chat_file:
+        print("No chat-tasks file found.")
+        return
+    data = yaml.safe_load(chat_file.read_text()) or {}
+    tasks = data.get("tasks", [])
+    # consider lines with DONE suffix as completed
+    remaining = [t for t in tasks if "DONE" not in t]
+    completed = [t for t in tasks if "DONE" in t]
+    # archive completed
+    if completed:
+        arch = []
+        if ARCHIVE_PATH.exists():
+            arch = yaml.safe_load(ARCHIVE_PATH.read_text()) or []
+        arch.extend(completed)
+        ARCHIVE_PATH.write_text(yaml.safe_dump(arch), encoding="utf-8")
+    # rewrite chat file with remaining
+    data["tasks"] = remaining
+    chat_file.write_text(yaml.safe_dump(data), encoding="utf-8")
+    print("Remaining chat tasks:")
+    for t in remaining:
+        print("-", t)
+
+
+# CLI hooks
+if __name__ == "__main__":
+    if len(sys.argv) > 1:
+        cmd = sys.argv[1]
+        if cmd == "recommendations":
+            top = generate_recommendations(); [print("-", t) for t in top]; sys.exit(0)
+        if cmd == "update-roadmap-status":
+            update_roadmap_statuses(); sys.exit(0)
+        if cmd == "task-status":
+            task_status(); sys.exit(0)
+        if cmd == "create-chat-tasks":
+            title = sys.argv[2]
+            items = sys.argv[3:]
+            create_chat_tasks(title, items); sys.exit(0)
 
 if __name__ == "__main__":
     main()

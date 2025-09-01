@@ -1,4 +1,10 @@
 
+
+
+"""
+Integration: Indirect integration via QuarkDriver and AutonomousAgent; orchestrates simulator runs.
+Rationale: State system validates, plans, and triggers actions that the simulator executes.
+"""
 import argparse
 from pathlib import Path
 import sys

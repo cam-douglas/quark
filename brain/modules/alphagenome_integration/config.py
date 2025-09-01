@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
-"""
-AlphaGenome Integration Configuration
+"""AlphaGenome Integration Configuration
 Central configuration for all biological development components
+
+Integration: This module participates in biological workflows via BiologicalSimulator and related analyses.
+Rationale: Biological modules used via BiologicalSimulator and downstream analyses.
 """
 
 import os

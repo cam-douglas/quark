@@ -1,3 +1,9 @@
+
+
+"""
+Integration: Support utilities used by brain/state; indirectly integrated where imported.
+Rationale: Shared helpers (performance, IO, streaming) used across runtime components.
+"""
 import argparse
 from pathlib import Path
 import sys

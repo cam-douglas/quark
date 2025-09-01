@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
-"""
-QUARK State Synchronization System
+"""QUARK State Synchronization System
 
 This script ensures all QUARK state files remain synchronized and up-to-date
 with the current project state. It automatically updates all state-related files
 when changes are made to maintain consistency across the entire project.
+
+Integration: Indirect integration via QuarkDriver and AutonomousAgent; orchestrates simulator runs.
+Rationale: State system validates, plans, and triggers actions that the simulator executes.
 """
 
 import os

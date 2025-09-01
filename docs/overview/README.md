@@ -1,24 +1,27 @@
-# 📚 DOCUMENTATION
+# overview
 
-## Purpose
-This directory contains components related to documentation and knowledge representation.
+Path: `docs/overview`
 
-## Structure
-- `01_DOCS/` - Comprehensive documentation
-- `02_SUMMARIES/` - Progress and status summaries
-- `03_REPORTS/` - Performance and status reports
+Purpose: Directory providing source files and/or submodules relevant to its path in the Quark repository.
 
-## Synergy Type
-Knowledge - Knowledge representation and communication
+## Subdirectories
+- (none)
 
-## Description
-The Documentation layer serves as the knowledge representation and communication center for the entire brain-ML synergy system, providing:
-- Comprehensive system documentation
-- Progress tracking and status summaries
-- Performance monitoring and reporting
-- Knowledge organization and indexing
-- Communication between all domains
-- Historical tracking and evolution
-- Best practices and guidelines
+## Files
+- 00_ESSENTIAL_KNOWLEDGE_INDEX.md
+- 01_CORE_SCIENTIFIC_FOUNDATION.md
+- 02_TECHNICAL_ARCHITECTURE.md
+- 03_RESEARCH_APPLICATIONS.md
+- 04_IMPLEMENTATION_GUIDE.md
+- 05_ENHANCED_FRAMEWORK.md
+- 06_MODELING_BRAIN.md
+- 07_BRAIN_STRUCTURE_NETWORKS.md
+- ADVANCED_INTEGRATION_README.md
+- ALPHAGENOME_INTEGRATION.md
+- HIERARCHY_DOCUMENTATION.md
+- NEW_BRAIN_ML_STRUCTURE.md
+- README.md
 
-This layer ensures that knowledge is properly represented, communicated, and preserved across all biological and computational domains, enabling effective collaboration and continuous improvement.
+## Links
+- [Root README](../README.md)
+- [Repo Index](../repo_index.json)

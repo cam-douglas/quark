@@ -1,6 +1,8 @@
-"""
-Safety Guardian
+"""Safety Guardian
 Monitors the agent's state for conditions that warrant an emergency shutdown.
+
+Integration: This module is part of the neural core and executes under brain_simulator.
+Rationale: Loaded by brain simulator as part of the neural core runtime.
 """
 from collections import deque
 import numpy as np

@@ -4,6 +4,9 @@ This first pass keeps things lightweight by re-using the SimpleTFIDF vectorizer
 for similarity and falling back to EpisodicMemory.retrieve_episode for final
 scoring. It can be replaced later with dense embeddings without changing the
 public API.
+
+Integration: This module is part of the neural core and executes under brain_simulator.
+Rationale: Loaded by brain simulator as part of the neural core runtime.
 """
 from __future__ import annotations
 

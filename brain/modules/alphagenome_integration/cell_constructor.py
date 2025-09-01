@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
-"""
-Cell Constructor Module for AlphaGenome Integration
+"""Cell Constructor Module for AlphaGenome Integration
 Constructs biological cells and tissues based on DNA regulatory predictions
 Follows biological development criteria for Quark project neural development
+
+Integration: This module participates in biological workflows via BiologicalSimulator and related analyses.
+Rationale: Biological modules used via BiologicalSimulator and downstream analyses.
 """
 
 import sys

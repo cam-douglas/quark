@@ -30,7 +30,11 @@ def _get_cortex() -> Optional[LanguageCortex]:
 
 
 def answer_with_llm(question: str) -> Optional[str]:
-    """Return an LLM-generated answer or None if unavailable."""
+    """Return an LLM-generated answer or None if unavailable.
+
+Integration: This module is part of the neural core and executes under brain_simulator.
+Rationale: Loaded by brain simulator as part of the neural core runtime.
+"""
     if LanguageCortex is None:
         logger.warning(f"LanguageCortex import failed: {_import_error}")
         return None
@@ -38,6 +42,11 @@ def answer_with_llm(question: str) -> Optional[str]:
     if cortex is None:
         return None
     try:
+        from brain.architecture.neural_core.cognitive_systems.resource_manager import ResourceManager
+        rm = ResourceManager.get_default()
+        if rm:
+            with rm.request_resources("nlp"):
+                return cortex.process_input(question)
         return cortex.process_input(question)
     except Exception as e:
         logger.error(f"LLM fallback failed: {e}")

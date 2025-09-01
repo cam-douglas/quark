@@ -1,7 +1,9 @@
-"""
-LLM-Powered Inverse Kinematics Module
+"""LLM-Powered Inverse Kinematics Module
 Integrates LLM-IK repository capabilities for advanced kinematic problem solving.
 Based on: https://github.com/StevenRice99/LLM-IK
+
+Integration: This module is part of the neural core and executes under brain_simulator.
+Rationale: Loaded by brain simulator as part of the neural core runtime.
 """
 
 import sys

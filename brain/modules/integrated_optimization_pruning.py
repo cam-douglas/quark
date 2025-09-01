@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-"""
-Integrated Optimization and Pruning System
+"""Integrated Optimization and Pruning System
 ==========================================
 
 Combines the biological pruning system with Cursor/system optimization.
@@ -8,6 +7,9 @@ Automatically runs optimization after every pruning operation for peak performan
 
 Author: Quark Brain Architecture
 Date: 2024
+
+Integration: Not directly invoked by brain simulator; participates via imports or supporting workflows.
+Rationale: Module is used by other components; no standalone simulator hook is required.
 """
 
 import os
@@ -19,7 +21,10 @@ from datetime import datetime
 from typing import Dict, List, Any, Optional
 
 # Import existing pruning system
-from integrated_pruning_system import IntegratedPruningSystem, PruningPlan
+try:
+    from brain.modules.integrated_pruning_system import IntegratedPruningSystem, PruningPlan
+except Exception:
+    from integrated_pruning_system import IntegratedPruningSystem, PruningPlan  # type: ignore
 from optimized_pruning_system import OptimizedPruningSystem
 
 # Import system optimizer

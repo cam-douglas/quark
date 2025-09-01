@@ -1,5 +1,14 @@
+
+
+"""
+Integration: This module is part of the neural core and executes under brain_simulator.
+Rationale: Loaded by brain simulator as part of the neural core runtime.
+"""
 import numpy as np
-import cv2
+try:
+    import cv2
+except Exception:  # optional dependency guard for headless/import audit
+    cv2 = None  # type: ignore
 from typing import Dict, Any, Optional
 import mujoco
 

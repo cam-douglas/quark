@@ -1,9 +1,11 @@
-"""
-Centralized Biological Constraints for Quark AGI Development
+"""Centralized Biological Constraints for Quark AGI Development
 
 This module consolidates all biological and AlphaGenome-related rules 
 into a single, machine-readable source of truth. The ComplianceEngine will use this 
 to enforce biological fidelity across the entire brain simulation.
+
+Integration: Not simulator-integrated; governance, rules, and roadmap processing.
+Rationale: Consumed by state system to guide behavior; no direct simulator hooks.
 """
 
 # --- Cell Construction & Marker Rules ---

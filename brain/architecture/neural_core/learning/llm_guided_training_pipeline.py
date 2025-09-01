@@ -1,7 +1,9 @@
-"""
-LLM-Guided Training Pipeline for Quark
+"""LLM-Guided Training Pipeline for Quark
 Integrates datasets from LLM-IK and LLM Articulated Manipulation repositories
 to create a comprehensive training system that follows developmental principles.
+
+Integration: This module is part of the neural core and executes under brain_simulator.
+Rationale: Loaded by brain simulator as part of the neural core runtime.
 """
 
 import os

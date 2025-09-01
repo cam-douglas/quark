@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-"""
-Mathematical Brain Core for Quark
+"""Mathematical Brain Core for Quark
 =================================
 
 Integrates mathematical problem-solving capabilities directly into Quark's
@@ -10,6 +9,9 @@ computation and AI reasoning.
 
 Author: Quark Brain Architecture
 Date: 2024
+
+Integration: Not directly invoked by brain simulator; participates via imports or supporting workflows.
+Rationale: Module is used by other components; no standalone simulator hook is required.
 """
 
 import logging
@@ -19,7 +21,10 @@ from pathlib import Path
 import time
 
 # Import our mathematical integration
-from mathematical_integration.wolfram_alpha_connector import WolframAlphaConnector
+try:
+    from brain.modules.mathematical_integration.wolfram_alpha_connector import WolframAlphaConnector
+except Exception:
+    from mathematical_integration.wolfram_alpha_connector import WolframAlphaConnector  # type: ignore
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)

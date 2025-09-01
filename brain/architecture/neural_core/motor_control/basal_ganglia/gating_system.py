@@ -1,3 +1,9 @@
+
+
+"""
+Integration: This module is part of the neural core and executes under brain_simulator.
+Rationale: Loaded by brain simulator as part of the neural core runtime.
+"""
 # brain_modules/bas-al_ganglia/gating_system.py
 
 """
@@ -7,7 +13,10 @@ Outputs: Action
 Dependencies: rl_agent, dopamine_system
 """
 
-from .rl_agent import QLearningAgent
+try:
+    from brain.architecture.neural_core.motor_control.basal_ganglia.rl_agent import QLearningAgent
+except Exception:
+    from .rl_agent import QLearningAgent  # type: ignore
 from .dopamine_system import DopamineSystem
 from .architecture import BasalGanglia
 import numpy as np

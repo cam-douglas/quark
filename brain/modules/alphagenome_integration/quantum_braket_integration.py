@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
-"""
-AWS Braket Quantum Computing Integration for Brain Simulation
+"""AWS Braket Quantum Computing Integration for Brain Simulation
 Integrates real AWS quantum computing capabilities with the brain architecture
+
+Integration: This module participates in biological workflows via BiologicalSimulator and related analyses.
+Rationale: Biological modules used via BiologicalSimulator and downstream analyses.
 """
 
 import boto3
@@ -9,7 +11,10 @@ import numpy as np
 import json
 from typing import Dict, Any, List, Optional
 from dataclasses import dataclass
-from braket.aws import AwsDevice
+try:
+    from braket.aws import AwsDevice
+except Exception:  # optional dependency guard
+    AwsDevice = None  # type: ignore
 from braket.devices import LocalSimulator
 from braket.circuits import Circuit, Observable
 from braket.aws.aws_session import AwsSession

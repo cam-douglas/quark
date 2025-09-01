@@ -1,7 +1,9 @@
-"""
-manif Adapter
+"""manif Adapter
 Lie groups utilities placeholder.
 Source: https://github.com/artivis/manif
+
+Integration: This module is indirectly invoked by simulators/agents through adapter or tooling calls.
+Rationale: Adapter layer used by simulators to interface external libraries.
 """
 import numpy as np
 

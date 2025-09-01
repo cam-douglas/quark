@@ -1,3 +1,9 @@
+
+
+"""
+Integration: Standalone operational script; not part of the simulator control loop.
+Rationale: Executed manually or by automation; does not run inside brain_simulator.
+"""
 from state.quark_state_system.goal_manager import next_goal
 
 def log_next_goal(prefix: str = "[Roadmap]"):

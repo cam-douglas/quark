@@ -1,9 +1,11 @@
-"""
-Quark Autonomous Agent
+"""Quark Autonomous Agent
 
 This is the core execution agent for the Quark system. It is responsible for driving
 development forward by autonomously executing tasks defined in the project roadmaps,
 while ensuring all actions are compliant with the established biological and safety rules.
+
+Integration: Indirect integration via QuarkDriver and AutonomousAgent; orchestrates simulator runs.
+Rationale: State system validates, plans, and triggers actions that the simulator executes.
 """
 import os
 import subprocess

@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
-"""
-🧠 Enhanced Sleep-Consolidation Framework
+"""🧠 Enhanced Sleep-Consolidation Framework
 Implements sophisticated sleep-driven consolidation mechanisms
 
 **Model:** Claude (Functional Implementation & Testing)
 **Purpose:** Sleep cycles, memory consolidation, and fatigue management
 **Validation Level:** Biological sleep pattern verification
+
+Integration: This module is part of the neural core and executes under brain_simulator.
+Rationale: Loaded by brain simulator as part of the neural core runtime.
 """
 
 import numpy as np

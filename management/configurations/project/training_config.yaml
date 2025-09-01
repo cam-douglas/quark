@@ -1,4 +1,10 @@
 # 🧠 Unified Training System Configuration
+#
+# Global toggle for dataset access mode. Values:
+#   • local     – read datasets from local disk (existing behaviour)
+#   • streaming – use StreamingManager + StreamDataset to stream shards from S3
+#
+data_mode: local
 # This file contains configurations for all training domains in the unified training system
 
 # Brain Development Training Configuration

@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-"""
-Redundancy Detection Module
+"""Redundancy Detection Module
 ===========================
 
 Detects both exact duplicates and redundant files with similar:
@@ -11,6 +10,9 @@ Detects both exact duplicates and redundant files with similar:
 
 Author: Quark Brain Architecture
 Date: 2024
+
+Integration: Not directly invoked by brain simulator; participates via imports or supporting workflows.
+Rationale: Module is used by other components; no standalone simulator hook is required.
 """
 
 import os

@@ -1,7 +1,9 @@
-"""
-GTSAM Adapter
+"""GTSAM Adapter
 Factor-graph based estimation (SLAM/VO) placeholder with safe fallback.
 Source: https://github.com/borglab/gtsam
+
+Integration: This module is indirectly invoked by simulators/agents through adapter or tooling calls.
+Rationale: Adapter layer used by simulators to interface external libraries.
 """
 from typing import Dict, Any
 

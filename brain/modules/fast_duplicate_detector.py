@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-"""
-Fast Duplicate Detection Module
+"""Fast Duplicate Detection Module
 ==============================
 
 Uses content fingerprinting and parallel processing to quickly identify
@@ -8,6 +7,9 @@ duplicate and redundant files without O(n²) complexity.
 
 Author: Quark Brain Architecture
 Date: 2024
+
+Integration: Not directly invoked by brain simulator; participates via imports or supporting workflows.
+Rationale: Module is used by other components; no standalone simulator hook is required.
 """
 
 import os

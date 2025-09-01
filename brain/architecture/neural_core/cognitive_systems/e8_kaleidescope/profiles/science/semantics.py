@@ -1,3 +1,9 @@
+
+
+"""
+Integration: This module is part of the neural core and executes under brain_simulator.
+Rationale: Loaded by brain simulator as part of the neural core runtime.
+"""
 from typing import Mapping, List, Tuple
 import numpy as np
 

@@ -1,3 +1,9 @@
+
+
+"""
+Integration: This module is part of the neural core and executes under brain_simulator.
+Rationale: Loaded by brain simulator as part of the neural core runtime.
+"""
 # brain_modules/basal_ganglia/enhanced_gating_system.py
 
 """
@@ -11,7 +17,20 @@ import numpy as np
 from typing import Dict, List, Tuple, Optional
 import time
 
-from .enhanced_architecture import EnhancedBasalGanglia, EnhancedDopamineSystem
+try:
+    from brain.architecture.neural_core.motor_control.basal_ganglia.enhanced_architecture import (
+        EnhancedBasalGanglia,
+        EnhancedDopamineSystem,
+    )
+except Exception:
+    from .enhanced_architecture import EnhancedBasalGanglia, EnhancedDopamineSystem  # type: ignore
+try:
+    from brain.architecture.neural_core.motor_control.basal_ganglia.actor_critic import (
+        ActorCriticAgent,
+        PrioritizedExperienceReplay,
+    )
+except Exception:
+    from .actor_critic import ActorCriticAgent, PrioritizedExperienceReplay  # type: ignore
 from .actor_critic import ActorCriticAgent, PrioritizedExperienceReplay
 
 class EnhancedGatingSystem:

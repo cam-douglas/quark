@@ -1,4 +1,10 @@
 
+
+
+"""
+Integration: Indirect integration via QuarkDriver and AutonomousAgent; orchestrates simulator runs.
+Rationale: State system validates, plans, and triggers actions that the simulator executes.
+"""
 def route_computation_intelligently(task_name: str, problem_size: int, **kwargs):
     """
     Intelligent routing for Quark brain simulation tasks

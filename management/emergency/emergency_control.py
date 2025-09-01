@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
-"""
-Simple Emergency Control Interface
+"""Simple Emergency Control Interface
 
 Simple command-line interface for the emergency shutdown system.
 No freezing, no complex monitoring.
+
+Integration: Not simulator-integrated; governance, rules, and roadmap processing.
+Rationale: Consumed by state system to guide behavior; no direct simulator hooks.
 """
 
 import sys

@@ -9,7 +9,11 @@ INDEX_PATH = Path(__file__).resolve().parents[2] / "brain" / "ml" / "ML_INDEX.ya
 _cache: List[dict] | None = None
 
 def get_ml_components() -> List[Dict]:
-    """Return cached list of ML component metadata."""
+    """Return cached list of ML component metadata.
+
+Integration: Indirect integration via QuarkDriver and AutonomousAgent; orchestrates simulator runs.
+Rationale: State system validates, plans, and triggers actions that the simulator executes.
+"""
     global _cache
     if _cache is None:
         if not INDEX_PATH.exists():

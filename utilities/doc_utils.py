@@ -1,3 +1,9 @@
+
+
+"""
+Integration: Support utilities used by brain/state; indirectly integrated where imported.
+Rationale: Shared helpers (performance, IO, streaming) used across runtime components.
+"""
 # utilities/doc_utils.py
 """Utility helpers for accessing documentation files.
 

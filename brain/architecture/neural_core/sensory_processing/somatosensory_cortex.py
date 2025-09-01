@@ -1,6 +1,8 @@
-"""
-Somatosensory Cortex
+"""Somatosensory Cortex
 Processes proprioceptive and (future) tactile information to build a body schema.
+
+Integration: This module is part of the neural core and executes under brain_simulator.
+Rationale: Loaded by brain simulator as part of the neural core runtime.
 """
 import numpy as np
 from typing import Dict, Any

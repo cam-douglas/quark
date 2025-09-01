@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-"""
-Wolfram Alpha Mathematical Integration for Quark
+"""Wolfram Alpha Mathematical Integration for Quark
 ===============================================
 
 Integrates Wolfram Alpha's computational capabilities directly into Quark's
@@ -9,6 +8,9 @@ optimization, and advanced problem-solving.
 
 Author: Quark Brain Architecture
 Date: 2024
+
+Integration: Not directly invoked by brain simulator; participates via imports or supporting workflows.
+Rationale: Module is used by other components; no standalone simulator hook is required.
 """
 
 import requests

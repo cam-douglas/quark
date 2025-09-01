@@ -2,6 +2,9 @@
 """Proto-Cortex Layer Sheet – Self-Organizing Map (SOM)
 Performs unsupervised learning on sensory input streams to create a topological map.
 This is a foundational step for forming internal representations of the world.
+
+Integration: This module is part of the neural core and executes under brain_simulator.
+Rationale: Loaded by brain simulator as part of the neural core runtime.
 """
 import numpy as np
 from typing import Tuple

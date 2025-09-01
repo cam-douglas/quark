@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
-"""
-Genome Analyzer Module for AlphaGenome Integration
+"""Genome Analyzer Module for AlphaGenome Integration
 Analyzes genome-wide patterns, regulatory networks, and evolutionary conservation
 Follows biological development criteria for Quark project
+
+Integration: This module participates in biological workflows via BiologicalSimulator and related analyses.
+Rationale: Biological modules used via BiologicalSimulator and downstream analyses.
 """
 
 import sys

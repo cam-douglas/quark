@@ -1,7 +1,6 @@
 import os
 import time
 
-import numpy as np
 import pytest
 
 # Ensure feature flag off for unit tests unless explicitly enabled via env

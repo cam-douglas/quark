@@ -1,8 +1,10 @@
-"""
-Ruckig Adapter
+"""Ruckig Adapter
 Provides jerk- and acceleration-limited online trajectory retiming.
 Falls back to pass-through if bindings are not available.
 Source: https://github.com/pantor/ruckig
+
+Integration: This module is indirectly invoked by simulators/agents through adapter or tooling calls.
+Rationale: Adapter layer used by simulators to interface external libraries.
 """
 from typing import Optional, Sequence
 import numpy as np

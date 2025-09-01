@@ -1,7 +1,9 @@
-"""
-Pinocchio Adapter
+"""Pinocchio Adapter
 Rigid-body dynamics/kinematics utilities placeholder.
 Source: https://github.com/stack-of-tasks/pinocchio
+
+Integration: This module is indirectly invoked by simulators/agents through adapter or tooling calls.
+Rationale: Adapter layer used by simulators to interface external libraries.
 """
 import numpy as np
 

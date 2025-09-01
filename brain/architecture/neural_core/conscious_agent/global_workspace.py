@@ -1,5 +1,4 @@
-"""
-Global Workspace (minimal runtime shim)
+"""Global Workspace (minimal runtime shim)
 
 Purpose: Provide a lightweight global workspace interface for the brain
 simulator. This shim supports status queries and optional broadcast logging
@@ -11,6 +10,9 @@ Outputs: `get_broadcast()` returns a summary dictionary suitable for status
          reporting.
 
 Seed/Deps: None; deterministic and side-effect free other than in-memory log.
+
+Integration: This module is part of the neural core and executes under brain_simulator.
+Rationale: Loaded by brain simulator as part of the neural core runtime.
 """
 from __future__ import annotations
 
@@ -42,5 +44,4 @@ class GlobalWorkspace:
             "num_items": len(self._contents),
             "recent": recent,
         }
-
 

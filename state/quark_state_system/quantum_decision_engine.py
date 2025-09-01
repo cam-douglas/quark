@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
-"""
-Quantum Computing Decision Engine for Quark Brain Simulation
+"""Quantum Computing Decision Engine for Quark Brain Simulation
 Intelligently decides when to use AWS Braket quantum computing vs classical computing
+
+Integration: Indirect integration via QuarkDriver and AutonomousAgent; orchestrates simulator runs.
+Rationale: State system validates, plans, and triggers actions that the simulator executes.
 """
 
 import numpy as np

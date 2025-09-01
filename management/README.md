@@ -1,23 +1,17 @@
-# 📋 MANAGEMENT
+# management
 
-## Purpose
-This directory contains components related to configuration and project management.
+Path: `management`
 
-## Structure
-- `01_CONFIGURATIONS/` - System configuration and parameters
-- `02_PROJECT_MANAGEMENT/` - Project coordination and documentation
+Purpose: Directory providing source files and/or submodules relevant to its path in the Quark repository.
 
-## Synergy Type
-Control - System orchestration and management
+## Subdirectories
+- configurations/
+- emergency/
+- rules/
 
-## Description
-The Management layer provides the control systems needed to coordinate and manage the entire brain-ML synergy system, including:
-- Training resource allocation and budgeting
-- Deployment configurations and settings
-- Monitoring and performance tracking
-- Project-specific configurations
-- Asset management and organization
-- Workflow definitions and automation
-- Documentation and reporting systems
+## Files
+- README.md
 
-This layer ensures that all components work together harmoniously and that resources are allocated efficiently across biological and computational domains.
+## Links
+- [Root README](README.md)
+- [Repo Index](repo_index.json)

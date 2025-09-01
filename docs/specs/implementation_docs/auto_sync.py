@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
-"""
-Simple Auto-Sync for Cursor
+"""Simple Auto-Sync for Cursor
 Automatically syncs files when needed.
+
+Integration: Documentation or examples; not part of executable runtime.
+Rationale: Intended for reference; does not run under simulator or state system.
 """
 
 import os

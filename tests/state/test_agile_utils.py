@@ -1,9 +1,7 @@
-import pytest
-
 from state.quark_state_system.agile_utils import (
     format_phase_step,
-    parse_phase_step,
     parse_continuous,
+    parse_phase_step,
 )
 
 

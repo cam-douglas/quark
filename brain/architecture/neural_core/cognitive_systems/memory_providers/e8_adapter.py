@@ -1,3 +1,9 @@
+
+
+"""
+Integration: This module is part of the neural core and executes under brain_simulator.
+Rationale: Loaded by brain simulator as part of the neural core runtime.
+"""
 from __future__ import annotations
 
 """E8MemoryAdapter bridges Quark's memory API with Kaleidescope's E8 lattice engine.
@@ -134,6 +140,13 @@ class E8MemoryAdapter:
             self._kmgr.main_vectors[item_id] = vec  # type: ignore[attr-defined]
             self._kmgr._main_storage_ids.append(item_id)  # noqa: SLF001 – internal use
             # defer KDTree build; Kaleidescope has its own indexing strategy
+            # Maintain a lightweight KDTree for fast nearest-neighbour when main_vectors grows
+            if not hasattr(self, "_e8_kdtree"):  # build first time
+                self._e8_kdtree = None
+                self._e8_mat = None
+            if len(self._kmgr.main_vectors) % 1000 == 0:  # rebuild every 1k inserts
+                self._e8_mat = np.vstack(list(self._kmgr.main_vectors.values()))
+                self._e8_kdtree = KDTree(self._e8_mat, metric="euclidean")
         else:
             vec = self._local_embedder.embed([text])[0]
             self._embeddings.append(vec)
@@ -155,11 +168,22 @@ class E8MemoryAdapter:
                 return []
             query_vec = self._dummy_embed([text])[0]
             ids, vecs = zip(*self._kmgr.main_vectors.items())  # type: ignore[attr-defined]
+
+            # Use KDTree if available for O(log n) search
+            if getattr(self, "_e8_kdtree", None) is not None:
+                dist, idx = self._e8_kdtree.query(query_vec.reshape(1, -1), k=min(top_k, len(vecs)))
+                idx = idx[0]; dist = dist[0]
+                return [
+                    (list(ids)[i], float(1.0 - dist[j]), {"text": ""})
+                    for j, i in enumerate(idx)
+                ]
+
+            # Fallback to brute-force cosine
             mat = np.vstack(vecs)
             sims = 1.0 - self._cosine_distance(mat, query_vec)
             top_indices = np.argsort(sims)[-top_k:][::-1]
             return [
-                (ids[i], float(sims[i]), {"text": ""})  # payload TBD
+                (ids[i], float(sims[i]), {"text": ""})
                 for i in top_indices
             ]
 

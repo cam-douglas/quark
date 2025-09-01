@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-"""
-Biological Pruning System for Repository Health
+"""Biological Pruning System for Repository Health
 ==============================================
 
 This module implements a biological pruning system that mimics natural neural pruning
@@ -15,6 +14,9 @@ Biological Principles:
 
 Author: Quark Brain Architecture
 Date: 2024
+
+Integration: Not directly invoked by brain simulator; participates via imports or supporting workflows.
+Rationale: Module is used by other components; no standalone simulator hook is required.
 """
 
 import os

@@ -1,8 +1,10 @@
-"""
-OMPL Adapter
+"""OMPL Adapter
 Joint/task-space motion planning wrapper.
 Falls back to straight-line interpolation if Python bindings are unavailable.
 Source: https://github.com/ompl/ompl
+
+Integration: This module is indirectly invoked by simulators/agents through adapter or tooling calls.
+Rationale: Adapter layer used by simulators to interface external libraries.
 """
 from typing import Optional
 import numpy as np

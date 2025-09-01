@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
-"""
-Quark State System Quantum Integration
+"""Quark State System Quantum Integration
 Integrates AWS Braket quantum computing with intelligent decision making
+
+Integration: Indirect integration via QuarkDriver and AutonomousAgent; orchestrates simulator runs.
+Rationale: State system validates, plans, and triggers actions that the simulator executes.
 """
 
 import os
@@ -195,7 +197,7 @@ def run_hybrid_computation(task_name: str, problem_size: int, **kwargs):
         updates["updates_applied"].append(f"Created quantum router: {router_file}")
         
         # 2. Update main state file
-        state_file = self.state_dir / "QUARK_STATE.md"
+        state_file = self.state_dir / "quark_state_system.md"
         if state_file.exists():
             self._update_state_file_with_quantum(state_file, updates)
         

@@ -5,13 +5,17 @@ not needed for verifying the driver loop.  We stub it with a lightweight fake
 that simply records how many times ``execute_next_goal`` was called and can be
 configured to raise exceptions to simulate run-time errors.
 """
-import importlib, sys, types
+
+import importlib
+import sys
+import types
 
 import pytest
 
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
+
 
 class DummyAgent:
     """A minimal stand-in for ``AutonomousAgent``.
@@ -28,12 +32,15 @@ class DummyAgent:
 
     def __init__(self, *_, fail_until: int = 0, max_calls: int | None = None, **__):
         from types import SimpleNamespace
+
         self.calls = 0
         self.fail_until = fail_until
         self.max_calls = max_calls
         # provide stubbed attributes expected by QuarkDriver
         self.compliance = SimpleNamespace(validate_action_legality=lambda *_: True)
-        self.roadmap = SimpleNamespace(get_next_actionable_goal=lambda: None, report_progress=lambda *_: None)
+        self.roadmap = SimpleNamespace(
+            get_next_actionable_goal=lambda: None, report_progress=lambda *_: None
+        )
 
     # pylint: disable=unused-argument
     def execute_next_goal(self):  # noqa: D401 (simple verb ok)
@@ -51,6 +58,7 @@ class DummyAgent:
 # Fixtures
 # ---------------------------------------------------------------------------
 
+
 @pytest.fixture(autouse=True)
 def patch_autonomous_agent(monkeypatch):
     """Replace the heavy AutonomousAgent with :class:`DummyAgent`."""
@@ -63,11 +71,14 @@ def patch_autonomous_agent(monkeypatch):
     # Stub roadmap_controller to satisfy autonomous_agent import chain
     if "quark_state_system.roadmap_controller" not in sys.modules:
         rc_mod = types.ModuleType("quark_state_system.roadmap_controller")
+
         class _DummyRoadmap:
             def get_next_actionable_goal(self):
                 return None
+
             def report_progress(self, *_):
                 pass
+
         rc_mod.RoadmapController = _DummyRoadmap
         sys.modules["quark_state_system.roadmap_controller"] = rc_mod
 
@@ -75,9 +86,11 @@ def patch_autonomous_agent(monkeypatch):
     comp_path = "brain_modules.alphagenome_integration.compliance_engine"
     if comp_path not in sys.modules:
         comp_mod = types.ModuleType(comp_path)
+
         class _DummyCompliance:
             def validate_action_legality(self, *_):
                 return True
+
         comp_mod.ComplianceEngine = _DummyCompliance
         # Ensure parent packages exist
         pkg_parts = comp_path.split(".")
@@ -112,6 +125,7 @@ def driver(monkeypatch):
 # ---------------------------------------------------------------------------
 # Tests
 # ---------------------------------------------------------------------------
+
 
 def test_trigger_detection_runs_limit(driver):
     """Driver should run *limit* tasks when trigger has numeric argument."""

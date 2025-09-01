@@ -23,6 +23,28 @@ python QUARK_STATE_SYSTEM.py recommendations
 ```
 Quark lists the top pending tasks (high → low priority).
 
+## 3.1 Auto-Expansion & Task Bridge
+
+When `recommendations` or the brain simulator requests tasks, the **Task Bridge** performs:
+1. Sync roadmap YAMLs → pending tasks.
+2. If a task title exceeds ~12 words, it is auto-split into subtasks via the local uncensored-Llama model (see `advanced_planner.py`).
+3. The subtasks are queued to the `goal_manager`; leftovers are pushed back so nothing is lost.
+4. On completion the simulator/agent calls `goal_manager.complete(id)` → `TASK_BRIDGE.mark_done()` → appends `DONE` in the originating roadmap bullet and updates status.
+
+No manual step is required—just mark tasks complete in chat (“task complete”).
+
+## 3.2 Ad-Hoc Chat Tasks
+
+If you ask, “Are these roadmap tasks or ad-hoc tasks?” and answer “ad-hoc”, Quark creates a new `chat_tasks_<title>_N.yaml` under `state/tasks/`. Use:
+```bash
+python QUARK_STATE_SYSTEM.py create-chat-tasks "My quick fixes" fix_database bug_123
+```
+To view progress:
+```bash
+python QUARK_STATE_SYSTEM.py task-status
+```
+Completed items move to `state/tasks/tasks_archive.yaml` automatically.
+
 ## 4  Mark Completion
 Once a task is done you can:
 ```bash

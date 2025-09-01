@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
-"""
-Real Basal Ganglia Architecture Implementation
+"""Real Basal Ganglia Architecture Implementation
 
 This module implements the complete basal ganglia architecture including
 all nuclei, connections, and computational models based on current
 neuroscientific understanding.
+
+Integration: This module is part of the neural core and executes under brain_simulator.
+Rationale: Loaded by brain simulator as part of the neural core runtime.
 """
 
 import numpy as np

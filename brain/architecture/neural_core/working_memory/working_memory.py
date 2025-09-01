@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
-"""
-🧠 Working Memory Module
+"""🧠 Working Memory Module
 Handles short-term information storage, retrieval, and cognitive load management
+
+Integration: This module is part of the neural core and executes under brain_simulator.
+Rationale: Loaded by brain simulator as part of the neural core runtime.
 """
 
 import numpy as np

@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
-"""
-Test S3 Streaming Capabilities
+"""Test S3 Streaming Capabilities
 Demonstrates streaming models and datasets directly from S3
+
+Integration: Indirect integration via QuarkDriver and AutonomousAgent; orchestrates simulator runs.
+Rationale: State system validates, plans, and triggers actions that the simulator executes.
 """
 
 import sys

@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
-"""
-Bedrock-Enhanced Brain Simulation Demo
+"""Bedrock-Enhanced Brain Simulation Demo
 Combines AWS Bedrock AI with Quantum Braket for advanced brain simulation
+
+Integration: This module participates in biological workflows via BiologicalSimulator and related analyses.
+Rationale: Biological modules used via BiologicalSimulator and downstream analyses.
 """
 
 import boto3

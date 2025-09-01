@@ -1,3 +1,9 @@
+
+
+"""
+Integration: This module is part of the neural core and executes under brain_simulator.
+Rationale: Loaded by brain simulator as part of the neural core runtime.
+"""
 import os
 import numpy as np
 from typing import Dict, Any, Optional
@@ -48,5 +54,4 @@ class HRMPlanner:
             "policy_prior": prior,
             "confidence": 0.2, # Placeholder confidence
         }
-
 

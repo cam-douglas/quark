@@ -1,7 +1,9 @@
-"""
-spatialmath Adapter
+"""spatialmath Adapter
 Pose/SE3 utilities wrapper.
 Source: https://github.com/bdaiinstitute/spatialmath-python
+
+Integration: This module is indirectly invoked by simulators/agents through adapter or tooling calls.
+Rationale: Adapter layer used by simulators to interface external libraries.
 """
 import numpy as np
 

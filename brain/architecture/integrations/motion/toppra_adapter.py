@@ -1,8 +1,10 @@
-"""
-TOPP-RA Adapter
+"""TOPP-RA Adapter
 Time-Optimal Path Parameterization under constraints.
 Falls back to pass-through if bindings are not available.
 Source: https://github.com/hungpham2511/toppra
+
+Integration: This module is indirectly invoked by simulators/agents through adapter or tooling calls.
+Rationale: Adapter layer used by simulators to interface external libraries.
 """
 from typing import Optional
 import numpy as np

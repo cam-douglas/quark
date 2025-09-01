@@ -1,6 +1,9 @@
 """ResourceConsumer – reacts to resource_integrated events and feeds them into KnowledgeHub.
 Currently handles plain-text files (.txt, .md) by assimilating their contents
 into the brain's KnowledgeHub.
+
+Integration: This module is part of the neural core and executes under brain_simulator.
+Rationale: Loaded by brain simulator as part of the neural core runtime.
 """
 from pathlib import Path
 from typing import Dict, Any

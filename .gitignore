@@ -52,3 +52,4 @@ data/**
 
 # Ignore repo index archives
 repo_indexes/**
+quark_env/

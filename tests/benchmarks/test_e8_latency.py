@@ -2,16 +2,13 @@ import os
 import random
 import string
 
-import numpy as np
 import pytest
-from pytest import approx
 
 pytest.importorskip("pytest_benchmark")
 
 from brain.architecture.neural_core.cognitive_systems.memory_providers.e8_adapter import (
     E8MemoryAdapter,
 )
-
 
 RAND = random.Random(42)
 

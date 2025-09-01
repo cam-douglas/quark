@@ -1,5 +1,7 @@
-"""
-A connector for the Kaggle API to enable dataset search and download.
+"""A connector for the Kaggle API to enable dataset search and download.
+
+Integration: This module is indirectly invoked by simulators/agents through adapter or tooling calls.
+Rationale: Operational tooling invoked by agents/simulators when required.
 """
 
 import os

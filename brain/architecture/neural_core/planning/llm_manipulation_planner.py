@@ -1,7 +1,9 @@
-"""
-LLM-Powered Manipulation Planning Module
+"""LLM-Powered Manipulation Planning Module
 Integrates kinematic-aware prompting for articulated object manipulation.
 Based on: https://github.com/GeWu-Lab/LLM_articulated_object_manipulation
+
+Integration: This module is part of the neural core and executes under brain_simulator.
+Rationale: Loaded by brain simulator as part of the neural core runtime.
 """
 
 import sys

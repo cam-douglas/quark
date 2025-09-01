@@ -1,10 +1,12 @@
-import types, sys
+import sys
+import types
 
 import pytest
 
 # Ensure placeholder for missing roadmap_controller to satisfy import chain
 sys.modules.setdefault("quark_state_system.roadmap_controller", types.ModuleType("rc"))
 if not hasattr(sys.modules["quark_state_system.roadmap_controller"], "RoadmapController"):
+
     class _StubRC:  # noqa: D401 simple stub
         def get_next_actionable_goal(self):
             return None
@@ -17,9 +19,11 @@ pkg_ai = types.ModuleType("brain_modules.alphagenome_integration")
 sys.modules.setdefault("brain_modules.alphagenome_integration", pkg_ai)
 ce_mod = types.ModuleType("brain_modules.alphagenome_integration.compliance_engine")
 if not hasattr(ce_mod, "ComplianceEngine"):
+
     class _ComplianceEngine:  # noqa: D401 simple stub
         def validate_action_legality(self, _):
             return True
+
     ce_mod.ComplianceEngine = _ComplianceEngine
 sys.modules["brain_modules.alphagenome_integration.compliance_engine"] = ce_mod
 
@@ -38,7 +42,7 @@ def stub_driver(monkeypatch, tmp_path):
         def __init__(self, root):
             self.counter = 0
             self.roadmap = types.SimpleNamespace(get_next_actionable_goal=lambda: None)
-            self.compliance = types.SimpleNamespace(validate_action_legality=lambda _ : True)
+            self.compliance = types.SimpleNamespace(validate_action_legality=lambda _: True)
 
         def execute_next_goal(self):
             self.counter += 1

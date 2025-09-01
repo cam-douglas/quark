@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
-"""
-Simple test to validate AlphaGenome integration setup
+"""Simple test to validate AlphaGenome integration setup
 Works even when AlphaGenome API is not available
+
+Integration: This module participates in biological workflows via BiologicalSimulator and related analyses.
+Rationale: Biological modules used via BiologicalSimulator and downstream analyses.
 """
 
 import sys

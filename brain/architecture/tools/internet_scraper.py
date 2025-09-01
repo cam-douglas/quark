@@ -1,5 +1,7 @@
-"""
-A simple, robust web scraper for the SelfLearningOrchestrator.
+"""A simple, robust web scraper for the SelfLearningOrchestrator.
+
+Integration: This module is indirectly invoked by simulators/agents through adapter or tooling calls.
+Rationale: Operational tooling invoked by agents/simulators when required.
 """
 
 import requests

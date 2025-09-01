@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
-"""
-Quark State System S3 Integration
+"""Quark State System S3 Integration
 Updates the Quark state system to work with Tokyo S3 bucket and instance
+
+Integration: Indirect integration via QuarkDriver and AutonomousAgent; orchestrates simulator runs.
+Rationale: State system validates, plans, and triggers actions that the simulator executes.
 """
 
 import os

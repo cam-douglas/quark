@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
-"""
-🧠 Hippocampus - Episodic Memory Module
+"""🧠 Hippocampus - Episodic Memory Module
 Handles episodic memory formation, consolidation, and pattern completion
+
+Integration: This module is part of the neural core and executes under brain_simulator.
+Rationale: Loaded by brain simulator as part of the neural core runtime.
 """
 
 import numpy as np

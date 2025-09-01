@@ -1,3 +1,9 @@
+
+
+"""
+Integration: Indirect integration via QuarkDriver and AutonomousAgent; orchestrates simulator runs.
+Rationale: State system validates, plans, and triggers actions that the simulator executes.
+"""
 # state/quark_state_system/task_loader.py
 """Central loader for consolidated task YAML files.
 

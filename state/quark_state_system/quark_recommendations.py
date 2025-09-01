@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
-"""
-QUARK Recommendations Engine
+"""QUARK Recommendations Engine
 
 This script demonstrates how QUARK can now provide intelligent recommendations
 based on its current state system, ensuring consistency across all interactions.
+
+Integration: Indirect integration via QuarkDriver and AutonomousAgent; orchestrates simulator runs.
+Rationale: State system validates, plans, and triggers actions that the simulator executes.
 """
 
 import json
@@ -16,6 +18,12 @@ roadmap_ctrl = import_module('management.rules.roadmaps.roadmap_controller')
 loader = import_module('state.quark_state_system.task_loader')
 
 ROADMAP_CTRL = roadmap_ctrl  # backward-compat alias
+
+from QUARK_STATE_SYSTEM import (
+    MASTER_ROADMAP,
+    ROADMAP_TASK_TMPL,
+    ROADMAP_USE_MARKERS,
+)
 
 class QuarkRecommendationsEngine:
     """
@@ -56,7 +64,7 @@ class QuarkRecommendationsEngine:
 
         # 3b. Generate fine-grained tasks from master roadmap '🚧 In Progress' sections.
         from pathlib import Path
-        master_path = Path("management/rules/roadmaps/master_roadmap.md")
+        master_path = MASTER_ROADMAP
         added_from_master = tl.generate_tasks_from_master(master_path)
 
         # Identify tasks newly created by both sync steps.
@@ -425,4 +433,3 @@ def get_quantum_recommendations():
         })
     
     return recommendations
-

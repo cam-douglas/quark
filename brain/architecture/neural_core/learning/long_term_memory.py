@@ -1,6 +1,8 @@
-"""
-Long-Term Memory Module for Lifelong Learning
+"""Long-Term Memory Module for Lifelong Learning
 This module stores experiences across all episodes to enable curiosity and novelty-seeking.
+
+Integration: This module is part of the neural core and executes under brain_simulator.
+Rationale: Loaded by brain simulator as part of the neural core runtime.
 """
 import numpy as np
 from collections import defaultdict

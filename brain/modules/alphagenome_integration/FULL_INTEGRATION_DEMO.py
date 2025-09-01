@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
-"""
-Complete AlphaGenome Integration Demonstration
+"""Complete AlphaGenome Integration Demonstration
 Shows full functionality with real API calls and biological simulation
+
+Integration: This module participates in biological workflows via BiologicalSimulator and related analyses.
+Rationale: Biological modules used via BiologicalSimulator and downstream analyses.
 """
 
 import sys

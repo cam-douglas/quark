@@ -16,12 +16,66 @@ ALWAYS keep roadmap YAMLs (`tasks_high.yaml`, `tasks_medium.yaml`, `tasks_low.ya
 ALWAYS refrain from marking a task complete until it has been validated as complete (tests pass or user approval).
 ALWAYS break tasks into small, numbered steps and reference the total count (e.g., "step 2 of 8") in conversational output *important* Always avoid gaps and monitor for overconfidence.
 ALWAYS execute code automatically in the foreground; background jobs are disallowed except the user explicitly requests otherwise.
+ALWAYS run required shell commands directly via the `run_terminal_cmd` tool; never instruct the user to copy-paste or execute commands manually in their terminal.
 ALWAYS prompt for explicit approval before any file deletion or move operation.
+
+# ---------------------------------------------------------------------------
+# Sprint / Batch / Task Management
+# ---------------------------------------------------------------------------
+ALWAYS manage objectives as Phases (Sprints) → Batches → Steps:
+  • Phase sequence: Planning → Implementation → Review → Retrospect → Deployment
+  • Batch (3 to 5 Steps) : Agile workflow steps inside a Phase (Requirement, Design, Development, Testing, Review)
+  • Step  : Smallest atomic action
+
+ALWAYS label items using the following convention:
+  • Phase  → numeric index (Phase 1, Phase 2 …)
+  • Batch  → uppercase letter within the phase (Batch A, Batch B …)
+  • Step   → numeric index within the batch (Step 1, Step 2 …)
+  Example: `Phase 2 of 5 ▸ Batch C of D ▸ Step 3 of 8`.
+
+ALWAYS keep each Batch between 1 and 5 Tasks; if more tasks are required, split them into additional Batches (Batch A, Batch B …) within the same Phase.
+
+ALWAYS execute a Phase in a continuous series of **3–5 Steps**.  Each Step is
+implemented as one or more Batches, where **each Batch may contain up to 3
+micro-steps** executed in a single pass.  If a Step is too large to fit safely
+into one Batch, split it across sequential Batches (A, B, C …) each containing
+≤3 micro-steps until the Step completes.
+
+ALWAYS, after each execution pass, output a summary that lists:
+  • Which micro-steps just completed and which remain in the current Batch.
+  • Batch status (e.g., "Batch B of D completed").
+  • Step status (e.g., "Step 2 of 4 completed").
+  • Phase status (e.g., "Phase 1 of 3 – Implementation – in progress").
+
+ALWAYS continue executing successive Batches without further user prompts
+until the 3–5 Steps of the Phase are complete **unless** the block is too
+large for safe execution; in that case execute one Batch at a time and report
+progress, waiting for user acknowledgement before starting the next Batch.
+
+ALWAYS auto-generate `/state/tasks/chat_tasks.yaml` (file name includes sprint title) at session start:
+  • Populate every Batch and Task, numbered `phase X/Y ▸ batch A/B ▸ task M/N`.
+  • Update status automatically; remove a Task only after it passes validation and Phase Review is approved.
+
+ALWAYS update roadmap YAMLs (`tasks_high.yaml`, `tasks_medium.yaml`, `tasks_low.yaml`) when the master roadmap changes OR at the start of each Phase.
+
+ALWAYS, at the very start of a new Phase, prompt the user:
+  “Run roadmap-aligned tasks or ad-hoc tasks for this phase?”
+  • If the user chooses *roadmap*, update the high/medium/low task YAMLs and operate exclusively on them.
+  • If the user chooses *ad-hoc*, operate only on `chat_tasks.yaml` for that phase.
+
+ALWAYS accept natural-language triggers:
+  • “proceed / execute / evolve” → advance to next Task in current Batch
+  • “next batch”                → start next Batch within current Phase
+  • “next phase”                → start next Phase after Deployment Review
+
+ALWAYS include phase / batch / task counters in chat replies and timing tables.
 
 ## 🗺️ MARKDOWN & CROSS-LINK AWARENESS (GLOBAL)
 ALWAYS at session start run `glob_file_search("**/*.md")` to collect Markdown paths.
 ALWAYS batch-read first 120 lines of each Markdown file in parallel.
+ALWAYS read every file in `management/rules/roadmap/` (currently 14 roadmap rule docs) at session start so strategic constraints are loaded into memory.
 ALWAYS read `README.md` in any directory before reading source files there.
+ALWAYS include a concise `README.md` in every non-leaf directory to document the purpose of contained files and expose relative links.
 ALWAYS embed relative links to relevant docs when generating/updating Markdown.
 ALWAYS verify that each embedded link resolves; warn if not.
 
@@ -43,6 +97,11 @@ ALWAYS write statically-typed Python and run `mypy --strict`.
 ALWAYS satisfy Ruff/flake8 + black + isort with no warnings.
 ALWAYS include Google/NumPy docstrings for every public symbol.
 ALWAYS validate all inputs; never log secrets; follow least privilege.
+ALWAYS keep individual Python source files concise; aim for 50–100 logical
+lines of code.  When a file grows beyond 100 lines (150 hard limit) the agent
+MUST refactor by extracting classes or functions into a new module under an
+appropriate sub-package and link them via imports.  Exceeding the limit is
+permitted only to finish a coherent code block (e.g., a class definition).
 ALWAYS add/update unit tests with ≥2 edge cases.
 ALWAYS keep coverage ≥90 % (`pytest --cov`).
 ALWAYS benchmark hot paths when algorithmic complexity changes.
@@ -67,19 +126,32 @@ ALWAYS avoid duplicate weight files inside repo; reference cache or `data/models
 ## 🧍‍♂️ MODE-SPECIFIC BEHAVIOURS
 ### CHAT / PLAN MODE
 ALWAYS ask scaffold questions when prompt is ambiguous.
-ALWAYS, when the user asks "are you certain", re-run validation checks (duplicate-code search, lint, tests) and propose at least one alternative solution not previously presented.
+ALWAYS, after presenting a plan of action, transition directly to execution **unless** the user explicitly says "stop" or requests clarification.
+  • DO NOT reprint or rephrase the same plan unless either (a) the user asks "repeat plan", or (b) new information or constraints are discovered that materially change the plan.
+  • If the user requests clarification, answer the specific question and then proceed without waiting for further approval.
+ALWAYS, when the user asks "are you certain", or, "are you sure", re-run validation checks (duplicate-code search, lint, tests) and propose at least one alternative solution not previously presented.
 ALWAYS treat the keyword "evolve" as an instruction to proceed with Quark’s recommendations provided they are backed by current scientific literature, and ensure Quark’s overarching goal to evolve and advance science remains active.
+ALWAYS interpret the keyword “execute" as an explicit instruction to perform the
+specified code steps immediately—even if the agent would normally suggest
+alternatives—provided no safety or compliance rule is violated.
+
 ### EDIT / REFACTOR MODE
+ALWAYS apply file edits directly with the appropriate tool; do NOT ask the
+user to paste code manually.  Only request confirmation when a rule already
+requires it (e.g., file deletion or move).
 ALWAYS minimise diff and preserve behaviour unless asked.
+ALWAYS read the entire target file into context before applying any edits; do not perform partial edits without first loading the full contents.
 ### GENERATE CODE MODE
 ALWAYS implement MVP first; add TODOs for stretch goals.
 ### FIX / DEBUG MODE
 ALWAYS reproduce the bug with a minimal case and state root cause.
 ALWAYS provide both fix **and** regression test.
 ALWAYS debug in foreground until resolved; pause only for needed info.
+ALWAYS attempt automatic patches iteratively until the error is resolved; do NOT stop to summarise each failure unless user input is essential for the next fix attempt.
 ALWAYS list exact paths for delete/move ops and wait for user approval.
 ### EXPLAIN MODE
 ALWAYS summarise the overall flow at a high level *only after* tasks/goals are complete, and ensure that the underlying tasks and recommendations remain highly technical and specific (the user does not need to read every task detail, only the final summary).
+ALWAYS, when summarising completed tasks, remind the user of any outstanding tasks in the chat. If new tasks have been introduced, keep track of all previous unfinished tasks and list them at the end of the summary.
 ### COMMIT MESSAGE MODE
 ALWAYS use Conventional Commits (`feat:`, `fix:`, `docs:`…).
 ### TEST MODE
@@ -168,10 +240,46 @@ ALWAYS update relative links inside `docs/safety_officer_readme.md` whenever
 # Brain Directory Indexing
 # ---------------------------------------------------------------------------
 ALWAYS at session start run `glob_file_search("brain/**/*.py")` (target = repo
- root, head_limit high) to build a manifest of all neural-core and ML files.
+ root, head_limit high) to build a manifest of all neural-core and ML files. 
+ALWAYS read **and** update the manifests at session start:
+  • /Users/camdouglas/quark/brain_manifest.json
+  • /Users/camdouglas/quark/repo_index.json
 
 Rationale: Guarantees biomechanical fidelity across the AGI brain simulation
  stack by enforcing a single canonical implementation style.
+
+# ---------------------------------------------------------------------------
+# Manifest Location & Archiving
+# ---------------------------------------------------------------------------
+ALWAYS keep the **current** manifests at the repository top level:
+  • `INDEX.md`
+  • `brain_manifest.json`
+  • `repo_index.json`
+
+ALWAYS move or generate *archived* or timestamped indexes under
+ `repo_indexes/` (e.g., `repo_indexes/repo_index_20250830.json`).  Current
+ top-level manifests should never be duplicated inside `repo_indexes/` to
+ avoid confusion.
+
+ALWAYS ensure that **any** update mechanism (nightly CI job, Quark State System sync, or Git pre-push hook) regenerates a fresh snapshot and moves the previous version into `repo_indexes/` with a date suffix **before** overwriting the top-level files.
+
+# ---------------------------------------------------------------------------
+# Manifest Maintenance Workflow
+# ---------------------------------------------------------------------------
+ALWAYS read **and** update the following manifests at session start **and** whenever any update mechanism (state sync, pre-push hook, CI job) modifies the tree:
+  • `/Users/camdouglas/quark/repo_indexes/INDEX.md`
+  • `/Users/camdouglas/quark/brain_manifest.json`
+  • `/Users/camdouglas/quark/repo_index.json`
+
+ALWAYS, after each manifest refresh:
+  • Re-scan the entire workspace so manifests reflect the current file set (all sub-trees, not just `brain/`).
+  • Regenerate or patch `README.md` files in every directory that changed, embedding fresh relative links to other READMEs and verifying that no internal links are broken (link-check logic).
+
+ALWAYS fail the triggering operation (pre-push, CI job, or in-session update) when:
+  • Any manifest is out-of-sync with on-disk files, OR
+  • Any refreshed README contains a dangling link.
+
+Rationale: keeps global indexes, deep-directory READMEs, and cross-links perfectly aligned with the evolving code-base.
 
 # ---------------------------------------------------------------------------
 # Data Storage & Knowledge Base Placement

@@ -1,7 +1,9 @@
-"""
-Sophus Adapter
+"""Sophus Adapter
 Lie groups utilities placeholder.
 Source: https://github.com/strasdat/Sophus
+
+Integration: This module is indirectly invoked by simulators/agents through adapter or tooling calls.
+Rationale: Adapter layer used by simulators to interface external libraries.
 """
 import numpy as np
 

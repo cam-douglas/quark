@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-"""
-Generate a technical whitepaper-style README.md from the Quark State System
+"""Generate a technical whitepaper-style README.md from the Quark State System
 and repository structure.
 
 Sections:
@@ -13,6 +12,9 @@ Sections:
 Behavior:
 - Safe to run locally and in CI. No external calls.
 - If QUARK_STATE.md is missing, proceeds with placeholder.
+
+Integration: Support utilities used by brain/state; indirectly integrated where imported.
+Rationale: Shared helpers (performance, IO, streaming) used across runtime components.
 """
 from __future__ import annotations
 
@@ -23,7 +25,7 @@ from pathlib import Path
 from typing import Optional, List
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-STATE_FILE = REPO_ROOT / "state/quark_state_system/QUARK_STATE.md"
+STATE_FILE = REPO_ROOT / "state/quark_state_system/quark_state_system.md"
 # Prefer the user's absolute README path if it exists; otherwise, use repo root.
 ABS_README = Path("/Users/camdouglas/quark/README.md")
 README_FILE = ABS_README if ABS_README.exists() else (REPO_ROOT / "README.md")
@@ -130,5 +132,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-
 

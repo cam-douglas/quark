@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
-"""
-AlphaGenome Integration Package
+"""AlphaGenome Integration Package
 Provides comprehensive biological development simulation using Google DeepMind's AlphaGenome
+
+Integration: This module participates in biological workflows via BiologicalSimulator and related analyses.
+Rationale: Biological modules used via BiologicalSimulator and downstream analyses.
 """
 
 try:

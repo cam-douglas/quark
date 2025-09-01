@@ -1,5 +1,7 @@
-from brain.architecture.neural_core.cognitive_systems.resource_manager import ResourceManager
 from pathlib import Path
+
+from brain.architecture.neural_core.cognitive_systems.resource_manager import ResourceManager
+
 
 def test_force_license_override(tmp_path):
     gpl_file = tmp_path / "gpl_mod.py"

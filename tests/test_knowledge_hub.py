@@ -1,11 +1,30 @@
+# ---- Test-only stubs to avoid heavy dependencies -----------------------
+import sys
+import types
+
 import pytest
 
-from brain.architecture.neural_core.cognitive_systems.knowledge_hub import KnowledgeHub
-from brain.architecture.neural_core.cognitive_systems.knowledge_hub import KnowledgeType
+from brain.architecture.neural_core.cognitive_systems.knowledge_hub import (
+    KnowledgeHub,
+    KnowledgeType,
+)
 from brain.architecture.neural_core.hippocampus.episodic_memory import EpisodicMemory
 
-# Disable heavy LLM fallback during unit tests
-import brain.architecture.neural_core.cognitive_systems.llm_fallback as _lf
+# Provide a lightweight stub for LanguageCortex so llm_fallback import is cheap
+stub_mod = types.ModuleType("language_cortex_stub")
+
+
+class _DummyLC:  # noqa: N801
+    def process_input(self, prompt: str):
+        return "stub-llm-answer"
+
+
+stub_mod.LanguageCortex = _DummyLC
+sys.modules["brain.architecture.neural_core.language.language_cortex"] = stub_mod
+
+# Monkeypatch llm_fallback.answer_with_llm to avoid network
+import brain.architecture.neural_core.cognitive_systems.llm_fallback as _lf  # noqa: E402
+
 _lf.answer_with_llm = lambda q: "stub-llm-answer"
 
 

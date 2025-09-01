@@ -1,7 +1,9 @@
-"""
-OCS2 Adapter
+"""OCS2 Adapter
 Model Predictive Control (MPC) interface placeholder.
 Source: https://github.com/leggedrobotics/ocs2
+
+Integration: This module is indirectly invoked by simulators/agents through adapter or tooling calls.
+Rationale: Adapter layer used by simulators to interface external libraries.
 """
 from typing import Optional
 import numpy as np

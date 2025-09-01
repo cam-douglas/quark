@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-"""
-Optimized Biological Pruning System for Repository Health
+"""Optimized Biological Pruning System for Repository Health
 ========================================================
 
 This module implements an optimized biological pruning system that uses:
@@ -18,6 +17,9 @@ Biological Principles:
 
 Author: Quark Brain Architecture
 Date: 2024
+
+Integration: Not directly invoked by brain simulator; participates via imports or supporting workflows.
+Rationale: Module is used by other components; no standalone simulator hook is required.
 """
 
 import os

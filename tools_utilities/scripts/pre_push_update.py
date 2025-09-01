@@ -6,6 +6,9 @@ Actions:
 2. Validate links in master_roadmap.md (abort with non-zero exit if broken)
 3. Sync roadmap snapshot → YAML tasks
 4. Update README.md Roadmap Status section (abstract + bullet summary)
+
+Integration: Not simulator-integrated; repository tooling for indexing, validation, or CI.
+Rationale: Executed by developers/CI to maintain repo health; not part of runtime simulator loop.
 """
 from __future__ import annotations
 import subprocess as sp
@@ -17,8 +20,8 @@ import datetime
 import yaml
 
 ROOT = Path(__file__).resolve().parents[2]  # project root
-RD_DIR = ROOT / "management" / "rules" / "roadmaps"
-MASTER = RD_DIR / "master_roadmap.md"
+RD_DIR = ROOT / "management" / "rules" / "roadmap"
+MASTER = RD_DIR / "MASTER_ROADMAP.md"
 INDEX = RD_DIR / "ROADMAPS_INDEX.md"
 README = ROOT / "README.md"
 
@@ -73,7 +76,7 @@ def validate_links():
 # ---------------------------------------------------------------------------
 
 def sync_tasks():
-    from management.rules.roadmaps.roadmap_controller import status_snapshot
+    from management.rules.roadmap.roadmap_controller import status_snapshot
     from state.quark_state_system import task_loader
     before = len(list(task_loader.get_tasks()))
     task_loader.sync_with_roadmaps(status_snapshot())
@@ -92,7 +95,7 @@ START_TAG = "<!-- ROADMAP_STATUS_START -->"
 END_TAG = "<!-- ROADMAP_STATUS_END -->"
 
 def roadmap_summary() -> str:
-    from management.rules.roadmaps.roadmap_controller import status_snapshot
+    from management.rules.roadmap.roadmap_controller import status_snapshot
     snap = status_snapshot()
     done = sum(1 for s in snap.values() if s == "done")
     progress = sum(1 for s in snap.values() if s == "progress")
