@@ -46,3 +46,9 @@ logs/
 # OS files
 .DS_Store
 Thumbs.db
+
+# Ignore heavy data assets
+data/**
+
+# Ignore repo index archives
+repo_indexes/**
