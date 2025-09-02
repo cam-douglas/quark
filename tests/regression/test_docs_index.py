@@ -1,4 +1,4 @@
-from utilities.doc_utils import open_doc
+from tools_utilities.scripts.doc_utils import open_doc
 
 
 def test_docs_index_exists():

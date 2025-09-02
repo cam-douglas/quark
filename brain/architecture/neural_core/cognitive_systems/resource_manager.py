@@ -113,7 +113,7 @@ class ResourceManager:
 
         # Start autoscan if enabled in default config
         if auto_scan:
-            self.autoscanner = AutoScanner(_DATA_DIR, interval_sec)
+            self.autoscanner = AutoScanner(_DATA_DIR, scan_interval_sec)
             self.autoscanner.start()
         else:
             self.autoscanner = None
@@ -126,25 +126,30 @@ class ResourceManager:
     # Streaming-aware training / fine-tuning launcher (Phase 3)
     # ------------------------------------------------------------------
 
-    def _launch_quark_cli(self, verb: str, overrides: dict[str, str] | None = None) -> int:
-        """Run quark_cli with the given verb ("train" or "fine-tune")."""
+    def _launch_orchestrator(self, verb: str, backend: str = "local", deploy: bool = False,
+                             overrides: dict[str, str] | None = None, checkpoint: Optional[str] = None) -> int:
+        """Run pipeline_orchestrator.py with given verb (train/finetune)."""
         overrides = overrides or {}
-        cli_path = _REPO_ROOT / "tools_utilities/scripts/quark_cli.py"
-        if not cli_path.exists():
-            logger.error("quark_cli.py not found at %s", cli_path)
+        orch_path = _REPO_ROOT / "tools_utilities/scripts/pipeline_orchestrator.py"
+        if not orch_path.exists():
+            logger.error("pipeline_orchestrator.py not found at %s", orch_path)
             return 1
 
-        override_args = []
-        for k, v in overrides.items():
-            override_args += ["--override", f"{k}={v}"]
+        cmd = [sys.executable, str(orch_path), verb, backend]
+        if deploy:
+            cmd.append("--deploy")
+        if checkpoint:
+            cmd.extend(["--checkpoint", checkpoint])
 
-        cmd = [sys.executable, str(cli_path), f"{verb} quark"] + override_args
-        logger.info("Launching %s", " ".join(cmd))
+        for k, v in overrides.items():
+            cmd += ["--override", f"{k}={v}"]
+
+        logger.info("[ResourceManager] launching orchestrator: %s", " ".join(cmd))
         try:
             completed = subprocess.run(cmd, check=False)
             return completed.returncode
-        except Exception as e:
-            logger.error("Failed to launch quark_cli: %s", e)
+        except Exception as exc:
+            logger.error("Failed to launch orchestrator: %s", exc)
             return 1
 
     # Public API
@@ -173,9 +178,9 @@ class ResourceManager:
             overrides.setdefault("train_prefix", prefix)
 
         if task_type_l in {"train", "training"}:
-            return self._launch_quark_cli("train", overrides)
+            return self._launch_orchestrator("train", overrides=overrides)
         elif task_type_l in {"fine_tune", "finetune", "fine-tune"}:
-            return self._launch_quark_cli("fine-tune", overrides)
+            return self._launch_orchestrator("finetune", overrides=overrides)
         else:
             logger.warning("Unknown task_type %s – falling back to legacy path", task_type)
             # legacy behaviour placeholder
@@ -206,7 +211,7 @@ class ResourceManager:
     # ------------------------------------------------------------------
     def get_streaming_manager(self, bucket: str):
         """Return (and cache) a StreamingManager for *bucket*."""
-        from utilities.s3_streaming_manager import S3StreamingManager as _SM  # local import to avoid heavy deps on import time
+        from tools_utilities.scripts.s3_streaming_manager import S3StreamingManager as _SM  # updated import path
         if not hasattr(self, "_sm_cache"):
             self._sm_cache = {}
         if bucket not in self._sm_cache:

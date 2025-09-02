@@ -88,8 +88,17 @@ def main():
         _run(TRAIN_SCRIPT, forwarded)
     elif re.search(r"\bfinetune\s+quark\b", phrase_lower):
         _run(FINETUNE_SCRIPT, forwarded)
+    elif re.search(r"\bstate\b", phrase_lower):
+        from tools_utilities.scripts import check_quark_state as _cqs  # lazy import
+        _cqs.extract_state_info()
+    elif re.search(r"\brecommendations?\b", phrase_lower):
+        from state.quark_state_system.quark_recommendations import QuarkRecommendationsEngine  # noqa: WPS433
+        eng = QuarkRecommendationsEngine()
+        eng._refresh_state()
+        for t in eng.next_tasks:
+            print("•", t["title"])
     else:
-        sys.exit("Unrecognised command phrase. Use 'train quark' or 'finetune quark'.")
+        sys.exit("Unrecognised command phrase. Use 'train quark', 'finetune quark', 'state', or 'recommendations'.")
 
 
 def _run(script: Path, forwarded):

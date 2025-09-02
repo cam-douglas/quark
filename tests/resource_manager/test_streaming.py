@@ -11,7 +11,7 @@ if not hasattr(moto, "mock_s3"):
     pytest.skip("moto.mock_s3 unavailable in this moto version", allow_module_level=True)
 from moto import mock_s3
 
-from utilities.s3_streaming_manager import StreamingManager
+from tools_utilities.scripts.s3_streaming_manager import StreamingManager
 from brain.ml.dataset_shards.stream_dataset import StreamDataset
 
 BUCKET = "test-stream-bucket"

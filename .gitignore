@@ -32,6 +32,12 @@ datasets/
 state_snapshots/
 # Cache files
 state_snapshots/cache/
+# Tool caches
+.ruff_cache/
+.pytest_cache/
+.cursor/
+.mlruns/
+.benchmarks/
 # Packaging artefacts
 *.egg-info/
 

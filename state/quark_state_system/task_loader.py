@@ -12,7 +12,7 @@ functions for the state-system and autonomous agent.
 """
 from pathlib import Path
 # local cached read
-from utilities.performance_utils import read_text_cached
+from tools_utilities.scripts.performance_utils import read_text_cached
 import yaml
 from typing import List, Optional, Dict
 

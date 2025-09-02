@@ -43,3 +43,31 @@ Purpose: Directory providing source files and/or submodules relevant to its path
 ## Links
 - [Root README](../../README.md)
 - [Repo Index](../../repo_index.json)
+
+---
+
+## ML Experiment Configs
+
+YAML files in this directory define **all** hyper-parameters and dataset pointers for the scripts in `tools_utilities/scripts/`.
+
+Key fields used by the automation layer:
+
+| Key | Example | Description |
+|-----|---------|-------------|
+| `bucket` | `s3://my-dataset-bucket` | Root path for streaming datasets. |
+| `train_prefix` | `datasets/cortex/train-` | S3 prefix or local dir for train split. |
+| `data_mode` | `streaming` or `local` | Chooses `S3 streaming` vs local FS loader. |
+| `model_name` | `gpt2-small` | Baseline model architecture. |
+| `lr`, `batch_size`, `epochs` | various | Standard optimisation knobs. |
+| `sm_instances` | `2` | SageMaker instance count when `--backend cloud`. |
+| `sm_instance_type` | `ml.g5.2xlarge` | GPU type for SageMaker training job. |
+| `image_uri` | custom ECR URI | Override Docker image; otherwise auto-built or stock. |
+
+All fields can be overridden on the CLI:
+
+```bash
+python train_streaming.py --config training_config.yaml \
+       --override lr=1e-4 batch_size=32
+```
+
+Commit a new YAML for every experiment you want to reproduce; store checkpoints with the same filename prefix under `runs/`.

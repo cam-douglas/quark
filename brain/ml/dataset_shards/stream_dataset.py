@@ -16,7 +16,7 @@ try:
 except ImportError as exc:  # pragma: no cover
     raise ImportError("StreamDataset requires PyTorch. Install with `pip install torch`. ") from exc
 
-from utilities.s3_streaming_manager import StreamingManager
+from tools_utilities.scripts.s3_streaming_manager import StreamingManager
 
 log = logging.getLogger(__name__)
 

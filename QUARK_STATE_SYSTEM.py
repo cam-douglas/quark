@@ -103,7 +103,7 @@ from management.rules.roadmaps.roadmap_controller import status_snapshot
 from management.rules.roadmaps.roadmap_controller import get_all_roadmaps
 from quark_state_system import task_loader
 # --- Docs helper ---
-from utilities.doc_utils import INDEX_PATH
+from tools_utilities.scripts.doc_utils import INDEX_PATH
 # --- END NEW IMPORTS ---
 
 # --- Roadmap Task Template Loader -----------------------------------------

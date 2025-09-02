@@ -97,11 +97,16 @@ ALWAYS write statically-typed Python and run `mypy --strict`.
 ALWAYS satisfy Ruff/flake8 + black + isort with no warnings.
 ALWAYS include Google/NumPy docstrings for every public symbol.
 ALWAYS validate all inputs; never log secrets; follow least privilege.
-ALWAYS keep individual Python source files concise; aim for 50–100 logical
-lines of code.  When a file grows beyond 100 lines (150 hard limit) the agent
-MUST refactor by extracting classes or functions into a new module under an
-appropriate sub-package and link them via imports.  Exceeding the limit is
-permitted only to finish a coherent code block (e.g., a class definition).
+ALWAYS keep individual Python source files concise.
+  • Target: 50–150 logical lines of code.
+  • Soft limit: At ~100 lines start planning a split; at 150 lines the split
+    MUST occur at the next natural junction (end of function/class/section).
+  • Hard limit: 300 lines. Any file at or beyond this size is considered
+    non-compliant and MUST be refactored into smaller modules that import each
+    other as needed.
+  • Splits should occur only at natural code-boundaries to preserve logic and
+    minimise diff size. After splitting, update imports and dependencies so
+    behaviour remains unchanged.
 ALWAYS add/update unit tests with ≥2 edge cases.
 ALWAYS keep coverage ≥90 % (`pytest --cov`).
 ALWAYS benchmark hot paths when algorithmic complexity changes.

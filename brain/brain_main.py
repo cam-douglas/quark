@@ -64,6 +64,9 @@ try:
 except Exception:  # pragma: no cover – we treat *any* failure as absence
     _MUJOCO_AVAILABLE = False
 
+from brain.architecture.learning.kpi_monitor import kpi_monitor
+from brain.architecture.neural_core.cognitive_systems.resource_manager import ResourceManager
+
 # ---------------------------------------------------------------------------
 # Utility helpers
 # ---------------------------------------------------------------------------
@@ -206,7 +209,9 @@ def main(argv: Optional[list[str]] = None) -> None:  # pragma: no cover – CLI 
             # Head-less mode
             brain_inputs = _zero_sensory_stub()
 
-        brain_outputs = brain.step(brain_inputs)
+        from brain.core.brain_simulator_adapter import step_with_metrics  # noqa: WPS433
+
+        brain_outputs = step_with_metrics(brain, brain_inputs)
 
         # Send low-level control to embodiment if available
         if runner is not None:
@@ -219,6 +224,18 @@ def main(argv: Optional[list[str]] = None) -> None:  # pragma: no cover – CLI 
         if step_idx % 100 == 0:
             action = brain_outputs.get("action")
             print(f"step={step_idx:05d} | action_shape={None if action is None else action.shape}")
+
+        # ---------------- KPI Monitoring & Auto-Learning ----------------
+        # Expect brain_outputs to include optional "reward" and "loss" keys; if absent skip.
+        metrics = {}
+        if "reward" in brain_outputs:
+            metrics["reward"] = brain_outputs["reward"]
+        if "loss" in brain_outputs:
+            metrics["loss"] = brain_outputs["loss"]
+        if metrics:
+            decision = kpi_monitor.update(metrics)
+            if decision and step_idx % 500 == 0:  # debounce every 500 steps
+                ResourceManager._DEFAULT.run_training_job(decision)
 
         # Sleep to maintain target frequency
         elapsed = time.time() - loop_start

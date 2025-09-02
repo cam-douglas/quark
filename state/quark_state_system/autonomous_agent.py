@@ -20,7 +20,7 @@ from brain_modules.alphagenome_integration.compliance_engine import ComplianceEn
 from .prompt_guardian import PromptGuardian
 from . import task_loader
 
-from utilities.performance_utils import profile_timing
+from tools_utilities.scripts.performance_utils import profile_timing
 
 class AutonomousAgent:
     """A self-determined agent that executes roadmap goals."""

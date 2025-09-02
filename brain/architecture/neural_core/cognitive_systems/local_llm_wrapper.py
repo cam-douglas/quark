@@ -90,7 +90,7 @@ class LocalLLMWrapper:
     # --------------------------------------------------------
     # Public API
     # --------------------------------------------------------
-    from utilities.performance_utils import memoize
+    from tools_utilities.scripts.performance_utils import memoize
 
     @memoize(maxsize=256)
     def generate(self, prompt: str, **kwargs) -> str:

@@ -56,7 +56,7 @@ pip install moto[all]                     # optional, enables test_streaming.py
 export AWS_PROFILE=quark
 export CACHE_DIR=~/.cache/quark_stream
 python - <<'PY'
-from utilities.s3_streaming_manager import StreamingManager
+from tools_utilities.scripts.s3_streaming_manager import StreamingManager
 from brain.ml.dataset_shards.stream_dataset import StreamDataset
 import json, torch
 

@@ -117,7 +117,7 @@ class QuarkDriver:
         print("="*60)
 
         # 🔬  Print timing breakdown for this prompt cycle
-        from utilities.performance_utils import print_timing_breakdown, reset_timing_registry
+        from tools_utilities.scripts.performance_utils import print_timing_breakdown, reset_timing_registry
         print_timing_breakdown(limit=8)
         reset_timing_registry()
 

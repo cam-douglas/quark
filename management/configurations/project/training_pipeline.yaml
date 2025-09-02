@@ -140,6 +140,9 @@ training_pipeline:
       update_frequency: "after_training"
       validation: "checksum_verification"
       rollback: "enabled"
+  # Local CPU/GPU training toggle (auto-discovered by orchestrator)
+  local_training:
+    enabled: true
   
   # Learning Algorithms
   learning_algorithms:

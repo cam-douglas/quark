@@ -14,7 +14,7 @@ import importlib
 import torch
 from torch.utils.data import DataLoader
 
-from utilities.s3_streaming_manager import StreamingManager
+from tools_utilities.scripts.s3_streaming_manager import StreamingManager
 from brain.ml.dataset_shards.stream_dataset import StreamDataset
 
 
