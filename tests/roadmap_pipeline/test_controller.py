@@ -1,4 +1,4 @@
-from management.rules.roadmaps import roadmap_controller as rc
+from management.rules.roadmap.roadmap_controller import RoadmapController
 
 
 def test_index_parsing():

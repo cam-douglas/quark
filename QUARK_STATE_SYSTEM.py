@@ -98,9 +98,9 @@ def _lazy_import(path: str, attr: str):
 # They are fetched via _lazy_import inside the respective functions.
 # goal handling
 from state.quark_state_system import goal_manager, ask_quark
-from management.rules.roadmaps.roadmap_controller import status_snapshot
+from management.rules.roadmap.roadmap_controller import status_snapshot
 # Roadmaps
-from management.rules.roadmaps.roadmap_controller import get_all_roadmaps
+from management.rules.roadmap.roadmap_controller import get_all_roadmaps
 from quark_state_system import task_loader
 # --- Docs helper ---
 from tools_utilities.scripts.doc_utils import INDEX_PATH
@@ -297,7 +297,7 @@ def run_tasks_overview():
     # the CLI output aligned with roadmap progress even if the YAML files are
     # stale or the user hasn't run an explicit `update roadmap` recently.
     try:
-        from management.rules.roadmaps.roadmap_controller import status_snapshot
+        from management.rules.roadmap.roadmap_controller import status_snapshot
         from state.quark_state_system import task_loader
         task_loader.sync_with_roadmaps(status_snapshot())
     except Exception as sync_err:

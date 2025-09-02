@@ -33,7 +33,6 @@ import yaml
 ROOT = Path(__file__).resolve().parents[2]  # project root
 RD_DIR = ROOT / "management" / "rules" / "roadmap"
 MASTER = RD_DIR / "MASTER_ROADMAP.md"
-INDEX = RD_DIR / "ROADMAPS_INDEX.md"
 README = ROOT / "README.md"
 
 

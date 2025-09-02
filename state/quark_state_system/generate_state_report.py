@@ -15,8 +15,8 @@ from pathlib import Path
 from datetime import datetime
 
 from importlib import import_module
+from management.rules.roadmap.roadmap_controller import status_snapshot
 
-roadmap_ctrl = import_module("management.rules.roadmaps.roadmap_controller")
 loader = import_module("state.quark_state_system.task_loader")
 
 REPORT_PATH = Path(__file__).resolve().parent / "quark_state_system.md"
@@ -24,7 +24,7 @@ REPORT_PATH = Path(__file__).resolve().parent / "quark_state_system.md"
 
 def build_report() -> str:
     timestamp = datetime.utcnow().strftime("%Y-%m-%d %H:%M UTC")
-    status_map = roadmap_ctrl.get_roadmap_status_map()
+    status_map = status_snapshot.get_roadmap_status_map()
     tasks = list(loader.next_actions(limit=5))
 
     md = [

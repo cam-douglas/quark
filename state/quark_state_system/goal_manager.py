@@ -14,7 +14,7 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Dict, Optional
 
-from management.rules.roadmaps.roadmap_controller import status_snapshot
+from management.rules.roadmap.roadmap_controller import get_all_roadmaps
 from . import task_loader
 from state.quark_state_system.advanced_planner import plan as llm_plan
 from brain.tools.task_bridge import TASK_BRIDGE
