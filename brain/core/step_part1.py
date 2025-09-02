@@ -1,4 +1,18 @@
+from typing import Dict, Any
+import time
+import numpy as np
+from brain.architecture.neural_core.learning.ppo_agent import PPOAgent
+from brain.architecture.neural_core.proto_cortex.layer_sheet import LayerSheet
 
+# AlphaGenome biological compliance
+try:
+    from brain.modules.alphagenome_integration.compliance_engine import ComplianceEngine
+    from brain.modules.alphagenome_integration.dna_controller import DNAController
+    ALPHAGENOME_COMPLIANCE_AVAILABLE = True
+except ImportError:
+    ALPHAGENOME_COMPLIANCE_AVAILABLE = False
+
+if True:
     def step(self, inputs: Dict[str, Any], stage: int = 0) -> Dict[str, Any]:
         # --- Lazy Load Datasets on First Step ---
         self._load_training_datasets_if_needed()
@@ -213,3 +227,59 @@
         # --- Blended Reward ---
         positive_valence = limbic_output.get("positive_valence", 0.0)
         error_signal = limbic_output.get("error_signal", 0.0)
+        blended_reward = positive_valence - error_signal
+        outputs['reward'] = blended_reward
+
+        # --- AlphaGenome Biological Rule Enforcement ---
+        if ALPHAGENOME_COMPLIANCE_AVAILABLE:
+            try:
+                # Initialize compliance engine if not exists
+                if not hasattr(self, 'compliance_engine'):
+                    self.compliance_engine = ComplianceEngine()
+                    print("🧬 AlphaGenome Compliance Engine activated for biological rule enforcement")
+                
+                # Get current brain state for validation
+                current_state = {
+                    'neuron_activity': visual_cortex_output.get('neural_activity', np.array([0.0])),
+                    'synaptic_weights': motor_cortex_output.get('synaptic_weights', np.array([1.0])),
+                    'cell_population': len(getattr(self, 'cells', [])),  # If cell tracking exists
+                    'simulation_time': getattr(self, 'total_simulation_time', 0.0)
+                }
+                
+                # Validate biological constraints
+                validation_results = {
+                    'biological_rules_followed': True,
+                    'warnings': [],
+                    'violations': []
+                }
+                
+                # Check simulation boundaries
+                cell_count = current_state.get('cell_population', 0)
+                sim_time_hours = current_state.get('simulation_time', 0.0) / 3600.0  # Convert to hours
+                
+                if not self.compliance_engine.check_simulation_boundaries(cell_count, int(sim_time_hours)):
+                    validation_results['violations'].append('Simulation boundaries exceeded')
+                    validation_results['biological_rules_followed'] = False
+                
+                # Add biological validation to outputs
+                outputs['alphagenome_validation'] = validation_results
+                
+                # If DNA controller is available, use it for regulatory analysis
+                if hasattr(self, 'dna_controller'):
+                    try:
+                        # Periodic DNA analysis (every 100 steps)
+                        if getattr(self, 'total_steps', 0) % 100 == 0:
+                            regulatory_analysis = self.dna_controller.analyze_regulatory_network(
+                                chromosome="chr1", 
+                                start=1000000, 
+                                end=1010000
+                            )
+                            outputs['regulatory_analysis'] = regulatory_analysis
+                    except Exception as e:
+                        outputs['dna_analysis_error'] = str(e)
+                
+            except Exception as e:
+                # Don't crash simulation if biological validation fails
+                outputs['alphagenome_error'] = f"Biological validation error: {e}"
+
+        return outputs

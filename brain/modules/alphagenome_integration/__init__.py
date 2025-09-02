@@ -37,7 +37,7 @@ __description__ = "AlphaGenome-powered biological development simulation for neu
 
 # Package-level configuration
 ALPHAGENOME_CONFIG = {
-    "repository_path": "/Users/camdouglas/quark/external/alphagenome",
+    "repository_path": "/Users/camdouglas/quark/data/external/alphagenome",
     "integration_modules": [
         "dna_controller",
         "cell_constructor", 

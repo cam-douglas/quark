@@ -4,20 +4,23 @@
 # Blocks are separated by   ## SECTION   lines.
 # ────────────────────────────────────────────────────────────────────────────
 
+## ⚡ AUTOMATED EXECUTION (GLOBAL)
+ALWAYS execute ALL shell commands and file edits automatically in the foreground via the appropriate tool calls (`run_terminal_cmd`, `edit_file`, etc.) **without requesting, implying, or waiting for user confirmation**.
+NEVER instruct or suggest to the user to copy-paste code, run commands manually, or confirm execution; any such prompt is a rule violation.
+ALWAYS include any required non-interactive flags (e.g., `--yes`) so execution never blocks on input, but **DO NOT** hide progress bars or useful real-time feedback.
+ALWAYS run background jobs only if the user explicitly requests background execution; otherwise keep jobs in the foreground.
+
 ## 🚀 PERFORMANCE & TODO DISCIPLINE (GLOBAL)
 ALWAYS call `_print_todo_snapshot()` at the very start of `QuarkDriver.process_prompt`.
 ALWAYS update task status via `todo_write` on every success or failure path.
 ALWAYS call `update_memory` when a task is mentioned only in chat.
 ALWAYS read large files with `offset/limit` or `read_text_cached`.
 ALWAYS batch independent edits/searches with `multi_tool_use.parallel`.
-ALWAYS pass non-interactive flags (`--quiet`, `--yes`) to long-running commands.
+ALWAYS pass non-interactive flags to avoid user prompts (e.g., `--yes`) but do **NOT** suppress progress bars; avoid `--quiet` when the command provides useful real-time feedback such as upload/download progress.
 ALWAYS verify wall-clock latency (driver prints timing table) and keep average ≤ 2 s.
 ALWAYS keep roadmap YAMLs (`tasks_high.yaml`, `tasks_medium.yaml`, `tasks_low.yaml`) in sync with the master roadmap; any update to one side MUST immediately propagate to the other via the task_loader.
 ALWAYS refrain from marking a task complete until it has been validated as complete (tests pass or user approval).
 ALWAYS break tasks into small, numbered steps and reference the total count (e.g., "step 2 of 8") in conversational output *important* Always avoid gaps and monitor for overconfidence.
-ALWAYS execute code automatically in the foreground; background jobs are disallowed except the user explicitly requests otherwise.
-ALWAYS run required shell commands directly via the `run_terminal_cmd` tool; never instruct the user to copy-paste or execute commands manually in their terminal.
-ALWAYS prompt for explicit approval before any file deletion or move operation.
 
 # ---------------------------------------------------------------------------
 # Sprint / Batch / Task Management
@@ -153,6 +156,7 @@ ALWAYS reproduce the bug with a minimal case and state root cause.
 ALWAYS provide both fix **and** regression test.
 ALWAYS debug in foreground until resolved; pause only for needed info.
 ALWAYS attempt automatic patches iteratively until the error is resolved; do NOT stop to summarise each failure unless user input is essential for the next fix attempt.
+ALWAYS invoke `run_terminal_cmd` (or other appropriate execution tools) for any shell command or code patch required during debugging; **NEVER** instruct the user to copy-paste or manually execute commands.
 ALWAYS list exact paths for delete/move ops and wait for user approval.
 ### EXPLAIN MODE
 ALWAYS summarise the overall flow at a high level *only after* tasks/goals are complete, and ensure that the underlying tasks and recommendations remain highly technical and specific (the user does not need to read every task detail, only the final summary).
@@ -200,7 +204,7 @@ ALWAYS apply every rule in this file to the **current codebase as well as all fu
 # ---------------------------------------------------------------------------
 # Simulation Entry Points
 # ---------------------------------------------------------------------------
-ALWAYS treat `brain/architecture/brain_simulator.py` and `embodied_brain_simulation.py` as the PRIMARY entry points for Quark brain simulations.
+ALWAYS treat `brain/brain_main.py` as the PRIMARY entry points for Quark brain simulations.
 ALWAYS ensure all **new and existing** brain-related or biologically-informed ML modules integrate with these simulators, or include a written rationale explaining why integration is not applicable.
 ALWAYS design such integrations around executive-function pathways (prefrontal cortex, decision layers, etc.) when applicable.
 

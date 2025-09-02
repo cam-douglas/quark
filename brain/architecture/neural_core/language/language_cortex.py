@@ -112,7 +112,7 @@ class LanguageCortex:
             config.read(config_path)
             
             # OpenAI
-            openai_key = config.get('API_KEYS', 'openai_api_key', fallback=None)
+            openai_key = config.get('API_KEYS', 'openai_api_key', fallback=None) or os.environ.get('OPENAI_API_KEY')
             if openai_key and 'YOUR_OPENAI_API_KEY' not in openai_key:
                 # Disable auto-retries to avoid long stalls on 429
                 self.openai_client = openai.OpenAI(api_key=openai_key, max_retries=0)
@@ -122,7 +122,7 @@ class LanguageCortex:
                 print("❌ OpenAI key not found or is a placeholder.")
 
             # Anthropic
-            anthropic_key = config.get('API_KEYS', 'anthropic_api_key', fallback=None)
+            anthropic_key = config.get('API_KEYS', 'anthropic_api_key', fallback=None) or os.environ.get('ANTHROPIC_API_KEY')
             if anthropic_key and 'YOUR_ANTHROPIC_API_KEY' not in anthropic_key:
                 self.anthropic_client = anthropic.Anthropic(api_key=anthropic_key)
                 print("✅ Anthropic client initialized.")
@@ -131,7 +131,7 @@ class LanguageCortex:
                 print("❌ Anthropic key not found or is a placeholder.")
 
             # Gemini
-            gemini_key = config.get('API_KEYS', 'Gemini', fallback=None)
+            gemini_key = config.get('API_KEYS', 'gemini_api_key', fallback=None) or os.environ.get('GEMINI_API_KEY') or os.environ.get('GOOGLE_API_KEY')
             if gemini_key and 'YOUR_GEMINI_API_KEY' not in gemini_key:
                 genai.configure(api_key=gemini_key)
                 gemini_model_name = os.environ.get('QUARK_GEMINI_MODEL', 'gemini-1.5-flash')
@@ -140,6 +140,15 @@ class LanguageCortex:
             else:
                 self.gemini_model = None
                 print("❌ Gemini key not found or is a placeholder.")
+
+            # AlphaGenome
+            alphagenome_key = config.get('API_KEYS', 'alphagenome_api_key', fallback=None) or os.environ.get('ALPHAGENOME_API_KEY')
+            if alphagenome_key and 'YOUR_ALPHAGENOME_API_KEY' not in alphagenome_key:
+                # Store for AlphaGenome modules to use
+                os.environ['ALPHAGENOME_API_KEY'] = alphagenome_key
+                print("✅ AlphaGenome API key configured.")
+            else:
+                print("❌ AlphaGenome API key not found or is a placeholder.")
 
         except Exception as e:
             print(f"Error loading API keys: {e}")

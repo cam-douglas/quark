@@ -1,4 +1,14 @@
 #!/usr/bin/env python3
+from __future__ import annotations
+
+# Set environment variables to suppress mutex debugging BEFORE any imports
+import os
+os.environ['GLOG_minloglevel'] = '2'
+os.environ['GLOG_logtostderr'] = '0' 
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
+os.environ['GRPC_VERBOSITY'] = 'NONE'
+os.environ['GRPC_TRACE'] = ''
+
 """brain/brain_main.py
 Unified entry-point that boots the Quark `BrainSimulator` and runs a simple
 closed-loop simulation.  This replaces the old split between *embodied* and
@@ -26,17 +36,8 @@ wrapper so that we have a single, canonical control-loop that directly talks to
 renderers, curriculum pipelines) are imported inside the main function to keep
 startup latency low.
 """
-from __future__ import annotations
 
-import os
-# ---------------------------------------------------------------------------
-# Silence noisy native-library logs (Abseil RAW: Lock blocking … and TensorFlow)
-# ---------------------------------------------------------------------------
-# These have to be set *before* TensorFlow / Abseil-powered wheels are imported.
-os.environ.setdefault("ABSL_LOG_FATAL_THRESHOLD", "4")  # mute RAW mutex contention logs
-os.environ.setdefault("ABSL_DIAGNOSTICS", "0")          # disable extra diagnostics, if honoured
-# Extra: silence TensorFlow / XLA spam if those libs are pulled in lazily later
-os.environ.setdefault("TF_CPP_MIN_LOG_LEVEL", "2")
+# Environment variables already set at top of file
 
 import argparse
 import sys
@@ -45,6 +46,7 @@ from types import SimpleNamespace
 from typing import Any, Dict, Optional
 
 import numpy as np
+import signal  # add near other imports
 
 # ---------------------------------------------------------------------------
 # Local imports – kept here to avoid polluting module namespace when imported
@@ -89,7 +91,7 @@ def _zero_sensory_stub() -> Dict[str, Any]:
 
 def _parse_args(argv: Optional[list[str]] = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Unified Quark brain entry-point")
-    parser.add_argument("--steps", type=int, default=10_000, help="Number of simulation steps to run")
+    parser.add_argument("--steps", type=int, default=float('inf'), help="Number of simulation steps to run (default: infinite, use Ctrl+C to interact)")
     parser.add_argument("--hz", type=float, default=60.0, help="Simulation frequency (steps per second)")
     # Viewer ON by default. Use --no-viewer to disable.
     parser.add_argument(
@@ -105,6 +107,51 @@ def _parse_args(argv: Optional[list[str]] = None) -> argparse.Namespace:
 def main(argv: Optional[list[str]] = None) -> None:  # pragma: no cover – CLI wrapper
     args = _parse_args(argv)
 
+    # ------------------------------------------------------------------
+    # Initialize MuJoCo viewer FIRST if requested
+    # ------------------------------------------------------------------
+    viewer: Optional[mujoco.viewer.Viewer] = None  # type: ignore[attr-defined]
+    runner: Optional[SimpleNamespace] = None
+    
+    if args.viewer and _MUJOCO_AVAILABLE:
+        try:
+            from brain.architecture.embodiment.run_mujoco_simulation import MuJoCoRunner
+            
+            # Set default model path if not provided
+            model_path = os.getenv("QUARK_MODEL_XML")
+            if not model_path:
+                model_path = "/Users/camdouglas/quark/brain/architecture/embodiment/humanoid.xml"
+                os.environ["QUARK_MODEL_XML"] = model_path
+                print(f"🎯 Using default MuJoCo model: {model_path}")
+            
+            if not os.path.isfile(model_path):
+                raise FileNotFoundError(f"MuJoCo model not found: {model_path}")
+            
+            print("🚀 Launching MuJoCo viewer...")
+            # MuJoCoRunner expects config file path, not model path
+            config_path = "brain/architecture/embodiment/config.ini"
+            runner = MuJoCoRunner(config_path)
+            viewer = mujoco.viewer.launch_passive(runner.model, runner.data)
+            print("🖥️  MuJoCo viewer launched successfully!")
+            print("📌 The MuJoCo viewer window should now be visible on your desktop")
+            # Allow OpenGL context to settle so the window is visible
+            import time as _t
+            _t.sleep(2.0)  # Give more time for viewer to fully initialize
+            
+        except Exception as exc:
+            print(f"⚠️  Failed to launch MuJoCo viewer ({exc}); falling back to head-less mode.")
+            viewer = None
+            runner = None
+    elif args.viewer and not _MUJOCO_AVAILABLE:
+        print("⚠️  MuJoCo not available; falling back to head-less mode.")
+
+    # ------------------------------------------------------------------
+    # Enable AlphaGenome biological rules and simulations
+    # ------------------------------------------------------------------
+    os.environ['QUARK_DISABLE_ALPHAGENOME'] = '0'  # Enable AlphaGenome
+    os.environ['QUARK_FORCE_ALPHAGENOME'] = '1'    # Force biological simulation
+    print("🧬 AlphaGenome biological rules and agents ENABLED")
+    
     # ------------------------------------------------------------------
     # Initialise Brain – HRM enabled unless QUARK_DISABLE_HRM=1
     # ------------------------------------------------------------------
@@ -167,34 +214,84 @@ def main(argv: Optional[list[str]] = None) -> None:  # pragma: no cover – CLI 
     except Exception as exc:
         print(f"⚠️  AutonomousAgent unavailable: {exc}")
 
-    # ------------------------------------------------------------------
-    # Optional Embodiment via MuJoCo – only if user requests and available
-    # ------------------------------------------------------------------
-    viewer: Optional[mujoco.viewer.Viewer] = None  # type: ignore[attr-defined]
-    runner: Optional[SimpleNamespace] = None
-    if args.viewer and _MUJOCO_AVAILABLE:
-        try:
-            from brain.architecture.embodiment.run_mujoco_simulation import MuJoCoRunner
-
-            model_path = os.getenv("QUARK_MODEL_XML")  # path to MJCF model
-            if not model_path or not os.path.isfile(model_path):
-                raise FileNotFoundError(
-                    "Set environment variable QUARK_MODEL_XML to a valid MuJoCo XML model if using --viewer"
-                )
-            runner = MuJoCoRunner(model_path)
-            viewer = mujoco.viewer.launch_passive(runner.model, runner.data)
-            print("🖥️  MuJoCo viewer launched – running with embodiment.")
-        except Exception as exc:
-            print(f"⚠️  Failed to launch MuJoCo viewer ({exc}); falling back to head-less mode.")
-            viewer = None
-            runner = None
+    # MuJoCo viewer already initialized above
 
     # ------------------------------------------------------------------
     # Main control loop
     # ------------------------------------------------------------------
     dt = 1.0 / max(args.hz, 1e-6)
     start_time = time.time()
-    for step_idx in range(args.steps):
+    step_idx = 0
+    
+    def handle_user_interaction():
+        """Handle user interaction when Ctrl+C is pressed."""
+        print("\n" + "="*50)
+        print("🗣️  USER PROMPT")
+        print("="*50)
+        print("💡 Press Ctrl+C anytime to pause and interact with Quark")
+        print("💡 Type 'continue' or press Enter to resume simulation")
+        print("💡 Type 'exit' or 'quit' to stop the simulation")
+        print("-"*50)
+        
+        try:
+            # Get user input
+            user_input = input("Your message: ").strip()
+            
+            if user_input.lower() in ['exit', 'quit']:
+                print("👋 Goodbye!")
+                return False  # Signal to exit
+            elif user_input.lower() in ['continue', 'resume', '']:
+                print("🔄 Resuming simulation...")
+                return True  # Signal to continue
+            
+            # Process user input through language cortex
+            try:
+                # Access language cortex from brain
+                language_cortex = None
+                if hasattr(brain, 'language_cortex'):
+                    language_cortex = brain.language_cortex
+                elif hasattr(brain, 'modules') and 'language_cortex' in brain.modules:
+                    language_cortex = brain.modules['language_cortex']
+                
+                if language_cortex and hasattr(language_cortex, 'process_input'):
+                    print("🧠 Quark is thinking...")
+                    response = language_cortex.process_input(user_input)
+                    print(f"🤖 Quark: {response}")
+                else:
+                    print("🤖 Quark: I hear you, but my language processing isn't fully connected yet.")
+                    print(f"🤖 Quark: You said: '{user_input}' - I'll remember that.")
+            except Exception as e:
+                print(f"🤖 Quark: I'm having trouble processing that right now. ({e})")
+                print(f"🤖 Quark: But I heard you say: '{user_input}'")
+            
+            # Ask if user wants to continue or provide more input
+            while True:
+                next_action = input("\nPress Enter to continue simulation, or type another message: ").strip()
+                if next_action == "":
+                    print("🔄 Resuming simulation...")
+                    break
+                elif next_action.lower() in ['exit', 'quit']:
+                    return False
+                else:
+                    # Process additional input
+                    try:
+                        if language_cortex and hasattr(language_cortex, 'process_input'):
+                            response = language_cortex.process_input(next_action)
+                            print(f"🤖 Quark: {response}")
+                        else:
+                            print(f"🤖 Quark: I acknowledge: '{next_action}'")
+                    except Exception as e:
+                        print(f"🤖 Quark: I heard you say: '{next_action}' (processing error: {e})")
+            
+            return True
+            
+        except (EOFError, KeyboardInterrupt):
+            print("\n🔄 Resuming simulation...")
+            return True
+    
+    def run_simulation_step():
+        """Run a single simulation step."""
+        nonlocal step_idx
         loop_start = time.time()
 
         brain_inputs: Dict[str, Any]
@@ -242,9 +339,44 @@ def main(argv: Optional[list[str]] = None) -> None:  # pragma: no cover – CLI 
         sleep_dur = dt - elapsed
         if sleep_dur > 0:
             time.sleep(sleep_dur)
+        
+        step_idx += 1
+    
+    # Print initial interaction instructions
+    print("\n" + "="*60)
+    print("🎮 INTERACTIVE BRAIN SIMULATION")
+    print("="*60)
+    print("💡 Press Ctrl+C anytime to pause and chat with Quark!")
+    print("💡 Quark will use its language cortex to respond to you")
+    print("💡 Type 'exit' during interaction to stop the simulation")
+    print("="*60)
+    
+    # Main interactive simulation loop
+    try:
+        while step_idx < args.steps:
+            run_simulation_step()
+            
+    except KeyboardInterrupt:
+        # Handle Ctrl+C for user interaction
+        should_continue = handle_user_interaction()
+        
+        # Continue simulation if user wants to
+        while should_continue and step_idx < args.steps:
+            try:
+                while step_idx < args.steps:
+                    run_simulation_step()
+            except KeyboardInterrupt:
+                # Allow multiple Ctrl+C interactions
+                should_continue = handle_user_interaction()
+                if not should_continue:
+                    break
 
     total_time = time.time() - start_time
-    print(f"✅ Simulation finished – {args.steps} steps in {total_time:.2f}s (avg {(total_time/args.steps):.4f}s/step)")
+    if step_idx > 0:
+        avg_time = total_time / step_idx
+        print(f"✅ Simulation finished – {step_idx} steps in {total_time:.2f}s (avg {avg_time:.4f}s/step)")
+    else:
+        print("✅ Simulation ended")
 
 
 # ---------------------------------------------------------------------------

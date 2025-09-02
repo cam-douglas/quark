@@ -4,16 +4,12 @@ This index collects every rules document within `management/rules/` so you can n
 
 | Category | Rule File |
 |----------|-----------|
-| Roadmaps | [roadmaps/AGI_INTEGRATED_ROADMAP.md](roadmaps/AGI_INTEGRATED_ROADMAP.md) |
-| Roadmaps | [roadmaps/ENHANCED_ROADMAP_IMPLEMENTATION.md](roadmaps/ENHANCED_ROADMAP_IMPLEMENTATION.md) |
-| Roadmaps | [roadmaps/HIGH_LEVEL_ROADMAP.md](roadmaps/HIGH_LEVEL_ROADMAP.md) |
-| Roadmaps | [roadmaps/master_roadmap.md](roadmaps/master_roadmap.md) |
-| Roadmaps | [roadmaps/UNIFIED_AGI_MASTER_ROADMAP_FINAL.md](roadmaps/UNIFIED_AGI_MASTER_ROADMAP_FINAL.md) |
-| Safety | [security/rules_security.md](security/rules_security.md) |
-| Security | [security/rules_security.md](security/rules_security.md) |
-| Machine-Learning Workflow | [ml_workflow/ml_workflow.md](ml_workflow/ml_workflow.md) |
-| Technical | [technical/technicalrules.md](technical/technicalrules.md) |
-| General | [general/rules_general.md](general/rules_general.md) |
+| Roadmap | [roadmap/MASTER_ROADMAP.md](roadmap/MASTER_ROADMAP.md) |
+| Roadmap| [roadmap/stage1_embryonic_rules.md](roadmap/stage1_embryonic_rules.md) |
+| Roadmap | [roadmap/stage6_adult_rules.md](roadmap/stage6_adult_rules.md) |
+| Security (archived) | [archive/rules_security_ARCHIVE.md](archive/rules_security_ARCHIVE.md) |
+| Technical (archived) | [archive/technicalrules_ARCHIVED.md](archive/technicalrules_ARCHIVED.md) |
+| Biological Constraints | [biological_constraints.py](biological_constraints.py) |
 | Misc | [README.md](README.md) |
 
 ---

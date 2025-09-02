@@ -17,7 +17,7 @@ class AlphaGenomeConfig:
     """Main configuration for AlphaGenome integration"""
     
     # Repository settings
-    repository_path: str = "/Users/camdouglas/quark/external/alphagenome"
+    repository_path: str = "/Users/camdouglas/quark/data/external/alphagenome"
     use_local_fallback: bool = True
     
     # API settings
@@ -134,11 +134,30 @@ class ConfigurationManager:
         self.biological_rules_config = BiologicalRulesConfig()
         self.simulation_config = SimulationConfig()
         
+        # Load API key from main config file if not set
+        self._load_main_config_api_key()
+        
         # Load from file if exists
         self.load_configuration()
         
         # Ensure directories exist
         self._ensure_directories()
+    
+    def _load_main_config_api_key(self):
+        """Load AlphaGenome API key from main config file."""
+        try:
+            import configparser
+            config = configparser.ConfigParser()
+            main_config_path = "/Users/camdouglas/quark/brain/architecture/config/config.ini"
+            
+            if os.path.exists(main_config_path):
+                config.read(main_config_path)
+                api_key = config.get('API_KEYS', 'alphagenome_api_key', fallback=None)
+                if api_key and 'YOUR_ALPHAGENOME_API_KEY' not in api_key:
+                    self.alphagenome_config.api_key = api_key
+                    os.environ['ALPHAGENOME_API_KEY'] = api_key
+        except Exception:
+            pass  # Silently fail if main config not available
     
     def load_configuration(self) -> bool:
         """Load configuration from JSON file"""

@@ -13,7 +13,7 @@ from typing import Dict, List, Optional, Tuple, Any, Union
 import json
 
 # Add external LLM articulated manipulation to path
-manipulation_path = os.path.join(os.path.dirname(__file__), '../../../../external/llm-articulated-manipulation/src')
+manipulation_path = os.path.join(os.path.dirname(__file__), '../../../../data/external/llm-articulated-manipulation/src')
 sys.path.append(manipulation_path)
 
 class LLMManipulationPlanner:

@@ -14,7 +14,7 @@ The script:
 """
 from __future__ import annotations
 
-import argparse, sys, logging, time, subprocess, json
+import argparse, sys, os, logging, time, subprocess, json
 from pathlib import Path
 from typing import List
 
@@ -63,7 +63,7 @@ def main():
     p.add_argument(
         "--role-arn",
         type=str,
-        default=sys.getenv("QUARK_SAGEMAKER_ROLE_ARN"),
+        default=os.getenv("QUARK_SAGEMAKER_ROLE_ARN"),
         help="IAM role ARN for SageMaker jobs (required when backend is cloud).",
     )
     p.add_argument(

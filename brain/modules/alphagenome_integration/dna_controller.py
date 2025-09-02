@@ -16,17 +16,29 @@ from dataclasses import dataclass, asdict
 from datetime import datetime
 import logging
 
-# Add AlphaGenome to path
-sys.path.insert(0, '/Users/camdouglas/quark/external/alphagenome/src')
+# Add AlphaGenome to path - try multiple locations
+for path in [
+    '/Users/camdouglas/quark/brain/modules',
+    '/Users/camdouglas/quark/data/external/alphagenome/src'
+]:
+    sys.path.insert(0, path)
 
 try:
     from alphagenome.data import genome
     from alphagenome.models import dna_client
     from alphagenome.visualization import plot_components
+    from alphagenome.types import GenomicInterval
     ALPHAGENOME_AVAILABLE = True
 except ImportError as e:
     logging.warning(f"AlphaGenome not available: {e}")
     ALPHAGENOME_AVAILABLE = False
+    # Define fallback type
+    @dataclass
+    class GenomicInterval:
+        chromosome: str
+        start: int
+        end: int
+        strand: str = "+"
     
     # Create mock classes for simulation mode
     class MockGenome:
@@ -170,7 +182,7 @@ class DNAController:
             logger.info(f"Adjusted interval to AlphaGenome supported length: {suitable_length} bp")
         
         # Create genomic interval
-        interval = genome.Interval(chromosome=chromosome, start=start, end=end)
+        interval = GenomicInterval(chromosome=chromosome, start=start, end=end)
         
         analysis_result = {
             "interval": {"chromosome": chromosome, "start": start, "end": end},
@@ -237,7 +249,7 @@ class DNAController:
         self.metrics["sequences_analyzed"] += 1
         return analysis_result
     
-    def _simulate_regulatory_analysis(self, interval: genome.Interval) -> Dict[str, Any]:
+    def _simulate_regulatory_analysis(self, interval: GenomicInterval) -> Dict[str, Any]:
         """Simulate regulatory analysis when AlphaGenome is not available"""
         
         sequence_length = interval.end - interval.start
@@ -426,7 +438,7 @@ class DNAController:
             "affected_outputs": len([s for s in score_values if abs(s) > 0.1])
         }
     
-    def _get_biological_context(self, interval: genome.Interval) -> Dict[str, Any]:
+    def _get_biological_context(self, interval: GenomicInterval) -> Dict[str, Any]:
         """Get biological context for genomic interval"""
         
         # Map chromosomes to developmental relevance
@@ -454,7 +466,7 @@ class DNAController:
         
         return context
     
-    def _assess_neural_importance(self, interval: genome.Interval) -> Dict[str, Any]:
+    def _assess_neural_importance(self, interval: GenomicInterval) -> Dict[str, Any]:
         """Assess neurobiological importance of genomic region"""
         
         # Neural development chromosomes and regions (simplified heuristic)
@@ -484,7 +496,7 @@ class DNAController:
             "developmental_stage_relevance": "embryonic_neural_development"
         }
     
-    def _estimate_conservation(self, interval: genome.Interval) -> float:
+    def _estimate_conservation(self, interval: GenomicInterval) -> float:
         """Estimate evolutionary conservation score (simplified heuristic)"""
         
         # Conservation tends to be higher for:
@@ -509,7 +521,7 @@ class DNAController:
         
         return min(1.0, conservation + neural_conservation_boost)
     
-    def _analyze_developmental_relevance(self, interval: genome.Interval, 
+    def _analyze_developmental_relevance(self, interval: GenomicInterval, 
                                        analysis_result: Dict[str, Any]) -> Dict[str, Any]:
         """Analyze relevance to neural development processes"""
         

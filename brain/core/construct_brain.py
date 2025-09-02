@@ -38,7 +38,7 @@ from brain.architecture.neural_core.hippocampus.sleep_consolidation_engine impor
 from brain.architecture.neural_core.salience_networks.basic_salience_network import BasicSalienceNetwork
 from brain.architecture.neural_core.default_mode_network.proto_dmn import ProtoDMN
 from brain.architecture.neural_core.cognitive_systems.world_model import SimpleWorldModel
-from brain.architecture.neural_core.limbic.limbic_system import LimbicSystem
+from brain.architecture.neural_core.cognitive_systems.limbic_system import LimbicSystem
 from brain.architecture.neural_core.working_memory.working_memory import WorkingMemory
 from brain.architecture.neural_core.conscious_agent.global_workspace import GlobalWorkspace
 
@@ -140,5 +140,21 @@ def _construct_brain_from_bio_spec(self, bio_spec: Dict[str, Any]):
     self.limbic_system = LimbicSystem()
     self.working_memory = WorkingMemory(capacity=10)
     self.global_workspace = GlobalWorkspace()
+
+    # --- AlphaGenome Integration ---
+    try:
+        from brain.modules.alphagenome_integration.dna_controller import create_dna_controller
+        from brain.modules.alphagenome_integration.compliance_engine import ComplianceEngine
+        
+        # Initialize DNA controller with API key
+        api_key = os.environ.get('ALPHAGENOME_API_KEY')
+        self.dna_controller = create_dna_controller(api_key=api_key)
+        self.compliance_engine = ComplianceEngine()
+        print("🧬 AlphaGenome DNA Controller and Compliance Engine integrated")
+        
+    except Exception as e:
+        print(f"⚠️ AlphaGenome integration unavailable: {e}")
+        self.dna_controller = None
+        self.compliance_engine = None
     
     print("✅ Brain modules constructed.")

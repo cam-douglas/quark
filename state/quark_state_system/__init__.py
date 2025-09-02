@@ -13,8 +13,6 @@ Rationale: State system validates, plans, and triggers actions that the simulato
 from importlib import import_module
 from types import ModuleType
 from typing import Any, Callable
-from .quark_recommendations import QuarkRecommendationsEngine
-
 _orig: ModuleType | None = None
 try:
     _orig = import_module("quark_state_system")
@@ -29,11 +27,16 @@ else:
             "quark_state_system.next_steps() is unavailable – original module not found."
         )
 
-_ENGINE = QuarkRecommendationsEngine()
+# Lazy loading to avoid circular import
+_ENGINE = None
 
 
 def ask_quark(query: str) -> str:
     """Unified entry-point: pass any natural-language request and get guidance."""
+    global _ENGINE
+    if _ENGINE is None:
+        from .quark_recommendations import QuarkRecommendationsEngine
+        _ENGINE = QuarkRecommendationsEngine()
     return _ENGINE.provide_intelligent_guidance(query)
 
 __all__ = ["next_steps"]

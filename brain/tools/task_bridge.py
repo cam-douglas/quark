@@ -19,8 +19,8 @@ except ModuleNotFoundError:
         def sync_from_roadmap(self):
             pass
 
-from QUARK_STATE_SYSTEM import update_roadmap_statuses
-from state.quark_state_system.advanced_planner import plan as llm_plan
+# Removed top-level imports to avoid circular dependencies
+# These will be imported lazily when needed
 
 logger = logging.getLogger(__name__)
 
@@ -43,6 +43,8 @@ class _TaskBridge:
             # If the task is long, break it down with the LLM-based planner
             if len(t.split()) > 12:  # heuristic threshold
                 try:
+                    # Lazy import to avoid circular dependency
+                    from state.quark_state_system.advanced_planner import plan as llm_plan
                     subtasks = [s["title"] for s in llm_plan(t)]
                     tasks.extend(subtasks if subtasks else [t])
                 except Exception as exc:  # fallback if model unavailable
@@ -60,6 +62,8 @@ class _TaskBridge:
             if self._integration.central_tasks[task].get("source") == "roadmap":
                 self._append_done_to_roadmap(task)
             try:
+                # Lazy import to avoid circular dependency
+                from QUARK_STATE_SYSTEM import update_roadmap_statuses
                 update_roadmap_statuses()
             except Exception as exc:
                 logger.warning("Roadmap status update failed: %s", exc)

@@ -4,12 +4,20 @@ import os
 import json
 import numpy as np
 import time
+# Planning
+from brain.architecture.neural_core.planning.hrm_adapter import HRMPlanner
+from brain.architecture.neural_core.fundamental.brain_stem import BrainStem
+from brain.architecture.safety.safety_guardian import SafetyGuardian
+from brain.architecture.neural_core.cognitive_systems.resource_manager import ResourceManager
+from brain.architecture.neural_core.cognitive_systems.callback_hub import hub
+# Task bridge for roadmap integration
+from brain.tools.task_bridge import TASK_BRIDGE
 
 
 class BrainSimulator:
     """The master controller for orchestrating all brain modules."""
     
-    def __init__(self, use_hrm: bool = False, obs_dim: int = None, act_dim: int = None, embodiment: Any = None):
+    def __init__(self, use_hrm: bool = False, obs_dim: int = None, act_dim: int = None, embodiment: Any = None, dataset_integration: Any | None = None):
         """
         Initializes the BrainSimulator.
         """
@@ -261,3 +269,35 @@ class BrainSimulator:
 
         # Set the initial developmental stage in relevant modules
         print("✅ Brain Simulator initialized successfully with biologically compliant architecture.")
+
+    # ------------------------------------------------------------------
+    # Public API: step
+    # ------------------------------------------------------------------
+
+    def step(self, inputs: Dict[str, Any], stage: int = 0) -> Dict[str, Any]:
+        """Single control step of the unified brain simulator.
+
+        This thin wrapper delegates to the standalone step logic kept in
+        `brain/core/step_part1.py`, which in turn calls `step_part2.py`.
+
+        Keeping the heavy logic outside the class avoids circular-import
+        issues while allowing the entry-point to call `BrainSimulator.step()`
+        directly.
+        """
+        from brain.core import step_part1  # local import to avoid startup cost
+
+        return step_part1.step(self, inputs, stage)
+
+    # ------------------------------------------------------------------
+    # Dataset loading (placeholder)
+    # ------------------------------------------------------------------
+
+    def _load_training_datasets_if_needed(self) -> None:
+        """Lazy dataset loader stub.
+
+        In the original modular design this method pulled AMASS/IK datasets
+        only on first use.  For now we keep a no-op placeholder so the step
+        logic can call it safely.  Future work: integrate `self.dataset_integration`
+        once that subsystem is revived.
+        """
+        return

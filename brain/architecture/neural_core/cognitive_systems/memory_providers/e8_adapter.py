@@ -90,7 +90,7 @@ class E8MemoryAdapter:
 
         if self.enabled:
             try:
-                from brain.architecture.neural_core.cognitive_systems.e8_kaleidescope.e8_mind_server_M16 import (  # pylint: disable=import-error
+                from brain.architecture.neural_core.cognitive_systems.e8_kaleidescope import (  # pylint: disable=import-error
                     MemoryManager,  # type: ignore
                     EMBED_DIM,
                 )

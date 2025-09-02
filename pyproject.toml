@@ -24,6 +24,12 @@ dev = [
 [tool.setuptools.package-dir]
 "" = "."
 
+# Include the nested brain namespace packages so editable install exposes
+# brain.architecture.* imports.
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["brain*"]
+
 [tool.black]
 line-length = 100
 target-version = ['py311']

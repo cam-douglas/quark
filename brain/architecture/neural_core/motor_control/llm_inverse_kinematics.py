@@ -13,7 +13,7 @@ from typing import Dict, List, Optional, Tuple, Any
 import json
 
 # Add external LLM-IK to path
-llm_ik_path = os.path.join(os.path.dirname(__file__), '../../../../external/llm-ik')
+llm_ik_path = os.path.join(os.path.dirname(__file__), '../../../../data/external/llm-ik')
 sys.path.append(llm_ik_path)
 
 class LLMInverseKinematics:

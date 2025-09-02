@@ -22,13 +22,13 @@ class HRMPlanner:
         self.available = False
 
         # Detect external repo presence
-        self.repo_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../external/hrm"))
+        self.repo_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../data/external/hrm"))
         if os.path.isdir(self.repo_path):
             # We keep integration minimal; skip heavy imports by default
             self.available = True
             print("✅ HRM Planner adapter initialized. Model is available (but not yet loaded).")
         else:
-            print("⚠️ HRM Planner adapter: external/hrm repository not found. Planner will be disabled.")
+            print("⚠️ HRM Planner adapter: data/external/hrm repository not found. Planner will be disabled.")
 
 
     def plan(self, obs: np.ndarray) -> Dict[str, Any]:

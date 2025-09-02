@@ -6,19 +6,13 @@ Purpose: Project Rules & Roadmaps: governance, safety, and roadmap specification
 
 ## Subdirectories
 - __pycache__/
-- brain_simulation/
-- cognitive/
-- general/
-- ml_workflow/
-- roadmaps/
-- security/
-- technical/
+- archive/            # Archived or superseded rule documents
+- roadmap/            # Active roadmap rules and stage documents
 
-## Files
-- ARCHIVED_cursorrules_2025-08-30.md
+## Files (top-level)
+- biological_constraints.py
 - MASTER_RULES_INDEX.md
 - README.md
-- biological_constraints.py
 - rules_updater.service
 
 ## Links
