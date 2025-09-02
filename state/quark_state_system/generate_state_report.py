@@ -1,13 +1,9 @@
-"""Generate QUARK_STATE.md from canonical sources.
+"""
+Generate a markdown report summarising Quark’s current state.
 
-Sources:
-- Roadmap status via management.rules.roadmaps.roadmap_controller.get_roadmap_status_map
-- Task YAMLs via state.quark_state_system.task_loader
-
-Produces/overwrites QUARK_STATE.md located in same directory.
-
-Integration: Indirect integration via QuarkDriver and AutonomousAgent; orchestrates simulator runs.
-Rationale: State system validates, plans, and triggers actions that the simulator executes.
+• Roadmap status via `management.rules.roadmap.roadmap_controller.get_roadmap_status_map`
+  (totals milestones, completed, in-progress)
+• Pending tasks via `state.quark_state_system.task_loader`
 """
 from __future__ import annotations
 

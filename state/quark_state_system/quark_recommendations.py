@@ -14,7 +14,7 @@ from typing import List
 from importlib import import_module
 
 # Modules
-roadmap_ctrl = import_module('management.rules.roadmaps.roadmap_controller')
+roadmap_ctrl = import_module('management.rules.roadmap.roadmap_controller')
 loader = import_module('state.quark_state_system.task_loader')
 
 ROADMAP_CTRL = roadmap_ctrl  # backward-compat alias

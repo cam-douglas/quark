@@ -1,10 +1,5 @@
 [
   {
-    "path": "quark.egg-info/",
-    "type": "dir",
-    "excluded": true
-  },
-  {
     "path": "__pycache__/",
     "type": "dir",
     "excluded": true
@@ -63,20 +58,20 @@
   {
     "path": "repo_index.json",
     "type": "file",
-    "size": 720426,
-    "last_modified": "2025-08-31T08:00:07.057823+00:00",
+    "size": 730256,
+    "last_modified": "2025-09-01T08:00:05.674293+00:00",
     "lang": "json",
-    "line_count": 21943,
-    "sha1": "d294962dc9ca27e87077e532628986a1791a1c64"
+    "line_count": 22294,
+    "sha1": "152a931311cc4ce6936d3c9cc77e5eadaf3956a4"
   },
   {
     "path": ".cursorrules",
     "type": "file",
-    "size": 22008,
-    "last_modified": "2025-09-01T06:45:57.614374+00:00",
+    "size": 22924,
+    "last_modified": "2025-09-02T03:51:55.722707+00:00",
     "lang": null,
-    "line_count": 347,
-    "sha1": "9ec6a5fa6508ac187ee0b79c1504d01bb0f92a2d"
+    "line_count": 359,
+    "sha1": "c59eba0595392f01f1d97a21259deb5ce114cbd3"
   },
   {
     "path": ".gitmodules",
@@ -106,13 +101,22 @@
     "sha1": "ef935656d75828b095f2a1d55e5686a6f2696130"
   },
   {
+    "path": "brain_specification.json",
+    "type": "file",
+    "size": 131,
+    "last_modified": "2025-09-01T16:12:13.299301+00:00",
+    "lang": "json",
+    "line_count": 9,
+    "sha1": "48ee95b1da575f9df6be5682e87daa2ec616ea99"
+  },
+  {
     "path": ".gitignore",
     "type": "file",
-    "size": 822,
-    "last_modified": "2025-09-01T05:01:51.534212+00:00",
+    "size": 906,
+    "last_modified": "2025-09-02T07:44:10.009439+00:00",
     "lang": null,
-    "line_count": 54,
-    "sha1": "4734fcb9fec785b9a381c23ff0326eacd660656a"
+    "line_count": 61,
+    "sha1": "b0e4fdf4928cad6a8677cea70c2eb1ca34d498b8"
   },
   {
     "path": ".quarkrules",
@@ -135,20 +139,11 @@
   {
     "path": "QUARK_STATE_SYSTEM.py",
     "type": "file",
-    "size": 20632,
-    "last_modified": "2025-08-31T13:03:32.019774+00:00",
+    "size": 27983,
+    "last_modified": "2025-09-02T07:54:15.912048+00:00",
     "lang": "py",
-    "line_count": 390,
-    "sha1": "94e3c0e80660734fce3377c9d9ea8527fdf1f8f9"
-  },
-  {
-    "path": "embodied_brain_simulation.py",
-    "type": "file",
-    "size": 23231,
-    "last_modified": "2025-08-30T05:14:55.380003+00:00",
-    "lang": "py",
-    "line_count": 515,
-    "sha1": "ee5f510b34d0fd9b230b92cd9f614bad0f82df27"
+    "line_count": 604,
+    "sha1": "ef4282a982cad8fcbd003641f767126d945a2e8d"
   },
   {
     "path": "tools_utilities/README.md",
@@ -165,22 +160,13 @@
     "excluded": true
   },
   {
-    "path": "tools_utilities/scripts/pre-push.backup.1755919748",
-    "type": "file",
-    "size": 2651,
-    "last_modified": "2025-08-23T03:29:08.364650+00:00",
-    "lang": "1755919748",
-    "line_count": 70,
-    "sha1": "0320be784099eb62d4404fb594344a25b64be29c"
-  },
-  {
     "path": "tools_utilities/scripts/pre_push_update.py",
     "type": "file",
-    "size": 5139,
-    "last_modified": "2025-08-30T16:50:50.621354+00:00",
+    "size": 6689,
+    "last_modified": "2025-09-02T07:49:33.935894+00:00",
     "lang": "py",
-    "line_count": 147,
-    "sha1": "f2dcc72c78c594bae89ddb7a56ecbd2671c46cba"
+    "line_count": 184,
+    "sha1": "1446b06ce0298d931a78bbb685d2cb444f39c698"
   },
   {
     "path": "tools_utilities/scripts/dataset_discovery.py",
@@ -203,17 +189,17 @@
   {
     "path": "tools_utilities/scripts/quark_cli.py",
     "type": "file",
-    "size": 4037,
-    "last_modified": "2025-09-01T06:11:06.131662+00:00",
+    "size": 4544,
+    "last_modified": "2025-09-02T06:28:51.604003+00:00",
     "lang": "py",
-    "line_count": 102,
-    "sha1": "45bab5371f57649fb217042f873c0452cbcc5e1b"
+    "line_count": 111,
+    "sha1": "2aaf9066f0b6b60ed2725cdc048d3ca411de6d74"
   },
   {
     "path": "tools_utilities/scripts/generate_roadmap_index.lock",
     "type": "file",
     "size": 0,
-    "last_modified": "2025-08-30T13:13:18.881957+00:00",
+    "last_modified": "2025-09-02T07:50:07.915366+00:00",
     "lang": "lock",
     "line_count": 0,
     "sha1": "da39a3ee5e6b4b0d3255bfef95601890afd80709"
@@ -228,6 +214,24 @@
     "sha1": "ec87fa29e1d438dc1e6f616b745dc472b95d9988"
   },
   {
+    "path": "tools_utilities/scripts/integrate_cli.py",
+    "type": "file",
+    "size": 1743,
+    "last_modified": "2025-09-01T16:31:33.296116+00:00",
+    "lang": "py",
+    "line_count": 62,
+    "sha1": "457ef4d7c902cb3d87bc15a75a3094ad46f61c7a"
+  },
+  {
+    "path": "tools_utilities/scripts/Dockerfile",
+    "type": "file",
+    "size": 787,
+    "last_modified": "2025-09-02T03:38:16.240074+00:00",
+    "lang": null,
+    "line_count": 17,
+    "sha1": "f47f6cd9817f31f5cc5fdd2c6c8de2d1bcd36591"
+  },
+  {
     "path": "tools_utilities/scripts/generate_repo_index.py",
     "type": "file",
     "size": 7155,
@@ -235,6 +239,51 @@
     "lang": "py",
     "line_count": 203,
     "sha1": "eccc779a88fca06e63bb1f5e024c514e63a9676f"
+  },
+  {
+    "path": "tools_utilities/scripts/pipeline_orchestrator.py",
+    "type": "file",
+    "size": 3746,
+    "last_modified": "2025-09-02T03:08:39.768426+00:00",
+    "lang": "py",
+    "line_count": 96,
+    "sha1": "45b9fa31ad184a520751d0b2f65ba9a832da3b6f"
+  },
+  {
+    "path": "tools_utilities/scripts/generate_readme.py",
+    "type": "file",
+    "size": 4704,
+    "last_modified": "2025-09-01T12:15:26.951128+00:00",
+    "lang": "py",
+    "line_count": 135,
+    "sha1": "854d2524168747badd6f90393857f29e7c6f5b4f"
+  },
+  {
+    "path": "tools_utilities/scripts/performance_utils.py",
+    "type": "file",
+    "size": 6530,
+    "last_modified": "2025-09-02T07:39:09.723533+00:00",
+    "lang": "py",
+    "line_count": 193,
+    "sha1": "5bd237e0cc9e289c109d6ccc3cb2a9d40edbce4b"
+  },
+  {
+    "path": "tools_utilities/scripts/aws_utils.py",
+    "type": "file",
+    "size": 4918,
+    "last_modified": "2025-09-02T02:53:15.168261+00:00",
+    "lang": "py",
+    "line_count": 139,
+    "sha1": "dca162818c596688fddfd303650b42c8ec2184c5"
+  },
+  {
+    "path": "tools_utilities/scripts/__init__.py",
+    "type": "file",
+    "size": 83,
+    "last_modified": "2025-09-02T07:21:33.571655+00:00",
+    "lang": "py",
+    "line_count": 1,
+    "sha1": "b9f5f80692ffaa13b8fb55a309a65748f81eaf2b"
   },
   {
     "path": "tools_utilities/scripts/nightly_repo_index.py",
@@ -248,11 +297,11 @@
   {
     "path": "tools_utilities/scripts/README.md",
     "type": "file",
-    "size": 493,
-    "last_modified": "2025-08-30T16:41:03.782174+00:00",
+    "size": 3754,
+    "last_modified": "2025-09-02T06:57:17.726508+00:00",
     "lang": "md",
-    "line_count": 24,
-    "sha1": "306fc141c3b3153302a30a4aefa6b289f6f18262"
+    "line_count": 60,
+    "sha1": "e4d38b07c279d8942445c0377c500168060a0477"
   },
   {
     "path": "tools_utilities/scripts/generate_roadmap_index.py",
@@ -264,6 +313,33 @@
     "sha1": "f6c00035365dedfd686d74f673c020da8c8ec19e"
   },
   {
+    "path": "tools_utilities/scripts/upload_heavy_directories.py",
+    "type": "file",
+    "size": 1239,
+    "last_modified": "2025-09-02T07:39:09.715208+00:00",
+    "lang": "py",
+    "line_count": 41,
+    "sha1": "9f7e9b25c812cf52642402d21c708a04758c253e"
+  },
+  {
+    "path": "tools_utilities/scripts/update_master_roadmap.py",
+    "type": "file",
+    "size": 1814,
+    "last_modified": "2025-09-02T06:15:23.411196+00:00",
+    "lang": "py",
+    "line_count": 59,
+    "sha1": "a2004ea6736a9590134f67798d68bfd5d38196c3"
+  },
+  {
+    "path": "tools_utilities/scripts/check_quark_state.py",
+    "type": "file",
+    "size": 2458,
+    "last_modified": "2025-09-01T16:31:33.299171+00:00",
+    "lang": "py",
+    "line_count": 70,
+    "sha1": "a604c85cc3fcbbe90f98c2dfdeae7e0912932415"
+  },
+  {
     "path": "tools_utilities/scripts/s3_sync.py",
     "type": "file",
     "size": 2417,
@@ -271,6 +347,15 @@
     "lang": "py",
     "line_count": 82,
     "sha1": "92480382d29579fe4dc780afc8a010e55f0a5aa5"
+  },
+  {
+    "path": "tools_utilities/scripts/doc_utils.py",
+    "type": "file",
+    "size": 1255,
+    "last_modified": "2025-09-02T07:39:09.718997+00:00",
+    "lang": "py",
+    "line_count": 41,
+    "sha1": "ff0f2d90c4e455b0b7bd6a6b67d915673124148a"
   },
   {
     "path": "tools_utilities/scripts/serial_pytest_runner.py",
@@ -293,83 +378,29 @@
   {
     "path": "tools_utilities/scripts/finetune_streaming.py",
     "type": "file",
-    "size": 2622,
-    "last_modified": "2025-09-01T04:01:07.879191+00:00",
+    "size": 5099,
+    "last_modified": "2025-09-02T03:32:15.336588+00:00",
     "lang": "py",
-    "line_count": 81,
-    "sha1": "6430afa5718031e03608c225e480f283410d2562"
+    "line_count": 142,
+    "sha1": "46e8df4e27bb6773cd4c22b86ab56e0f4c50b251"
+  },
+  {
+    "path": "tools_utilities/scripts/s3_streaming_manager.py",
+    "type": "file",
+    "size": 8254,
+    "last_modified": "2025-09-01T04:04:18.659496+00:00",
+    "lang": "py",
+    "line_count": 200,
+    "sha1": "70d5eb0f4316e3f0825d265126379757c048351c"
   },
   {
     "path": "tools_utilities/scripts/train_streaming.py",
     "type": "file",
-    "size": 4395,
-    "last_modified": "2025-09-01T06:52:21.538005+00:00",
+    "size": 11468,
+    "last_modified": "2025-09-02T03:33:01.744899+00:00",
     "lang": "py",
-    "line_count": 122,
-    "sha1": "5ae2f15a89523119766a49a67ec1540bd373e537"
-  },
-  {
-    "path": ".pytest_cache/CACHEDIR.TAG",
-    "type": "file",
-    "size": 191,
-    "last_modified": "2025-08-23T05:42:16.481085+00:00",
-    "lang": "tag",
-    "line_count": 4,
-    "sha1": "74a33d12cf1d479b4901bc0a0dd1cf02df998f0b"
-  },
-  {
-    "path": ".pytest_cache/README.md",
-    "type": "file",
-    "size": 302,
-    "last_modified": "2025-08-23T05:42:16.480846+00:00",
-    "lang": "md",
-    "line_count": 8,
-    "sha1": "54be9e578952c88d983b7d92c5f96579869575a3"
-  },
-  {
-    "path": ".pytest_cache/.gitignore",
-    "type": "file",
-    "size": 37,
-    "last_modified": "2025-08-23T05:42:16.480978+00:00",
-    "lang": null,
-    "line_count": 2,
-    "sha1": "cc9aa9dc139ca3d797f2c9c27f4a912b2461098b"
-  },
-  {
-    "path": ".pytest_cache/v/README.md",
-    "type": "file",
-    "size": 260,
-    "last_modified": "2025-08-30T16:41:03.783351+00:00",
-    "lang": "md",
-    "line_count": 15,
-    "sha1": "e632655c1ed5271c79b2fffef01bf509047f12b6"
-  },
-  {
-    "path": ".pytest_cache/v/cache/nodeids",
-    "type": "file",
-    "size": 16348,
-    "last_modified": "2025-09-01T06:52:16.787912+00:00",
-    "lang": null,
-    "line_count": 178,
-    "sha1": "3d2aca1cfd03dcb48cfd83495cb7b6156be6e7b2"
-  },
-  {
-    "path": ".pytest_cache/v/cache/lastfailed",
-    "type": "file",
-    "size": 56177,
-    "last_modified": "2025-09-01T06:52:16.788525+00:00",
-    "lang": null,
-    "line_count": 725,
-    "sha1": "00ee005a65b900248cd86ea2727e0ca4fbf7aa6c"
-  },
-  {
-    "path": ".pytest_cache/v/cache/README.md",
-    "type": "file",
-    "size": 287,
-    "last_modified": "2025-08-30T16:41:03.783746+00:00",
-    "lang": "md",
-    "line_count": 16,
-    "sha1": "c6cdceb57c088e41f8bda4ac4576319c6f418852"
+    "line_count": 295,
+    "sha1": "0fc3cd33ab853c139c20a53098e6a1f1bb055697"
   },
   {
     "path": "config/README.md",
@@ -399,1264 +430,9 @@
     "sha1": "2ee4acf76fdc1473dab78d566eb97a5288e11f8d"
   },
   {
-    "path": "config/testing/.pytest_cache/CACHEDIR.TAG",
-    "type": "file",
-    "size": 191,
-    "last_modified": "2025-08-29T09:21:02.116893+00:00",
-    "lang": "tag",
-    "line_count": 4,
-    "sha1": "74a33d12cf1d479b4901bc0a0dd1cf02df998f0b"
-  },
-  {
-    "path": "config/testing/.pytest_cache/README.md",
-    "type": "file",
-    "size": 302,
-    "last_modified": "2025-08-29T09:21:02.116684+00:00",
-    "lang": "md",
-    "line_count": 8,
-    "sha1": "54be9e578952c88d983b7d92c5f96579869575a3"
-  },
-  {
-    "path": "config/testing/.pytest_cache/.gitignore",
-    "type": "file",
-    "size": 37,
-    "last_modified": "2025-08-29T09:21:02.116793+00:00",
-    "lang": null,
-    "line_count": 2,
-    "sha1": "cc9aa9dc139ca3d797f2c9c27f4a912b2461098b"
-  },
-  {
-    "path": "config/testing/.pytest_cache/v/README.md",
-    "type": "file",
-    "size": 288,
-    "last_modified": "2025-08-30T16:41:03.784693+00:00",
-    "lang": "md",
-    "line_count": 15,
-    "sha1": "ee170455baf0408e1d67f7d809591bc1c315e6f8"
-  },
-  {
-    "path": "config/testing/.pytest_cache/v/cache/nodeids",
-    "type": "file",
-    "size": 8723,
-    "last_modified": "2025-08-29T09:54:36.277939+00:00",
-    "lang": null,
-    "line_count": 84,
-    "sha1": "81a6517c106d586088b388038ace2178cde95c8c"
-  },
-  {
-    "path": "config/testing/.pytest_cache/v/cache/lastfailed",
-    "type": "file",
-    "size": 6829,
-    "last_modified": "2025-08-29T09:54:36.278268+00:00",
-    "lang": null,
-    "line_count": 73,
-    "sha1": "ef118d7a3ae3cbb8422ecd1f51f104d3824f35fc"
-  },
-  {
-    "path": "config/testing/.pytest_cache/v/cache/README.md",
-    "type": "file",
-    "size": 315,
-    "last_modified": "2025-08-30T16:41:03.784992+00:00",
-    "lang": "md",
-    "line_count": 16,
-    "sha1": "c288fbec2d1a4035605a143783f4c31f8060b698"
-  },
-  {
-    "path": ".mlruns/0/README.md",
-    "type": "file",
-    "size": 254,
-    "last_modified": "2025-08-30T16:41:03.785625+00:00",
-    "lang": "md",
-    "line_count": 15,
-    "sha1": "741ebbd42dc95ad80471ca96f3855aa4ef4b1d9f"
-  },
-  {
-    "path": ".mlruns/0/meta.yaml",
-    "type": "file",
-    "size": 170,
-    "last_modified": "2025-08-22T03:51:15.945841+00:00",
-    "lang": "yaml",
-    "line_count": 6,
-    "sha1": "e98789efb54c5012abf00185cd858a2668b435c6"
-  },
-  {
-    "path": ".mlruns/505953476862620945/README.md",
-    "type": "file",
-    "size": 471,
-    "last_modified": "2025-08-30T16:41:03.785966+00:00",
-    "lang": "md",
-    "line_count": 20,
-    "sha1": "fc6f52753a22c93fc0dc7eb7f118a64893910dbe"
-  },
-  {
-    "path": ".mlruns/505953476862620945/meta.yaml",
-    "type": "file",
-    "size": 217,
-    "last_modified": "2025-08-22T03:51:15.950373+00:00",
-    "lang": "yaml",
-    "line_count": 6,
-    "sha1": "94053bc3516671b3bc8c1130217b8c8c60baea49"
-  },
-  {
-    "path": ".mlruns/505953476862620945/c8bef425e9ad4146bdc3dd8ebdc50fcd/README.md",
-    "type": "file",
-    "size": 386,
-    "last_modified": "2025-08-30T16:41:03.786492+00:00",
-    "lang": "md",
-    "line_count": 19,
-    "sha1": "9a54007b5732f1633c62267688b82b27c3a5504b"
-  },
-  {
-    "path": ".mlruns/505953476862620945/c8bef425e9ad4146bdc3dd8ebdc50fcd/meta.yaml",
-    "type": "file",
-    "size": 401,
-    "last_modified": "2025-08-22T03:51:16.500873+00:00",
-    "lang": "yaml",
-    "line_count": 14,
-    "sha1": "7034b6f79534749223fc1b41dc383349ae3798e8"
-  },
-  {
-    "path": ".mlruns/505953476862620945/c8bef425e9ad4146bdc3dd8ebdc50fcd/metrics/sensory_spikes",
-    "type": "file",
-    "size": 22,
-    "last_modified": "2025-08-22T03:51:16.035397+00:00",
-    "lang": null,
-    "line_count": 1,
-    "sha1": "1d5553500734cab1381e37c03bb5c7652985f499"
-  },
-  {
-    "path": ".mlruns/505953476862620945/c8bef425e9ad4146bdc3dd8ebdc50fcd/metrics/README.md",
-    "type": "file",
-    "size": 353,
-    "last_modified": "2025-08-30T16:41:03.788315+00:00",
-    "lang": "md",
-    "line_count": 16,
-    "sha1": "5a30d1ecda9882dadfd4ae62b608fbe74c9eb3fb"
-  },
-  {
-    "path": ".mlruns/505953476862620945/c8bef425e9ad4146bdc3dd8ebdc50fcd/metrics/thalamic_spikes",
-    "type": "file",
-    "size": 20,
-    "last_modified": "2025-08-22T03:51:16.035568+00:00",
-    "lang": null,
-    "line_count": 1,
-    "sha1": "f41f9345a192988ab335e4493df5d0870e790f74"
-  },
-  {
-    "path": ".mlruns/505953476862620945/c8bef425e9ad4146bdc3dd8ebdc50fcd/artifacts/README.md",
-    "type": "file",
-    "size": 350,
-    "last_modified": "2025-08-30T16:41:03.788548+00:00",
-    "lang": "md",
-    "line_count": 15,
-    "sha1": "1cea9e7b932d2d4bbfef503e24feb904f8a2c5c5"
-  },
-  {
-    "path": ".mlruns/505953476862620945/c8bef425e9ad4146bdc3dd8ebdc50fcd/tags/mlflow.user",
-    "type": "file",
-    "size": 10,
-    "last_modified": "2025-08-22T03:51:16.028456+00:00",
-    "lang": "user",
-    "line_count": 1,
-    "sha1": "6666854ba143c684469e2e179f854f98fd76b3f2"
-  },
-  {
-    "path": ".mlruns/505953476862620945/c8bef425e9ad4146bdc3dd8ebdc50fcd/tags/mlflow.source.git.commit",
-    "type": "file",
-    "size": 40,
-    "last_modified": "2025-08-22T03:51:16.029496+00:00",
-    "lang": "commit",
-    "line_count": 1,
-    "sha1": "a8e9664f0a882cc449d93593ebe9c9c828ddf6fb"
-  },
-  {
-    "path": ".mlruns/505953476862620945/c8bef425e9ad4146bdc3dd8ebdc50fcd/tags/mlflow.runName",
-    "type": "file",
-    "size": 22,
-    "last_modified": "2025-08-22T03:51:16.030281+00:00",
-    "lang": "runname",
-    "line_count": 1,
-    "sha1": "7b5b6c5d65c1283df57b7eade40ddb20eeac5e85"
-  },
-  {
-    "path": ".mlruns/505953476862620945/c8bef425e9ad4146bdc3dd8ebdc50fcd/tags/mlflow.source.name",
-    "type": "file",
-    "size": 80,
-    "last_modified": "2025-08-22T03:51:16.028826+00:00",
-    "lang": "name",
-    "line_count": 1,
-    "sha1": "58baa57eeb4478045dbbcdd009b09cd9003beaad"
-  },
-  {
-    "path": ".mlruns/505953476862620945/c8bef425e9ad4146bdc3dd8ebdc50fcd/tags/README.md",
-    "type": "file",
-    "size": 412,
-    "last_modified": "2025-08-30T16:41:03.788832+00:00",
-    "lang": "md",
-    "line_count": 19,
-    "sha1": "c97774e2f57ea28c9d9058bb020c41db86945d76"
-  },
-  {
-    "path": ".mlruns/505953476862620945/c8bef425e9ad4146bdc3dd8ebdc50fcd/tags/mlflow.source.type",
-    "type": "file",
-    "size": 5,
-    "last_modified": "2025-08-22T03:51:16.029160+00:00",
-    "lang": "type",
-    "line_count": 1,
-    "sha1": "9be34046ca1ba588dc09de6a2c470501a652545c"
-  },
-  {
-    "path": ".mlruns/505953476862620945/c8bef425e9ad4146bdc3dd8ebdc50fcd/params/n_inputs",
-    "type": "file",
-    "size": 3,
-    "last_modified": "2025-08-22T03:51:16.032020+00:00",
-    "lang": null,
-    "line_count": 1,
-    "sha1": "310b86e0b62b828562fc91c7be5380a992b2786a"
-  },
-  {
-    "path": ".mlruns/505953476862620945/c8bef425e9ad4146bdc3dd8ebdc50fcd/params/input_firing_rate_hz",
-    "type": "file",
-    "size": 4,
-    "last_modified": "2025-08-22T03:51:16.032158+00:00",
-    "lang": null,
-    "line_count": 1,
-    "sha1": "b8fc90fd7ade4838fc2405e4321d6b394d59f336"
-  },
-  {
-    "path": ".mlruns/505953476862620945/c8bef425e9ad4146bdc3dd8ebdc50fcd/params/README.md",
-    "type": "file",
-    "size": 350,
-    "last_modified": "2025-08-30T16:41:03.789071+00:00",
-    "lang": "md",
-    "line_count": 16,
-    "sha1": "a6a9bc7f195707bf9b85071bf29c478723be3dc3"
-  },
-  {
-    "path": ".mlruns/505953476862620945/fc408afd2d6c4c5fb4d8e3ac0f9384dd/README.md",
-    "type": "file",
-    "size": 386,
-    "last_modified": "2025-08-30T16:41:03.786844+00:00",
-    "lang": "md",
-    "line_count": 19,
-    "sha1": "5b78dca9661381ec4482b68a432bdde22971312d"
-  },
-  {
-    "path": ".mlruns/505953476862620945/fc408afd2d6c4c5fb4d8e3ac0f9384dd/meta.yaml",
-    "type": "file",
-    "size": 395,
-    "last_modified": "2025-08-22T05:09:44.943579+00:00",
-    "lang": "yaml",
-    "line_count": 14,
-    "sha1": "891701ca54448ca31ae2278f2a01f9cd7c588dbd"
-  },
-  {
-    "path": ".mlruns/505953476862620945/fc408afd2d6c4c5fb4d8e3ac0f9384dd/metrics/mean_w_mV",
-    "type": "file",
-    "size": 35,
-    "last_modified": "2025-08-22T05:09:44.916014+00:00",
-    "lang": null,
-    "line_count": 1,
-    "sha1": "4495e0c672349d2dcaa48dae5a1d29dc16524d80"
-  },
-  {
-    "path": ".mlruns/505953476862620945/fc408afd2d6c4c5fb4d8e3ac0f9384dd/metrics/num_weighted_synapses",
-    "type": "file",
-    "size": 22,
-    "last_modified": "2025-08-22T05:09:44.915873+00:00",
-    "lang": null,
-    "line_count": 1,
-    "sha1": "7bf2c15ece84bfd1e7eb415975447d9b19511703"
-  },
-  {
-    "path": ".mlruns/505953476862620945/fc408afd2d6c4c5fb4d8e3ac0f9384dd/metrics/README.md",
-    "type": "file",
-    "size": 365,
-    "last_modified": "2025-08-30T16:41:03.789566+00:00",
-    "lang": "md",
-    "line_count": 17,
-    "sha1": "611a43a9e82ba27578b77a25dc5bffd69feed2d4"
-  },
-  {
-    "path": ".mlruns/505953476862620945/fc408afd2d6c4c5fb4d8e3ac0f9384dd/metrics/std_w_mV",
-    "type": "file",
-    "size": 34,
-    "last_modified": "2025-08-22T05:09:44.916146+00:00",
-    "lang": null,
-    "line_count": 1,
-    "sha1": "9d7d107b648db9e11d0d35f4bb7fd7d4ca62acb3"
-  },
-  {
-    "path": ".mlruns/505953476862620945/fc408afd2d6c4c5fb4d8e3ac0f9384dd/artifacts/README.md",
-    "type": "file",
-    "size": 341,
-    "last_modified": "2025-08-30T16:41:03.789835+00:00",
-    "lang": "md",
-    "line_count": 15,
-    "sha1": "4f9e802b1afdddee5458ce9af2e036e3dc84f9e6"
-  },
-  {
-    "path": ".mlruns/505953476862620945/fc408afd2d6c4c5fb4d8e3ac0f9384dd/tags/mlflow.runName",
-    "type": "file",
-    "size": 16,
-    "last_modified": "2025-08-22T05:09:44.910728+00:00",
-    "lang": "runname",
-    "line_count": 1,
-    "sha1": "68b952895c2b9f2052a21260ad0cd6da62ac2998"
-  },
-  {
-    "path": ".mlruns/505953476862620945/fc408afd2d6c4c5fb4d8e3ac0f9384dd/tags/mlflow.source.name",
-    "type": "file",
-    "size": 69,
-    "last_modified": "2025-08-22T05:09:44.890474+00:00",
-    "lang": "name",
-    "line_count": 1,
-    "sha1": "e952d9e869dc29ba8c4928aa0ab3a65576c531c8"
-  },
-  {
-    "path": ".mlruns/505953476862620945/fc408afd2d6c4c5fb4d8e3ac0f9384dd/tags/README.md",
-    "type": "file",
-    "size": 350,
-    "last_modified": "2025-08-30T16:41:03.790090+00:00",
-    "lang": "md",
-    "line_count": 16,
-    "sha1": "7b0a79eb4ab32d308e43e87e5e6e87bc504b95f5"
-  },
-  {
-    "path": ".mlruns/505953476862620945/fc408afd2d6c4c5fb4d8e3ac0f9384dd/params/mode",
-    "type": "file",
-    "size": 11,
-    "last_modified": "2025-08-22T05:09:44.913501+00:00",
-    "lang": null,
-    "line_count": 1,
-    "sha1": "cf8b334b177c4e5f9891ece2ab5028d5664d52f7"
-  },
-  {
-    "path": ".mlruns/505953476862620945/fc408afd2d6c4c5fb4d8e3ac0f9384dd/params/README.md",
-    "type": "file",
-    "size": 323,
-    "last_modified": "2025-08-30T16:41:03.790333+00:00",
-    "lang": "md",
-    "line_count": 15,
-    "sha1": "6dbb3d5326f708906314f6d17444799a3fef3fc1"
-  },
-  {
-    "path": ".mlruns/505953476862620945/092a8151e6dd4ca9b2f5c4482133600e/README.md",
-    "type": "file",
-    "size": 373,
-    "last_modified": "2025-08-30T16:41:03.787189+00:00",
-    "lang": "md",
-    "line_count": 18,
-    "sha1": "0871056e903294b28081d25eb991c9e5d5a5f637"
-  },
-  {
-    "path": ".mlruns/505953476862620945/092a8151e6dd4ca9b2f5c4482133600e/meta.yaml",
-    "type": "file",
-    "size": 392,
-    "last_modified": "2025-08-22T04:32:18.414766+00:00",
-    "lang": "yaml",
-    "line_count": 14,
-    "sha1": "0ebda2172e7878ed0ce007f79bfd4b4fa54aeb38"
-  },
-  {
-    "path": ".mlruns/505953476862620945/092a8151e6dd4ca9b2f5c4482133600e/metrics/mean_w_mV",
-    "type": "file",
-    "size": 20,
-    "last_modified": "2025-08-22T04:32:18.412369+00:00",
-    "lang": null,
-    "line_count": 1,
-    "sha1": "e91c87b6c67f635bc3fd6cda217893ac224c2a34"
-  },
-  {
-    "path": ".mlruns/505953476862620945/092a8151e6dd4ca9b2f5c4482133600e/metrics/README.md",
-    "type": "file",
-    "size": 330,
-    "last_modified": "2025-08-30T16:41:03.790870+00:00",
-    "lang": "md",
-    "line_count": 15,
-    "sha1": "deaa1a00217969c2997e13af99647d9e67a9f0bf"
-  },
-  {
-    "path": ".mlruns/505953476862620945/092a8151e6dd4ca9b2f5c4482133600e/tags/mlflow.runName",
-    "type": "file",
-    "size": 13,
-    "last_modified": "2025-08-22T04:32:18.406602+00:00",
-    "lang": "runname",
-    "line_count": 1,
-    "sha1": "25e6871e091c842b17fb066d0bb5e90f9323bb66"
-  },
-  {
-    "path": ".mlruns/505953476862620945/092a8151e6dd4ca9b2f5c4482133600e/tags/README.md",
-    "type": "file",
-    "size": 329,
-    "last_modified": "2025-08-30T16:41:03.791095+00:00",
-    "lang": "md",
-    "line_count": 15,
-    "sha1": "3040146b6645f309e73c076edab717ff25311f8e"
-  },
-  {
-    "path": ".mlruns/505953476862620945/092a8151e6dd4ca9b2f5c4482133600e/params/mode",
-    "type": "file",
-    "size": 8,
-    "last_modified": "2025-08-22T04:32:18.409787+00:00",
-    "lang": null,
-    "line_count": 1,
-    "sha1": "8482db7369be8187766d124c85bf6103b26efc9e"
-  },
-  {
-    "path": ".mlruns/505953476862620945/092a8151e6dd4ca9b2f5c4482133600e/params/README.md",
-    "type": "file",
-    "size": 323,
-    "last_modified": "2025-08-30T16:41:03.791349+00:00",
-    "lang": "md",
-    "line_count": 15,
-    "sha1": "7ff567d5926bca0dc365555919e7b2823d40a196"
-  },
-  {
-    "path": ".mlruns/505953476862620945/3fab790e89374b1fbdf95d900ae92107/README.md",
-    "type": "file",
-    "size": 378,
-    "last_modified": "2025-08-30T16:41:03.787573+00:00",
-    "lang": "md",
-    "line_count": 18,
-    "sha1": "572fc1fa9ec051190bcb183776834d6fd1d58637"
-  },
-  {
-    "path": ".mlruns/505953476862620945/3fab790e89374b1fbdf95d900ae92107/meta.yaml",
-    "type": "file",
-    "size": 401,
-    "last_modified": "2025-08-22T03:54:52.110196+00:00",
-    "lang": "yaml",
-    "line_count": 14,
-    "sha1": "c113a6a50045e05884b3a4fc530413aab5cee94d"
-  },
-  {
-    "path": ".mlruns/505953476862620945/3fab790e89374b1fbdf95d900ae92107/metrics/sensory_spikes",
-    "type": "file",
-    "size": 23,
-    "last_modified": "2025-08-22T03:54:52.051304+00:00",
-    "lang": null,
-    "line_count": 1,
-    "sha1": "e6a9ecca03bfd9253105fa57076d1761c2161d9d"
-  },
-  {
-    "path": ".mlruns/505953476862620945/3fab790e89374b1fbdf95d900ae92107/metrics/README.md",
-    "type": "file",
-    "size": 353,
-    "last_modified": "2025-08-30T16:41:03.791927+00:00",
-    "lang": "md",
-    "line_count": 16,
-    "sha1": "53c2051f9ab325f0b693aea3560041355bb7ce69"
-  },
-  {
-    "path": ".mlruns/505953476862620945/3fab790e89374b1fbdf95d900ae92107/metrics/thalamic_spikes",
-    "type": "file",
-    "size": 23,
-    "last_modified": "2025-08-22T03:54:52.051445+00:00",
-    "lang": null,
-    "line_count": 1,
-    "sha1": "b05cc5686783ed71ff59c3d4095a69262e904085"
-  },
-  {
-    "path": ".mlruns/505953476862620945/3fab790e89374b1fbdf95d900ae92107/artifacts/README.md",
-    "type": "file",
-    "size": 350,
-    "last_modified": "2025-08-30T16:41:03.792201+00:00",
-    "lang": "md",
-    "line_count": 15,
-    "sha1": "8863e18cb3f3f68bcbf23b6aff7a2a783b45c1d4"
-  },
-  {
-    "path": ".mlruns/505953476862620945/3fab790e89374b1fbdf95d900ae92107/params/thalamic_thresh_mV",
-    "type": "file",
-    "size": 5,
-    "last_modified": "2025-08-22T03:54:52.048023+00:00",
-    "lang": null,
-    "line_count": 1,
-    "sha1": "9da0c8b57360a3cd234ca2f100f8a5ceebd397b7"
-  },
-  {
-    "path": ".mlruns/505953476862620945/3fab790e89374b1fbdf95d900ae92107/params/synaptic_jump_mV",
-    "type": "file",
-    "size": 4,
-    "last_modified": "2025-08-22T03:54:52.048289+00:00",
-    "lang": null,
-    "line_count": 1,
-    "sha1": "4c7a18c8baa891976ae8102b846b3aa8143fe90d"
-  },
-  {
-    "path": ".mlruns/505953476862620945/3fab790e89374b1fbdf95d900ae92107/params/input_firing_rate_hz",
-    "type": "file",
-    "size": 5,
-    "last_modified": "2025-08-22T03:54:52.047762+00:00",
-    "lang": null,
-    "line_count": 1,
-    "sha1": "5656e9ef8c7878fb85717298168ca980ce0ffd79"
-  },
-  {
-    "path": ".mlruns/505953476862620945/3fab790e89374b1fbdf95d900ae92107/params/README.md",
-    "type": "file",
-    "size": 397,
-    "last_modified": "2025-08-30T16:41:03.792498+00:00",
-    "lang": "md",
-    "line_count": 18,
-    "sha1": "3742eccbf903e2044fb854366638e39585ce1637"
-  },
-  {
-    "path": ".mlruns/505953476862620945/3fab790e89374b1fbdf95d900ae92107/params/thalamic_tau_ms",
-    "type": "file",
-    "size": 4,
-    "last_modified": "2025-08-22T03:54:52.048150+00:00",
-    "lang": null,
-    "line_count": 1,
-    "sha1": "57eb3a49d9ad9aaafe3c8a0d0fcef34d4f755c72"
-  },
-  {
-    "path": ".mlruns/505953476862620945/94dee3dd6af84b1c819f75b15b54c21b/README.md",
-    "type": "file",
-    "size": 355,
-    "last_modified": "2025-08-30T16:41:03.787911+00:00",
-    "lang": "md",
-    "line_count": 16,
-    "sha1": "0269c126e3206ec4429f41266c4c5fff2c53f214"
-  },
-  {
-    "path": ".mlruns/505953476862620945/94dee3dd6af84b1c819f75b15b54c21b/meta.yaml",
-    "type": "file",
-    "size": 395,
-    "last_modified": "2025-08-22T05:09:45.202509+00:00",
-    "lang": "yaml",
-    "line_count": 14,
-    "sha1": "8c7e694b693459a9f8b4685de5ff85ad34ecb99d"
-  },
-  {
-    "path": ".mlruns/505953476862620945/94dee3dd6af84b1c819f75b15b54c21b/metrics/mean_w_mV",
-    "type": "file",
-    "size": 33,
-    "last_modified": "2025-08-22T05:09:45.026547+00:00",
-    "lang": null,
-    "line_count": 1,
-    "sha1": "dcd6712f80a2710f2316bbfdb53236372c1c347f"
-  },
-  {
-    "path": ".mlruns/505953476862620945/94dee3dd6af84b1c819f75b15b54c21b/metrics/num_weighted_synapses",
-    "type": "file",
-    "size": 22,
-    "last_modified": "2025-08-22T05:09:45.026256+00:00",
-    "lang": null,
-    "line_count": 1,
-    "sha1": "a23aa511886f67d9feeee8980f6727e62819cf1d"
-  },
-  {
-    "path": ".mlruns/505953476862620945/94dee3dd6af84b1c819f75b15b54c21b/metrics/README.md",
-    "type": "file",
-    "size": 365,
-    "last_modified": "2025-08-30T16:41:03.792985+00:00",
-    "lang": "md",
-    "line_count": 17,
-    "sha1": "1ce4a4f472293b1ed2fd209bff339e03efae86f6"
-  },
-  {
-    "path": ".mlruns/505953476862620945/94dee3dd6af84b1c819f75b15b54c21b/metrics/std_w_mV",
-    "type": "file",
-    "size": 36,
-    "last_modified": "2025-08-22T05:09:45.026824+00:00",
-    "lang": null,
-    "line_count": 1,
-    "sha1": "eea263114bcc5692067565b5d74a606791a5162d"
-  },
-  {
-    "path": ".ruff_cache/CACHEDIR.TAG",
-    "type": "file",
-    "size": 43,
-    "last_modified": "2025-08-30T14:51:46.681087+00:00",
-    "lang": "tag",
-    "line_count": 1,
-    "sha1": "a841ba867b077ea911fad5dd6d94abda6f10b22c"
-  },
-  {
-    "path": ".ruff_cache/.gitignore",
-    "type": "file",
-    "size": 35,
-    "last_modified": "2025-08-30T14:51:46.681178+00:00",
-    "lang": null,
-    "line_count": 2,
-    "sha1": "aeb40107cf378115a0a443b6ddcc4e0606d52ff6"
-  },
-  {
-    "path": ".ruff_cache/0.12.11/15663043365463385982",
-    "type": "file",
-    "size": 73,
-    "last_modified": "2025-08-30T14:51:46.699800+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "72a7646fe3589dd1b86551d97cbc752315aba850"
-  },
-  {
-    "path": ".ruff_cache/0.12.11/2922841793501965552",
-    "type": "file",
-    "size": 95,
-    "last_modified": "2025-08-30T14:51:46.704975+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "3812d42a39656d3db73fc149ed09b2f5e7ffa60e"
-  },
-  {
-    "path": ".ruff_cache/0.12.11/6089395092740657185",
-    "type": "file",
-    "size": 123,
-    "last_modified": "2025-08-30T15:13:20.739388+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "db672364338aa6655cb2f1ec30cd9c576d1a17c2"
-  },
-  {
-    "path": ".ruff_cache/0.12.11/7255713184549314990",
-    "type": "file",
-    "size": 292,
-    "last_modified": "2025-08-30T14:51:46.704289+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "94348a1ade8c2fb6d3b2afdcc6ef347941546442"
-  },
-  {
-    "path": ".ruff_cache/0.12.11/7842171667457703483",
-    "type": "file",
-    "size": 100,
-    "last_modified": "2025-08-30T14:51:46.702892+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "edaaebc3050c281f615e6cf3043fb29c7a579eec"
-  },
-  {
-    "path": ".ruff_cache/0.12.11/9336584013570744366",
-    "type": "file",
-    "size": 90,
-    "last_modified": "2025-08-30T14:51:46.700101+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "2e24bd7f54123a7a8473a7d1af1c8077ddb64178"
-  },
-  {
-    "path": ".ruff_cache/0.12.11/10608114010567024662",
-    "type": "file",
-    "size": 176,
-    "last_modified": "2025-08-30T15:13:20.739075+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "c013e08a97118ff60951e1547d1448b5299e2277"
-  },
-  {
-    "path": ".ruff_cache/0.12.11/543014751612268107",
-    "type": "file",
-    "size": 366,
-    "last_modified": "2025-08-30T14:51:46.700380+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "5d28c6cd20f799f60522254c0890b954b16fc88d"
-  },
-  {
-    "path": ".ruff_cache/0.12.11/14954504632622189277",
-    "type": "file",
-    "size": 193,
-    "last_modified": "2025-08-30T14:51:46.700831+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "25fba66883efca1f513ee623ae0af98d23712991"
-  },
-  {
-    "path": ".ruff_cache/0.12.11/3530625636718776123",
-    "type": "file",
-    "size": 180,
-    "last_modified": "2025-08-30T14:51:46.700307+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "e3fb6bc8d0da0b4a8a254931220603b0ed7ddcab"
-  },
-  {
-    "path": ".ruff_cache/0.12.11/4446389372027958763",
-    "type": "file",
-    "size": 228,
-    "last_modified": "2025-08-30T14:51:46.703550+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "63d089b6c6b421ec502136533f11a49cd9451bd2"
-  },
-  {
-    "path": ".ruff_cache/0.12.11/4628697051284271225",
-    "type": "file",
-    "size": 102,
-    "last_modified": "2025-08-30T14:51:46.702408+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "2bcc2d67081bfa0169cff886032f6c651f07baec"
-  },
-  {
-    "path": ".ruff_cache/0.12.11/9193757425353112077",
-    "type": "file",
-    "size": 83,
-    "last_modified": "2025-08-30T15:12:51.336400+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "9245250744459aeef5e97246c8206ec63eb5edf5"
-  },
-  {
-    "path": ".ruff_cache/0.12.11/11699675086153366728",
-    "type": "file",
-    "size": 81,
-    "last_modified": "2025-08-30T15:13:20.739183+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "5aad0b1cc516455b77a930c5c8fd194b8d327924"
-  },
-  {
-    "path": ".ruff_cache/0.12.11/13199941059071426594",
-    "type": "file",
-    "size": 121,
-    "last_modified": "2025-08-30T14:51:46.701217+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "19a632f2e757ef08d3b502fdd9fc662aedf66b94"
-  },
-  {
-    "path": ".ruff_cache/0.12.11/4101955998005671544",
-    "type": "file",
-    "size": 117,
-    "last_modified": "2025-08-30T14:51:46.701170+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "4804bc7cd755436d2f4d2e5ed73316689606669d"
-  },
-  {
-    "path": ".ruff_cache/0.12.11/12981524442858242754",
-    "type": "file",
-    "size": 195,
-    "last_modified": "2025-08-30T14:51:46.701474+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "2624fed5c3f5888fa19706f589adc7f79b689333"
-  },
-  {
-    "path": ".ruff_cache/0.12.11/17759942007350560554",
-    "type": "file",
-    "size": 82,
-    "last_modified": "2025-08-30T15:13:20.739264+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "4721755e793345f895fa40e129c943b263f1ea6c"
-  },
-  {
-    "path": ".ruff_cache/0.12.11/14931293450018601101",
-    "type": "file",
-    "size": 81,
-    "last_modified": "2025-08-30T15:13:20.739434+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "6c7c8b450db6566aadf024b21764a71e6dccb6bf"
-  },
-  {
-    "path": ".ruff_cache/0.12.11/5162881758694252647",
-    "type": "file",
-    "size": 87,
-    "last_modified": "2025-08-30T15:13:20.739258+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "10e4920e778b94a591b31eea986d352492c68e1c"
-  },
-  {
-    "path": ".ruff_cache/0.12.11/13308212383940123000",
-    "type": "file",
-    "size": 452,
-    "last_modified": "2025-08-30T14:51:46.702169+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "26bb02b121c6283d10e37649bed3a0b21202ef0c"
-  },
-  {
-    "path": ".ruff_cache/0.12.11/7663358923725615249",
-    "type": "file",
-    "size": 136,
-    "last_modified": "2025-08-30T14:51:46.704736+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "3bb727624be683dc26f443f599a807be70080d80"
-  },
-  {
-    "path": ".ruff_cache/0.12.11/15734478007257300560",
-    "type": "file",
-    "size": 104,
-    "last_modified": "2025-08-30T14:51:46.703103+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "7ea5d8b678d64daf895abe4641966c0f185a9440"
-  },
-  {
-    "path": ".ruff_cache/0.12.11/1732191204313217711",
-    "type": "file",
-    "size": 262,
-    "last_modified": "2025-08-30T14:51:46.703411+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "a515cf05b4c6518d19153206f358a483dab265b6"
-  },
-  {
-    "path": ".ruff_cache/0.12.11/10310282587998175439",
-    "type": "file",
-    "size": 1456,
-    "last_modified": "2025-08-30T14:51:46.703595+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "25111f95d86a352da0117728517fa9ffde957fc2"
-  },
-  {
-    "path": ".ruff_cache/0.12.11/12618287980058546726",
-    "type": "file",
-    "size": 111,
-    "last_modified": "2025-08-30T14:51:46.704964+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "af28a74e52bd1c4c7bb305d949071ed5b4b793c7"
-  },
-  {
-    "path": ".ruff_cache/0.12.11/4684916874995106156",
-    "type": "file",
-    "size": 274,
-    "last_modified": "2025-08-30T15:13:20.739084+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "2b33fbc270d7920278f41199b9e57a47dba3a87e"
-  },
-  {
-    "path": ".ruff_cache/0.12.11/7771787746278617011",
-    "type": "file",
-    "size": 82,
-    "last_modified": "2025-08-30T14:51:46.703094+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "c5063a133bafd1eae4b31d893cc04d718d89fda7"
-  },
-  {
-    "path": ".ruff_cache/0.12.11/16276990180546136627",
-    "type": "file",
-    "size": 180,
-    "last_modified": "2025-08-30T14:51:46.704123+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "20ebad055d756de73457c40e9d65e5aaf51587f4"
-  },
-  {
-    "path": ".ruff_cache/0.12.11/README.md",
-    "type": "file",
-    "size": 960,
-    "last_modified": "2025-08-30T16:41:03.794034+00:00",
-    "lang": "md",
-    "line_count": 45,
-    "sha1": "9174932446ffe96605d473d92deea4b0f7664277"
-  },
-  {
-    "path": ".ruff_cache/0.12.11/6753341343981836827",
-    "type": "file",
-    "size": 140,
-    "last_modified": "2025-08-30T14:51:46.699980+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "c98e31c4dd1472fcb32c6da3bd806f527feafc07"
-  },
-  {
-    "path": ".ruff_cache/0.12.11/468069776608721636",
-    "type": "file",
-    "size": 131,
-    "last_modified": "2025-08-30T15:13:20.739130+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "c25dfe84ea65b47c451e4d179a591030a3caff9d"
-  },
-  {
-    "path": ".ruff_cache/0.12.11/16753457897566667122",
-    "type": "file",
-    "size": 176,
-    "last_modified": "2025-08-30T14:51:46.701056+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "07b88815a9e5fffef5105596b8e7150a1a973b75"
-  },
-  {
-    "path": ".ruff_cache/0.12.11/16960529159210037385",
-    "type": "file",
-    "size": 113,
-    "last_modified": "2025-08-30T14:51:46.700927+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "f48d49b36953442e7728c463f7130afd92a7fef0"
-  },
-  {
-    "path": ".ruff_cache/0.12.11/10947198700498205020",
-    "type": "file",
-    "size": 105,
-    "last_modified": "2025-08-30T14:51:46.704633+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "2fd9d7d60d2681e0b4141dffa9ab73ab3a368496"
-  },
-  {
-    "path": ".ruff_cache/0.12.11/11761874888420591983",
-    "type": "file",
-    "size": 83,
-    "last_modified": "2025-08-30T14:51:46.701432+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "bc42997fa30354f172ba5b0d5e7f83c282b2bfb9"
-  },
-  {
-    "path": ".ruff_cache/0.12.11/16659392620589225239",
-    "type": "file",
-    "size": 140,
-    "last_modified": "2025-08-30T14:51:46.704953+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "d5b372dcffa8d583cd94c08090401ab7c8e45f6e"
-  },
-  {
-    "path": ".ruff_cache/0.12.11/1604851928021986932",
-    "type": "file",
-    "size": 83,
-    "last_modified": "2025-08-30T14:51:46.702284+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "398f2f6282685e5c844337e334c07be377e29802"
-  },
-  {
-    "path": ".ruff_cache/0.12.11/11637494032942868991",
-    "type": "file",
-    "size": 377,
-    "last_modified": "2025-08-30T14:51:46.701763+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "2d2f4768dfe45d04a092c2b00cdf8ac35803101f"
-  },
-  {
-    "path": ".ruff_cache/0.12.11/12966584436959860109",
-    "type": "file",
-    "size": 300,
-    "last_modified": "2025-08-30T14:51:46.701350+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "54631197f7f7434ceec9e7544ad8530bd36d5442"
-  },
-  {
-    "path": ".ruff_cache/0.12.11/11908114673401594041",
-    "type": "file",
-    "size": 131,
-    "last_modified": "2025-08-30T14:51:46.703658+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "161a4797c69a5ddc16201b724a56388db93dad99"
-  },
-  {
-    "path": ".ruff_cache/0.12.11/10754031804566344885",
-    "type": "file",
-    "size": 228,
-    "last_modified": "2025-08-30T15:13:20.739286+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "d18bce768b0605f5c04f226bd68e1d8fd62af3a3"
-  },
-  {
-    "path": ".ruff_cache/0.12.11/16013651169508192690",
-    "type": "file",
-    "size": 103,
-    "last_modified": "2025-08-30T14:51:46.700847+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "205acb8a35c2fa8386443687a79f2f648e7ebf8c"
-  },
-  {
-    "path": ".ruff_cache/0.12.11/14964659550937854620",
-    "type": "file",
-    "size": 157,
-    "last_modified": "2025-08-30T14:51:46.702686+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "f1d8bded1fdea6d69b9aa48c97c7196f998f5563"
-  },
-  {
-    "path": ".ruff_cache/0.12.11/6962632198930792951",
-    "type": "file",
-    "size": 142,
-    "last_modified": "2025-08-30T14:51:46.702001+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "f633d6c33d1d61dc27262fae0ce921fe9f94ba7f"
-  },
-  {
-    "path": ".ruff_cache/0.12.11/9432775351070371255",
-    "type": "file",
-    "size": 148,
-    "last_modified": "2025-08-30T14:51:46.704277+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "6a34caf3e04e75742c8b55201e8b993efe476de8"
-  },
-  {
-    "path": ".ruff_cache/0.12.11/14961921888178714571",
-    "type": "file",
-    "size": 81,
-    "last_modified": "2025-08-30T14:51:46.699871+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "40c2fd4a6ec2490d3c9d20178416fb10c1cfd20e"
-  },
-  {
-    "path": ".ruff_cache/0.12.11/12588482461918771691",
-    "type": "file",
-    "size": 274,
-    "last_modified": "2025-08-30T14:51:46.703504+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "7cac75d026f9af1e981dbddf43be1f3941112c8d"
-  },
-  {
-    "path": ".ruff_cache/0.12.11/798889682718175569",
-    "type": "file",
-    "size": 102,
-    "last_modified": "2025-08-30T14:51:46.700134+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "4463046d75c89c8486643036efe2e68012f089b1"
-  },
-  {
-    "path": ".ruff_cache/0.12.11/16786158563625383418",
-    "type": "file",
-    "size": 168,
-    "last_modified": "2025-08-30T14:51:46.701435+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "ecff2b3a404a4da1f727fe5674a891fdf99ad493"
-  },
-  {
-    "path": ".ruff_cache/0.12.11/8991064889539394554",
-    "type": "file",
-    "size": 121,
-    "last_modified": "2025-08-30T15:12:51.336431+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "457aede92aacf1ef51d395b92608fe47fd771960"
-  },
-  {
-    "path": ".ruff_cache/0.12.11/338856749669246209",
-    "type": "file",
-    "size": 109,
-    "last_modified": "2025-08-30T14:51:46.700343+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "e3ab3fba974ac769b70c25df022c422ef4ed6ae2"
-  },
-  {
-    "path": ".ruff_cache/0.12.11/14220512579849938362",
-    "type": "file",
-    "size": 149,
-    "last_modified": "2025-08-30T14:51:46.700142+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "351a82a85e80387e889da12e56c8c81d35dd7f6e"
-  },
-  {
-    "path": ".ruff_cache/0.12.11/17649954756054997871",
-    "type": "file",
-    "size": 102,
-    "last_modified": "2025-08-30T14:51:46.700438+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "02a848ae4fc08d3dcb27aed1ce9a94ec2caa543a"
-  },
-  {
-    "path": ".ruff_cache/0.12.11/13196696362494989679",
-    "type": "file",
-    "size": 123,
-    "last_modified": "2025-08-30T14:51:46.702602+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "d8021bc1a1a50377fb95cd17c4c54f6035c0b456"
-  },
-  {
-    "path": ".ruff_cache/0.12.11/269831073759236537",
-    "type": "file",
-    "size": 125,
-    "last_modified": "2025-08-30T14:51:46.704177+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "4950992dc9350a7165d54164c4e5d7e24549d19e"
-  },
-  {
-    "path": ".ruff_cache/0.12.11/14598330697886559094",
-    "type": "file",
-    "size": 306,
-    "last_modified": "2025-08-30T14:51:46.704465+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "02a468be616109230536e376554a67292ff29841"
-  },
-  {
-    "path": ".ruff_cache/0.12.11/7193668403442945321",
-    "type": "file",
-    "size": 139,
-    "last_modified": "2025-08-30T14:51:46.702440+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "00ed1d52752aeabcfcb08b345ed2f6d654968e7f"
-  },
-  {
-    "path": ".ruff_cache/0.12.11/18153185780676637511",
-    "type": "file",
-    "size": 101,
-    "last_modified": "2025-08-30T14:51:46.702235+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "707c6f6c010c337f0ec644c4cc6eba5445b2120a"
-  },
-  {
-    "path": ".ruff_cache/0.12.11/804335561923691396",
-    "type": "file",
-    "size": 104,
-    "last_modified": "2025-08-30T14:51:46.700256+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "097eeab496019b918dbb0e0983d7d49d229ea708"
-  },
-  {
-    "path": ".ruff_cache/0.12.11/13954394459424169335",
-    "type": "file",
-    "size": 539,
-    "last_modified": "2025-08-30T14:51:46.703349+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "599ce7bd4e8b727299d17789d162742e0125ed20"
-  },
-  {
-    "path": ".ruff_cache/0.12.11/15273168082872051859",
-    "type": "file",
-    "size": 97,
-    "last_modified": "2025-08-30T14:51:46.701417+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "7d1c7880bc566247df6b088b1a42b07c02b34592"
-  },
-  {
-    "path": ".ruff_cache/0.12.11/6559599244861403895",
-    "type": "file",
-    "size": 101,
-    "last_modified": "2025-08-30T14:51:46.704769+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "1b4b4409a4207a4fd46abdcb8f21d268f29e37af"
-  },
-  {
-    "path": ".ruff_cache/0.12.11/10185676786726117977",
-    "type": "file",
-    "size": 149,
-    "last_modified": "2025-08-30T14:51:46.702588+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "1b520f1da16f9fccbf5168d49635a491ff6508d4"
-  },
-  {
-    "path": ".ruff_cache/0.12.11/3696984470355497697",
-    "type": "file",
-    "size": 510,
-    "last_modified": "2025-08-30T14:51:46.699902+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "5664961b98c745857f33f63a2e03d52774f5c2b1"
-  },
-  {
-    "path": ".ruff_cache/0.12.11/5533895358385828910",
-    "type": "file",
-    "size": 81,
-    "last_modified": "2025-08-30T14:51:46.703284+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "71da7ae7def55d63b7b05393a190616205b634f8"
-  },
-  {
-    "path": ".ruff_cache/0.12.11/2707310156428527269",
-    "type": "file",
-    "size": 70,
-    "last_modified": "2025-08-30T14:51:46.703819+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "cd2745eb09661d21cfa84a5459e175e6bc92f285"
-  },
-  {
-    "path": ".ruff_cache/0.12.11/15051590860931126801",
-    "type": "file",
-    "size": 132,
-    "last_modified": "2025-08-30T14:51:46.704592+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "613a18d413c96637ade5a80894736c453bfb97f7"
-  },
-  {
-    "path": ".ruff_cache/0.12.11/16322526879894619584",
-    "type": "file",
-    "size": 140,
-    "last_modified": "2025-08-30T14:51:46.703315+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "1d00b896f4352b5545428af319ac0ae71b289693"
-  },
-  {
-    "path": ".ruff_cache/0.12.11/2993580569548445749",
-    "type": "file",
-    "size": 95,
-    "last_modified": "2025-08-30T15:12:51.336513+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "83e6cce573e06ccb89181a7281d256f3c889da29"
-  },
-  {
-    "path": ".ruff_cache/0.12.11/9353749877497842458",
-    "type": "file",
-    "size": 112,
-    "last_modified": "2025-08-30T14:51:46.703047+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "5ba640d263f3ef90a35d10021bd654ac316ebc38"
-  },
-  {
-    "path": ".ruff_cache/0.12.11/5262109462052754009",
-    "type": "file",
-    "size": 73,
-    "last_modified": "2025-08-30T15:12:51.336277+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "74ac55c1771a886786060db4ba879b0584815ab5"
-  },
-  {
-    "path": ".ruff_cache/0.12.11/217362086765082679",
-    "type": "file",
-    "size": 464,
-    "last_modified": "2025-08-30T14:51:46.701461+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "94170f8975a7b918be37f75190a7ad943e1fdc6c"
-  },
-  {
-    "path": ".ruff_cache/0.12.11/6220569598003714860",
-    "type": "file",
-    "size": 87,
-    "last_modified": "2025-08-30T14:51:46.702507+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "a9c7152ac743c6b7b7781c8a47205d98eafc4114"
-  },
-  {
-    "path": ".ruff_cache/0.12.11/13624083663920421070",
-    "type": "file",
-    "size": 120,
-    "last_modified": "2025-08-30T14:51:46.702312+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "229619421ca60fd0b073e349f27158ee21f967f5"
+    "path": "config/testing/.pytest_cache/v/",
+    "type": "dir",
+    "excluded": true
   },
   {
     "path": "tests/__pycache__/",
@@ -1816,11 +592,11 @@
   {
     "path": "tests/roadmap_pipeline/test_controller.py",
     "type": "file",
-    "size": 600,
-    "last_modified": "2025-08-30T15:13:26.968192+00:00",
+    "size": 611,
+    "last_modified": "2025-09-02T07:55:14.455451+00:00",
     "lang": "py",
     "line_count": 18,
-    "sha1": "2050c46678875f380ec5c450d117cc4e7a90b047"
+    "sha1": "de2329cedcbbb44a1fdf57d0c56eaaf22e1352d8"
   },
   {
     "path": "tests/cognitive_benchmarks/__pycache__/",
@@ -1926,11 +702,11 @@
   {
     "path": "tests/resource_manager/test_streaming.py",
     "type": "file",
-    "size": 1723,
-    "last_modified": "2025-09-01T02:35:42.815518+00:00",
+    "size": 1737,
+    "last_modified": "2025-09-02T07:29:02.902360+00:00",
     "lang": "py",
     "line_count": 53,
-    "sha1": "c7778384d624143290a85ea46e9423e083d8c1ae"
+    "sha1": "e7a8f695f2a2935340d66e9db5137212fa63c178"
   },
   {
     "path": "tests/resource_manager/README.md",
@@ -2019,6 +795,24 @@
     "sha1": "b28338a73085b04a4ac1756efbe192cc4d77903e"
   },
   {
+    "path": "tests/integration_tasks/test_biological_integration.py",
+    "type": "file",
+    "size": 6756,
+    "last_modified": "2025-08-30T16:50:50.602108+00:00",
+    "lang": "py",
+    "line_count": 174,
+    "sha1": "584454c3751717099fe6a85251c8a5b2f07ada01"
+  },
+  {
+    "path": "tests/integration_tasks/test_brain_integration.py",
+    "type": "file",
+    "size": 4926,
+    "last_modified": "2025-08-30T16:50:50.603501+00:00",
+    "lang": "py",
+    "line_count": 136,
+    "sha1": "c39a50249f866c89f6081eff5eab74e3d62feea4"
+  },
+  {
     "path": "tests/hippocampus/__pycache__/",
     "type": "dir",
     "excluded": true
@@ -2102,378 +896,6 @@
     "sha1": "5cb9a5dca0a838328dd0fe22dc4685fff4458101"
   },
   {
-    "path": "tests/testing_frameworks/__pycache__/",
-    "type": "dir",
-    "excluded": true
-  },
-  {
-    "path": "tests/testing_frameworks/README.md",
-    "type": "file",
-    "size": 388,
-    "last_modified": "2025-08-30T16:41:03.797959+00:00",
-    "lang": "md",
-    "line_count": 21,
-    "sha1": "5c7bd61d89fe012ce924435a268c9790ecf83421"
-  },
-  {
-    "path": "tests/testing_frameworks/focused_repo_tests/README.md",
-    "type": "file",
-    "size": 387,
-    "last_modified": "2025-08-30T16:41:03.800550+00:00",
-    "lang": "md",
-    "line_count": 17,
-    "sha1": "3d9bc8439eace71096188bbdddc3c7135e1b0a0e"
-  },
-  {
-    "path": "tests/testing_frameworks/focused_repo_tests/test_run_20250820_082148/README.md",
-    "type": "file",
-    "size": 364,
-    "last_modified": "2025-08-30T16:41:03.802423+00:00",
-    "lang": "md",
-    "line_count": 15,
-    "sha1": "99a80cb292b751182c2fb9345afca0a70e40193f"
-  },
-  {
-    "path": "tests/testing_frameworks/focused_repo_tests/test_run_20250820_082148/generated_test_files/__pycache__/",
-    "type": "dir",
-    "excluded": true
-  },
-  {
-    "path": "tests/testing_frameworks/focused_repo_tests/test_run_20250820_082148/generated_test_files/README.md",
-    "type": "file",
-    "size": 378,
-    "last_modified": "2025-08-30T16:41:03.803120+00:00",
-    "lang": "md",
-    "line_count": 15,
-    "sha1": "32725e3396a406f96695099dbf1c3c16135b95bc"
-  },
-  {
-    "path": "tests/testing_frameworks/focused_repo_tests/test_run_20250820_082916/README.md",
-    "type": "file",
-    "size": 364,
-    "last_modified": "2025-08-30T16:41:03.802634+00:00",
-    "lang": "md",
-    "line_count": 15,
-    "sha1": "b6270851c779e1f9ed89bc85df3644d4ec3961b6"
-  },
-  {
-    "path": "tests/testing_frameworks/focused_repo_tests/test_run_20250820_082916/generated_test_files/__pycache__/",
-    "type": "dir",
-    "excluded": true
-  },
-  {
-    "path": "tests/testing_frameworks/focused_repo_tests/test_run_20250820_082916/generated_test_files/README.md",
-    "type": "file",
-    "size": 378,
-    "last_modified": "2025-08-30T16:41:03.803459+00:00",
-    "lang": "md",
-    "line_count": 15,
-    "sha1": "34f46533c715383ff2ddb3590074a36f940d80da"
-  },
-  {
-    "path": "tests/testing_frameworks/focused_repo_tests/test_run_20250820_082250/README.md",
-    "type": "file",
-    "size": 364,
-    "last_modified": "2025-08-30T16:41:03.802856+00:00",
-    "lang": "md",
-    "line_count": 15,
-    "sha1": "3f203fb193dc24537fbc0a6ef80a550ba332d32f"
-  },
-  {
-    "path": "tests/testing_frameworks/focused_repo_tests/test_run_20250820_082250/generated_test_files/__pycache__/",
-    "type": "dir",
-    "excluded": true
-  },
-  {
-    "path": "tests/testing_frameworks/focused_repo_tests/test_run_20250820_082250/generated_test_files/README.md",
-    "type": "file",
-    "size": 378,
-    "last_modified": "2025-08-30T16:41:03.803790+00:00",
-    "lang": "md",
-    "line_count": 15,
-    "sha1": "cffe6980a853994dbaed553672ce2fb2b77da170"
-  },
-  {
-    "path": "tests/testing_frameworks/core/__pycache__/",
-    "type": "dir",
-    "excluded": true
-  },
-  {
-    "path": "tests/testing_frameworks/core/README.md",
-    "type": "file",
-    "size": 290,
-    "last_modified": "2025-08-30T16:41:03.800879+00:00",
-    "lang": "md",
-    "line_count": 15,
-    "sha1": "2880977672c3cdfa0a14f54e981d2fdddffcef93"
-  },
-  {
-    "path": "tests/testing_frameworks/comprehensive/README.md",
-    "type": "file",
-    "size": 321,
-    "last_modified": "2025-08-30T16:41:03.801078+00:00",
-    "lang": "md",
-    "line_count": 15,
-    "sha1": "6f6c8c213eddbcb1a32101c86d0b6e67824c183c"
-  },
-  {
-    "path": "tests/testing_frameworks/comprehensive/comprehensive_repo_tests/README.md",
-    "type": "file",
-    "size": 419,
-    "last_modified": "2025-08-30T16:41:03.804204+00:00",
-    "lang": "md",
-    "line_count": 17,
-    "sha1": "a50e9bcddb6d88db82ce5c720e23fb83fcaffc12"
-  },
-  {
-    "path": "tests/testing_frameworks/comprehensive/comprehensive_repo_tests/test_run_20250820_082043/README.md",
-    "type": "file",
-    "size": 390,
-    "last_modified": "2025-08-30T16:41:03.804459+00:00",
-    "lang": "md",
-    "line_count": 15,
-    "sha1": "6ce9de158ba2fbb22daacd156636060aa06e57aa"
-  },
-  {
-    "path": "tests/testing_frameworks/comprehensive/comprehensive_repo_tests/test_run_20250820_082043/generated_test_files/__pycache__/",
-    "type": "dir",
-    "excluded": true
-  },
-  {
-    "path": "tests/testing_frameworks/comprehensive/comprehensive_repo_tests/test_run_20250820_082043/generated_test_files/README.md",
-    "type": "file",
-    "size": 404,
-    "last_modified": "2025-08-30T16:41:03.805133+00:00",
-    "lang": "md",
-    "line_count": 15,
-    "sha1": "3e708c5b6327fdcc2d7c420d33b58656a8fe4e04"
-  },
-  {
-    "path": "tests/testing_frameworks/comprehensive/comprehensive_repo_tests/test_run_20250820_082128/README.md",
-    "type": "file",
-    "size": 390,
-    "last_modified": "2025-08-30T16:41:03.804675+00:00",
-    "lang": "md",
-    "line_count": 15,
-    "sha1": "541c824a309b63842a637358b7453941c1e56b00"
-  },
-  {
-    "path": "tests/testing_frameworks/comprehensive/comprehensive_repo_tests/test_run_20250820_082128/generated_test_files/__pycache__/",
-    "type": "dir",
-    "excluded": true
-  },
-  {
-    "path": "tests/testing_frameworks/comprehensive/comprehensive_repo_tests/test_run_20250820_082128/generated_test_files/README.md",
-    "type": "file",
-    "size": 404,
-    "last_modified": "2025-08-30T16:41:03.805473+00:00",
-    "lang": "md",
-    "line_count": 15,
-    "sha1": "3d4ed952267b5dd79694cc9f6ea7bc02c6ef7a35"
-  },
-  {
-    "path": "tests/testing_frameworks/comprehensive/comprehensive_repo_tests/test_run_20250820_082158/README.md",
-    "type": "file",
-    "size": 390,
-    "last_modified": "2025-08-30T16:41:03.804886+00:00",
-    "lang": "md",
-    "line_count": 15,
-    "sha1": "69354128205d3d3cddf9e5d64e48d4873a2f290b"
-  },
-  {
-    "path": "tests/testing_frameworks/comprehensive/comprehensive_repo_tests/test_run_20250820_082158/generated_test_files/__pycache__/",
-    "type": "dir",
-    "excluded": true
-  },
-  {
-    "path": "tests/testing_frameworks/comprehensive/comprehensive_repo_tests/test_run_20250820_082158/generated_test_files/README.md",
-    "type": "file",
-    "size": 404,
-    "last_modified": "2025-08-30T16:41:03.805854+00:00",
-    "lang": "md",
-    "line_count": 15,
-    "sha1": "b50dbfb009b035fa22bd74cdccc018cf5ecedf05"
-  },
-  {
-    "path": "tests/testing_frameworks/tests/__pycache__/",
-    "type": "dir",
-    "excluded": true
-  },
-  {
-    "path": "tests/testing_frameworks/tests/README.md",
-    "type": "file",
-    "size": 275,
-    "last_modified": "2025-08-30T16:41:03.801379+00:00",
-    "lang": "md",
-    "line_count": 15,
-    "sha1": "712bc6ef61160b7c7533f4e9997e8e5d078e7711"
-  },
-  {
-    "path": "tests/testing_frameworks/comprehensive_repo_tests/README.md",
-    "type": "file",
-    "size": 399,
-    "last_modified": "2025-08-30T16:41:03.801833+00:00",
-    "lang": "md",
-    "line_count": 17,
-    "sha1": "fc80bfde4cfd9e5bea392db38506fd2e01b987d1"
-  },
-  {
-    "path": "tests/testing_frameworks/comprehensive_repo_tests/test_run_20250820_082043/README.md",
-    "type": "file",
-    "size": 370,
-    "last_modified": "2025-08-30T16:41:03.806285+00:00",
-    "lang": "md",
-    "line_count": 15,
-    "sha1": "d7c84ee8627bf5129ab5a38200a5e442589ae55f"
-  },
-  {
-    "path": "tests/testing_frameworks/comprehensive_repo_tests/test_run_20250820_082043/generated_test_files/__pycache__/",
-    "type": "dir",
-    "excluded": true
-  },
-  {
-    "path": "tests/testing_frameworks/comprehensive_repo_tests/test_run_20250820_082043/generated_test_files/README.md",
-    "type": "file",
-    "size": 384,
-    "last_modified": "2025-08-30T16:41:03.807064+00:00",
-    "lang": "md",
-    "line_count": 15,
-    "sha1": "42098ba0a8bcfbe02fb0488664c2a72bc2219a19"
-  },
-  {
-    "path": "tests/testing_frameworks/comprehensive_repo_tests/test_run_20250820_082128/README.md",
-    "type": "file",
-    "size": 370,
-    "last_modified": "2025-08-30T16:41:03.806525+00:00",
-    "lang": "md",
-    "line_count": 15,
-    "sha1": "1c1ad3f332a30c90ded2f97357db7658293f961c"
-  },
-  {
-    "path": "tests/testing_frameworks/comprehensive_repo_tests/test_run_20250820_082128/generated_test_files/__pycache__/",
-    "type": "dir",
-    "excluded": true
-  },
-  {
-    "path": "tests/testing_frameworks/comprehensive_repo_tests/test_run_20250820_082128/generated_test_files/README.md",
-    "type": "file",
-    "size": 384,
-    "last_modified": "2025-08-30T16:41:03.807574+00:00",
-    "lang": "md",
-    "line_count": 15,
-    "sha1": "510091d257d1de049f47bd4b195853700a35ae70"
-  },
-  {
-    "path": "tests/testing_frameworks/comprehensive_repo_tests/test_run_20250820_082158/README.md",
-    "type": "file",
-    "size": 370,
-    "last_modified": "2025-08-30T16:41:03.806770+00:00",
-    "lang": "md",
-    "line_count": 15,
-    "sha1": "0d6af68df810327b2d72f45205c62c84e27ec53f"
-  },
-  {
-    "path": "tests/testing_frameworks/comprehensive_repo_tests/test_run_20250820_082158/generated_test_files/__pycache__/",
-    "type": "dir",
-    "excluded": true
-  },
-  {
-    "path": "tests/testing_frameworks/comprehensive_repo_tests/test_run_20250820_082158/generated_test_files/README.md",
-    "type": "file",
-    "size": 384,
-    "last_modified": "2025-08-30T16:41:03.808120+00:00",
-    "lang": "md",
-    "line_count": 15,
-    "sha1": "1b587d55cbf58f0361ce49196e678969a190c69e"
-  },
-  {
-    "path": "tests/testing_frameworks/focused/README.md",
-    "type": "file",
-    "size": 303,
-    "last_modified": "2025-08-30T16:41:03.802168+00:00",
-    "lang": "md",
-    "line_count": 15,
-    "sha1": "bb2d6b5a375ff4622cdde8767f8f4fef9dc36e91"
-  },
-  {
-    "path": "tests/testing_frameworks/focused/focused_repo_tests/README.md",
-    "type": "file",
-    "size": 401,
-    "last_modified": "2025-08-30T16:41:03.808568+00:00",
-    "lang": "md",
-    "line_count": 17,
-    "sha1": "a18e4754978e92a099b73ba5137d2cb357e80a56"
-  },
-  {
-    "path": "tests/testing_frameworks/focused/focused_repo_tests/test_run_20250820_082148/README.md",
-    "type": "file",
-    "size": 378,
-    "last_modified": "2025-08-30T16:41:03.808826+00:00",
-    "lang": "md",
-    "line_count": 15,
-    "sha1": "6194a7e43add039a77020e2cc056859ba3050963"
-  },
-  {
-    "path": "tests/testing_frameworks/focused/focused_repo_tests/test_run_20250820_082148/generated_test_files/__pycache__/",
-    "type": "dir",
-    "excluded": true
-  },
-  {
-    "path": "tests/testing_frameworks/focused/focused_repo_tests/test_run_20250820_082148/generated_test_files/README.md",
-    "type": "file",
-    "size": 392,
-    "last_modified": "2025-08-30T16:41:03.809517+00:00",
-    "lang": "md",
-    "line_count": 15,
-    "sha1": "b7a78c5a16c65002629a0b95b0c41836297df10f"
-  },
-  {
-    "path": "tests/testing_frameworks/focused/focused_repo_tests/test_run_20250820_082916/README.md",
-    "type": "file",
-    "size": 378,
-    "last_modified": "2025-08-30T16:41:03.809042+00:00",
-    "lang": "md",
-    "line_count": 15,
-    "sha1": "7703d440cdf8073e045438e050d141c6fe780699"
-  },
-  {
-    "path": "tests/testing_frameworks/focused/focused_repo_tests/test_run_20250820_082916/generated_test_files/__pycache__/",
-    "type": "dir",
-    "excluded": true
-  },
-  {
-    "path": "tests/testing_frameworks/focused/focused_repo_tests/test_run_20250820_082916/generated_test_files/README.md",
-    "type": "file",
-    "size": 392,
-    "last_modified": "2025-08-30T16:41:03.809852+00:00",
-    "lang": "md",
-    "line_count": 15,
-    "sha1": "0eaf9de7192fc08ec18487d06f494f5c1b1a9643"
-  },
-  {
-    "path": "tests/testing_frameworks/focused/focused_repo_tests/test_run_20250820_082250/README.md",
-    "type": "file",
-    "size": 378,
-    "last_modified": "2025-08-30T16:41:03.809252+00:00",
-    "lang": "md",
-    "line_count": 15,
-    "sha1": "c5bb8ec48859912ad028b04173efcce54778f59b"
-  },
-  {
-    "path": "tests/testing_frameworks/focused/focused_repo_tests/test_run_20250820_082250/generated_test_files/__pycache__/",
-    "type": "dir",
-    "excluded": true
-  },
-  {
-    "path": "tests/testing_frameworks/focused/focused_repo_tests/test_run_20250820_082250/generated_test_files/README.md",
-    "type": "file",
-    "size": 392,
-    "last_modified": "2025-08-30T16:41:03.810275+00:00",
-    "lang": "md",
-    "line_count": 15,
-    "sha1": "222a74b09adfd3c7f6eaa17bcab39ba531380092"
-  },
-  {
     "path": "tests/regression/__pycache__/",
     "type": "dir",
     "excluded": true
@@ -2499,11 +921,11 @@
   {
     "path": "tests/regression/test_docs_index.py",
     "type": "file",
-    "size": 165,
-    "last_modified": "2025-08-30T15:13:26.995194+00:00",
+    "size": 179,
+    "last_modified": "2025-09-02T07:32:35.845042+00:00",
     "lang": "py",
     "line_count": 6,
-    "sha1": "bf3ee14686bdf03af722435c2c56c14423e2bc76"
+    "sha1": "30a877db5355fcce9d9ed0e9e873c254bb6317ef"
   },
   {
     "path": "tests/brain_simulator/__pycache__/",
@@ -3024,6 +1446,15 @@
     "sha1": "05d6cb763a3925279b6732c93421202f76463160"
   },
   {
+    "path": "management/configurations/project/finetune_config.yaml",
+    "type": "file",
+    "size": 882,
+    "last_modified": "2025-09-02T03:30:44.438803+00:00",
+    "lang": "yaml",
+    "line_count": 25,
+    "sha1": "3aacc9ba6a9d8191f08dbae16e167876009b84dd"
+  },
+  {
     "path": "management/configurations/project/utils.toml",
     "type": "file",
     "size": 433,
@@ -3305,11 +1736,11 @@
   {
     "path": "management/configurations/project/training_pipeline.yaml",
     "type": "file",
-    "size": 8433,
-    "last_modified": "2025-08-21T07:58:22.344956+00:00",
+    "size": 8537,
+    "last_modified": "2025-09-02T03:33:32.838993+00:00",
     "lang": "yaml",
-    "line_count": 343,
-    "sha1": "c2fe22cd9b7dde4a5d779b5e9a5d9ef66a187ab9"
+    "line_count": 346,
+    "sha1": "57d91f89d93c0165c4ea78405984fb226eaa146f"
   },
   {
     "path": "management/configurations/project/agi_enhanced_connectome.yaml",
@@ -4547,11 +2978,11 @@
   {
     "path": "management/configurations/project/README.md",
     "type": "file",
-    "size": 873,
-    "last_modified": "2025-08-30T16:41:03.823919+00:00",
+    "size": 2052,
+    "last_modified": "2025-09-02T02:51:31.248132+00:00",
     "lang": "md",
-    "line_count": 45,
-    "sha1": "fc070aac3c69a93439ce02102abe05c7b02b0f0a"
+    "line_count": 73,
+    "sha1": "34a7ed00ded0b8d9575c345053ec60d96ca82abe"
   },
   {
     "path": "management/configurations/project/aws_optimization_config.yaml",
@@ -4781,11 +3212,11 @@
   {
     "path": "management/configurations/project/training_config.yaml",
     "type": "file",
-    "size": 7767,
-    "last_modified": "2025-09-01T02:26:15.333262+00:00",
+    "size": 1044,
+    "last_modified": "2025-09-02T03:30:44.438759+00:00",
     "lang": "yaml",
-    "line_count": 346,
-    "sha1": "338dc0adadcf72e93e831693ec35b5b9e81e8551"
+    "line_count": 28,
+    "sha1": "320469b1541bdb8329516c622e3624561e8aee7f"
   },
   {
     "path": "management/configurations/project/METADATA_49.toml",
@@ -6657,61 +5088,169 @@
     "excluded": true
   },
   {
-    "path": "management/rules/roadmap/master_roadmap.md",
+    "path": "management/rules/roadmap/appendix_c_rules.md",
     "type": "file",
-    "size": 49711,
-    "last_modified": "2025-09-01T07:47:30.667656+00:00",
+    "size": 1775,
+    "last_modified": "2025-09-01T10:19:00.985112+00:00",
     "lang": "md",
-    "line_count": 1034,
-    "sha1": "beefaf5a75e8ee9bc1e1540cd13318dafd52c58b"
+    "line_count": 55,
+    "sha1": "a0cc421bcf8991efa235fb566f8d89ffa51cda8c"
+  },
+  {
+    "path": "management/rules/roadmap/appendix_b_rules.md",
+    "type": "file",
+    "size": 1545,
+    "last_modified": "2025-09-01T10:19:00.985076+00:00",
+    "lang": "md",
+    "line_count": 40,
+    "sha1": "f2468f36f7f0c2909a8617ebb672a096f585bef8"
+  },
+  {
+    "path": "management/rules/roadmap/benchmark_validation_rules.md",
+    "type": "file",
+    "size": 13440,
+    "last_modified": "2025-09-01T10:19:00.975309+00:00",
+    "lang": "md",
+    "line_count": 158,
+    "sha1": "666d918dc72a09c74ea0b8995e70d761c4653ba0"
+  },
+  {
+    "path": "management/rules/roadmap/main_integrations_rules.md",
+    "type": "file",
+    "size": 1785,
+    "last_modified": "2025-09-01T10:19:00.950116+00:00",
+    "lang": "md",
+    "line_count": 28,
+    "sha1": "affb708f00e1e236e36d6ea86c823981237d7a32"
+  },
+  {
+    "path": "management/rules/roadmap/system_design_and_orchestration_rules.md",
+    "type": "file",
+    "size": 3601,
+    "last_modified": "2025-09-01T10:19:00.980543+00:00",
+    "lang": "md",
+    "line_count": 65,
+    "sha1": "04040e4b3b9183289bf63e3803a943d563e4191c"
+  },
+  {
+    "path": "management/rules/roadmap/MASTER_ROADMAP.md",
+    "type": "file",
+    "size": 1314,
+    "last_modified": "2025-09-02T07:57:19.394195+00:00",
+    "lang": "md",
+    "line_count": 19,
+    "sha1": "7bb49775e085c3f25ad76e0390f22508f4a0494e"
+  },
+  {
+    "path": "management/rules/roadmap/stage1_embryonic_rules.md",
+    "type": "file",
+    "size": 3745,
+    "last_modified": "2025-09-01T11:18:07.197067+00:00",
+    "lang": "md",
+    "line_count": 76,
+    "sha1": "b27cab51cc5b39cd79832792b322a9e24c3accdf"
   },
   {
     "path": "management/rules/roadmap/roadmap_controller.py",
     "type": "file",
     "size": 5591,
-    "last_modified": "2025-08-30T16:50:50.626702+00:00",
+    "last_modified": "2025-09-01T10:22:48.483775+00:00",
     "lang": "py",
     "line_count": 158,
-    "sha1": "7b0157b014cf0370245e7fac92545e15f6725407"
+    "sha1": "fda7ea6f4b4a18c3b531e53d80d8b5626ca5aaa3"
+  },
+  {
+    "path": "management/rules/roadmap/appendix_d_rules.md",
+    "type": "file",
+    "size": 1164,
+    "last_modified": "2025-09-01T10:19:00.985210+00:00",
+    "lang": "md",
+    "line_count": 26,
+    "sha1": "089310d4a77b5f4bb3900c1492095a6616b3e00e"
+  },
+  {
+    "path": "management/rules/roadmap/stage4_childhood_rules.md",
+    "type": "file",
+    "size": 5302,
+    "last_modified": "2025-09-01T11:18:14.234738+00:00",
+    "lang": "md",
+    "line_count": 82,
+    "sha1": "45caa9c1435f9bc657b48fa30c3fd7a96d33efce"
   },
   {
     "path": "management/rules/roadmap/README.md",
     "type": "file",
-    "size": 521,
-    "last_modified": "2025-08-30T16:41:03.828336+00:00",
+    "size": 2455,
+    "last_modified": "2025-09-01T10:23:48.708176+00:00",
     "lang": "md",
-    "line_count": 23,
-    "sha1": "b956faa15510d3249eca70c12503fb5910fa19b3"
+    "line_count": 52,
+    "sha1": "de12204433bf43af039ebd829560de61fcf6b1fc"
   },
   {
-    "path": "management/rules/roadmap/temp/AGI_BrainFusion_Chrono_Validated.json",
+    "path": "management/rules/roadmap/stage6_adult_rules.md",
     "type": "file",
-    "size": 626,
-    "last_modified": "2025-09-01T07:01:53.483728+00:00",
-    "lang": "json",
-    "line_count": 31,
-    "sha1": "b837017f06c72fbc31f686722595aedd477c21a1"
-  },
-  {
-    "path": "management/rules/roadmap/temp/AGI_BrainFusion_Chrono_Validated.md",
-    "type": "file",
-    "size": 52053,
-    "last_modified": "2025-09-01T07:59:01.455275+00:00",
+    "size": 5071,
+    "last_modified": "2025-09-01T11:18:18.318719+00:00",
     "lang": "md",
-    "line_count": 853,
-    "sha1": "d9156b0f974e9f51afc7fed0ce34050b25a0ac08"
+    "line_count": 83,
+    "sha1": "5617394ae2503256d0901099547ed326d38d81a7"
   },
   {
-    "path": "management/rules/roadmap/temp/AGI_BrainFusion_Chrono_Validated.yaml",
+    "path": "management/rules/roadmap/deliverables_rules.md",
     "type": "file",
-    "size": 433,
-    "last_modified": "2025-09-01T07:01:53.469442+00:00",
-    "lang": "yaml",
-    "line_count": 17,
-    "sha1": "b89508cf11cfa0d5582e71a5217eac4cdae0fae7"
+    "size": 1799,
+    "last_modified": "2025-09-01T10:19:00.985034+00:00",
+    "lang": "md",
+    "line_count": 29,
+    "sha1": "fa186c9189375db77d5079f2bb72427a290379c6"
   },
   {
-    "path": "management/rules/roadmap/archive/BIOLOGICAL_AGI_DEVELOPMENT_ROADMAP_backup.md",
+    "path": "management/rules/roadmap/stage2_fetal_rules.md",
+    "type": "file",
+    "size": 3994,
+    "last_modified": "2025-09-01T11:18:09.591585+00:00",
+    "lang": "md",
+    "line_count": 75,
+    "sha1": "902a74508bf9ddedbea9bccf18363d62c550d0b7"
+  },
+  {
+    "path": "management/rules/roadmap/stage3_early_post-natal_rules.md",
+    "type": "file",
+    "size": 4466,
+    "last_modified": "2025-09-01T11:18:11.979261+00:00",
+    "lang": "md",
+    "line_count": 73,
+    "sha1": "5f6d6a667c5e1fbe78313c95da6a2f2bf2d23086"
+  },
+  {
+    "path": "management/rules/roadmap/stage5_adolescence_rules.md",
+    "type": "file",
+    "size": 4460,
+    "last_modified": "2025-09-01T11:18:16.196070+00:00",
+    "lang": "md",
+    "line_count": 72,
+    "sha1": "bc34ffb69dfbf4be5c15100c722cbfe9eb127c68"
+  },
+  {
+    "path": "management/rules/roadmap/appendix_a_rules.md",
+    "type": "file",
+    "size": 15956,
+    "last_modified": "2025-09-01T10:19:00.985164+00:00",
+    "lang": "md",
+    "line_count": 366,
+    "sha1": "391852a1b26e91b67e0e871598623663fce703bd"
+  },
+  {
+    "path": "management/rules/roadmap/archive_superseded/master_roadmap_last_backup.md",
+    "type": "file",
+    "size": 49712,
+    "last_modified": "2025-09-01T10:26:50.283603+00:00",
+    "lang": "md",
+    "line_count": 1035,
+    "sha1": "8a3f405e545e9777ea102b4daf4276e9bc2fd12d"
+  },
+  {
+    "path": "management/rules/roadmap/archive_superseded/BIOLOGICAL_AGI_DEVELOPMENT_ROADMAP_backup.md",
     "type": "file",
     "size": 14735,
     "last_modified": "2025-08-31T06:51:39.703952+00:00",
@@ -6720,16 +5259,7 @@
     "sha1": "8a6cef8311cb5437b2e4261cfb8f90092fc9cb8f"
   },
   {
-    "path": "management/rules/roadmap/archive/master_roadmap_main_backup.md",
-    "type": "file",
-    "size": 44903,
-    "last_modified": "2025-08-31T10:48:56.520107+00:00",
-    "lang": "md",
-    "line_count": 1075,
-    "sha1": "b9ba13fab490da8067f3b5ff9c6c8fdf286e087b"
-  },
-  {
-    "path": "management/rules/roadmap/archive/AGI_INTEGRATED_ROADMAP_backup.md",
+    "path": "management/rules/roadmap/archive_superseded/AGI_INTEGRATED_ROADMAP_backup.md",
     "type": "file",
     "size": 18722,
     "last_modified": "2025-08-31T07:54:57.873323+00:00",
@@ -6738,16 +5268,7 @@
     "sha1": "9a9bdafe4f8902e9a97a35b3782084c1fc71ec67"
   },
   {
-    "path": "management/rules/roadmap/archive/master_roadmap_20250830_backup.md",
-    "type": "file",
-    "size": 31406,
-    "last_modified": "2025-08-30T23:06:55.927116+00:00",
-    "lang": "md",
-    "line_count": 752,
-    "sha1": "57ea914bac8f678f1e53b18b85a20da8dc4ff4d1"
-  },
-  {
-    "path": "management/rules/roadmap/archive/UNIFIED_AGI_MASTER_ROADMAP_FINAL_backup.md",
+    "path": "management/rules/roadmap/archive_superseded/UNIFIED_AGI_MASTER_ROADMAP_FINAL_backup.md",
     "type": "file",
     "size": 6294,
     "last_modified": "2025-08-31T06:53:03.524034+00:00",
@@ -6756,7 +5277,7 @@
     "sha1": "884a212bbfe7234c8964c06a1f049e1e52887d68"
   },
   {
-    "path": "management/rules/roadmap/archive/HIGH_LEVEL_ROADMAP_backup.md",
+    "path": "management/rules/roadmap/archive_superseded/HIGH_LEVEL_ROADMAP_backup.md",
     "type": "file",
     "size": 5840,
     "last_modified": "2025-08-31T06:57:44.798437+00:00",
@@ -6765,7 +5286,7 @@
     "sha1": "cad46cfbfc779756c9124b9ff13cec8b0705328a"
   },
   {
-    "path": "management/rules/roadmap/archive/ENHANCED_ROADMAP_IMPLEMENTATION_backup.md",
+    "path": "management/rules/roadmap/archive_superseded/ENHANCED_ROADMAP_IMPLEMENTATION_backup.md",
     "type": "file",
     "size": 14066,
     "last_modified": "2025-08-31T07:55:04.736664+00:00",
@@ -6774,7 +5295,7 @@
     "sha1": "8f6b0bb9fa51fe3100056267166c6ba3aca5a578"
   },
   {
-    "path": "management/rules/roadmap/archive/ROADMAPS_INDEX_backup.md",
+    "path": "management/rules/roadmap/archive_superseded/ROADMAPS_INDEX_backup.md",
     "type": "file",
     "size": 870,
     "last_modified": "2025-08-31T07:55:01.350286+00:00",
@@ -6983,11 +5504,11 @@
   {
     "path": "docs/roadmap_brain_gaps_20250830.md",
     "type": "file",
-    "size": 5883,
-    "last_modified": "2025-08-30T22:00:47.117442+00:00",
+    "size": 5848,
+    "last_modified": "2025-09-01T10:28:34.055642+00:00",
     "lang": "md",
     "line_count": 67,
-    "sha1": "648cddcc8d9bd600c3810e4bec397ddd0a865a05"
+    "sha1": "e416393839a70f6308a2e20554ab441a37772290"
   },
   {
     "path": "docs/references.bib",
@@ -7181,11 +5702,11 @@
   {
     "path": "docs/dev_roadmap_pipeline.md",
     "type": "file",
-    "size": 2155,
-    "last_modified": "2025-08-30T01:55:13.992625+00:00",
+    "size": 3243,
+    "last_modified": "2025-09-01T12:34:58.490025+00:00",
     "lang": "md",
-    "line_count": 54,
-    "sha1": "b431b9e2a1a6c04381b5171f6d47556dda3ffd80"
+    "line_count": 76,
+    "sha1": "ccb919abfcb178261ead70d473eb390a1d7c5589"
   },
   {
     "path": "docs/DBRX_INTEGRATION_GUIDE.md",
@@ -7325,11 +5846,11 @@
   {
     "path": "docs/STREAMING_DATA_README.md",
     "type": "file",
-    "size": 5109,
-    "last_modified": "2025-09-01T06:32:00.090587+00:00",
+    "size": 5123,
+    "last_modified": "2025-09-02T07:32:50.635538+00:00",
     "lang": "md",
     "line_count": 136,
-    "sha1": "5e5ea4e8d0b1fbeb9999835f9d98299263cc2618"
+    "sha1": "5522d5b38909e9b74c2ca646541ec8c1ab6f5108"
   },
   {
     "path": "docs/TRAINING_USAGE_GUIDE.md",
@@ -10017,11 +8538,11 @@
   {
     "path": "state/README.md",
     "type": "file",
-    "size": 326,
-    "last_modified": "2025-08-30T16:41:03.779151+00:00",
+    "size": 1909,
+    "last_modified": "2025-09-01T16:45:13.134816+00:00",
     "lang": "md",
-    "line_count": 20,
-    "sha1": "b3097c0d20355b8ce8376548c33a673eb9fbcb13"
+    "line_count": 45,
+    "sha1": "b142de1c82292aade13316fdf4829595ced40d7f"
   },
   {
     "path": "state/tasks/__pycache__/",
@@ -10029,31 +8550,13 @@
     "excluded": true
   },
   {
-    "path": "state/tasks/quark_knowledge_chat.yaml",
-    "type": "file",
-    "size": 1439,
-    "last_modified": "2025-08-30T14:58:56.391608+00:00",
-    "lang": "yaml",
-    "line_count": 27,
-    "sha1": "74c18159fbdf6ddb0ae3ee96c2ec93fca48cf590"
-  },
-  {
     "path": "state/tasks/tasks_medium.yaml",
     "type": "file",
-    "size": 83,
-    "last_modified": "2025-08-30T15:22:31.292514+00:00",
+    "size": 0,
+    "last_modified": "2025-09-01T11:27:06.168953+00:00",
     "lang": "yaml",
-    "line_count": 4,
-    "sha1": "dce2f8cdd7ac0293e6ffcb36f62c094fb470e96e"
-  },
-  {
-    "path": "state/tasks/current_tasks.md.backup",
-    "type": "file",
-    "size": 5950,
-    "last_modified": "2025-08-29T15:13:05.675956+00:00",
-    "lang": "backup",
-    "line_count": 137,
-    "sha1": "cab224667ffc75336e2ac1df99a53ef3e1c63058"
+    "line_count": 0,
+    "sha1": "da39a3ee5e6b4b0d3255bfef95601890afd80709"
   },
   {
     "path": "state/tasks/tasks_high.yaml",
@@ -10065,22 +8568,13 @@
     "sha1": "cd0d4cc32346750408f7d4f5e78ec9a6e5b79a0d"
   },
   {
-    "path": "state/tasks/STAGE_N3_EVOLUTION_IMPLEMENTATION_SUMMARY.md.backup",
-    "type": "file",
-    "size": 11782,
-    "last_modified": "2025-08-29T15:13:05.669300+00:00",
-    "lang": "backup",
-    "line_count": 263,
-    "sha1": "ae1b1e7b20bdec3bdf08982d81158c10301a3d8f"
-  },
-  {
     "path": "state/tasks/README.md",
     "type": "file",
-    "size": 527,
-    "last_modified": "2025-08-30T16:41:03.844642+00:00",
+    "size": 1483,
+    "last_modified": "2025-09-01T12:08:40.740210+00:00",
     "lang": "md",
-    "line_count": 27,
-    "sha1": "4ac2d66ba278999d4a69c7ed516a2df890f3850d"
+    "line_count": 31,
+    "sha1": "a78c880532722c4ef6cf4b339903e05e65c36576"
   },
   {
     "path": "state/tasks/tasks_archive.yaml",
@@ -10092,414 +8586,22 @@
     "sha1": "cd0d4cc32346750408f7d4f5e78ec9a6e5b79a0d"
   },
   {
-    "path": "state/tasks/COMPLEXITY_EVOLUTION_TODOS.md.backup",
-    "type": "file",
-    "size": 8645,
-    "last_modified": "2025-08-29T15:13:05.668669+00:00",
-    "lang": "backup",
-    "line_count": 173,
-    "sha1": "76583f99943817671e21f8e026720f7570992f9a"
-  },
-  {
     "path": "state/tasks/tasks_low.yaml",
     "type": "file",
-    "size": 734,
-    "last_modified": "2025-08-30T06:19:29.570261+00:00",
+    "size": 0,
+    "last_modified": "2025-09-01T11:27:04.195846+00:00",
     "lang": "yaml",
-    "line_count": 28,
-    "sha1": "7548afc358f9088b1ebb140d013bac60d7d4ad8e"
+    "line_count": 0,
+    "sha1": "da39a3ee5e6b4b0d3255bfef95601890afd80709"
   },
   {
-    "path": "state/tasks/research/task_execution_report.md",
+    "path": "state/tasks/integrations/__init__.py",
     "type": "file",
-    "size": 81,
-    "last_modified": "2025-08-29T15:13:05.679982+00:00",
-    "lang": "md",
-    "line_count": 1,
-    "sha1": "65d2dfdb9fc80ff6915b26cfc12620d63d8e7435"
-  },
-  {
-    "path": "state/tasks/research/README.md",
-    "type": "file",
-    "size": 374,
-    "last_modified": "2025-08-30T16:41:03.846427+00:00",
-    "lang": "md",
-    "line_count": 18,
-    "sha1": "a1b88f9c22b93606ece6bd3edf008379c9029f6d"
-  },
-  {
-    "path": "state/tasks/research/ACTUAL_LEARNING_COMPLETE.md",
-    "type": "file",
-    "size": 84,
-    "last_modified": "2025-08-29T15:13:05.679449+00:00",
-    "lang": "md",
-    "line_count": 1,
-    "sha1": "1c83d78854a35553fabbc00eb7face73460bd14b"
-  },
-  {
-    "path": "state/tasks/research/phase_1_plan.md",
-    "type": "file",
-    "size": 72,
-    "last_modified": "2025-08-29T15:13:05.679770+00:00",
-    "lang": "md",
-    "line_count": 1,
-    "sha1": "3bb25f4a14c58e3046c8077ccbf26f802bdda484"
-  },
-  {
-    "path": "state/tasks/research/BENCHMARK_EXPERIMENT_TODOS.md",
-    "type": "file",
-    "size": 86,
-    "last_modified": "2025-08-29T15:13:05.679623+00:00",
-    "lang": "md",
-    "line_count": 1,
-    "sha1": "e54d443fb4e2af42d9fc049dede15d8b8c8bfe80"
-  },
-  {
-    "path": "state/tasks/core/BIOLOGICAL_BRAIN_AGENT_INTEGRATION.md",
-    "type": "file",
-    "size": 94,
-    "last_modified": "2025-08-29T15:13:05.672914+00:00",
-    "lang": "md",
-    "line_count": 1,
-    "sha1": "30a8aaeb4c5d3acc39f4fcc703859b57e9df0ba2"
-  },
-  {
-    "path": "state/tasks/core/PHASE_TODO_BREAKDOWN.md",
-    "type": "file",
-    "size": 80,
-    "last_modified": "2025-08-29T15:13:05.675203+00:00",
-    "lang": "md",
-    "line_count": 1,
-    "sha1": "c05a1243829579fa50c828f60890e4bfeaf2d023"
-  },
-  {
-    "path": "state/tasks/core/README.md",
-    "type": "file",
-    "size": 436,
-    "last_modified": "2025-08-30T16:41:03.846814+00:00",
-    "lang": "md",
-    "line_count": 19,
-    "sha1": "e170d2dcde1c35a97729a6b869c29558b25b2d4d"
-  },
-  {
-    "path": "state/tasks/core/BRAIN_INTEGRATION_SUMMARY.md",
-    "type": "file",
-    "size": 85,
-    "last_modified": "2025-08-29T15:13:05.675042+00:00",
-    "lang": "md",
-    "line_count": 1,
-    "sha1": "78ff57f88f426c29d02a5bf4b3b63c8342940ea9"
-  },
-  {
-    "path": "state/tasks/core/STAGE_N2_COMPLETION_SUMMARY.md",
-    "type": "file",
-    "size": 87,
-    "last_modified": "2025-08-29T15:13:05.675370+00:00",
-    "lang": "md",
-    "line_count": 1,
-    "sha1": "b69573705fdf4722adda38a720c367c10c257235"
-  },
-  {
-    "path": "state/tasks/core/STAGE_N3_EVOLUTION_IMPLEMENTATION_SUMMARY.md",
-    "type": "file",
-    "size": 101,
-    "last_modified": "2025-08-29T15:13:05.675527+00:00",
-    "lang": "md",
-    "line_count": 1,
-    "sha1": "b3c6513ef8c2263966ccbcc0e513222187f13122"
-  },
-  {
-    "path": "state/tasks/archive/README.md",
-    "type": "file",
-    "size": 372,
-    "last_modified": "2025-08-30T16:41:03.847088+00:00",
-    "lang": "md",
-    "line_count": 21,
-    "sha1": "c6b2557f863f4394f315443669a1ad2012208d97"
-  },
-  {
-    "path": "state/tasks/archive/metrics/README.md",
-    "type": "file",
-    "size": 291,
-    "last_modified": "2025-08-30T16:41:03.848306+00:00",
-    "lang": "md",
-    "line_count": 15,
-    "sha1": "cc7f336909c815ac77c141456be16ebf8e54f076"
-  },
-  {
-    "path": "state/tasks/archive/goals/README.md",
-    "type": "file",
-    "size": 287,
-    "last_modified": "2025-08-30T16:41:03.848514+00:00",
-    "lang": "md",
-    "line_count": 15,
-    "sha1": "3e005ceae35bef0ad91748e6fef9f354f617254f"
-  },
-  {
-    "path": "state/tasks/archive/experiments/first_real_experiment_report.md",
-    "type": "file",
-    "size": 102,
-    "last_modified": "2025-08-29T15:13:05.670781+00:00",
-    "lang": "md",
-    "line_count": 1,
-    "sha1": "1afc742006695cb542cda22c7044ca0a12e0a02b"
-  },
-  {
-    "path": "state/tasks/archive/experiments/README.md",
-    "type": "file",
-    "size": 333,
-    "last_modified": "2025-08-30T16:41:03.848732+00:00",
-    "lang": "md",
-    "line_count": 16,
-    "sha1": "86fe4aed7f3557c64857eac850c471640f2c67b0"
-  },
-  {
-    "path": "state/tasks/archive/dependencies/README.md",
-    "type": "file",
-    "size": 301,
-    "last_modified": "2025-08-30T16:41:03.848925+00:00",
-    "lang": "md",
-    "line_count": 15,
-    "sha1": "175b6aea89a59af0363246ac061bd3bdb3bc988d"
-  },
-  {
-    "path": "state/tasks/archive/task_templates/README.md",
-    "type": "file",
-    "size": 305,
-    "last_modified": "2025-08-30T16:41:03.849144+00:00",
-    "lang": "md",
-    "line_count": 15,
-    "sha1": "39dc314051989027c0728f5591ec9946ca7139d9"
-  },
-  {
-    "path": "state/tasks/archive/active_tasks/README.md",
-    "type": "file",
-    "size": 330,
-    "last_modified": "2025-08-30T16:41:03.849352+00:00",
-    "lang": "md",
-    "line_count": 16,
-    "sha1": "10fab039437a397abff34808ed4ec7719e6bd3ee"
-  },
-  {
-    "path": "state/tasks/archive/active_tasks/README_archive_20250822.md",
-    "type": "file",
-    "size": 8755,
-    "last_modified": "2025-08-29T15:13:05.669895+00:00",
-    "lang": "md",
-    "line_count": 277,
-    "sha1": "70589ecbcb16515cdcfa7f7bc0af308ad6af8fbe"
-  },
-  {
-    "path": "state/tasks/archive/completed_tasks/README.md",
-    "type": "file",
-    "size": 307,
-    "last_modified": "2025-08-30T16:41:03.849551+00:00",
-    "lang": "md",
-    "line_count": 15,
-    "sha1": "d475769ae193d3bccbb2ce4fd606a0638f8d80bb"
-  },
-  {
-    "path": "state/tasks/integrations/__pycache__/",
-    "type": "dir",
-    "excluded": true
-  },
-  {
-    "path": "state/tasks/integrations/SELF_LEARNING_CAPABILITIES_SUMMARY.md",
-    "type": "file",
-    "size": 104,
-    "last_modified": "2025-08-29T15:13:05.677147+00:00",
-    "lang": "md",
-    "line_count": 1,
-    "sha1": "49dd4c5e831f668fbf24eda68bce89fc131e5bfd"
-  },
-  {
-    "path": "state/tasks/integrations/biological_brain_task_integration.py",
-    "type": "file",
-    "size": 25639,
-    "last_modified": "2025-08-30T16:50:50.600992+00:00",
+    "size": 33,
+    "last_modified": "2025-09-01T13:07:29.398452+00:00",
     "lang": "py",
-    "line_count": 599,
-    "sha1": "f08d882b1fe3f56995622047d2363ed30b800e59"
-  },
-  {
-    "path": "state/tasks/integrations/brain_capabilities_module.py",
-    "type": "file",
-    "size": 45044,
-    "last_modified": "2025-08-30T16:50:50.601694+00:00",
-    "lang": "py",
-    "line_count": 1094,
-    "sha1": "98511382a8db4c8fb3569b18caed16514d43a718"
-  },
-  {
-    "path": "state/tasks/integrations/test_biological_integration.py",
-    "type": "file",
-    "size": 6756,
-    "last_modified": "2025-08-30T16:50:50.602108+00:00",
-    "lang": "py",
-    "line_count": 174,
-    "sha1": "584454c3751717099fe6a85251c8a5b2f07ada01"
-  },
-  {
-    "path": "state/tasks/integrations/brain_capability_awareness_report.md",
-    "type": "file",
-    "size": 104,
-    "last_modified": "2025-08-29T15:13:05.678121+00:00",
-    "lang": "md",
     "line_count": 1,
-    "sha1": "b3f0d3c7fc68daf1bac2e25643d61883fc1e0b1b"
-  },
-  {
-    "path": "state/tasks/integrations/BIOLOGICAL_BRAIN_INTEGRATION_SUMMARY.md",
-    "type": "file",
-    "size": 107,
-    "last_modified": "2025-08-29T15:13:05.676559+00:00",
-    "lang": "md",
-    "line_count": 1,
-    "sha1": "fe52dc2b4337633814524480fe6270d0dd1229ae"
-  },
-  {
-    "path": "state/tasks/integrations/README.md",
-    "type": "file",
-    "size": 828,
-    "last_modified": "2025-08-30T16:41:03.847880+00:00",
-    "lang": "md",
-    "line_count": 31,
-    "sha1": "36731f55659a24e5ec03600c3ec40487e3111c80"
-  },
-  {
-    "path": "state/tasks/integrations/brain_task_bridge.py",
-    "type": "file",
-    "size": 21302,
-    "last_modified": "2025-08-30T16:50:50.602685+00:00",
-    "lang": "py",
-    "line_count": 564,
-    "sha1": "51a2c60cbf53832f972961f5e875d42ff74e6cb7"
-  },
-  {
-    "path": "state/tasks/integrations/constraint_optimization_system.py",
-    "type": "file",
-    "size": 22449,
-    "last_modified": "2025-08-30T16:50:50.603174+00:00",
-    "lang": "py",
-    "line_count": 506,
-    "sha1": "596686831401526c5d0d0cc5a3f69e8726717a52"
-  },
-  {
-    "path": "state/tasks/integrations/test_brain_integration.py",
-    "type": "file",
-    "size": 4926,
-    "last_modified": "2025-08-30T16:50:50.603501+00:00",
-    "lang": "py",
-    "line_count": 136,
-    "sha1": "c39a50249f866c89f6081eff5eab74e3d62feea4"
-  },
-  {
-    "path": "state/tasks/integrations/capabilities_integration.py",
-    "type": "file",
-    "size": 56392,
-    "last_modified": "2025-08-30T16:50:50.604225+00:00",
-    "lang": "py",
-    "line_count": 1258,
-    "sha1": "967e59178c535151069e45dfa355b95d0d17724c"
-  },
-  {
-    "path": "state/tasks/integrations/BRAIN_CAPABILITIES_INTEGRATION_SUMMARY.md",
-    "type": "file",
-    "size": 111,
-    "last_modified": "2025-08-29T15:13:05.676722+00:00",
-    "lang": "md",
-    "line_count": 1,
-    "sha1": "5a6c7c29dd399228a22622e49673a02fe7c0a859"
-  },
-  {
-    "path": "state/tasks/integrations/brain_goal_integration.md",
-    "type": "file",
-    "size": 93,
-    "last_modified": "2025-08-29T15:13:05.678273+00:00",
-    "lang": "md",
-    "line_count": 1,
-    "sha1": "9319fff3637148f8158feb740cede1902d5aeb50"
-  },
-  {
-    "path": "state/tasks/integrations/brain_task_analysis_report.md",
-    "type": "file",
-    "size": 97,
-    "last_modified": "2025-08-29T15:13:05.678431+00:00",
-    "lang": "md",
-    "line_count": 1,
-    "sha1": "8d2bdb5a952bdca378063530827f03c62c5d7e30"
-  },
-  {
-    "path": "state/tasks/integrations/CAPABILITY_DISCOVERY_SUMMARY.md",
-    "type": "file",
-    "size": 98,
-    "last_modified": "2025-08-29T15:13:05.676867+00:00",
-    "lang": "md",
-    "line_count": 1,
-    "sha1": "30ae9be4284d90b0381656ae6ab9ed7f55790f05"
-  },
-  {
-    "path": "state/tasks/integrations/performance_monitoring_dashboard.py",
-    "type": "file",
-    "size": 18245,
-    "last_modified": "2025-08-30T16:50:50.604744+00:00",
-    "lang": "py",
-    "line_count": 430,
-    "sha1": "40853df0d42f84c51584a1c492ddd8f090392954"
-  },
-  {
-    "path": "state/tasks/integrations/brain_analysis/BRAIN_ANALYSIS_SUMMARY.md",
-    "type": "file",
-    "size": 93,
-    "last_modified": "2025-08-29T15:13:05.677485+00:00",
-    "lang": "md",
-    "line_count": 1,
-    "sha1": "7520f622398ac4b6ef9b4828609cde4d1c65948e"
-  },
-  {
-    "path": "state/tasks/integrations/brain_analysis/README.md",
-    "type": "file",
-    "size": 353,
-    "last_modified": "2025-08-30T16:41:03.850172+00:00",
-    "lang": "md",
-    "line_count": 16,
-    "sha1": "04b984dd7e204fc9db311d95cd415c9cf943714f"
-  },
-  {
-    "path": "state/tasks/integrations/brain_analysis/brain_task_analysis.json",
-    "type": "file",
-    "size": 5437,
-    "last_modified": "2025-08-29T15:13:05.677589+00:00",
-    "lang": "json",
-    "line_count": 200,
-    "sha1": "84d9b0f3c62cc2630cc977721a353128357e2aa2"
-  },
-  {
-    "path": "state/memory/epi.json.gz",
-    "type": "file",
-    "size": 245,
-    "last_modified": "2025-08-30T17:12:20.250710+00:00",
-    "lang": "gz",
-    "line_count": null,
-    "sha1": "e8d3088835aaec4ea13083c3e350b464ea7bf097"
-  },
-  {
-    "path": "state/memory/README.md",
-    "type": "file",
-    "size": 279,
-    "last_modified": "2025-08-30T16:41:03.844869+00:00",
-    "lang": "md",
-    "line_count": 16,
-    "sha1": "cd54cd02cca44f610d3dbb2c495b9ff8a26c7c40"
-  },
-  {
-    "path": "state/memory/ltm.json.gz",
-    "type": "file",
-    "size": 129,
-    "last_modified": "2025-08-30T17:12:20.251147+00:00",
-    "lang": "gz",
-    "line_count": null,
-    "sha1": "5a23f184ac29711da863150566b568ffd4c0b288"
+    "sha1": "c14b8188ab6a3b212f129cdd0a65b72eaf0f8b08"
   },
   {
     "path": "state/quark_state_system/__pycache__/",
@@ -10509,11 +8611,11 @@
   {
     "path": "state/quark_state_system/quark_recommendations.py",
     "type": "file",
-    "size": 17873,
-    "last_modified": "2025-08-31T13:13:04.847023+00:00",
+    "size": 17872,
+    "last_modified": "2025-09-02T07:58:47.147597+00:00",
     "lang": "py",
     "line_count": 435,
-    "sha1": "3d2b5f5bc7249523e50b0599f945d5b39b9a78d2"
+    "sha1": "b6f1842a0b8868cf729821e292dae82b7e50f19b"
   },
   {
     "path": "state/quark_state_system/sync_quark_state.py",
@@ -10534,22 +8636,13 @@
     "sha1": "08d3183f1ebba07f991da9c091ab4a84922ad1f5"
   },
   {
-    "path": "state/quark_state_system/integrate_cli.py",
-    "type": "file",
-    "size": 1743,
-    "last_modified": "2025-08-30T16:50:50.607088+00:00",
-    "lang": "py",
-    "line_count": 62,
-    "sha1": "457ef4d7c902cb3d87bc15a75a3094ad46f61c7a"
-  },
-  {
     "path": "state/quark_state_system/goal_manager.py",
     "type": "file",
-    "size": 3169,
-    "last_modified": "2025-08-30T16:50:50.607521+00:00",
+    "size": 3882,
+    "last_modified": "2025-09-02T07:54:27.463022+00:00",
     "lang": "py",
-    "line_count": 93,
-    "sha1": "19a387b853ac5f6696459313383b759b535cbf9b"
+    "line_count": 109,
+    "sha1": "dcb2d237c42e1edb73895511c2ba0b0d8857f86e"
   },
   {
     "path": "state/quark_state_system/quantum_config.json",
@@ -10570,31 +8663,22 @@
     "sha1": "8a5cb5c2750b9863133ec9268f95e53e59f10ffe"
   },
   {
-    "path": "state/quark_state_system/data_migration_manager.py",
+    "path": "state/quark_state_system/quark_state_system.md",
     "type": "file",
-    "size": 18393,
-    "last_modified": "2025-08-30T16:50:50.608319+00:00",
-    "lang": "py",
-    "line_count": 467,
-    "sha1": "7c539afe31ffccddaa3dff8c20cd012346092e1a"
+    "size": 20212,
+    "last_modified": "2025-08-29T23:44:34.704077+00:00",
+    "lang": "md",
+    "line_count": 453,
+    "sha1": "23a355f38be2daad807061a29a682b1ee0b0fde9"
   },
   {
     "path": "state/quark_state_system/generate_state_report.py",
     "type": "file",
-    "size": 1723,
-    "last_modified": "2025-08-30T16:50:50.608622+00:00",
+    "size": 1728,
+    "last_modified": "2025-09-02T07:56:38.841387+00:00",
     "lang": "py",
     "line_count": 56,
-    "sha1": "fc0ab66971b5c2316dfdb4a471e4105e7d71c10b"
-  },
-  {
-    "path": "state/quark_state_system/cli_demo.py",
-    "type": "file",
-    "size": 621,
-    "last_modified": "2025-08-30T16:50:50.608899+00:00",
-    "lang": "py",
-    "line_count": 20,
-    "sha1": "f276ff1d605a308053c1faf882a7e9bbb6c8aac8"
+    "sha1": "085bad111fff2677a44dd3f2fb2603462952fb51"
   },
   {
     "path": "state/quark_state_system/test_s3_streaming.py",
@@ -10624,31 +8708,13 @@
     "sha1": "c6ca9b6ce690883eccf847765b5d919ea52052d0"
   },
   {
-    "path": "state/quark_state_system/QUARK_STATE_SYSTEM_COMPLETE.md",
-    "type": "file",
-    "size": 4795,
-    "last_modified": "2025-08-29T23:51:47.330968+00:00",
-    "lang": "md",
-    "line_count": 152,
-    "sha1": "c00e9c8e336ea69fe4cb278ea148de24bc8c61ec"
-  },
-  {
     "path": "state/quark_state_system/README.md",
     "type": "file",
-    "size": 946,
-    "last_modified": "2025-08-30T16:41:03.846094+00:00",
+    "size": 991,
+    "last_modified": "2025-09-01T12:17:55.056452+00:00",
     "lang": "md",
     "line_count": 45,
-    "sha1": "630829024045b412d1952f38e40ca349a8bc4509"
-  },
-  {
-    "path": "state/quark_state_system/QUARK_STATE_ORGANIZATION.md",
-    "type": "file",
-    "size": 49,
-    "last_modified": "2025-08-29T23:51:47.321701+00:00",
-    "lang": "md",
-    "line_count": 1,
-    "sha1": "a752330a05d37ff2413c0bcd0a2cca08ce7ec1ce"
+    "sha1": "ef93b1e693b9efab75d9d712e70d4b38594f7ec0"
   },
   {
     "path": "state/quark_state_system/upload_heavy_directories.py",
@@ -10660,31 +8726,13 @@
     "sha1": "f830904cd7c2b5785413ea292d10617d7fa087bd"
   },
   {
-    "path": "state/quark_state_system/data_access_config.json",
-    "type": "file",
-    "size": 715,
-    "last_modified": "2025-08-29T23:51:47.363712+00:00",
-    "lang": "json",
-    "line_count": 20,
-    "sha1": "4fc50423361db746b6e1b62b33e771c390f5dff8"
-  },
-  {
-    "path": "state/quark_state_system/check_quark_state.py",
-    "type": "file",
-    "size": 2451,
-    "last_modified": "2025-08-30T16:50:50.615710+00:00",
-    "lang": "py",
-    "line_count": 70,
-    "sha1": "61f607770cbf436e216df300b9c16c8144675ef7"
-  },
-  {
     "path": "state/quark_state_system/quark_driver.py",
     "type": "file",
-    "size": 10051,
-    "last_modified": "2025-09-01T05:31:23.148413+00:00",
+    "size": 10065,
+    "last_modified": "2025-09-02T07:24:53.398474+00:00",
     "lang": "py",
     "line_count": 228,
-    "sha1": "6ae9fb7a949cb63606b8d46e3ccf612628cb0912"
+    "sha1": "634f061fdb59aae07a53243d9c17b7d138b78c44"
   },
   {
     "path": "state/quark_state_system/ml_registry_loader.py",
@@ -10707,11 +8755,11 @@
   {
     "path": "state/quark_state_system/quark_quantum_integration.py",
     "type": "file",
-    "size": 20359,
-    "last_modified": "2025-08-30T16:50:50.617676+00:00",
+    "size": 20366,
+    "last_modified": "2025-09-01T12:16:39.441544+00:00",
     "lang": "py",
     "line_count": 479,
-    "sha1": "d98f70943a4ede5c15c4507de04717d1da02e266"
+    "sha1": "c0b7fce5724de2eadfef22c1dc3604ecc882ea3e"
   },
   {
     "path": "state/quark_state_system/prompt_guardian.py",
@@ -10725,11 +8773,11 @@
   {
     "path": "state/quark_state_system/task_loader.py",
     "type": "file",
-    "size": 10887,
-    "last_modified": "2025-08-30T16:50:50.618627+00:00",
+    "size": 10901,
+    "last_modified": "2025-09-02T07:26:35.563493+00:00",
     "lang": "py",
     "line_count": 300,
-    "sha1": "538ff9ac2cd6ddc4a748e85b875a3fb10aa75b33"
+    "sha1": "3f315ab2a096cb4437a07783fe7eedfe248fb3ba"
   },
   {
     "path": "state/quark_state_system/model_config.json",
@@ -10761,20 +8809,11 @@
   {
     "path": "state/quark_state_system/autonomous_agent.py",
     "type": "file",
-    "size": 5864,
-    "last_modified": "2025-08-30T16:50:50.619820+00:00",
+    "size": 5878,
+    "last_modified": "2025-09-02T07:25:38.516037+00:00",
     "lang": "py",
     "line_count": 140,
-    "sha1": "601bb7436d1c7b5f0fdba397ac8446b83b1f94f0"
-  },
-  {
-    "path": "state/quark_state_system/QUARK_STATE.md",
-    "type": "file",
-    "size": 20212,
-    "last_modified": "2025-08-29T23:44:34.704077+00:00",
-    "lang": "md",
-    "line_count": 453,
-    "sha1": "23a355f38be2daad807061a29a682b1ee0b0fde9"
+    "sha1": "6ae32306597b6f0ff8400d0d3f15ebe464300b3f"
   },
   {
     "path": "state/quark_state_system/agile_utils.py",
@@ -10784,348 +8823,6 @@
     "lang": "py",
     "line_count": 49,
     "sha1": "ef6c70fa2a3bd5246b118a94aa435c480dccc4d3"
-  },
-  {
-    "path": "utilities/__pycache__/",
-    "type": "dir",
-    "excluded": true
-  },
-  {
-    "path": "utilities/_bootstrap.py",
-    "type": "file",
-    "size": 56,
-    "last_modified": "2025-08-29T06:01:55.182227+00:00",
-    "lang": "py",
-    "line_count": 1,
-    "sha1": "bf700b1dd3f235a8980a926e8158cbd8306e76c4"
-  },
-  {
-    "path": "utilities/generate_readme.py",
-    "type": "file",
-    "size": 4697,
-    "last_modified": "2025-08-30T16:50:50.627995+00:00",
-    "lang": "py",
-    "line_count": 135,
-    "sha1": "f274d49fd1029892cf9d251799748d369beb4bd9"
-  },
-  {
-    "path": "utilities/performance_utils.py",
-    "type": "file",
-    "size": 6516,
-    "last_modified": "2025-08-30T16:50:50.628538+00:00",
-    "lang": "py",
-    "line_count": 193,
-    "sha1": "a10f416fed98ee707c89a7d39ccc54fd0bc91b98"
-  },
-  {
-    "path": "utilities/__init__.py",
-    "type": "file",
-    "size": 134,
-    "last_modified": "2025-08-29T06:01:55.182089+00:00",
-    "lang": "py",
-    "line_count": 6,
-    "sha1": "73dd4e267fc34b624413a94b25b8e3d6d97b6c5e"
-  },
-  {
-    "path": "utilities/README.md",
-    "type": "file",
-    "size": 440,
-    "last_modified": "2025-08-30T16:41:03.779892+00:00",
-    "lang": "md",
-    "line_count": 24,
-    "sha1": "ec4bd9593507efcb327759641379ca24415b6cc3"
-  },
-  {
-    "path": "utilities/upload_heavy_directories.py",
-    "type": "file",
-    "size": 1346,
-    "last_modified": "2025-08-30T16:50:50.629103+00:00",
-    "lang": "py",
-    "line_count": 45,
-    "sha1": "7c7ae4951c71b5898fb5564482537643f2eb42b7"
-  },
-  {
-    "path": "utilities/doc_utils.py",
-    "type": "file",
-    "size": 1257,
-    "last_modified": "2025-08-30T16:50:50.629418+00:00",
-    "lang": "py",
-    "line_count": 41,
-    "sha1": "93e6854412fbeb9111e5c4b19f8f5e74d5a8d4d3"
-  },
-  {
-    "path": "utilities/s3_streaming_manager.py",
-    "type": "file",
-    "size": 8254,
-    "last_modified": "2025-09-01T04:04:18.659496+00:00",
-    "lang": "py",
-    "line_count": 200,
-    "sha1": "70d5eb0f4316e3f0825d265126379757c048351c"
-  },
-  {
-    "path": "utilities/tools_utilities/README.md",
-    "type": "file",
-    "size": 409,
-    "last_modified": "2025-08-30T16:41:03.851348+00:00",
-    "lang": "md",
-    "line_count": 22,
-    "sha1": "6d9191ad19d73ac10e2a922c8112a506456e928f"
-  },
-  {
-    "path": "utilities/tools_utilities/documentation/__pycache__/",
-    "type": "dir",
-    "excluded": true
-  },
-  {
-    "path": "utilities/tools_utilities/documentation/README.md",
-    "type": "file",
-    "size": 309,
-    "last_modified": "2025-08-30T16:41:03.851845+00:00",
-    "lang": "md",
-    "line_count": 15,
-    "sha1": "83c1b8be829003eadf800611250b76b3f9c5fd0e"
-  },
-  {
-    "path": "utilities/tools_utilities/scripts_backup/README.md",
-    "type": "file",
-    "size": 302,
-    "last_modified": "2025-08-30T16:41:03.852066+00:00",
-    "lang": "md",
-    "line_count": 15,
-    "sha1": "d12833fac797b58a2d7d18c82c41f77fdb417992"
-  },
-  {
-    "path": "utilities/tools_utilities/live_stream/__pycache__/",
-    "type": "dir",
-    "excluded": true
-  },
-  {
-    "path": "utilities/tools_utilities/live_stream/README.md",
-    "type": "file",
-    "size": 305,
-    "last_modified": "2025-08-30T16:41:03.852350+00:00",
-    "lang": "md",
-    "line_count": 15,
-    "sha1": "7af50b3507528393d31c5e5c93c1ac368be13b9a"
-  },
-  {
-    "path": "utilities/tools_utilities/scripts/__pycache__/",
-    "type": "dir",
-    "excluded": true
-  },
-  {
-    "path": "utilities/tools_utilities/scripts/README.md",
-    "type": "file",
-    "size": 318,
-    "last_modified": "2025-08-30T16:41:03.852576+00:00",
-    "lang": "md",
-    "line_count": 17,
-    "sha1": "7c9f3d6c6c41e8b55514b02cb673dc71b71a22ed"
-  },
-  {
-    "path": "utilities/tools_utilities/scripts/legacy_migration/__pycache__/",
-    "type": "dir",
-    "excluded": true
-  },
-  {
-    "path": "utilities/tools_utilities/scripts/legacy_migration/README.md",
-    "type": "file",
-    "size": 329,
-    "last_modified": "2025-08-30T16:41:03.854070+00:00",
-    "lang": "md",
-    "line_count": 15,
-    "sha1": "f8ea031d24d2e2d07be2d73ed3ab57605702eb79"
-  },
-  {
-    "path": "utilities/tools_utilities/scripts/debug/__pycache__/",
-    "type": "dir",
-    "excluded": true
-  },
-  {
-    "path": "utilities/tools_utilities/scripts/debug/README.md",
-    "type": "file",
-    "size": 307,
-    "last_modified": "2025-08-30T16:41:03.854296+00:00",
-    "lang": "md",
-    "line_count": 15,
-    "sha1": "0f8cf297e7ad3aaf4bf0a00b007c63dd074f20c3"
-  },
-  {
-    "path": "utilities/tools_utilities/testing_frameworks/__pycache__/",
-    "type": "dir",
-    "excluded": true
-  },
-  {
-    "path": "utilities/tools_utilities/testing_frameworks/README.md",
-    "type": "file",
-    "size": 342,
-    "last_modified": "2025-08-30T16:41:03.852783+00:00",
-    "lang": "md",
-    "line_count": 17,
-    "sha1": "457672ca63c61c839f5571d5e7aa8717080abbc9"
-  },
-  {
-    "path": "utilities/tools_utilities/testing_frameworks/tests/__pycache__/",
-    "type": "dir",
-    "excluded": true
-  },
-  {
-    "path": "utilities/tools_utilities/testing_frameworks/tests/README.md",
-    "type": "file",
-    "size": 338,
-    "last_modified": "2025-08-30T16:41:03.854765+00:00",
-    "lang": "md",
-    "line_count": 18,
-    "sha1": "c6f1c13363f9df9c970e1125148a2a6421263322"
-  },
-  {
-    "path": "utilities/tools_utilities/testing_frameworks/tests/unit/__pycache__/",
-    "type": "dir",
-    "excluded": true
-  },
-  {
-    "path": "utilities/tools_utilities/testing_frameworks/tests/unit/README.md",
-    "type": "file",
-    "size": 328,
-    "last_modified": "2025-08-30T16:41:03.855230+00:00",
-    "lang": "md",
-    "line_count": 15,
-    "sha1": "7f602af7958947907b56841fb9fb69fa7b7d3e14"
-  },
-  {
-    "path": "utilities/tools_utilities/testing_frameworks/tests/integration/__pycache__/",
-    "type": "dir",
-    "excluded": true
-  },
-  {
-    "path": "utilities/tools_utilities/testing_frameworks/tests/integration/README.md",
-    "type": "file",
-    "size": 342,
-    "last_modified": "2025-08-30T16:41:03.855448+00:00",
-    "lang": "md",
-    "line_count": 15,
-    "sha1": "dfd511989d9bb194cf1699c678c2329b4169c0c9"
-  },
-  {
-    "path": "utilities/tools_utilities/testing_frameworks/tests/simulation/__pycache__/",
-    "type": "dir",
-    "excluded": true
-  },
-  {
-    "path": "utilities/tools_utilities/testing_frameworks/tests/simulation/README.md",
-    "type": "file",
-    "size": 340,
-    "last_modified": "2025-08-30T16:41:03.855659+00:00",
-    "lang": "md",
-    "line_count": 15,
-    "sha1": "9c9d95ae729bc5866465fa57c6fdbd96a4560400"
-  },
-  {
-    "path": "utilities/tools_utilities/testing_frameworks/core_tests/__pycache__/",
-    "type": "dir",
-    "excluded": true
-  },
-  {
-    "path": "utilities/tools_utilities/testing_frameworks/core_tests/README.md",
-    "type": "file",
-    "size": 328,
-    "last_modified": "2025-08-30T16:41:03.854977+00:00",
-    "lang": "md",
-    "line_count": 15,
-    "sha1": "0778535eb6c0967b7e8d121121105e09b895a29c"
-  },
-  {
-    "path": "utilities/tools_utilities/automation/__pycache__/",
-    "type": "dir",
-    "excluded": true
-  },
-  {
-    "path": "utilities/tools_utilities/automation/README.md",
-    "type": "file",
-    "size": 303,
-    "last_modified": "2025-08-30T16:41:03.853214+00:00",
-    "lang": "md",
-    "line_count": 15,
-    "sha1": "c95262973af0ded9e7a0ca63fb8e48018408973a"
-  },
-  {
-    "path": "utilities/tools_utilities/autonomous_editing/__pycache__/",
-    "type": "dir",
-    "excluded": true
-  },
-  {
-    "path": "utilities/tools_utilities/autonomous_editing/README.md",
-    "type": "file",
-    "size": 319,
-    "last_modified": "2025-08-30T16:41:03.853413+00:00",
-    "lang": "md",
-    "line_count": 15,
-    "sha1": "b6ef1368cd4f8ab88acca00061ed496681431472"
-  },
-  {
-    "path": "utilities/tools_utilities/validation/__pycache__/",
-    "type": "dir",
-    "excluded": true
-  },
-  {
-    "path": "utilities/tools_utilities/validation/README.md",
-    "type": "file",
-    "size": 303,
-    "last_modified": "2025-08-30T16:41:03.853609+00:00",
-    "lang": "md",
-    "line_count": 15,
-    "sha1": "9ee94f7808ead3a580a9858d67b3040d99175d26"
-  },
-  {
-    "path": "utilities/utilities/README.md",
-    "type": "file",
-    "size": 287,
-    "last_modified": "2025-08-30T16:41:03.851591+00:00",
-    "lang": "md",
-    "line_count": 16,
-    "sha1": "7573b0929a5bf7a4e1afba8e8c7358aeb66470b8"
-  },
-  {
-    "path": "utilities/utilities/optimization/__pycache__/",
-    "type": "dir",
-    "excluded": true
-  },
-  {
-    "path": "utilities/utilities/optimization/README.md",
-    "type": "file",
-    "size": 301,
-    "last_modified": "2025-08-30T16:41:03.856912+00:00",
-    "lang": "md",
-    "line_count": 15,
-    "sha1": "fb5ba140b3a3b1bd6a9b6208ebf45f6590362b22"
-  },
-  {
-    "path": "utilities/utilities/gym/__pycache__/",
-    "type": "dir",
-    "excluded": true
-  },
-  {
-    "path": "utilities/utilities/gym/README.md",
-    "type": "file",
-    "size": 293,
-    "last_modified": "2025-08-30T16:41:03.857138+00:00",
-    "lang": "md",
-    "line_count": 16,
-    "sha1": "b5f4e31bd1e5e73a421ef3a4d47a7adecc1fc868"
-  },
-  {
-    "path": "utilities/utilities/gym/spaces/__pycache__/",
-    "type": "dir",
-    "excluded": true
-  },
-  {
-    "path": "utilities/utilities/gym/spaces/README.md",
-    "type": "file",
-    "size": 299,
-    "last_modified": "2025-08-30T16:41:03.857465+00:00",
-    "lang": "md",
-    "line_count": 15,
-    "sha1": "62ca0d7c25cb978d29b47fbcbb948d0edbe76469"
   },
   {
     "path": "logs/alphagenome/",
@@ -11196,24 +8893,6 @@
     "sha1": "858909998158023176c45c9de446e29238a526cf"
   },
   {
-    "path": ".github/workflows/daily-sync.yml",
-    "type": "file",
-    "size": 654,
-    "last_modified": "2025-09-01T04:09:41.435005+00:00",
-    "lang": "yml",
-    "line_count": 23,
-    "sha1": "5117a2bb700deec389729ee821ce7ee26caf3422"
-  },
-  {
-    "path": ".github/workflows/developmental-progress.yml",
-    "type": "file",
-    "size": 13371,
-    "last_modified": "2025-08-21T01:11:49.347753+00:00",
-    "lang": "yml",
-    "line_count": 301,
-    "sha1": "1cf9b3a21073ebb75af8512e22941b9c6c6cbfc3"
-  },
-  {
     "path": ".github/workflows/ci.yml",
     "type": "file",
     "size": 3209,
@@ -11255,6 +8934,15 @@
     "sha1": "25f3558e0f89c8a207740b56cf416bf05aaeccea"
   },
   {
+    "path": "brain/brain_main.py",
+    "type": "file",
+    "size": 11403,
+    "last_modified": "2025-09-02T03:37:07.896032+00:00",
+    "lang": "py",
+    "line_count": 252,
+    "sha1": "2285b39dbeacfacec03fdaaf0ac366aeb4242c0d"
+  },
+  {
     "path": "brain/tools/__pycache__/",
     "type": "dir",
     "excluded": true
@@ -11269,6 +8957,15 @@
     "sha1": "23b365e8ca7f773eb5df78f84e887cbbb0fcd0ca"
   },
   {
+    "path": "brain/tools/task_bridge.py",
+    "type": "file",
+    "size": 3356,
+    "last_modified": "2025-09-01T13:08:29.138258+00:00",
+    "lang": "py",
+    "line_count": 84,
+    "sha1": "e637dbae913242686cb4e8ec4c2fe1d4379ac46a"
+  },
+  {
     "path": "brain/tools/README.md",
     "type": "file",
     "size": 344,
@@ -11278,18 +8975,198 @@
     "sha1": "82a5211119989b115b03b04df3a6761ab176c162"
   },
   {
+    "path": "brain/core/set_viewer.py",
+    "type": "file",
+    "size": 829,
+    "last_modified": "2025-09-01T14:29:37.674338+00:00",
+    "lang": "py",
+    "line_count": 16,
+    "sha1": "0738fe508b3f2cfeb25023832d19663c6e14955f"
+  },
+  {
+    "path": "brain/core/get_status.py",
+    "type": "file",
+    "size": 5020,
+    "last_modified": "2025-09-01T14:43:24.594464+00:00",
+    "lang": "py",
+    "line_count": 73,
+    "sha1": "35dc8d138e00adb710241209bca55b7d16a52c48"
+  },
+  {
+    "path": "brain/core/brain_simulator_init.py",
+    "type": "file",
+    "size": 13528,
+    "last_modified": "2025-09-01T16:13:35.795428+00:00",
+    "lang": "py",
+    "line_count": 263,
+    "sha1": "5ea979f5b363f7dab8a503b276fc170fd3b68996"
+  },
+  {
+    "path": "brain/core/llm_manipulation_property.py",
+    "type": "file",
+    "size": 405,
+    "last_modified": "2025-09-01T14:29:44.061303+00:00",
+    "lang": "py",
+    "line_count": 9,
+    "sha1": "64f204e74c757f1282c2dfb5c0ec46df5faeb76d"
+  },
+  {
+    "path": "brain/core/load_training_datasets.py",
+    "type": "file",
+    "size": 1764,
+    "last_modified": "2025-09-01T14:29:41.724014+00:00",
+    "lang": "py",
+    "line_count": 33,
+    "sha1": "e493d0186a5c02c99d37b2e27a1dfdfd9fc64c2c"
+  },
+  {
+    "path": "brain/core/emb_header_imports.py",
+    "type": "file",
+    "size": 2457,
+    "last_modified": "2025-09-01T15:40:46.017965+00:00",
+    "lang": "py",
+    "line_count": 66,
+    "sha1": "80efd427d2b87609f52cc8fdf0bd9db810e49038"
+  },
+  {
+    "path": "brain/core/emb_run_and_main.py",
+    "type": "file",
+    "size": 7523,
+    "last_modified": "2025-09-01T15:29:15.598068+00:00",
+    "lang": "py",
+    "line_count": 160,
+    "sha1": "2e394bff4569ceb712505dfcfe84cafc51be51f0"
+  },
+  {
+    "path": "brain/core/step_part1.py",
+    "type": "file",
+    "size": 9659,
+    "last_modified": "2025-09-01T14:43:31.068517+00:00",
+    "lang": "py",
+    "line_count": 215,
+    "sha1": "d0fb98325f66501f5ee98fe0048166ceff3af420"
+  },
+  {
+    "path": "brain/core/emb_init_and_io.py",
+    "type": "file",
+    "size": 2945,
+    "last_modified": "2025-09-01T15:40:42.157867+00:00",
+    "lang": "py",
+    "line_count": 79,
+    "sha1": "eded755ea7ddd7475a62adb3acae780058069872"
+  },
+  {
+    "path": "brain/core/emb_curriculum_logic.py",
+    "type": "file",
+    "size": 4019,
+    "last_modified": "2025-09-01T15:30:37.088292+00:00",
+    "lang": "py",
+    "line_count": 91,
+    "sha1": "e7b24008c9c0f815a296e5b6f8990190b982e1c3"
+  },
+  {
+    "path": "brain/core/ask_method.py",
+    "type": "file",
+    "size": 1200,
+    "last_modified": "2025-09-01T14:47:16.633066+00:00",
+    "lang": "py",
+    "line_count": 29,
+    "sha1": "6c212f957ff26ba7efe790d23329824d6a59a26b"
+  },
+  {
+    "path": "brain/core/calculate_pose_error.py",
+    "type": "file",
+    "size": 503,
+    "last_modified": "2025-09-01T14:29:29.791326+00:00",
+    "lang": "py",
+    "line_count": 11,
+    "sha1": "ff51d9641ed25a71b256249e6fc1d9cc0e6e8911"
+  },
+  {
+    "path": "brain/core/llm_ik_property.py",
+    "type": "file",
+    "size": 325,
+    "last_modified": "2025-09-01T14:29:51.316765+00:00",
+    "lang": "py",
+    "line_count": 9,
+    "sha1": "2ddc74ebde2794059b5c642ec9208f1adf0dac9f"
+  },
+  {
+    "path": "brain/core/emb_init_sim_and_reset.py",
+    "type": "file",
+    "size": 4505,
+    "last_modified": "2025-09-01T15:29:11.116067+00:00",
+    "lang": "py",
+    "line_count": 104,
+    "sha1": "dc5dac89ef4f1722088b0ed6d9a1871f493a2231"
+  },
+  {
+    "path": "brain/core/construct_brain.py",
+    "type": "file",
+    "size": 7394,
+    "last_modified": "2025-09-01T16:18:13.215042+00:00",
+    "lang": "py",
+    "line_count": 144,
+    "sha1": "146e354e476ea4f31d9a2845a893c15b7fe13c32"
+  },
+  {
+    "path": "brain/core/step_part2.py",
+    "type": "file",
+    "size": 1491,
+    "last_modified": "2025-09-01T14:43:33.006544+00:00",
+    "lang": "py",
+    "line_count": 37,
+    "sha1": "ff4620c28c5eeeb1ad6a306de585594800642a00"
+  },
+  {
+    "path": "brain/core/header_imports.py",
+    "type": "file",
+    "size": 7521,
+    "last_modified": "2025-09-01T14:29:58.792620+00:00",
+    "lang": "py",
+    "line_count": 119,
+    "sha1": "d626f85859eb8c979c9778a369b2111251a6b6a2"
+  },
+  {
+    "path": "brain/core/update_stage.py",
+    "type": "file",
+    "size": 226,
+    "last_modified": "2025-09-01T14:29:35.554509+00:00",
+    "lang": "py",
+    "line_count": 7,
+    "sha1": "5a8414c950984936fb863217ce4e84e4c541320a"
+  },
+  {
+    "path": "brain/core/update_profiling.py",
+    "type": "file",
+    "size": 1651,
+    "last_modified": "2025-09-01T14:43:26.636313+00:00",
+    "lang": "py",
+    "line_count": 22,
+    "sha1": "fe08f301461f0bd39a929f21bcf65aa653cef10d"
+  },
+  {
+    "path": "brain/core/brain_simulator_adapter.py",
+    "type": "file",
+    "size": 1168,
+    "last_modified": "2025-09-02T03:45:37.885688+00:00",
+    "lang": "py",
+    "line_count": 35,
+    "sha1": "ca9166e535e1723d6f45ae0761d7068702f8a9ab"
+  },
+  {
+    "path": "brain/core/generate_subtasks.py",
+    "type": "file",
+    "size": 1314,
+    "last_modified": "2025-09-01T14:43:28.700694+00:00",
+    "lang": "py",
+    "line_count": 28,
+    "sha1": "066242fe2a6f4407bf271c1dd7351e3a0958f25d"
+  },
+  {
     "path": "brain/architecture/__pycache__/",
     "type": "dir",
     "excluded": true
-  },
-  {
-    "path": "brain/architecture/brain_simulator.py",
-    "type": "file",
-    "size": 49853,
-    "last_modified": "2025-08-30T16:46:39.919520+00:00",
-    "lang": "py",
-    "line_count": 947,
-    "sha1": "d7ea7e49feb1c3e18fc9fa8c2ce3804889bd0cc5"
   },
   {
     "path": "brain/architecture/README.md",
@@ -11372,6 +9249,15 @@
     "path": "brain/architecture/learning/__pycache__/",
     "type": "dir",
     "excluded": true
+  },
+  {
+    "path": "brain/architecture/learning/kpi_monitor.py",
+    "type": "file",
+    "size": 3910,
+    "last_modified": "2025-09-02T03:14:50.333169+00:00",
+    "lang": "py",
+    "line_count": 110,
+    "sha1": "41fec1d43e02c0051bf19bb0f9d4f984545f3cc5"
   },
   {
     "path": "brain/architecture/learning/README.md",
@@ -11915,11 +9801,11 @@
   {
     "path": "brain/architecture/neural_core/cognitive_systems/resource_manager.py",
     "type": "file",
-    "size": 25236,
-    "last_modified": "2025-09-01T05:45:27.396066+00:00",
+    "size": 25510,
+    "last_modified": "2025-09-02T07:23:43.637053+00:00",
     "lang": "py",
-    "line_count": 621,
-    "sha1": "004635d08634eb11a13c147384a757da9c6c8c29"
+    "line_count": 626,
+    "sha1": "7b02004be897a621b33f22860c9d884d9e5283f2"
   },
   {
     "path": "brain/architecture/neural_core/cognitive_systems/tfidf_vectorizer.py",
@@ -11951,11 +9837,11 @@
   {
     "path": "brain/architecture/neural_core/cognitive_systems/local_llm_wrapper.py",
     "type": "file",
-    "size": 5130,
-    "last_modified": "2025-08-30T16:46:39.930359+00:00",
+    "size": 5144,
+    "last_modified": "2025-09-02T07:28:05.747332+00:00",
     "lang": "py",
     "line_count": 135,
-    "sha1": "d3cfc619a4fa72be585f1123cc02ce7aa9725aa8"
+    "sha1": "09d174025436ad6bad4caff00493322fc8ed9967"
   },
   {
     "path": "brain/architecture/neural_core/cognitive_systems/world_model.py",
@@ -15238,20 +13124,20 @@
   {
     "path": "brain/ml/dataset_shards/stream_dataset.py",
     "type": "file",
-    "size": 3053,
-    "last_modified": "2025-09-01T04:02:37.501446+00:00",
+    "size": 3067,
+    "last_modified": "2025-09-02T07:27:15.334126+00:00",
     "lang": "py",
     "line_count": 93,
-    "sha1": "c1d2403eaf94c6d3352758743e831287ea2c7c8a"
+    "sha1": "7ca185490c8348820949468602338df186a61ba2"
   },
   {
     "path": "brain/ml/dataset_shards/data_loader_factory.py",
     "type": "file",
-    "size": 2392,
-    "last_modified": "2025-09-01T05:36:38.486341+00:00",
+    "size": 2406,
+    "last_modified": "2025-09-02T07:24:05.766473+00:00",
     "lang": "py",
     "line_count": 65,
-    "sha1": "173e8e737fd6842f8f692300b72c6c57a337b442"
+    "sha1": "0068dacf395ae3c2ab763c6fe964370701efb685"
   },
   {
     "path": "brain/ml/architecture/README.md",
@@ -21267,6 +19153,60 @@
     "sha1": "c7e9663a53a31021c136c388ad9c3ce420a4db2b"
   },
   {
+    "path": "brain/superseded.brain_simulation/.superseded.embodied_brain_simulation copy.py",
+    "type": "file",
+    "size": 23219,
+    "last_modified": "2025-09-01T14:48:48.372337+00:00",
+    "lang": "py",
+    "line_count": 515,
+    "sha1": "a521d23c366e389656a6efe8fc3abbaa8e422034"
+  },
+  {
+    "path": "brain/superseded.brain_simulation/superseded.embodied_brain_simulation.py",
+    "type": "file",
+    "size": 23875,
+    "last_modified": "2025-09-01T15:56:11.219589+00:00",
+    "lang": "py",
+    "line_count": 529,
+    "sha1": "c75fd5df9c751b6e1be06eca04a66397bee8e65b"
+  },
+  {
+    "path": "brain/superseded.brain_simulation/__init__.py",
+    "type": "file",
+    "size": 114,
+    "last_modified": "2025-09-01T12:48:17.901394+00:00",
+    "lang": "py",
+    "line_count": 2,
+    "sha1": "f985d86610cf15ec0ffedbd260cc6f4e8dbc90eb"
+  },
+  {
+    "path": "brain/superseded.brain_simulation/brain_simulator_copy.py",
+    "type": "file",
+    "size": 50254,
+    "last_modified": "2025-09-01T12:49:21.224338+00:00",
+    "lang": "py",
+    "line_count": 957,
+    "sha1": "6733992b6f4590cb67a5be8109187140d067f6c7"
+  },
+  {
+    "path": "brain/superseded.brain_simulation/superseded.brain_simulation.py",
+    "type": "file",
+    "size": 43727,
+    "last_modified": "2025-09-01T14:39:49.333053+00:00",
+    "lang": "py",
+    "line_count": 853,
+    "sha1": "7f7d1ef2279c209fda4e00a501da11ba784bfb7c"
+  },
+  {
+    "path": "brain/superseded.brain_simulation/embodied_brain_simulation.py",
+    "type": "file",
+    "size": 23905,
+    "last_modified": "2025-09-01T15:56:52.927099+00:00",
+    "lang": "py",
+    "line_count": 529,
+    "sha1": "78f2529cda87087d562b2897538820617d7c79a0"
+  },
+  {
     "path": "brain/modules/__pycache__/",
     "type": "dir",
     "excluded": true
@@ -21514,214 +19454,6 @@
     "lang": "py",
     "line_count": 1164,
     "sha1": "63ae5fa8429e7961c13cdba2738ab50513839661"
-  },
-  {
-    "path": "quark_env/pyvenv.cfg",
-    "type": "file",
-    "size": 280,
-    "last_modified": "2025-09-01T04:44:52.949908+00:00",
-    "lang": "cfg",
-    "line_count": 5,
-    "sha1": "c398584620e29f385072cd2551de45b19f802bf3"
-  },
-  {
-    "path": "quark_env/bin/__pycache__/",
-    "type": "dir",
-    "excluded": true
-  },
-  {
-    "path": "quark_env/bin/Activate.ps1",
-    "type": "file",
-    "size": 9033,
-    "last_modified": "2025-09-01T04:44:55.224506+00:00",
-    "lang": "ps1",
-    "line_count": 247,
-    "sha1": "ea5cbdd1a49dbb45fe15e836c732c258c0cb094b"
-  },
-  {
-    "path": "quark_env/bin/python3",
-    "type": "file",
-    "size": 33816,
-    "last_modified": "2025-08-02T09:29:42.935659+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "365a749960cf3b1e5f8c3602bff26ac7c71a61ed"
-  },
-  {
-    "path": "quark_env/bin/pygrun",
-    "type": "file",
-    "size": 6150,
-    "last_modified": "2025-09-01T04:45:44.559317+00:00",
-    "lang": null,
-    "line_count": 164,
-    "sha1": "857c850ce3afa6e1f513ba9f0526253299844dd4"
-  },
-  {
-    "path": "quark_env/bin/python",
-    "type": "file",
-    "size": 33816,
-    "last_modified": "2025-08-02T09:29:42.935659+00:00",
-    "lang": null,
-    "line_count": null,
-    "sha1": "365a749960cf3b1e5f8c3602bff26ac7c71a61ed"
-  },
-  {
-    "path": "quark_env/bin/pip3",
-    "type": "file",
-    "size": 250,
-    "last_modified": "2025-09-01T04:45:42.603585+00:00",
-    "lang": null,
-    "line_count": 8,
-    "sha1": "c4ad2c0daf7c2be5d5b3780f914ae08a92094279"
-  },
-  {
-    "path": "quark_env/bin/activate.fish",
-    "type": "file",
-    "size": 2216,
-    "last_modified": "2025-09-01T04:44:55.224074+00:00",
-    "lang": "fish",
-    "line_count": 69,
-    "sha1": "4f61cca2fcc6e28b4eb6fc593b09b4d348736e66"
-  },
-  {
-    "path": "quark_env/bin/isympy",
-    "type": "file",
-    "size": 207,
-    "last_modified": "2025-09-01T04:56:55.863408+00:00",
-    "lang": null,
-    "line_count": 7,
-    "sha1": "0de31b20a845daffc24aa6646046b242f5866b63"
-  },
-  {
-    "path": "quark_env/bin/torchrun",
-    "type": "file",
-    "size": 222,
-    "last_modified": "2025-09-01T04:57:02.566456+00:00",
-    "lang": null,
-    "line_count": 7,
-    "sha1": "493bf99566c19c7f73687dd5d8def52869ef0d16"
-  },
-  {
-    "path": "quark_env/bin/python3.11",
-    "type": "file",
-    "size": 33816,
-    "last_modified": "2025-08-02T09:29:42.935659+00:00",
-    "lang": "11",
-    "line_count": null,
-    "sha1": "365a749960cf3b1e5f8c3602bff26ac7c71a61ed"
-  },
-  {
-    "path": "quark_env/bin/f2py",
-    "type": "file",
-    "size": 218,
-    "last_modified": "2025-09-01T05:07:33.109688+00:00",
-    "lang": null,
-    "line_count": 7,
-    "sha1": "a01f13f0ff90fb35b0512171f0c10da6cc2032fe"
-  },
-  {
-    "path": "quark_env/bin/pip",
-    "type": "file",
-    "size": 250,
-    "last_modified": "2025-09-01T04:45:42.603281+00:00",
-    "lang": null,
-    "line_count": 8,
-    "sha1": "c4ad2c0daf7c2be5d5b3780f914ae08a92094279"
-  },
-  {
-    "path": "quark_env/bin/tqdm",
-    "type": "file",
-    "size": 209,
-    "last_modified": "2025-09-01T05:08:47.946026+00:00",
-    "lang": null,
-    "line_count": 7,
-    "sha1": "d8b30998f262c3811c8fe110f730f33169995efd"
-  },
-  {
-    "path": "quark_env/bin/markdown-it",
-    "type": "file",
-    "size": 222,
-    "last_modified": "2025-09-01T04:45:45.199962+00:00",
-    "lang": null,
-    "line_count": 7,
-    "sha1": "78a9ebd120f085d478939f008bf5030bd543ecd8"
-  },
-  {
-    "path": "quark_env/bin/pip3.11",
-    "type": "file",
-    "size": 250,
-    "last_modified": "2025-09-01T04:45:42.603749+00:00",
-    "lang": "11",
-    "line_count": 8,
-    "sha1": "c4ad2c0daf7c2be5d5b3780f914ae08a92094279"
-  },
-  {
-    "path": "quark_env/bin/pygmentize",
-    "type": "file",
-    "size": 217,
-    "last_modified": "2025-09-01T04:45:45.081922+00:00",
-    "lang": null,
-    "line_count": 7,
-    "sha1": "54f6127906a51e4252dacd69d490b71b9e473c54"
-  },
-  {
-    "path": "quark_env/bin/jp.py",
-    "type": "file",
-    "size": 1724,
-    "last_modified": "2025-09-01T05:07:33.117277+00:00",
-    "lang": "py",
-    "line_count": 54,
-    "sha1": "cdf6717a81bda1b895569f79c06a22a2ed358f78"
-  },
-  {
-    "path": "quark_env/bin/torchfrtrace",
-    "type": "file",
-    "size": 231,
-    "last_modified": "2025-09-01T04:57:02.566276+00:00",
-    "lang": null,
-    "line_count": 7,
-    "sha1": "e81311b22d48f6b26b96cdf1026207a5e85bbee8"
-  },
-  {
-    "path": "quark_env/bin/activate",
-    "type": "file",
-    "size": 1766,
-    "last_modified": "2025-09-01T04:46:08.854072+00:00",
-    "lang": null,
-    "line_count": 64,
-    "sha1": "06af7d16d694b2729ea00f762d859463fbd56178"
-  },
-  {
-    "path": "quark_env/bin/numpy-config",
-    "type": "file",
-    "size": 218,
-    "last_modified": "2025-09-01T05:07:33.109849+00:00",
-    "lang": null,
-    "line_count": 7,
-    "sha1": "2f392675a7b08833dc34fb40dcb7a827f4fcd3e3"
-  },
-  {
-    "path": "quark_env/bin/activate.csh",
-    "type": "file",
-    "size": 936,
-    "last_modified": "2025-09-01T04:44:55.224279+00:00",
-    "lang": "csh",
-    "line_count": 26,
-    "sha1": "983df12a7d3cb53d42850ee57f8bcc51984e0ca3"
-  },
-  {
-    "path": "quark_env/lib/python3.11/",
-    "type": "dir",
-    "excluded": true
-  },
-  {
-    "path": "quark_env/share/man/man1/isympy.1",
-    "type": "file",
-    "size": 6659,
-    "last_modified": "2025-09-01T04:56:52.706465+00:00",
-    "lang": "1",
-    "line_count": 188,
-    "sha1": "4da89d73108de69f826b0d9f6fe4f9cea47d972e"
   },
   {
     "path": "backups/README.md",

@@ -13,7 +13,7 @@ contributors and Cursor agents share a single source of truth.
 
 ## 2. Recommendation Path  (`state/quark_state_system/quark_recommendations.py`)
 * Hot-reloads `task_loader` to ensure task YAML files are current.
-* Pulls a roadmap snapshot via `management.rules.roadmaps.roadmap_controller`.
+* Pulls a roadmap snapshot via `management.rules.roadmap.roadmap_controller`.
 * Syncs roadmap items into task YAMLs and optionally explodes
   "🚧 In Progress" sections into fine-grained tasks.
 * Returns a formatted guidance block containing `next_tasks`.
