@@ -1,11 +1,7 @@
 
 
 """
-Integration: Support utilities used by brain/state; indirectly integrated where imported.
-Rationale: Shared helpers (performance, IO, streaming) used across runtime components.
-"""
-# FILE: utilities/performance_utils.py
-"""Utility helpers for lightweight performance profiling.
+Utility helpers for lightweight performance profiling.
 
 This module introduces two minimal-overhead helpers that add **wall-clock**
 latency measurements around critical functions without pulling in heavy
