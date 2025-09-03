@@ -7,11 +7,10 @@ Quark is a modular brain-simulation and machine-learning platform spanning molec
 
 ## Current State (via Quark State System)
 
-**Current Development Stage**: STAGE N4 IN PROGRESS
-**Overall Progress**: 5% (Stage N4 In Progress)
-### **Phase 4: AGI Capabilities & Full Validation** 🚀
-#### **Roadmap Target Deliverables**:
-### **Phase 4: AGI Capabilities & Full Validation** 🚀 READY TO START
+Current Development Stage: (not found)
+Overall Progress: (unknown)
+Next Major Milestone: (unknown)
+
 
 ### Operate the State System
 
@@ -26,7 +25,6 @@ python QUARK_STATE_SYSTEM.py sync
 - tests/cognitive_benchmarks/: working memory, decision-making, reversal learning
 - tests/testing_frameworks/: automated validation, live streaming, system health
 - tests/simulations/: embodiment and physics hooks
-- CI: .github/workflows/ci.yml (runs smoke + benchmark stubs)
 
 
 ## Architecture
