@@ -43,9 +43,39 @@ def _load_yaml(fp: Path, prio: str):
         text = fp.read_text()
     except FileNotFoundError:
         return []
-    data = yaml.safe_load(read_text_cached(fp)) or []
-    for d in data:
-        d.setdefault("priority", prio)
+    raw_data = yaml.safe_load(read_text_cached(fp)) or []
+    
+    # Handle different YAML formats
+    if isinstance(raw_data, dict) and "tasks" in raw_data:
+        # Format: {generated: date, tasks: [list of strings or dicts]}
+        task_list = raw_data["tasks"]
+    elif isinstance(raw_data, list):
+        # Format: [list of strings or dicts]
+        task_list = raw_data
+    else:
+        return []
+    
+    # Convert strings to task dictionaries
+    data = []
+    for i, item in enumerate(task_list):
+        if isinstance(item, str):
+            # Convert string to task dict
+            task_dict = {
+                "id": f"{prio}_{i}_{hash(item) % 10000}",
+                "title": item,
+                "priority": prio,
+                "status": "pending"
+            }
+        elif isinstance(item, dict):
+            # Already a dict, just add missing fields
+            task_dict = item.copy()
+            task_dict.setdefault("priority", prio)
+            task_dict.setdefault("status", "pending")
+            task_dict.setdefault("id", f"{prio}_{i}_{hash(str(item)) % 10000}")
+        else:
+            continue
+        data.append(task_dict)
+    
     return data
 
 
