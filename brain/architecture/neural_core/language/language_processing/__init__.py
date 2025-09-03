@@ -107,6 +107,15 @@ class LanguageCortex:
             # Generate response using selected model
             response = self._generate_response_with_model(prompt, service, specific_model)
             
+            # If API model failed (quota/token issues), try local fallback
+            if not response and service in ['openai', 'anthropic', 'gemini']:
+                print(f"🔄 {service} failed, falling back to local model...")
+                response = self._generate_response_with_local_model(prompt)
+                if response:
+                    selected_model = 'local:fallback'
+                    service = 'local'
+                    specific_model = 'fallback'
+            
             if response:
                 self._record_call(service)
                 # Add to conversation history with model selection info
@@ -119,7 +128,7 @@ class LanguageCortex:
                 })
                 return response
             else:
-                return "❌ Failed to generate response with selected model."
+                return "❌ Failed to generate response with all available models."
                 
         except Exception as e:
             logger.error(f"Language processing error: {e}")
@@ -163,6 +172,37 @@ class LanguageCortex:
         
         import random
         return random.choice(local_responses)
+    
+    def _generate_response_with_local_model(self, prompt: str) -> Optional[str]:
+        """Generate response using local LLM as fallback."""
+        try:
+            # Try to use the LocalLLMWrapper
+            from brain.architecture.neural_core.cognitive_systems.local_llm_wrapper import LocalLLMWrapper
+            
+            # Initialize local model if not already done
+            if not hasattr(self, '_local_llm'):
+                self._local_llm = LocalLLMWrapper()
+            
+            # Create a conversation prompt
+            full_prompt = f"{self.system_prompt}\n\nUser: {prompt}\nQuark:"
+            
+            # Generate response with local model
+            response = self._local_llm.generate_response(full_prompt, max_new_tokens=256, temperature=0.7)
+            
+            if response and response.strip():
+                # Clean up the response
+                clean_response = response.strip()
+                # Remove any repeated prompt text
+                if "Quark:" in clean_response:
+                    clean_response = clean_response.split("Quark:")[-1].strip()
+                return clean_response
+            else:
+                return "I'm thinking about your question using my local processing capabilities."
+                
+        except Exception as e:
+            logger.error(f"Local model fallback error: {e}")
+            # Ultimate fallback - simple contextual responses
+            return self._query_local_model(prompt)
     
     def get_processing_status(self) -> Dict[str, Any]:
         """Get current language processing status with model selection analytics."""

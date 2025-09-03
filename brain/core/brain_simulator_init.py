@@ -46,8 +46,8 @@ class BrainSimulator:
                 try:
                     from brain.modules.alphagenome_integration.biological_simulator import BiologicalSimulator
                     self.bio_simulator = BiologicalSimulator()
-                    # Run a 3-day (72-hour) simulation to develop the brain structure
-                    self.brain_bio_spec = self.bio_simulator.run_simulation(duration=72.0)
+                    # Run a 100-step simulation to develop the brain structure
+                    self.brain_bio_spec = self.bio_simulator.run_simulation(steps=100)
                     print("✅ Biological simulation complete. Brain specification generated.")
                 except Exception as e:
                     print(f"⚠️ AlphaGenome unavailable, using fallback spec: {e}")

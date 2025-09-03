@@ -91,7 +91,7 @@ def _zero_sensory_stub() -> Dict[str, Any]:
 
 def _parse_args(argv: Optional[list[str]] = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Unified Quark brain entry-point")
-    parser.add_argument("--steps", type=int, default=float('inf'), help="Number of simulation steps to run (default: infinite, use Ctrl+C to interact)")
+    parser.add_argument("--steps", type=int, default=float('inf'), help="Number of simulation steps to run (default: INFINITE - runs until manually stopped)")
     parser.add_argument("--hz", type=float, default=60.0, help="Simulation frequency (steps per second)")
     # Viewer ON by default. Use --no-viewer to disable.
     parser.add_argument(
@@ -127,16 +127,26 @@ def main(argv: Optional[list[str]] = None) -> None:  # pragma: no cover – CLI 
             if not os.path.isfile(model_path):
                 raise FileNotFoundError(f"MuJoCo model not found: {model_path}")
             
-            print("🚀 Launching MuJoCo viewer...")
+            print("🚀 Launching MuJoCo simulation...")
             # MuJoCoRunner expects config file path, not model path
             config_path = "brain/architecture/embodiment/config.ini"
             runner = MuJoCoRunner(config_path)
-            viewer = mujoco.viewer.launch_passive(runner.model, runner.data)
-            print("🖥️  MuJoCo viewer launched successfully!")
-            print("📌 The MuJoCo viewer window should now be visible on your desktop")
-            # Allow OpenGL context to settle so the window is visible
-            import time as _t
-            _t.sleep(2.0)  # Give more time for viewer to fully initialize
+            
+            # Check if we're running in background (no TTY) or foreground
+            is_background = not os.isatty(0)  # Check if stdin is a TTY
+            
+            if is_background:
+                print("🖥️  Background mode detected - using offscreen rendering")
+                viewer = None  # Use offscreen rendering
+                # Initialize offscreen renderer for background mode
+                runner.renderer = mujoco.Renderer(runner.model, height=480, width=640)
+            else:
+                print("🖥️  Foreground mode - launching interactive viewer")
+                viewer = mujoco.viewer.launch_passive(runner.model, runner.data)
+                print("📌 The MuJoCo viewer window should now be visible on your desktop")
+                # Allow OpenGL context to settle
+                import time as _t
+                _t.sleep(2.0)
             
         except Exception as exc:
             print(f"⚠️  Failed to launch MuJoCo viewer ({exc}); falling back to head-less mode.")
@@ -255,8 +265,39 @@ def main(argv: Optional[list[str]] = None) -> None:  # pragma: no cover – CLI 
                 
                 if language_cortex and hasattr(language_cortex, 'process_input'):
                     print("🧠 Quark is thinking...")
-                    response = language_cortex.process_input(user_input)
-                    print(f"🤖 Quark: {response}")
+                    
+                    # Temporarily suppress ALL verbose logging during user interaction
+                    import logging
+                    import sys
+                    import warnings
+                    from contextlib import redirect_stderr, redirect_stdout
+                    from io import StringIO
+                    
+                    # Suppress all logging, warnings, and stderr during interaction
+                    original_level = logging.getLogger().level
+                    original_stderr = sys.stderr
+                    original_stdout = sys.stdout
+                    
+                    # Set environment variable to suppress tokenizer warnings
+                    os.environ['TOKENIZERS_PARALLELISM'] = 'false'
+                    
+                    try:
+                        # Suppress all output except our print statements
+                        logging.getLogger().setLevel(logging.CRITICAL)
+                        warnings.filterwarnings("ignore")
+                        
+                        # Capture stderr to suppress error messages
+                        captured_stderr = StringIO()
+                        sys.stderr = captured_stderr
+                        
+                        response = language_cortex.process_input(user_input)
+                        print(f"🤖 Quark: {response}")
+                        
+                    finally:
+                        # Restore all original settings
+                        logging.getLogger().setLevel(original_level)
+                        sys.stderr = original_stderr
+                        warnings.resetwarnings()
                 else:
                     print("🤖 Quark: I hear you, but my language processing isn't fully connected yet.")
                     print(f"🤖 Quark: You said: '{user_input}' - I'll remember that.")
@@ -270,14 +311,28 @@ def main(argv: Optional[list[str]] = None) -> None:  # pragma: no cover – CLI 
                 if next_action == "":
                     print("🔄 Resuming simulation...")
                     break
-                elif next_action.lower() in ['exit', 'quit']:
+                elif next_action.lower() in ['exit', 'quit', 'stop']:
                     return False
                 else:
                     # Process additional input
                     try:
                         if language_cortex and hasattr(language_cortex, 'process_input'):
-                            response = language_cortex.process_input(next_action)
-                            print(f"🤖 Quark: {response}")
+                            # Suppress ALL verbose logging for clean interaction
+                            original_level = logging.getLogger().level
+                            original_stderr = sys.stderr
+                            captured_stderr = StringIO()
+                            
+                            try:
+                                logging.getLogger().setLevel(logging.CRITICAL)
+                                warnings.filterwarnings("ignore")
+                                sys.stderr = captured_stderr
+                                
+                                response = language_cortex.process_input(next_action)
+                                print(f"🤖 Quark: {response}")
+                            finally:
+                                logging.getLogger().setLevel(original_level)
+                                sys.stderr = original_stderr
+                                warnings.resetwarnings()
                         else:
                             print(f"🤖 Quark: I acknowledge: '{next_action}'")
                     except Exception as e:
@@ -315,7 +370,9 @@ def main(argv: Optional[list[str]] = None) -> None:  # pragma: no cover – CLI 
             ctrl = brain_outputs.get("action")
             if ctrl is not None:
                 runner.step(ctrl)
-            viewer.sync()  # type: ignore[union-attr]
+            # Sync viewer only if it exists (not in offscreen mode)
+            if viewer is not None:
+                viewer.sync()  # type: ignore[union-attr]
 
         # Basic console diagnostics every 100 steps
         if step_idx % 100 == 0:
@@ -344,11 +401,12 @@ def main(argv: Optional[list[str]] = None) -> None:  # pragma: no cover – CLI 
     
     # Print initial interaction instructions
     print("\n" + "="*60)
-    print("🎮 INTERACTIVE BRAIN SIMULATION")
+    print("🎮 INTERACTIVE BRAIN SIMULATION - INFINITE MODE")
     print("="*60)
+    print("💡 Running INDEFINITELY until manually stopped")
     print("💡 Press Ctrl+C anytime to pause and chat with Quark!")
     print("💡 Quark will use its language cortex to respond to you")
-    print("💡 Type 'exit' during interaction to stop the simulation")
+    print("💡 Type 'exit', 'quit', or 'stop' to terminate simulation")
     print("="*60)
     
     # Main interactive simulation loop

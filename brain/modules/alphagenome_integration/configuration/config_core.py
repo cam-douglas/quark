@@ -119,7 +119,7 @@ class SimulationConfig:
     visualization_resolution: int = 300  # DPI
     
     # Performance settings
-    multithreading_enabled: bool = True
+    multithreading_enabled: bool = False  # STABLE: Disabled to prevent mutex lock issues
     gpu_acceleration: bool = False  # Not implemented yet
     memory_efficient_mode: bool = True
 

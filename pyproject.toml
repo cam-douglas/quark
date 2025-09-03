@@ -13,6 +13,9 @@ requires-python = ">=3.10"
 [project.entry-points."quark.resource_plugins"]
 noop = "brain.architecture.neural_core.cognitive_systems.plugins.noop_plugin:NoOpPlugin"
 
+[project.scripts]
+quark-brain = "brain.brain_main:main"
+
 [project.optional-dependencies]
 dev = [
     "pytest>=8.4",

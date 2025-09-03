@@ -18,17 +18,20 @@ The Quark Brain is a biologically-compliant cognitive architecture that integrat
 
 ### **Run the Brain**
 ```bash
-# Basic execution
-python brain_main.py
+# Default execution (infinite mode with MuJoCo viewer)
+mjpython brain_main.py
 
-# With MuJoCo viewer
-python brain_main.py --viewer
+# Basic execution (infinite mode, headless)
+python brain_main.py --no-viewer
 
-# Headless mode with custom frequency  
-python brain_main.py --no-viewer --hz 30 --steps 1000
+# Custom frequency (still infinite)
+mjpython brain_main.py --hz 30
+
+# Finite steps (override infinite default)
+mjpython brain_main.py --steps 1000
 
 # Enable advanced E8 consciousness
-USE_E8_MEMORY=true python brain_main.py
+USE_E8_MEMORY=true mjpython brain_main.py
 ```
 
 ### **Core Components**

@@ -28,7 +28,8 @@ class HRMPlanner:
             self.available = True
             print("✅ HRM Planner adapter initialized. Model is available (but not yet loaded).")
         else:
-            print("⚠️ HRM Planner adapter: data/external/hrm repository not found. Planner will be disabled.")
+            # HRM repository not found - planner disabled silently
+            self.available = False
 
 
     def plan(self, obs: np.ndarray) -> Dict[str, Any]:

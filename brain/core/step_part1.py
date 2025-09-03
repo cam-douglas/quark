@@ -62,13 +62,21 @@ if True:
                 slam_outputs['gtsam'] = {"pose": [0,0,0]}
         outputs['slam'] = slam_outputs
         
-        auditory_cortex_output = self.auditory_cortex.step(sensory_inputs.get("audio"))
-        outputs['auditory_cortex'] = auditory_cortex_output
+        if hasattr(self, 'auditory_cortex') and self.auditory_cortex is not None:
+            auditory_cortex_output = self.auditory_cortex.step(sensory_inputs.get("audio"))
+            outputs['auditory_cortex'] = auditory_cortex_output
+        else:
+            auditory_cortex_output = None  # Initialize for later use
+            outputs['auditory_cortex'] = None
         
         current_qpos = inputs.get("qpos")
         current_qvel = inputs.get("qvel")
-        somatosensory_output = self.somatosensory_cortex.step(current_qpos, current_qvel)
-        outputs['somatosensory_cortex'] = somatosensory_output
+        if hasattr(self, 'somatosensory_cortex') and self.somatosensory_cortex is not None:
+            somatosensory_output = self.somatosensory_cortex.step(current_qpos, current_qvel)
+            outputs['somatosensory_cortex'] = somatosensory_output
+        else:
+            somatosensory_output = {"body_schema": np.zeros(32)}  # Default output
+            outputs['somatosensory_cortex'] = None
         t_sensory = time.time()
 
         # 2. Get current physical state from the environment
@@ -119,8 +127,11 @@ if True:
         t_proto = time.time()
         
         # --- Oculomotor Control Step ---
-        oculomotor_output = self.oculomotor_cortex.step()
-        outputs['oculomotor_cortex'] = oculomotor_output
+        if hasattr(self, 'oculomotor_cortex') and self.oculomotor_cortex is not None:
+            oculomotor_output = self.oculomotor_cortex.step()
+            outputs['oculomotor_cortex'] = oculomotor_output
+        else:
+            outputs['oculomotor_cortex'] = None
         
         # --- Advanced Planning / Servoing (feature-flagged) ---
         planned_traj = None
@@ -153,14 +164,17 @@ if True:
         t_ppo_select = time.time()
 
         # --- Motor Cortex ---
-        motor_cortex_output = self.motor_cortex.step(
-            ppo_goal=ppo_goal, 
-            hrm_subgoal=(self.hrm_planner.plan(obs) if self.hrm_planner is not None else None),
-            current_qpos=current_qpos
-        )
-        
-        # Raw command
-        raw_motor_command = motor_cortex_output.get('ctrl')
+        if hasattr(self, 'motor_cortex') and self.motor_cortex is not None:
+            motor_cortex_output = self.motor_cortex.step(
+                ppo_goal=ppo_goal, 
+                hrm_subgoal=(self.hrm_planner.plan(obs) if self.hrm_planner is not None else None),
+                current_qpos=current_qpos
+            )
+            # Raw command
+            raw_motor_command = motor_cortex_output.get('ctrl')
+        else:
+            motor_cortex_output = {"ctrl": np.zeros(16)}  # Default motor output
+            raw_motor_command = motor_cortex_output.get('ctrl')
 
         # Optional MPC correction (OCS2)
         if self.use_ocs2 and self.ocs2 and raw_motor_command is not None:
@@ -180,7 +194,10 @@ if True:
                 pass
         
         # --- Cerebellum refinement ---
-        refined_motor_command = self.cerebellum.refine_motor_command(raw_motor_command)
+        if hasattr(self, 'cerebellum') and self.cerebellum is not None:
+            refined_motor_command = self.cerebellum.refine_motor_command(raw_motor_command)
+        else:
+            refined_motor_command = raw_motor_command  # Pass through without refinement
         
         # Apply small visual servoing delta if available (task-space shim)
         if visp_delta is not None and refined_motor_command is not None and refined_motor_command.shape[0] >= 2:

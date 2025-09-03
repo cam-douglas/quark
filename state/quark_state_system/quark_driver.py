@@ -71,11 +71,18 @@ class QuarkDriver:
                 "Rule enforcement banner missing in files: " + ", ".join(missing_banner)
             )
 
-        if not os.path.exists(quark_rules_path):
-            raise FileNotFoundError(".quarkrules file is required but missing.")
-
-        with open(quark_rules_path, "r", encoding="utf-8") as rf:
-            self.quark_rules_text = rf.read()
+        # Load rules from .quark/rules/ directory instead of .quarkrules file
+        quark_rules_dir = os.path.join(self.workspace_root, ".quark", "rules")
+        self.quark_rules_text = ""
+        
+        if os.path.exists(quark_rules_dir):
+            rule_files = glob.glob(os.path.join(quark_rules_dir, "*.mdc"))
+            for rule_file in rule_files:
+                with open(rule_file, "r", encoding="utf-8") as rf:
+                    self.quark_rules_text += rf.read() + "\n"
+            print(f"✅ QuarkDriver loaded {len(rule_files)} rule files from .quark/rules/")
+        else:
+            print("⚠️ .quark/rules/ directory not found, using minimal rules")
 
         if os.path.exists(cursor_rules_path):
             with open(cursor_rules_path, "r", encoding="utf-8") as rf:

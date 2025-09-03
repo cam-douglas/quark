@@ -15,6 +15,11 @@ class AutonomousAgent:
         self.workspace_root = workspace_root or "."
         self.initialized = True
         self.roadmap = []  # Empty roadmap in minimal mode
+        
+        # Add compliance attribute for QuarkDriver compatibility
+        from .prompt_guardian import PromptGuardian
+        self.compliance = PromptGuardian(workspace_root=self.workspace_root)
+        
         logger.info("AutonomousAgent initialized (minimal mode)")
     
     def execute_next_goal(self) -> bool:
