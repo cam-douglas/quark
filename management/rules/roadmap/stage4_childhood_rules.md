@@ -66,7 +66,7 @@ validation:
   - "Match DTI myelination curves ages 2-12"
   - "Test WISC-like puzzle tasks ≥85th percentile vs child norms"
 ```
-**Functional Mapping (links to Appendix Part 1):**
+**Functional Mapping (links to Appendix A):**
 - [Core Cognitive — Memory, Learning, Reasoning, Problem Solving](#$cap-1-core-cognitive)
 - [Perception & World Modeling — Multimodal Perception, World Models, Embodiment](#$cap-2-perception-world-modeling)
 - [Action & Agency — Planning, Decision-Making, Tool Use, Self-Improvement](#$cap-3-action-agency)

@@ -2,7 +2,7 @@
   "alphagenome": {
     "repository_path": "/Users/camdouglas/quark/data/external/alphagenome",
     "use_local_fallback": true,
-    "api_key": "AIzaSyDeDNNFx2iT0cp74fMbEUj0uZKMkkRgWlo",
+    "api_key": "MOVED_TO_CREDENTIALS_DIRECTORY",
     "api_endpoint": "https://api.alphagenome.deepmind.com",
     "max_requests_per_hour": 1000,
     "max_sequence_length": 1000000,

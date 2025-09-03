@@ -8,7 +8,7 @@ I've successfully integrated Google DeepMind's AlphaGenome API with your brain s
 
 ### 1. **DNA Controller** (`.cursor/rules/dna_controller.py`)
 - **Integrated with your existing biological brain-inspired rule system**
-- **AlphaGenome API integration** with your API key: `AIzaSyBzpB8gJ_8xaWH_obtjNBuQQ4hZkSnMxOk`
+- **AlphaGenome API integration** with API key: `MOVED_TO_CREDENTIALS_DIRECTORY`
 - **DNA sequence analysis** using AlphaGenome's predictive models
 - **Variant effect prediction** for brain tissue (UBERON:0001157)
 - **Brain-specific DNA sequence generation** for different brain regions
@@ -47,7 +47,7 @@ I've successfully integrated Google DeepMind's AlphaGenome API with your brain s
 - **Data Pipeline**: Integrates with your existing data management systems
 
 ### **AlphaGenome API Integration**
-- **API Key**: Integrated your provided key: `AIzaSyBzpB8gJ_8xaWH_obtjNBuQQ4hZkSnMxOk`
+- **API Key**: Integrated API key: `MOVED_TO_CREDENTIALS_DIRECTORY`
 - **Real-time Analysis**: DNA sequence analysis, variant prediction, chromatin structure
 - **Brain Tissue Specificity**: Uses UBERON:0001157 (brain tissue) ontology
 - **Fallback Mode**: Automatic simulation mode when API is unavailable
@@ -154,7 +154,7 @@ results = simulator.simulate_brain_development(
 ## 🔒 Security & Configuration
 
 ### **API Key Management**
-- Your API key is integrated: `AIzaSyBzpB8gJ_8xaWH_obtjNBuQQ4hZkSnMxOk`
+- Your API key is integrated: `MOVED_TO_CREDENTIALS_DIRECTORY`
 - **Never commit API keys to version control**
 - System gracefully handles invalid or expired keys
 - Fallback to simulation mode when needed

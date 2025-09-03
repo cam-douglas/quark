@@ -6,6 +6,9 @@ tests/visualizations/outputs/
 utilities/tools_utilities/audit/audit_outputs/
 state/quark_state_system/s3_*
 
+# Credentials and secrets (security)
+data/credentials/
+
 # Local caches/lockfiles from external tools
 data/knowledge/models_artifacts/huggingface/
 

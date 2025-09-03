@@ -41,7 +41,7 @@ def demonstrate_alphagenome_integration():
         from alphagenome.models import dna_client
         
         # Your configured API key
-        API_KEY = 'AIzaSyDz4S3z6K0lwAi7_vC8gi1_0KOF9xmVtb4'
+        API_KEY = 'MOVED_TO_CREDENTIALS_DIRECTORY'
         
         print("   Creating AlphaGenome client...")
         model = dna_client.create(API_KEY)

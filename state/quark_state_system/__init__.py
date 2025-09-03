@@ -29,14 +29,45 @@ else:
 
 # Lazy loading to avoid circular import
 _ENGINE = None
+_CHAT_TASK_MANAGER = None
 
 
 def ask_quark(query: str) -> str:
     """Unified entry-point: pass any natural-language request and get guidance."""
-    global _ENGINE
+    global _ENGINE, _CHAT_TASK_MANAGER
+    
+    # Initialize chat task manager if needed
+    if _CHAT_TASK_MANAGER is None:
+        from .chat_task_manager import ChatTaskManager
+        _CHAT_TASK_MANAGER = ChatTaskManager()
+    
+    # Check if this is a task-related query first
+    task_response = _CHAT_TASK_MANAGER.get_task_response(query)
+    if task_response:
+        return task_response
+    
+    # Otherwise, use the standard guidance system
     if _ENGINE is None:
         from .quark_recommendations import QuarkRecommendationsEngine
         _ENGINE = QuarkRecommendationsEngine()
     return _ENGINE.provide_intelligent_guidance(query)
+
+
+def handle_task_query(query: str) -> str:
+    """Handle task-related queries with proper protocol."""
+    global _CHAT_TASK_MANAGER
+    if _CHAT_TASK_MANAGER is None:
+        from .chat_task_manager import ChatTaskManager
+        _CHAT_TASK_MANAGER = ChatTaskManager()
+    return _CHAT_TASK_MANAGER.get_task_response(query)
+
+
+def update_chat_tasks() -> str:
+    """Update the chat tasks file."""
+    global _CHAT_TASK_MANAGER
+    if _CHAT_TASK_MANAGER is None:
+        from .chat_task_manager import ChatTaskManager
+        _CHAT_TASK_MANAGER = ChatTaskManager()
+    return _CHAT_TASK_MANAGER.update_chat_tasks_file()
 
 __all__ = ["next_steps"]

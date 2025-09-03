@@ -78,7 +78,7 @@ interactions = simulator.simulate_cellular_interactions(
 
 ```python
 # Set your AlphaGenome API key
-ALPHAGENOME_API_KEY = "AIzaSyBzpB8gJ_8xaWH_obtjNBuQQ4hZkSnMxOk"
+ALPHAGENOME_API_KEY = "MOVED_TO_CREDENTIALS_DIRECTORY"
 
 # The system will automatically use this key for all AlphaGenome operations
 ```

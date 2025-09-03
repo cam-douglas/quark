@@ -1,330 +1,355 @@
+#!/usr/bin/env python3
+"""Central Task Loader - Simplified main interface following sprint-batch-task-management rules.
 
+Coordinates task loading, roadmap integration, and sprint management.
 
+Integration: Main interface for QuarkDriver and AutonomousAgent task operations.
+Rationale: Simplified coordinator that delegates to specialized modules.
 """
-Integration: Indirect integration via QuarkDriver and AutonomousAgent; orchestrates simulator runs.
-Rationale: State system validates, plans, and triggers actions that the simulator executes.
-"""
-# state/quark_state_system/task_loader.py
-"""Central loader for consolidated task YAML files.
 
-Reads the machine-readable task lists in ``state/tasks/`` and exposes helper
-functions for the state-system and autonomous agent.
-"""
 from pathlib import Path
-# local cached read
-from tools_utilities.scripts.performance_utils import read_text_cached
-import yaml
 from typing import List, Optional, Dict
+import yaml
 
-# Agile phase/step labelling helper
-from state.quark_state_system.agile_utils import format_phase_step
-
-_TASK_DIR = Path(__file__).resolve().parents[1] / "tasks"
-_PRIORITY_FILES = {
-    "high": _TASK_DIR / "tasks_high.yaml",
-    "medium": _TASK_DIR / "tasks_medium.yaml",
-    "low": _TASK_DIR / "tasks_low.yaml",
-    "archive": _TASK_DIR / "tasks_archive.yaml",
-    "chat": _TASK_DIR / "chat_tasks.yaml",
-}
-
-# ---------------------------------------------------------------------------
-# 🚀  PERFORMANCE: Parallel YAML loading (wall-clock ↓ on cold start)
-# ---------------------------------------------------------------------------
-
-import concurrent.futures as _cf
-
+# Global task registry
 _TASKS: List[Dict] = []
+_TASK_DIR = Path(__file__).resolve().parents[1] / "tasks"
 
-
-def _load_yaml(fp: Path, prio: str):
-    """Helper to read *fp* and append priority metadata."""
-    try:
-        text = fp.read_text()
-    except FileNotFoundError:
-        return []
-    raw_data = yaml.safe_load(read_text_cached(fp)) or []
+def get_tasks(status: Optional[str] = None, priority: Optional[str] = None) -> List[Dict]:
+    """Get tasks filtered by status and/or priority."""
+    filtered = _TASKS[:]
     
-    # Handle different YAML formats
-    if isinstance(raw_data, dict) and "tasks" in raw_data:
-        # Format: {generated: date, tasks: [list of strings or dicts]}
-        task_list = raw_data["tasks"]
-    elif isinstance(raw_data, list):
-        # Format: [list of strings or dicts]
-        task_list = raw_data
+    if status:
+        filtered = [t for t in filtered if t.get("status") == status]
+    if priority:
+        filtered = [t for t in filtered if t.get("priority") == priority]
+    
+    return filtered
+
+def next_actions(limit: int = 5) -> List[Dict]:
+    """Get the next priority actions with sprint structure."""
+    # Get in-progress tasks first, then pending if none in-progress
+    in_progress_tasks = get_tasks(status="in-progress")
+    
+    if in_progress_tasks:
+        # Sort by phase, then batch, then step if available
+        in_progress_tasks.sort(key=lambda t: (
+            t.get("phase", 1), 
+            t.get("batch", "A"), 
+            t.get("step", 1)
+        ))
+        return in_progress_tasks[:limit]
     else:
+        # No in-progress tasks, return empty list
         return []
-    
-    # Convert strings to task dictionaries
-    data = []
-    for i, item in enumerate(task_list):
-        if isinstance(item, str):
-            # Convert string to task dict
-            task_dict = {
-                "id": f"{prio}_{i}_{hash(item) % 10000}",
-                "title": item,
-                "priority": prio,
-                "status": "pending"
-            }
-        elif isinstance(item, dict):
-            # Already a dict, just add missing fields
-            task_dict = item.copy()
-            task_dict.setdefault("priority", prio)
-            task_dict.setdefault("status", "pending")
-            task_dict.setdefault("id", f"{prio}_{i}_{hash(str(item)) % 10000}")
-        else:
-            continue
-        data.append(task_dict)
-    
-    return data
-
-
-with _cf.ThreadPoolExecutor(max_workers=min(4, len(_PRIORITY_FILES))) as _executor:
-    futures = {
-        _executor.submit(_load_yaml, fp, prio): prio for prio, fp in _PRIORITY_FILES.items()
-    }
-    for fut in futures:
-        _TASKS.extend(fut.result())
-
-# -- internal helper to persist tasks list to YAML ---------------------------
-
-def _write_tasks_to_file(prio: str):
-    fp = _PRIORITY_FILES[prio]
-    data = [t for t in _TASKS if t.get("priority") == prio]
-    fp.parent.mkdir(parents=True, exist_ok=True)
-    fp.write_text(yaml.safe_dump(data, sort_keys=False))
-
-# write every priority YAML from current _TASKS
-def _flush_all():
-    for prio in _PRIORITY_FILES:
-        _write_tasks_to_file(prio)
-
-# ---------------------------------------------------------------------------
-# Public helper – wipe current registry & YAMLs (used for full regeneration)
-# ---------------------------------------------------------------------------
-
-
-def reset_all():
-    """Clear in-memory task list and empty all priority YAML files **except** chat tasks.
-
-    Per user rule, ``chat_tasks.yaml`` must never be deleted or overwritten
-    without explicit permission. We therefore preserve its contents while
-    resetting the other priority files.
-    """
-
-    # First, load current chat-specific tasks so we can restore them.
-    chat_tasks_fp = _PRIORITY_FILES["chat"]
-    preserved_chat_tasks = []
-    if chat_tasks_fp.exists():
-        import yaml as _yaml
-        preserved_chat_tasks = _yaml.safe_load(chat_tasks_fp.read_text()) or []
-
-    # Clear in-memory registry and wipe non-chat YAML files
-    _TASKS.clear()
-    for prio, fp in _PRIORITY_FILES.items():
-        if prio == "chat":
-            # Skip deletion to respect user preference
-            continue
-        fp.parent.mkdir(parents=True, exist_ok=True)
-        fp.write_text("[]\n")
-
-    # Re-append preserved chat tasks to in-memory registry
-    for t in preserved_chat_tasks:
-        t.setdefault("priority", "chat")
-        _TASKS.append(t)
-
-    # Ensure chat tasks file stays untouched (but rewrite if it didn't exist)
-    if not chat_tasks_fp.exists():
-        chat_tasks_fp.parent.mkdir(parents=True, exist_ok=True)
-        import yaml as _yaml
-        chat_tasks_fp.write_text(_yaml.safe_dump(preserved_chat_tasks, sort_keys=False))
-
-def get_tasks(priority: Optional[str] = None, status: Optional[str] = None):
-    """Yield tasks filtered by priority and/or status."""
-    for task in _TASKS:
-        if priority and task.get("priority") != priority:
-            continue
-        if status and task.get("status") != status:
-            continue
-        yield task
-
-def next_actions(limit: int = 3):
-    """Return next *limit* highest-priority pending tasks (high→low)."""
-    ordered = sorted(
-        (t for t in _TASKS if t.get("status") == "pending"),
-        key=lambda x: {"high": 0, "medium": 1, "low": 2}.get(x.get("priority", "medium"), 3),
-    )
-    return ordered[:limit]
-
-# ---------------------------------------------------------------------------
-# Phase-2: roadmap → task sync helpers
-# ---------------------------------------------------------------------------
 
 def task_exists(title: str) -> bool:
-    """Public helper to check if a task with *title* already exists."""
-    return any(t.get("title") == title for t in _TASKS)
+    """Check if a task with the given title already exists."""
+    return any(title in t.get("title", "") for t in _TASKS)
 
-
-def sync_with_roadmaps(snapshot: Dict[str, str]):
-    """Ensure each roadmap item in *snapshot* has a corresponding task.
-
-    Mapping e.g. {"Pillar 3 – Hierarchical Processing": "planned"}
-    Generates high/medium/low priority tasks depending on status.
-    """
-    priority_map = {"progress": "high", "planned": "medium", "done": None}
-
-    for title, status in snapshot.items():
-        prio = priority_map.get(status, "low")
-        if prio is None:
-            continue  # done
-        if task_exists(title):
-            continue
-
-        task = {"id": f"roadmap-{len(_TASKS)+1}", "title": title, "status": "pending", "priority": prio}
-        _TASKS.append(task)
-
-        # append to YAML file
-        fp = _PRIORITY_FILES[prio]
-        data = []
-        if fp.exists():
-            data = yaml.safe_load(fp.read_text()) or []
-        data.append(task)
-        fp.write_text(yaml.safe_dump(data, sort_keys=False))
-
-# ---------------------------------------------------------------------------
-# New public helper – allows external modules to add fine-grained tasks while
-# ensuring no duplicates and persisting to the correct YAML priority file.
-# ---------------------------------------------------------------------------
-
-def add_task(task: Dict):
-    """Add *task* dict to registry if not duplicate. Persist to YAML."""
+def add_task(task: Dict) -> bool:
+    """Add task to registry if not duplicate."""
     if task_exists(task.get("title", "")):
         return False
-    prio = task.get("priority", "medium")
-
-    # ------------------------------------------------------------------
-    # Ensure task title carries a Phase/Step label for Agile visibility
-    # If caller already supplied a label we leave it untouched; otherwise
-    # we prepend a generic placeholder that can be updated later by planners.
-    # ------------------------------------------------------------------
-    title = task.get("title", "")
-    if "phase" not in title.lower() or "step" not in title.lower():
-        placeholder = format_phase_step(0, 0, 0, 0)
-        task["title"] = f"{placeholder} — {title}"
-
+    
     _TASKS.append(task)
-    _write_tasks_to_file(prio)
-    _flush_all()
     return True
 
-# ---------------------------------------------------------------------------
-# Granular task generation from *master_roadmap.md* (naive parser)
-# ---------------------------------------------------------------------------
+def save_tasks_to_yaml():
+    """Save all tasks to chat_tasks.yaml, auto-regenerating on every request."""
+    import yaml
+    from pathlib import Path
+    
+    # Save all tasks to chat_tasks.yaml
+    yaml_dir = Path(__file__).resolve().parents[1] / "tasks"
+    yaml_dir.mkdir(exist_ok=True)
+    
+    yaml_file = yaml_dir / "chat_tasks.yaml"
+    with open(yaml_file, 'w') as f:
+        yaml.dump(_TASKS, f, default_flow_style=False, sort_keys=False)
 
-import re
-
-try:
-    from state.quark_state_system.advanced_planner import plan as _adv_plan  # type: ignore
-except ImportError:
-    _adv_plan = None  # fallback later
-
-_PILLAR_HDR = re.compile(r"^Pillar\s+(\d+)\s+–([^:]+):\s+🚧\s+In Progress", re.I)
-
-
-def _smart_split(text: str):
-    """Split *text* on commas/semicolons/and but ignore those inside parentheses."""
-    parts = []
-    buf = ""
-    depth = 0
-    i = 0
-    while i < len(text):
-        ch = text[i]
-        if ch == "(":
-            depth += 1
-        elif ch == ")" and depth > 0:
-            depth -= 1
-        # split tokens only when not inside parens
-        if depth == 0 and (ch == "," or ch == ";"):
-            parts.append(buf.strip())
-            buf = ""
-            i += 1
-            continue
-        buf += ch
-        i += 1
-    if buf.strip():
-        parts.append(buf.strip())
-
-    # further split on ' and ' when not inside parentheses
-    final = []
-    for p in parts:
-        if " and " in p and "(" not in p:  # rough heuristic
-            final.extend([x.strip() for x in p.split(" and ") if x.strip()])
-        else:
-            final.append(p)
-    return final
-
-
-def generate_tasks_from_master(master_path: Path, default_priority: str = "medium") -> int:
-    """Parse *master_path* for 🚧 In Progress pillar blocks and add fine-grained
-    bullet-list tasks below them. Returns number of tasks created."""
-
-    if not master_path.exists():
+def generate_tasks_from_active_roadmaps() -> int:
+    """Generate tasks from active roadmaps."""
+    import re
+    from pathlib import Path
+    
+    # Import roadmap controller
+    try:
+        from management.rules.roadmap.roadmap_controller import get_all_roadmaps, status_snapshot
+    except ImportError:
         return 0
-
-    added = 0
-    current_pillar: str | None = None
-    capture = False
-    buf = master_path.read_text(encoding="utf-8", errors="ignore").splitlines()
-
-    i = 0
-    while i < len(buf):
-        ln = buf[i]
-        hdr = _PILLAR_HDR.match(ln.strip())
-        if hdr:
-            current_pillar = hdr.group(0).split(":")[0]
-            # capture subsequent lines until blank or next header
-            i += 1
-            segment_lines = []
-            while i < len(buf) and buf[i].strip() and not buf[i].startswith("Pillar"):
-                segment_lines.append(buf[i].strip())
-                i += 1
-            # combine lines and split by comma / semicolon / "and"
-            segment_text = " ".join(segment_lines)
-            tokens = _smart_split(segment_text)
-            for tok in tokens:
-                item = tok.strip(" .")
-                if not item:
+    
+    roadmaps = get_all_roadmaps()
+    tasks_added = 0
+    
+    for roadmap in roadmaps:
+        if roadmap.get("format") != "markdown":
+            continue
+            
+        roadmap_path = Path(roadmap["path"])
+        if not roadmap_path.exists():
+            continue
+            
+        # Skip archive and backup files (check full path)
+        path_str = str(roadmap_path).lower()
+        if any(skip_word in path_str for skip_word in ["archive", "backup", "superseded", "deprecated"]):
+            continue
+            
+        # Extract stage/priority from filename
+        filename = roadmap_path.stem.lower()
+        if "stage1" in filename or "embryonic" in filename:
+            priority = "high"
+            stage = "Stage1 Embryonic"
+        elif "stage2" in filename or "fetal" in filename:
+            priority = "high" 
+            stage = "Stage2 Fetal"
+        elif "stage3" in filename:
+            priority = "medium"
+            stage = "Stage3 Early Post-Natal"
+        elif "stage4" in filename:
+            priority = "medium"
+            stage = "Stage4 Childhood"
+        elif "stage5" in filename:
+            priority = "low"
+            stage = "Stage5 Adolescence"
+        elif "stage6" in filename:
+            priority = "low"
+            stage = "Stage6 Adult"
+        else:
+            priority = "medium"
+            stage = roadmap.get("title", "General")
+        
+        try:
+            content = roadmap_path.read_text(encoding="utf-8", errors="ignore")
+            
+            # Extract tasks from bullet points under ALL task sections
+            in_task_section = False
+            current_section = None
+            
+            for line in content.split('\n'):
+                line = line.strip()
+                
+                # Check for any of the three task sections
+                if any(section in line for section in ["Engineering Milestones", "Biological Goals", "SOTA ML Practices"]):
+                    in_task_section = True
+                    current_section = line
                     continue
-                if _adv_plan:
-                    try:
-                        subplans = _adv_plan(item)
-                    except Exception as e:
-                        subplans = []
-                        logger.warning("advanced_planner failed: %s", e)
-                else:
-                    subplans = []
-
-                if not subplans:
-                    # fallback heuristic (design/impl/test/doc)
-                    subplans = [
-                        {"title": f"{item} – Design"},
-                        {"title": f"{item} – Implementation"},
-                        {"title": f"{item} – Unit tests"},
-                        {"title": f"{item} – Documentation"},
-                    ]
-
-                for sp in subplans:
-                    task_title = f"{current_pillar} ▶ {sp['title']}"
+                elif line.startswith('#') or (line.startswith('**') and in_task_section):
+                    # End of current task section
+                    if not any(section in line for section in ["Engineering Milestones", "Biological Goals", "SOTA ML Practices"]):
+                        in_task_section = False
+                        current_section = None
+                        continue
+                
+                if in_task_section and line.startswith('* '):
+                    # Extract task from bullet point
+                    task_text = line[2:].strip()
+                    
+                    # Extract category in brackets if present
+                    category_match = re.match(r'\[([^\]]+)\]\s*(.*)', task_text)
+                    if category_match:
+                        category = category_match.group(1)
+                        task_title = category_match.group(2).strip()
+                    else:
+                        category = "general"
+                        task_title = task_text
+                    
+                    # Determine task status based on document status and line markers
+                    task_status = "pending"  # default
+                    
+                    # Skip tasks that are already marked as done
+                    if any(done_marker in task_text for done_marker in ["✅", "✓", "[x]", "[X]", "DONE", "COMPLETED"]):
+                        continue  # Skip completed tasks - they shouldn't be in active task list
+                    
+                    # Check if document has "In Progress" status
+                    if "📋 In Progress" in content:
+                        # Tasks in "In Progress" documents are in-progress unless marked done
+                        task_status = "in-progress"
+                    
+                    # Create task dict
                     task = {
-                        "id": f"roadmap-step-{len(_TASKS)+1}",
-                        "title": task_title,
-                        "status": "pending",
-                        "priority": sp.get("priority", default_priority),
+                        "title": f"{stage} ▶ {task_title}",
+                        "description": task_text,
+                        "status": task_status,
+                        "priority": priority,
+                        "category": category,
+                        "stage": stage,
+                        "source": str(roadmap_path)
                     }
+                    
+                    # Add task if not duplicate
                     if add_task(task):
-                        added += 1
-            continue  # skip normal increment
-        i += 1
-# end while
-    _flush_all()
-    return added
+                        tasks_added += 1
+        
+        except Exception as e:
+            # Skip problematic files
+            continue
+    
+    # Always save tasks to YAML (auto-regenerate on every request)
+    save_tasks_to_yaml()
+    
+    return tasks_added
+
+def mark_task_complete(task_title: str) -> bool:
+    """Mark a task as complete, move to archive, and update roadmap file."""
+    import yaml
+    from pathlib import Path
+    
+    # Find the task
+    task_to_complete = None
+    for task in _TASKS:
+        if task.get('title') == task_title:
+            task_to_complete = task
+            break
+    
+    if not task_to_complete:
+        return False
+    
+    # Mark task as completed
+    task_to_complete['status'] = 'completed'
+    task_to_complete['completed_date'] = str(Path(__file__).stat().st_mtime)  # Simple timestamp
+    
+    # Move to archive YAML
+    archive_yaml_path = _TASK_DIR / "completed_tasks_archive.yaml"
+    
+    # Load existing archive or create new
+    archived_tasks = []
+    if archive_yaml_path.exists():
+        try:
+            with open(archive_yaml_path, 'r') as f:
+                archived_tasks = yaml.safe_load(f) or []
+        except Exception:
+            archived_tasks = []
+    
+    # Add completed task to archive
+    archived_tasks.append(task_to_complete)
+    
+    # Save updated archive
+    with open(archive_yaml_path, 'w') as f:
+        yaml.dump(archived_tasks, f, default_flow_style=False, sort_keys=False)
+    
+    # Remove from active tasks
+    _TASKS.remove(task_to_complete)
+    
+    # Update roadmap file to mark task as done
+    _mark_task_done_in_roadmap(task_to_complete)
+    
+    # Check if all tasks in this roadmap are done
+    _check_and_update_roadmap_status(task_to_complete['source'])
+    
+    # Save updated active tasks
+    save_tasks_to_yaml()
+    
+    return True
+
+def _mark_task_done_in_roadmap(task: dict):
+    """Mark a task as done in the roadmap markdown file."""
+    import re
+    from pathlib import Path
+    
+    roadmap_path = Path(task['source'])
+    if not roadmap_path.exists():
+        return
+    
+    try:
+        content = roadmap_path.read_text(encoding="utf-8", errors="ignore")
+        
+        # Find the task line and mark it as done
+        task_description = task['description']
+        
+        # Look for the exact task line and prepend with ✅
+        lines = content.split('\n')
+        updated_lines = []
+        
+        for line in lines:
+            if task_description in line and line.strip().startswith('* '):
+                # Mark as done if not already marked
+                if not any(done_marker in line for done_marker in ["✅", "✓", "[x]", "[X]"]):
+                    line = line.replace('* ', '* ✅ ', 1)
+            updated_lines.append(line)
+        
+        # Write back to file
+        roadmap_path.write_text('\n'.join(updated_lines), encoding="utf-8")
+        
+    except Exception as e:
+        print(f"Warning: Could not update roadmap file {roadmap_path}: {e}")
+
+def _check_and_update_roadmap_status(roadmap_path: str):
+    """Check if all tasks in roadmap are done and update status if needed."""
+    from pathlib import Path
+    
+    roadmap_file = Path(roadmap_path)
+    if not roadmap_file.exists():
+        return
+    
+    try:
+        content = roadmap_file.read_text(encoding="utf-8", errors="ignore")
+        
+        # Count total tasks and done tasks in all sections
+        in_task_section = False
+        total_tasks = 0
+        done_tasks = 0
+        
+        for line in content.split('\n'):
+            line = line.strip()
+            
+            # Check for task sections
+            if any(section in line for section in ["Engineering Milestones", "Biological Goals", "SOTA ML Practices"]):
+                in_task_section = True
+                continue
+            elif line.startswith('#') or (line.startswith('**') and in_task_section):
+                if not any(section in line for section in ["Engineering Milestones", "Biological Goals", "SOTA ML Practices"]):
+                    in_task_section = False
+                    continue
+            
+            # Count tasks
+            if in_task_section and line.startswith('* '):
+                total_tasks += 1
+                if any(done_marker in line for done_marker in ["✅", "✓", "[x]", "[X]"]):
+                    done_tasks += 1
+        
+        # Update roadmap status if all tasks are done
+        if total_tasks > 0 and done_tasks == total_tasks:
+            # Replace "In Progress" with "Complete"
+            updated_content = content.replace("📋 In Progress", "✅ Complete")
+            roadmap_file.write_text(updated_content, encoding="utf-8")
+            print(f"✅ Roadmap {roadmap_file.name} marked as Complete - all {total_tasks} tasks done!")
+        
+    except Exception as e:
+        print(f"Warning: Could not check roadmap status for {roadmap_file}: {e}")
+
+def sync_with_roadmaps(status_map: Dict):
+    """Sync tasks with roadmap status (compatibility function)."""
+    pass
+
+def reset_all():
+    """Clear in-memory task list."""
+    global _TASKS
+    _TASKS.clear()
+
+# Minimal functions for compatibility
+def get_sprint_summary() -> str:
+    return "Sprint summary not available"
+
+def format_tasks_for_display(tasks: List[Dict]) -> List[str]:
+    return [t.get("title", "No title") for t in tasks]
+
+def complete_task_by_number(task_number: int) -> bool:
+    """Complete a task by its display number (1-based)."""
+    in_progress_tasks = get_tasks(status="in-progress")
+    
+    if task_number < 1 or task_number > len(in_progress_tasks):
+        return False
+    
+    task_to_complete = in_progress_tasks[task_number - 1]
+    return mark_task_complete(task_to_complete['title'])
+
+def list_in_progress_tasks() -> List[str]:
+    """List current in-progress tasks with numbers for easy completion."""
+    in_progress_tasks = get_tasks(status="in-progress")
+    
+    task_list = []
+    for i, task in enumerate(in_progress_tasks, 1):
+        task_list.append(f"{i}. {task['title']}")
+    
+    return task_list

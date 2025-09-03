@@ -57,7 +57,7 @@ kpis:
 validation:
   - "Compare WCST performance to adolescent cohort"
 ```
-**Functional Mapping (links to Appendix Part 1):**
+**Functional Mapping (links to Appendix A):**
 - [Core Cognitive — Memory, Learning, Reasoning, Problem Solving](#$cap-1-core-cognitive)
 - [Action & Agency — Planning, Decision-Making, Tool Use, Self-Improvement](#$cap-3-action-agency)
 - [Communication & Language — Natural Language, Dialogue, Symbolic Manipulation](#$cap-4-communication-language)

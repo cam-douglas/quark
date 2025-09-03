@@ -7,7 +7,7 @@ Your AlphaGenome API key has been successfully integrated and the system is now 
 ## 📊 Demonstration Results
 
 ### ✅ **Real API Testing - SUCCESS**
-- **API Key**: `AIzaSyDz4S3z6K0lwAi7_vC8gi1_0KOF9xmVtb4` (configured)
+- **API Key**: `MOVED_TO_CREDENTIALS_DIRECTORY` (configured)
 - **API Client**: Successfully created and operational
 - **Real Predictions**: Live genomic analysis working
 - **Data Quality**: High-resolution 2048+ base pair analysis
