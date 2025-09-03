@@ -124,6 +124,26 @@ def sync_tasks():
     log(f"Tasks synced (before={before}, after={after}, added_from_master={added})")
 
 
+# 5. Brain directory indexing (neural-core & ML modules)
+
+from glob import glob
+import json
+
+BRAIN_MANIFEST = ROOT / "brain_manifest.json"
+REPO_MANIFEST = ROOT / "repo_index.json"
+
+def build_brain_manifest():
+    """Scan brain/**/*.py and update manifest JSON files."""
+    patterns = [str(ROOT / "brain" / "**" / "*.py"), str(ROOT / "brain" / "**" / "*.pyi")]
+    files = []
+    for pat in patterns:
+        files.extend(glob(pat, recursive=True))
+    files = [str(Path(f).resolve().relative_to(ROOT)) for f in sorted(files)]
+    BRAIN_MANIFEST.write_text(json.dumps(files, indent=2))
+    REPO_MANIFEST.write_text(json.dumps(files, indent=2))
+    log(f"Brain manifest updated with {len(files)} python files")
+
+
 # ---------------------------------------------------------------------------
 # 4. README update
 # ---------------------------------------------------------------------------
@@ -173,6 +193,7 @@ def main():
         build_master_roadmap()
         validate_links()
         sync_tasks()
+        build_brain_manifest()
         update_readme()
         log("Pre-push update completed successfully ✅")
     except Exception as e:  # pragma: no cover

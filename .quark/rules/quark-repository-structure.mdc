@@ -1,0 +1,28 @@
+---
+description: Quark repository structure, placement, and file-type routing rules
+alwaysApply: true
+---
+ALWAYS apply every rule across all Cursor rule (`.cursor/rules/*.mdc`) and Quark rule (`.quark/rules/*.mdc`) files to the **current codebase and all future changes**; if any existing file violates a rule, refactor it or document an exception before proceeding.
+
+## 🧠 QUARK REPOSITROY STRUCTURE
+ALWAYS respect directory schema:
+  • `brain/`  – neural core + ML sub-systems (`brain/ml/`)
+  • `tests/` – test suites & benchmarks
+  • `tools_utilities/` – helper scripts
+  • `management/` – configs & project management (`management/rules/`)
+  • `state/` – runtime agent state
+  • `docs/` – all documentation
+  • `repo_indexes/` – generated manifests
+ALWAYS follow file-type routing:
+  • Scripts → `tools_utilities/scripts/`
+  • Configs → `management/configurations/project/`
+  • Notebooks → `docs/notebooks/`
+  • Documentation → `docs/`
+  • Results → `tests/results_outputs/`
+  • Models → `data/models/`
+  • Knowledge → `data/knowledge`
+  • Datasets → `data/datasets`
+  • Experiments → `tests/results_outputs/experiments/`
+ALWAYS obey TOP-LEVEL PLACEMENT GUARD:
+  • Never create files at repo root unless core entry-points (`README.md`, `pyproject.toml`, `QUARK_STATE_SYSTEM.py`).
+ALWAYS include tests with new code; maintain directory structure; preserve backups and archive for historical data.

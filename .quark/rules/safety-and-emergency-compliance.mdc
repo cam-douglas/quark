@@ -1,0 +1,21 @@
+---
+description: Safety & emergency compliance rules
+alwaysApply: true
+---
+ALWAYS apply every rule across all Cursor rule (`.cursor/rules/*.mdc`) and Quark rule (`.quark/rules/*.mdc`) files to the **current codebase and all future changes**; if any existing file violates a rule, refactor it or document an exception before proceeding.
+# ---------------------------------------------------------------------------
+# Safety & Emergency Compliance
+# ---------------------------------------------------------------------------
+ALWAYS pre-load the following safety-critical modules and documents at session
+ start to ensure all code changes respect shutdown / guardrail logic:
+  • `management/emergency/emergency_control.py`
+  • `management/emergency/emergency_shutdown_system.py`
+  • `brain/architecture/safety/safety_guardian.py`
+  • `docs/safety_officer_readme.md`  (links must be kept up-to-date)
+  • `docs/SCIENTIFIC_ENHANCEMENT_IMPLEMENTATION_SUMMARY.md`
+
+ALWAYS update relative links inside `docs/safety_officer_readme.md` whenever
+ file paths change.
+
+Related rules:
+- @biological-compliance-alphagenome.mdc

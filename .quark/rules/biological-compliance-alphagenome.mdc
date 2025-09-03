@@ -1,0 +1,32 @@
+---
+description: Biological compliance (AlphaGenome) rules
+alwaysApply: true
+---
+
+ALWAYS apply every rule across all Cursor rule (`.cursor/rules/*.mdc`) and Quark rule (`.quark/rules/*.mdc`) files to the **current codebase and all future changes**; if any existing file violates a rule, refactor it or document an exception before proceeding.
+
+# ---------------------------------------------------------------------------
+# Biological Compliance – Alphagenome Integration
+# ---------------------------------------------------------------------------
+ALWAYS enforce **Alphagenome Criteria** for any code that interfaces with
+ biological simulation, genetic algorithms, or brain-module ML components.
+
+ALWAYS load the following reference implementations into memory at session
+ start so the agent can replicate their coding patterns and validation logic:
+  • `brain/modules/alphagenome_integration/biological_simulator.py`
+  • `brain/modules/alphagenome_integration/dna_controller.py`
+  • `brain/modules/alphagenome_integration/genome_analyzer.py`
+  • `brain/modules/alphagenome_integration/cell_constructor.py`
+
+ALWAYS, before modifying or extending biological code, verify compliance with
+ Alphagenome domain rules (naming conventions, unit balances, biological
+ constraints) and cite the specific rule in commit messages.
+
+ALWAYS include edge-case biological tests (e.g., malformed genome strings,
+ boundary diffusion parameters) when touching these modules.
+
+ALWAYS load supporting documentation `docs/alphagenome_integration_readme.md` at
+ session start so design decisions remain aligned with the written spec.
+
+Related rules:
+- @safety-and-emergency-compliance.mdc

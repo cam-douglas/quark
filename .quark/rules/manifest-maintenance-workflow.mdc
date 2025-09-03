@@ -1,0 +1,27 @@
+---
+description: Manifest Maintenance Workflow
+alwaysApply: true
+---
+ALWAYS apply every rule across all Cursor rule (`.cursor/rules/*.mdc`) and Quark rule (`.quark/rules/*.mdc`) files to the **current codebase and all future changes**; if any existing file violates a rule, refactor it or document an exception before proceeding.
+# ---------------------------------------------------------------------------
+# Manifest Maintenance Workflow
+# ---------------------------------------------------------------------------
+ALWAYS read **and** update the following manifests at session start **and** whenever any update mechanism (state sync, pre-push hook, CI job) modifies the tree:
+  • `/Users/camdouglas/quark/repo_indexes/INDEX.md`
+  • `/Users/camdouglas/quark/brain_manifest.json`
+  • `/Users/camdouglas/quark/repo_index.json`
+
+ALWAYS, after each manifest refresh:
+  • Re-scan the entire workspace so manifests reflect the current file set (all sub-trees, not just `brain/`).
+  • Regenerate or patch `README.md` files in every directory that changed, embedding fresh relative links to other READMEs and verifying that no internal links are broken (link-check logic).
+
+ALWAYS fail the triggering operation (pre-push, CI job, or in-session update) when:
+  • Any manifest is out-of-sync with on-disk files, OR
+  • Any refreshed README contains a dangling link.
+
+Rationale: keeps global indexes, deep-directory READMEs, and cross-links perfectly aligned with the evolving code-base.
+
+Related rules:
+- @management-rules-loader.mdc
+
+ALWAYS forbid any automated or autonomous edit to `.quark/rules` or `.cursor/rules`; the system may only **suggest** changes which must be explicitly approved and manually applied by the user.

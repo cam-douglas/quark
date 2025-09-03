@@ -46,6 +46,31 @@ class QuarkDriver:
         quark_rules_path = os.path.join(self.workspace_root, ".quarkrules")
         cursor_rules_path = os.path.join(self.workspace_root, ".cursorrules")
 
+        # Verify enforcement banner exists in every rule file (cursor & quark)
+        banner_snippet = "ALWAYS apply every rule across all Cursor rule"
+        rule_dirs = [
+            os.path.join(self.workspace_root, ".cursor", "rules"),
+            os.path.join(self.workspace_root, ".quark", "rules"),
+        ]
+        missing_banner = []
+        import glob
+        for rd in rule_dirs:
+            if not os.path.isdir(rd):
+                continue
+            for fp in glob.glob(os.path.join(rd, "*.mdc")):
+                try:
+                    with open(fp, "r", encoding="utf-8") as _f:
+                        head = _f.read(512)  # first ~512 chars sufficient
+                    if banner_snippet not in head:
+                        missing_banner.append(os.path.relpath(fp, self.workspace_root))
+                except Exception:
+                    missing_banner.append(os.path.relpath(fp, self.workspace_root))
+
+        if missing_banner:
+            raise RuntimeError(
+                "Rule enforcement banner missing in files: " + ", ".join(missing_banner)
+            )
+
         if not os.path.exists(quark_rules_path):
             raise FileNotFoundError(".quarkrules file is required but missing.")
 

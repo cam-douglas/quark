@@ -1,0 +1,15 @@
+---
+description: Simulation entry points rules
+alwaysApply: true
+---
+ALWAYS apply every rule across all Cursor rule (`.cursor/rules/*.mdc`) and Quark rule (`.quark/rules/*.mdc`) files to the **current codebase and all future changes**; if any existing file violates a rule, refactor it or document an exception before proceeding.
+
+# ---------------------------------------------------------------------------
+# Simulation Entry Points
+# ---------------------------------------------------------------------------
+ALWAYS treat `brain/brain_main.py` as the PRIMARY entry points for Quark brain simulations.
+ALWAYS ensure all **new and existing** brain-related or biologically-informed ML modules integrate with these simulators, or include a written rationale explaining why integration is not applicable.
+ALWAYS design such integrations around executive-function pathways (prefrontal cortex, decision layers, etc.) when applicable.
+
+Related rules:
+- @mode-specific-behaviours.mdc

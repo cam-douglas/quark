@@ -1,15 +1,15 @@
-from management.rules.roadmap.roadmap_controller import RoadmapController
+from management.rules.roadmap.roadmap_controller import status_snapshot, get_index
 
 
 def test_index_parsing():
-    rows = rc.get_index()
+    rows = get_index()
     # Ensure index contains at least the master roadmap
     titles = [r["title"] for r in rows]
     assert any("Master Roadmap" in t for t in titles)
 
 
 def test_status_snapshot_mapping():
-    snap = rc.status_snapshot()
+    snap = status_snapshot()
     assert isinstance(snap, dict)
     # snapshot keys should be non-empty titles
     assert snap, "Snapshot should not be empty"

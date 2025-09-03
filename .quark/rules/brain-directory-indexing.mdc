@@ -1,0 +1,21 @@
+---
+description: Brain directory indexing rules
+applyIntelligently: true
+---
+
+ALWAYS apply every rule across all Cursor rule (`.cursor/rules/*.mdc`) and Quark rule (`.quark/rules/*.mdc`) files to the **current codebase and all future changes**; if any existing file violates a rule, refactor it or document an exception before proceeding.
+
+# ---------------------------------------------------------------------------
+# Brain Directory Indexing
+# ---------------------------------------------------------------------------
+ALWAYS during the pre-push hook run `glob_file_search("brain/**/*.py")` (target = repo root, head_limit high) to build a manifest of all neural-core and ML files. 
+ALWAYS read **and** update the manifests during the pre-push hook:
+  • /Users/camdouglas/quark/brain_manifest.json
+  • /Users/camdouglas/quark/repo_index.json
+
+Rationale: Guarantees biomechanical fidelity across the AGI brain simulation
+ stack by enforcing a single canonical implementation style.
+
+Related rules:
+- @manifest-location-and-archiving.mdc
+- @manifest-maintenance-workflow.mdc

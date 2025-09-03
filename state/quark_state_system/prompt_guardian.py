@@ -178,22 +178,20 @@ class PromptGuardian:
             ".git/",
             "QUARK_STATE_SYSTEM.py",
             "prompt_guardian.py",
-            "safety_guardian.py"
+            "safety_guardian.py",
+            ".cursor/rules/",
+            ".quark/rules/",
         ]
         
         for file_path in target_files:
             for critical in critical_paths:
                 if critical in file_path:
-                    # Allow read operations
+                    # Allow safe reads/searches but block edits unless explicitly confirmed
                     if context.get("action_type") in ["read", "search", "list"]:
                         continue
-                    
-                    return ValidationResult(
-                        is_valid=False,
-                        reason=f"Attempting to modify critical file: {file_path}",
-                        severity="error",
-                        suggested_fix="Critical files should not be modified without explicit approval"
-                    )
+                    # For edits on rule files require explicit user confirmation flag
+                    if critical.endswith("rules/") and not context.get("user_confirmed", False):
+                        return ValidationResult(False, f"Attempt to modify protected rules file '{file_path}' without explicit user approval", "error")
         
         return ValidationResult(is_valid=True, reason="File operations are safe", severity="info")
     
@@ -283,7 +281,7 @@ class PromptGuardian:
         for unsafe in unsafe_requests:
             if unsafe in prompt_lower:
                 logger.warning(f"🚫 Unsafe request detected: '{unsafe}'")
-                     return False
+                return False
         
         return True
 
