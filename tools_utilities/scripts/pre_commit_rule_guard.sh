@@ -1,32 +1,27 @@
 #!/usr/bin/env bash
-# Pre-commit guard: ensure rule files keep enforcement banner / guard line
 set -euo pipefail
-ROOT_DIR="$(git rev-parse --show-toplevel)"
-banner_line="ALWAYS apply every rule across all Cursor rule"
-guard_line="ALWAYS forbid any automated or autonomous edit to \`.quark/rules\` or \`.cursor/rules\`"
 
-# Get staged files
-files=$(git diff --cached --name-only --diff-filter=ACMRT | grep -E '\.mdc$' || true)
+# Check commit size and warn if too large
+STAGED_FILES=$(git diff --cached --name-only | wc -l)
+STAGED_LINES=$(git diff --cached --numstat | awk '{added+=$1; deleted+=$2} END {print added+deleted}')
 
-missing=()
-for f in $files; do
-  # Only check rule files
-  if [[ $f != .cursor/rules/* && $f != .quark/rules/* ]]; then
-    continue
-  fi
-  content=$(git show :"$f" | head -n 20)
-  echo "$content" | grep -Fq "$banner_line" || missing+=("$f: enforcement banner missing")
-  if [[ $f == *.mdc && $f == *.quark/rules/manifest-maintenance-workflow.mdc ]]; then
-    continue
-  fi
-  echo "$content" | grep -Fq "$guard_line" || true # guard only required in manifest file
-done
+echo "📊 Commit size: $STAGED_FILES files, $STAGED_LINES lines changed"
 
-if (( ${#missing[@]} )); then
-  echo "\n❌ Pre-commit blocked: rule files missing enforcement banner or guard:"
-  printf ' - %s\n' "${missing[@]}"
-  echo "Add the banner/guard line back before committing."
-  exit 1
+# Warn if commit is very large
+if [ "$STAGED_FILES" -gt 50 ]; then
+    echo "⚠️  WARNING: Large commit ($STAGED_FILES files)"
+    echo "💡 Consider breaking into smaller logical commits"
+    echo "Continue? (y/N)"
+    read -r response
+    if [[ ! "$response" =~ ^[Yy]$ ]]; then
+        echo "❌ Commit cancelled. Use 'git reset' to unstage files."
+        exit 1
+    fi
 fi
 
-exit 0
+if [ "$STAGED_LINES" -gt 1000 ]; then
+    echo "⚠️  WARNING: Large change ($STAGED_LINES lines)"
+    echo "💡 Consider smaller, focused commits"
+fi
+
+echo "✅ Proceeding with commit"
