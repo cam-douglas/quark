@@ -21,6 +21,7 @@ THEN implement step by step:
 - Execute the smallest safe edits; keep behaviour changes intentional.
 - Maintain typing, lint, formatting, tests, and coverage thresholds. (See: `.cursor/rules/architecture-and-quality.mdc`)
 - Update documentation and cross-links as behaviour changes. (See: `.cursor/rules/markdown-and-crosslink-awareness.mdc`)
+- **Commit frequently with safe practices**: 1-10 files per commit, 1-50 lines changed per file when possible, single logical change per commit, related files only (never mix unrelated changes)
 
 THEN generate two summaries:
 - Technical summary of what changed and why (with citations if external sources informed decisions).
@@ -33,3 +34,4 @@ FINALLY self-verify:
 
 NEVER proceed if READMEs or required Markdown cannot be loaded; halt and request clarification. (See: `.cursor/rules/documentation-first-guard.mdc`)
 NEVER introduce placeholders; if a dependency is missing, diagnose root cause and implement a working solution or stop with a clear Needs-Info note. (See: `.cursor/rules/redundant-code-guard.mdc`)
+NEVER perform large-scale operations (cleanup, refactoring, tool installation) without recent commit of current work and explicit user approval for any file deletions or moves.
