@@ -36,7 +36,12 @@ def validate_md(md_path: Path, repo_root: Path) -> List[Tuple[Path, str]]:
             continue
         t_path = (md_path.parent / target).resolve()
         if not t_path.exists():
-            broken.append((md_path.relative_to(repo_root), target))
+            try:
+                relative_md_path = md_path.relative_to(repo_root)
+            except ValueError:
+                # Handle absolute vs relative path issues
+                relative_md_path = str(md_path)
+            broken.append((relative_md_path, target))
     return broken
 
 
