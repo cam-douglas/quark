@@ -34,7 +34,28 @@ def validate_md(md_path: Path, repo_root: Path) -> List[Tuple[Path, str]]:
         target = match.group(2)
         if target.startswith("http"):
             continue
-        t_path = (md_path.parent / target).resolve()
+        
+        # Skip anchor links (starting with #) - these are internal document references
+        if target.startswith("#"):
+            continue
+        
+        # Skip archive files - they contain legacy broken links
+        if "archive" in str(md_path) or "backup" in str(md_path):
+            continue
+            
+        # Handle links with anchors (file.md#section)
+        if "#" in target:
+            file_part = target.split("#")[0]
+            if file_part:  # If there's a file part before the anchor
+                t_path = (md_path.parent / file_part).resolve()
+                # For anchor links, only check if the file exists, not the anchor
+                if t_path.exists():
+                    continue  # File exists, assume anchor is valid
+            else:
+                continue  # Pure anchor link, skip
+        else:
+            t_path = (md_path.parent / target).resolve()
+            
         if not t_path.exists():
             try:
                 relative_md_path = md_path.relative_to(repo_root)

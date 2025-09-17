@@ -50,3 +50,16 @@ python QUARK_STATE_SYSTEM.py sync
 
 See docs/INDEX.md for a curated map of specifications, guides, and historical reports.
 
+
+
+<!-- ROADMAP_STATUS_START -->
+**Roadmap Status**  
+Date: 2025-09-17  
+Roadmaps: 1 (✅ 0 · 🚧 0 · 📋 0)  
+Pending tasks: 0
+
+* Use `python QUARK_STATE_SYSTEM.py \"update roadmap\"` after editing roadmap files.  
+* Top priorities surfaced via `recommendations` command.  
+* Chat-specified tasks live in `chat_tasks.yaml`.
+
+<!-- ROADMAP_STATUS_END -->

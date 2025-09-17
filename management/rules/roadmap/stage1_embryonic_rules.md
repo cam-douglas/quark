@@ -16,8 +16,8 @@ Weeks 3–8: neural-tube folding plus SHH/BMP/WNT/FGF gradients establish fore-,
 
 * [foundation-layer] ✅ **DONE** - Establish foundation-layer morphogen solver aligning with SHH/BMP/WNT/FGF gradients.
 * [developmental-biology] ✅ **DONE** - Generate lineage-tagged neuroepithelial cells with human-compliant longitudinal validation.
-* [foundation-layer] ✅ **DONE** - Excavate ventricular cavities (lateral, third, fourth, aqueduct) in voxel map. → [Detailed sub-tasks](../../state/tasks/roadmap_tasks/foundation_layer_detailed_tasks.md#11-ventricular-system-construction)
-* [foundation-layer] ✅ **DONE** - Lay meninges scaffold (dura, arachnoid, pia) surrounding neural tube. → [Detailed sub-tasks](../../state/tasks/roadmap_tasks/foundation_layer_detailed_tasks.md#12-meninges-scaffold-construction)
+* [foundation-layer] ✅ **DONE** - Excavate ventricular cavities (lateral, third, fourth, aqueduct) in voxel map. → [Detailed sub-tasks](../../../state/tasks/roadmap_tasks/foundation_layer_tasks.md#11-ventricular-system-construction)
+* [foundation-layer] ✅ **DONE** - Lay meninges scaffold (dura, arachnoid, pia) surrounding neural tube. → [Detailed sub-tasks](../../../state/tasks/roadmap_tasks/foundation_layer_tasks.md#12-meninges-scaffold-construction)
 * [brainstem] ✅ **DONE** - Segment brainstem subdivisions (midbrain, pons, medulla) with labels; deployed with Prometheus/Grafana monitoring. → Retrospective: `docs/reports/brainstem_segmentation_phase4_postmortem.md`, Dashboard: `management/configurations/project/grafana_dashboards/brainstem_segmentation.json`
 * [cerebellum] 🚨 **PENDING** - Model cerebellar vermis, hemispheres, and deep nuclei microzones for future motor-control loops.
 * [cortex-mapping] 🚨 **PENDING** - Generate cerebral lobe mapping table (frontal, parietal, temporal, occipital, limbic, insular) linked to functional subsystems.
@@ -34,8 +34,8 @@ Weeks 3–8: neural-tube folding plus SHH/BMP/WNT/FGF gradients establish fore-,
 
 **SOTA ML Practices (2025) — recommended methods**
 
-* [foundation-layer] ✅ **DONE** - Diffusion-based generative fields to model spatial morphogen concentration. → [Detailed sub-tasks](../../state/tasks/roadmap_tasks/foundation_layer_detailed_tasks.md#22-advanced-ml-integration)
-* [foundation-layer] ✅ **DONE** - Transformer-based graph neural nets (GNN-ViT hybrid) for 3-D segmentation with limited labels. → [Detailed sub-tasks](../../state/tasks/roadmap_tasks/foundation_layer_detailed_tasks.md#23-3d-segmentation-system)
+* [foundation-layer] ✅ **DONE** - Diffusion-based generative fields to model spatial morphogen concentration. → [Detailed sub-tasks](../../../state/tasks/roadmap_tasks/foundation_layer_tasks.md#22-advanced-ml-integration)
+* [foundation-layer] ✅ **DONE** - Transformer-based graph neural nets (GNN-ViT hybrid) for 3-D segmentation with limited labels. → [Detailed sub-tasks](../../../state/tasks/roadmap_tasks/foundation_layer_tasks.md#23-3d-segmentation-system)
 * [curriculum-learning] 🚨 **PENDING** - Curriculum learning: train on simplified in-silico embryos → full morphology.
 * [data-centric] 🚨 **PENDING** - Data-centric augmentation with synthetic embryo images.
 
