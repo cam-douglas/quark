@@ -1,8 +1,7 @@
 name: Reorg Safety Check
 
 on:
-  pull_request:
-    branches: [ reorg_phase3 ]
+  workflow_dispatch:  # Manual trigger only - reorg_phase3 branch no longer exists
 
 jobs:
   safety:
