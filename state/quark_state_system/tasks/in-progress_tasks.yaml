@@ -1,0 +1,381 @@
+generated: '2025-09-04T22:21:14.643185'
+description: All in-progress tasks from active roadmap files, organized by sub-headings
+total_tasks: 18
+active_roadmaps:
+- stage1_embryonic_rules.md
+tasks_by_roadmap:
+  stage1_embryonic_rules.md:
+    "Engineering Milestones \u2014 Stage1 Embryonic Rules":
+      original_header: "**Engineering Milestones \u2014 implementation tasks driving\
+        \ Stage 1 goals**"
+      tasks:
+      - &id001
+        id: stage1_embryonic_rules_[developmental-biology_0_5539
+        title: '[[developmental-biology] Generate lineage-tagged neuroepithelial cells
+          for downstream proliferation.'
+        status: pending
+        source: stage1_embryonic_rules
+        category: '[developmental-biology'
+        section: Engineering Milestones
+        section_subtitle: "Engineering Milestones \u2014 Stage1 Embryonic Rules"
+        original_header: "**Engineering Milestones \u2014 implementation tasks driving\
+          \ Stage 1 goals**"
+        roadmap_file: stage1_embryonic_rules.md
+        phase: 1
+        batch: A
+        step: 1
+        pfo_stage: F2
+        formatted_label: "Phase 1 \u25B8 Batch A \u25B8 Step 1.F2"
+      - &id002
+        id: stage1_embryonic_rules_[foundation-layer_1_2236
+        title: '[[foundation-layer] Excavate ventricular cavities (lateral, third,
+          fourth, aqueduct) in voxel map.'
+        status: pending
+        source: stage1_embryonic_rules
+        category: '[foundation-layer'
+        section: Engineering Milestones
+        section_subtitle: "Engineering Milestones \u2014 Stage1 Embryonic Rules"
+        original_header: "**Engineering Milestones \u2014 implementation tasks driving\
+          \ Stage 1 goals**"
+        roadmap_file: stage1_embryonic_rules.md
+        phase: 1
+        batch: A
+        step: 2
+        pfo_stage: F4
+        formatted_label: "Phase 1 \u25B8 Batch A \u25B8 Step 2.F4"
+      - &id003
+        id: stage1_embryonic_rules_[foundation-layer_2_1437
+        title: '[[foundation-layer] Lay meninges scaffold (dura, arachnoid, pia) surrounding
+          neural tube.'
+        status: pending
+        source: stage1_embryonic_rules
+        category: '[foundation-layer'
+        section: Engineering Milestones
+        section_subtitle: "Engineering Milestones \u2014 Stage1 Embryonic Rules"
+        original_header: "**Engineering Milestones \u2014 implementation tasks driving\
+          \ Stage 1 goals**"
+        roadmap_file: stage1_embryonic_rules.md
+        phase: 1
+        batch: A
+        step: 3
+        pfo_stage: F4
+        formatted_label: "Phase 1 \u25B8 Batch A \u25B8 Step 3.F4"
+      - &id004
+        id: stage1_embryonic_rules_[brainstem_3_8663
+        title: '[[brainstem] Segment brainstem subdivisions (midbrain, pons, medulla)
+          with dedicated sensorimotor/autonomic labels.'
+        status: pending
+        source: stage1_embryonic_rules
+        category: '[brainstem'
+        section: Engineering Milestones
+        section_subtitle: "Engineering Milestones \u2014 Stage1 Embryonic Rules"
+        original_header: "**Engineering Milestones \u2014 implementation tasks driving\
+          \ Stage 1 goals**"
+        roadmap_file: stage1_embryonic_rules.md
+        phase: 1
+        batch: A
+        step: 4
+        pfo_stage: F4
+        formatted_label: "Phase 1 \u25B8 Batch A \u25B8 Step 4.F4"
+      - &id005
+        id: stage1_embryonic_rules_[cerebellum_4_814
+        title: '[[cerebellum] Model cerebellar vermis, hemispheres, and deep nuclei
+          microzones for future motor-control loops.'
+        status: pending
+        source: stage1_embryonic_rules
+        category: '[cerebellum'
+        section: Engineering Milestones
+        section_subtitle: "Engineering Milestones \u2014 Stage1 Embryonic Rules"
+        original_header: "**Engineering Milestones \u2014 implementation tasks driving\
+          \ Stage 1 goals**"
+        roadmap_file: stage1_embryonic_rules.md
+        phase: 1
+        batch: A
+        step: 5
+        pfo_stage: F4
+        formatted_label: "Phase 1 \u25B8 Batch A \u25B8 Step 5.F4"
+      - &id006
+        id: stage1_embryonic_rules_[cortex-mapping_5_3711
+        title: '[[cortex-mapping] Generate cerebral lobe mapping table (frontal, parietal,
+          temporal, occipital, limbic, insular) linked to functional subsystems.'
+        status: pending
+        source: stage1_embryonic_rules
+        category: '[cortex-mapping'
+        section: Engineering Milestones
+        section_subtitle: "Engineering Milestones \u2014 Stage1 Embryonic Rules"
+        original_header: "**Engineering Milestones \u2014 implementation tasks driving\
+          \ Stage 1 goals**"
+        roadmap_file: stage1_embryonic_rules.md
+        phase: 1
+        batch: A
+        step: 1
+        pfo_stage: F4
+        formatted_label: "Phase 1 \u25B8 Batch A \u25B8 Step 1.F4"
+    "Biological Goals \u2014 Stage1 Embryonic Rules":
+      original_header: "**Biological Goals \u2014 desired biological outcomes for\
+        \ Stage 1**"
+      tasks:
+      - &id007
+        id: stage1_embryonic_rules_[foundation-layer_6_909
+        title: "[[foundation-layer] Simulate morphogen gradients to generate a coarse\
+          \ 3-axis voxel map (\u23291 mm\xB3 resolution) that labels emerging brain\
+          \ regions."
+        status: pending
+        source: stage1_embryonic_rules
+        category: '[foundation-layer'
+        section: Biological Goals
+        section_subtitle: "Biological Goals \u2014 Stage1 Embryonic Rules"
+        original_header: "**Biological Goals \u2014 desired biological outcomes for\
+          \ Stage 1**"
+        roadmap_file: stage1_embryonic_rules.md
+        phase: 1
+        batch: A
+        step: 2
+        pfo_stage: P1
+        formatted_label: "Phase 1 \u25B8 Batch A \u25B8 Step 2.P1"
+      - &id008
+        id: stage1_embryonic_rules_[developmental-biology_7_1066
+        title: '[[developmental-biology] Instantiate proto-cell populations with lineage
+          tags for later differentiation.'
+        status: pending
+        source: stage1_embryonic_rules
+        category: '[developmental-biology'
+        section: Biological Goals
+        section_subtitle: "Biological Goals \u2014 Stage1 Embryonic Rules"
+        original_header: "**Biological Goals \u2014 desired biological outcomes for\
+          \ Stage 1**"
+        roadmap_file: stage1_embryonic_rules.md
+        phase: 1
+        batch: A
+        step: 3
+        pfo_stage: P4
+        formatted_label: "Phase 1 \u25B8 Batch A \u25B8 Step 3.P4"
+      - &id009
+        id: stage1_embryonic_rules_[foundation-layer_8_4663
+        title: '[[foundation-layer] Validate regional segmentation against Allen Brain
+          Atlas embryonic reference.'
+        status: pending
+        source: stage1_embryonic_rules
+        category: '[foundation-layer'
+        section: Biological Goals
+        section_subtitle: "Biological Goals \u2014 Stage1 Embryonic Rules"
+        original_header: "**Biological Goals \u2014 desired biological outcomes for\
+          \ Stage 1**"
+        roadmap_file: stage1_embryonic_rules.md
+        phase: 1
+        batch: A
+        step: 4
+        pfo_stage: P1
+        formatted_label: "Phase 1 \u25B8 Batch A \u25B8 Step 4.P1"
+      - &id010
+        id: stage1_embryonic_rules_[foundation-layer_9_6161
+        title: '[[foundation-layer] Map primitive ventricular system (lateral, third,
+          fourth ventricles, cerebral aqueduct) for future CSF modelling.'
+        status: pending
+        source: stage1_embryonic_rules
+        category: '[foundation-layer'
+        section: Biological Goals
+        section_subtitle: "Biological Goals \u2014 Stage1 Embryonic Rules"
+        original_header: "**Biological Goals \u2014 desired biological outcomes for\
+          \ Stage 1**"
+        roadmap_file: stage1_embryonic_rules.md
+        phase: 1
+        batch: A
+        step: 5
+        pfo_stage: P1
+        formatted_label: "Phase 1 \u25B8 Batch A \u25B8 Step 5.P1"
+      - &id011
+        id: stage1_embryonic_rules_[foundation-layer_10_8713
+        title: '[[foundation-layer] Document meninges scaffold (dura, arachnoid, pia)
+          as exostructural context.'
+        status: pending
+        source: stage1_embryonic_rules
+        category: '[foundation-layer'
+        section: Biological Goals
+        section_subtitle: "Biological Goals \u2014 Stage1 Embryonic Rules"
+        original_header: "**Biological Goals \u2014 desired biological outcomes for\
+          \ Stage 1**"
+        roadmap_file: stage1_embryonic_rules.md
+        phase: 1
+        batch: A
+        step: 1
+        pfo_stage: P1
+        formatted_label: "Phase 1 \u25B8 Batch A \u25B8 Step 1.P1"
+    "SOTA ML Practices \u2014 Stage1 Embryonic Rules":
+      original_header: "**SOTA ML Practices (2025) \u2014 recommended methods**"
+      tasks:
+      - &id012
+        id: stage1_embryonic_rules_[foundation-layer_11_8771
+        title: '[[foundation-layer] Diffusion-based generative fields to model spatial
+          morphogen concentration.'
+        status: pending
+        source: stage1_embryonic_rules
+        category: '[foundation-layer'
+        section: SOTA ML Practices
+        section_subtitle: "SOTA ML Practices \u2014 Stage1 Embryonic Rules"
+        original_header: "**SOTA ML Practices (2025) \u2014 recommended methods**"
+        roadmap_file: stage1_embryonic_rules.md
+        phase: 1
+        batch: C
+        step: 2
+        pfo_stage: A2
+        formatted_label: "Phase 1 \u25B8 Batch C \u25B8 Step 2.A2"
+      - &id013
+        id: stage1_embryonic_rules_[foundation-layer_12_9508
+        title: '[[foundation-layer] Transformer-based graph neural nets (GNN-ViT hybrid)
+          for 3-D segmentation with limited labels.'
+        status: pending
+        source: stage1_embryonic_rules
+        category: '[foundation-layer'
+        section: SOTA ML Practices
+        section_subtitle: "SOTA ML Practices \u2014 Stage1 Embryonic Rules"
+        original_header: "**SOTA ML Practices (2025) \u2014 recommended methods**"
+        roadmap_file: stage1_embryonic_rules.md
+        phase: 1
+        batch: C
+        step: 3
+        pfo_stage: A2
+        formatted_label: "Phase 1 \u25B8 Batch C \u25B8 Step 3.A2"
+      - &id014
+        id: stage1_embryonic_rules_[curriculum-learning_13_6206
+        title: "[[curriculum-learning] Curriculum learning: train on simplified in-silico\
+          \ embryos \u2192 full morphology."
+        status: pending
+        source: stage1_embryonic_rules
+        category: '[curriculum-learning'
+        section: SOTA ML Practices
+        section_subtitle: "SOTA ML Practices \u2014 Stage1 Embryonic Rules"
+        original_header: "**SOTA ML Practices (2025) \u2014 recommended methods**"
+        roadmap_file: stage1_embryonic_rules.md
+        phase: 1
+        batch: C
+        step: 4
+        pfo_stage: A2
+        formatted_label: "Phase 1 \u25B8 Batch C \u25B8 Step 4.A2"
+      - &id015
+        id: stage1_embryonic_rules_[data-centric_14_3213
+        title: '[[data-centric] Data-centric augmentation with synthetic embryo images.'
+        status: pending
+        source: stage1_embryonic_rules
+        category: '[data-centric'
+        section: SOTA ML Practices
+        section_subtitle: "SOTA ML Practices \u2014 Stage1 Embryonic Rules"
+        original_header: "**SOTA ML Practices (2025) \u2014 recommended methods**"
+        roadmap_file: stage1_embryonic_rules.md
+        phase: 1
+        batch: C
+        step: 5
+        pfo_stage: A2
+        formatted_label: "Phase 1 \u25B8 Batch C \u25B8 Step 5.A2"
+    "Functional Mapping \u2014 Stage1 Embryonic Rules":
+      original_header: '**Functional Mapping (links to Appendix A):**'
+      tasks:
+      - &id016
+        id: stage1_embryonic_rules_functional_mapping_1_5798
+        title: "[functional-mapping] Core Cognitive \u2014 Memory, Learning, Reasoning,\
+          \ Problem Solving"
+        status: pending
+        source: stage1_embryonic_rules
+        category: functional-mapping
+        section: Functional Mapping
+        section_subtitle: "Functional Mapping \u2014 Stage1 Embryonic Rules"
+        original_header: '**Functional Mapping (links to Appendix A):**'
+        roadmap_file: stage1_embryonic_rules.md
+        appendix_link: '#$cap-1-core-cognitive'
+        appendix_context:
+          context_snippet: "<a id=\"$cap-1-core-cognitive\"></a>\n\nCore Cognitive\
+            \ Domains\n\nNeurobiology\nEpisodic memory relies on hippocampus (DG/CA3\
+            \ for pattern separation/completion) with cortical consolidation during\
+            \ slow-wave sleep; acetylcholine gates encoding vs consolidation across\
+            \ hippocampal-entorhinal loops. Prefrontal cortex (PFC) supports working\
+            \ memory and executive control, integrating with thalamus via cortico-thalamo-cortical\
+            \ loops; cortex obeys laminar feedforward (L4\u2192L2/3) and feedback\
+            \ (L5/6) motifs. Reasoni"
+          full_appendix_available: true
+          appendix_file: management/rules/roadmap/appendix_a_rules.md
+        capability_number: '1'
+        capability_id: core-cognitive
+        phase: 1
+        batch: A
+        step: 1
+        pfo_stage: P2
+        formatted_label: "Phase 1 \u25B8 Batch A \u25B8 Step 1.P2"
+      - &id017
+        id: stage1_embryonic_rules_functional_mapping_2_1427
+        title: "[functional-mapping] Perception & World Modeling \u2014 Multimodal\
+          \ Perception, World Models, Embodiment"
+        status: pending
+        source: stage1_embryonic_rules
+        category: functional-mapping
+        section: Functional Mapping
+        section_subtitle: "Functional Mapping \u2014 Stage1 Embryonic Rules"
+        original_header: '**Functional Mapping (links to Appendix A):**'
+        roadmap_file: stage1_embryonic_rules.md
+        appendix_link: '#$cap-2-perception-world-modeling'
+        appendix_context:
+          context_snippet: "<a id=\"$cap-1-core-cognitive\"></a>\n\nCore Cognitive\
+            \ Domains\n\nNeurobiology\nEpisodic memory relies on hippocampus (DG/CA3\
+            \ for pattern separation/completion) with cortical consolidation during\
+            \ slow-wave sleep; acetylcholine gates encoding vs consolidation across\
+            \ hippocampal-entorhinal loops. Prefrontal cortex (PFC) supports working\
+            \ memory and executive control, integrating with thalamus via cortico-thalamo-cortical\
+            \ loops; cortex obeys laminar feedforward (L4\u2192L2/3) and feedback\
+            \ (L5/6) motifs. Reasoni"
+          full_appendix_available: true
+          appendix_file: management/rules/roadmap/appendix_a_rules.md
+        capability_number: '2'
+        capability_id: perception-world-modeling
+        phase: 1
+        batch: A
+        step: 2
+        pfo_stage: P2
+        formatted_label: "Phase 1 \u25B8 Batch A \u25B8 Step 2.P2"
+      - &id018
+        id: stage1_embryonic_rules_functional_mapping_3_749
+        title: "[functional-mapping] Action & Agency \u2014 Planning, Decision-Making,\
+          \ Tool Use, Self-Improvement"
+        status: pending
+        source: stage1_embryonic_rules
+        category: functional-mapping
+        section: Functional Mapping
+        section_subtitle: "Functional Mapping \u2014 Stage1 Embryonic Rules"
+        original_header: '**Functional Mapping (links to Appendix A):**'
+        roadmap_file: stage1_embryonic_rules.md
+        appendix_link: '#$cap-3-action-agency'
+        appendix_context:
+          context_snippet: "<a id=\"$cap-1-core-cognitive\"></a>\n\nCore Cognitive\
+            \ Domains\n\nNeurobiology\nEpisodic memory relies on hippocampus (DG/CA3\
+            \ for pattern separation/completion) with cortical consolidation during\
+            \ slow-wave sleep; acetylcholine gates encoding vs consolidation across\
+            \ hippocampal-entorhinal loops. Prefrontal cortex (PFC) supports working\
+            \ memory and executive control, integrating with thalamus via cortico-thalamo-cortical\
+            \ loops; cortex obeys laminar feedforward (L4\u2192L2/3) and feedback\
+            \ (L5/6) motifs. Reasoni"
+          full_appendix_available: true
+          appendix_file: management/rules/roadmap/appendix_a_rules.md
+        capability_number: '3'
+        capability_id: action-agency
+        phase: 1
+        batch: A
+        step: 3
+        pfo_stage: P2
+        formatted_label: "Phase 1 \u25B8 Batch A \u25B8 Step 3.P2"
+all_tasks:
+- *id001
+- *id002
+- *id003
+- *id004
+- *id005
+- *id006
+- *id007
+- *id008
+- *id009
+- *id010
+- *id011
+- *id012
+- *id013
+- *id014
+- *id015
+- *id016
+- *id017
+- *id018

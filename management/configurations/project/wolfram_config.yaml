@@ -1,0 +1,205 @@
+# Wolfram Alpha Configuration for Quark Brain Simulation
+# ======================================================
+
+# API Configuration
+api:
+  app_id: "TYW5HL7G68"
+  app_name: "cursor"
+  description: "quark_brain_simulation"
+  base_url: "http://api.wolframalpha.com/v2"
+  timeout: 30
+  max_retries: 3
+  retry_delay: 1.0
+
+# Output Settings
+output:
+  format: "plaintext,image"
+  units: "metric"
+  assumptions: "auto"
+  
+# Query Types and their Default Pods
+query_types:
+  differential_equation:
+    include_pods: ["Solution", "Plot", "Stability"]
+    exclude_pods: ["Assumptions", "WebDefinitions"]
+    
+  matrix_analysis:
+    include_pods: ["Result", "Eigenvalues", "Eigenvectors", "Properties"]
+    exclude_pods: ["WebDefinitions"]
+    
+  optimization:
+    include_pods: ["Result", "Solution", "Minimum", "Plot"]
+    exclude_pods: ["Assumptions"]
+    
+  time_series:
+    include_pods: ["Analysis", "Statistics", "Plot", "Periodogram"]
+    exclude_pods: ["WebDefinitions"]
+    
+  graph_theory:
+    include_pods: ["Properties", "Metrics", "Visualization", "Analysis"]
+    exclude_pods: ["WebDefinitions"]
+    
+  statistics:
+    include_pods: ["Result", "TestStatistic", "PValue", "Distribution"]
+    exclude_pods: ["WebDefinitions"]
+
+# Brain Simulation Specific Settings
+brain_simulation:
+  # Neural dynamics equations to validate
+  neural_equations:
+    - "Hodgkin-Huxley model"
+    - "Leaky integrate-and-fire neuron"
+    - "FitzHugh-Nagumo model"
+    - "Morris-Lecar model"
+    - "Izhikevich neuron model"
+  
+  # Default parameters for neural models
+  default_parameters:
+    membrane_capacitance: 1.0
+    leak_conductance: 0.3
+    sodium_conductance: 120.0
+    potassium_conductance: 36.0
+    sodium_reversal: 50.0
+    potassium_reversal: -77.0
+    leak_reversal: -54.4
+    
+  # Connectivity analysis settings
+  connectivity:
+    matrix_size_limit: 100  # Maximum matrix size for analysis
+    eigenvalue_threshold: 0.01
+    stability_check: true
+    
+  # Optimization settings
+  optimization:
+    parameter_bounds:
+      learning_rate: [0.0001, 0.1]
+      batch_size: [8, 256]
+      hidden_size: [32, 512]
+      dropout: [0.0, 0.5]
+    
+    algorithms: ["minimize", "maximize", "constrained optimization"]
+
+# Training Integration Settings
+training:
+  validation_frequency: 10  # How often to validate with Wolfram (epochs)
+  save_intermediate: true
+  mathematical_validation: true
+  parameter_analysis: true
+  
+  # What to analyze during training
+  analysis_components:
+    - "parameter_distribution"
+    - "gradient_norms"
+    - "loss_landscape"
+    - "convergence_rate"
+
+# Caching and Performance
+cache:
+  enabled: true
+  max_size: 1000  # Maximum number of cached results
+  ttl: 86400  # Time to live in seconds (24 hours)
+  
+performance:
+  concurrent_requests: 5  # Maximum concurrent API requests
+  rate_limit: 2000  # Requests per month (adjust based on your plan)
+  batch_size: 10  # For batch processing
+
+# Error Handling
+error_handling:
+  max_retries: 3
+  retry_on_timeout: true
+  fallback_to_local: true  # Use local computation if Wolfram fails
+  log_errors: true
+
+# Result Processing
+result_processing:
+  extract_numerical: true
+  extract_equations: true
+  extract_plots: true
+  save_images: true
+  image_format: "png"
+  
+  # Numerical extraction settings
+  numerical_precision: 6
+  scientific_notation: true
+  
+  # Plot settings
+  plot_download: true
+  plot_directory: "./data/wolfram_plots"
+  
+# Specific Brain Components Configuration
+brain_components:
+  cortex:
+    query_templates:
+      - "cortical column dynamics"
+      - "pyramidal neuron firing pattern"
+      - "cortical layer connectivity"
+    
+  hippocampus:
+    query_templates:
+      - "place cell firing fields"
+      - "theta rhythm oscillations"
+      - "long-term potentiation"
+    
+  thalamus:
+    query_templates:
+      - "thalamic relay function"
+      - "thalamocortical oscillations"
+      - "sensory gating"
+    
+  basal_ganglia:
+    query_templates:
+      - "action selection mechanism"
+      - "dopamine reward prediction"
+      - "motor control loops"
+
+# Advanced Features
+advanced:
+  # Mathematical validation
+  equation_validation:
+    check_syntax: true
+    stability_analysis: true
+    phase_portraits: true
+    
+  # Cross-validation with literature
+  literature_validation:
+    enabled: false  # Requires additional setup
+    databases: ["PubMed", "arXiv", "Nature"]
+    
+  # Real-time monitoring
+  monitoring:
+    enabled: true
+    metrics: ["query_count", "success_rate", "response_time"]
+    alert_thresholds:
+      error_rate: 0.1
+      response_time: 30.0
+
+# Development and Testing
+development:
+  debug_mode: false
+  verbose_logging: true
+  test_mode: false
+  mock_responses: false
+  
+  # Test queries for validation
+  test_queries:
+    basic: "2+2"
+    mathematical: "integrate x^2 dx"
+    neural: "Hodgkin-Huxley equations"
+    
+# Integration with Other Systems
+integrations:
+  # Paper-QA integration
+  paper_qa:
+    enabled: true
+    cross_reference: true
+    
+  # Kaggle integration
+  kaggle:
+    enabled: true
+    dataset_analysis: true
+    
+  # Cloud computing integration
+  cloud:
+    enabled: true
+    distributed_queries: false

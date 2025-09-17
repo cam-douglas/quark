@@ -1,0 +1,90 @@
+{
+  "final_state": {
+    "cell_type_distribution": {
+      "neuron": 2036961,
+      "astrocyte": 381930,
+      "oligodendrocyte": 101848,
+      "microglia": 25462
+    },
+    "total_tissues": 5,
+    "tissue_types": [
+      "neural_plate",
+      "cortex",
+      "hippocampus",
+      "cerebellum",
+      "brainstem"
+    ]
+  },
+  "simulation_state": {
+    "current_time": 100.09999999999859,
+    "current_stage": "synaptogenesis",
+    "total_cells": 21267795.113523126,
+    "simulation_running": false,
+    "brain_regions": {
+      "neural_plate": {
+        "cells": 4134701.5195072545,
+        "differentiation": 0.3390000000000002
+      },
+      "cortex": {
+        "cells": 6449672.077588725,
+        "differentiation": 0.08200000000000006
+      },
+      "hippocampus": {
+        "cells": 3274359.9984599403,
+        "differentiation": 0.08200000000000006
+      },
+      "cerebellum": {
+        "cells": 4233749.438838407,
+        "differentiation": 0.08200000000000006
+      },
+      "brainstem": {
+        "cells": 3175312.079128797,
+        "differentiation": 0.0
+      }
+    },
+    "morphogen_levels": {
+      "SHH": 0.11313093844027569,
+      "BMP": 0.6040634014865873,
+      "WNT": 1.0743432263904775,
+      "FGF": 0.04799964050685496
+    }
+  },
+  "brain_specification": {
+    "cell_type_distribution": {
+      "NEURON": 2036961,
+      "ASTROCYTE": 381930,
+      "OLIGODENDROCYTE": 101848,
+      "MICROGLIA": 25462
+    },
+    "brain_regions": {
+      "neural_plate": {
+        "cells": 4134701.5195072545,
+        "differentiation": 0.3390000000000002
+      },
+      "cortex": {
+        "cells": 6449672.077588725,
+        "differentiation": 0.08200000000000006
+      },
+      "hippocampus": {
+        "cells": 3274359.9984599403,
+        "differentiation": 0.08200000000000006
+      },
+      "cerebellum": {
+        "cells": 4233749.438838407,
+        "differentiation": 0.08200000000000006
+      },
+      "brainstem": {
+        "cells": 3175312.079128797,
+        "differentiation": 0.0
+      }
+    },
+    "developmental_stage": "synaptogenesis",
+    "simulation_time": 100.09999999999859,
+    "morphogen_status": [
+      "SHH",
+      "BMP",
+      "WNT",
+      "FGF"
+    ]
+  }
+}

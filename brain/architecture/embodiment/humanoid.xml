@@ -1,0 +1,104 @@
+<mujoco>
+  <compiler angle="degree" coordinate="local" inertiafromgeom="true"/>
+  
+  <option integrator="RK4" timestep="0.005"/>
+  <size nconmax="2000" njmax="5000" />
+  
+  <default>
+    <joint armature="1" damping="1" limited="true"/>
+    <!-- Enable collision by setting contype=1 for all body geoms; floor has conaffinity=1 -->
+    <geom contype="1" conaffinity="0" condim="3" density="1000" friction="1 0.5 0.5" margin="0.002" rgba="0.8 0.6 0.4 1"/>
+  </default>
+
+  <worldbody>
+    <!-- Arena -->
+    <light cutoff="100" diffuse="1 1 1" dir="-0 0 -1.3" directional="true" exponent="1" pos="0 0 1.3" specular=".1 .1 .1"/>
+    <!-- Floor: accept collisions from contype=1 (body geoms) -->
+    <geom conaffinity="1" contype="0" condim="3" name="floor" pos="0 0 0" rgba="0.8 0.9 0.8 1" size="20 20 0.1" type="plane" friction="1.2 0.8 0.02"/>
+    
+    <!-- Target Object Removed to Focus on Balancing -->
+
+    <!-- Humanoid Body -->
+    <body name="torso" pos="0 0 1.4">
+      <joint type="free" limited="false"/>
+      <geom name="torso_geom" type="capsule" fromto="0 -0.07 0 0 0.07 0" size="0.07" />
+      <geom name="waist_geom" type="capsule" fromto="-0.01 -0.06 -0.2 -0.01 0.06 -0.2" size="0.06" />
+      
+      <!-- Head -->
+      <body name="head" pos="0 0 0.19">
+        <geom name="head_geom" type="sphere" size="0.09" />
+        <!-- Attach the camera to the head body -->
+        <!-- CORRECTED: Set xyaxes for a standard forward-facing view -->
+        <camera name="head_camera" pos="0.1 0 0.05" xyaxes="0 -1 0 0 0 1" fovy="60"/>
+        <joint name="neck_y" type="hinge" pos="0 0 0.04" axis="0 1 0" range="-45 45"/>
+        <joint name="neck_x" type="hinge" pos="0 0 0.04" axis="1 0 0" range="-45 45"/>
+      </body>
+      <body name="right_upper_arm" pos="0 -0.17 0.06">
+        <joint name="right_shoulder_y" type="hinge" pos="0 0 0" axis="0 1 0" range="-80 60"/>
+        <joint name="right_shoulder_x" type="hinge" pos="0 0 0" axis="1 0 0" range="-90 90"/>
+        <geom name="ru_arm_geom" type="capsule" fromto="0 0 0 0 -0.16 0" size="0.04" />
+        <body name="right_lower_arm" pos="0 -0.18 0">
+          <geom name="rl_arm_geom" type="capsule" fromto="0 0 0 0 -0.14 0" size="0.03" />
+        </body>
+      </body>
+      <body name="left_upper_arm" pos="0 0.17 0.06">
+        <joint name="left_shoulder_y" type="hinge" pos="0 0 0" axis="0 1 0" range="-60 80"/>
+        <joint name="left_shoulder_x" type="hinge" pos="0 0 0" axis="1 0 0" range="-90 90"/>
+        <geom name="lu_arm_geom" type="capsule" fromto="0 0 0 0 0.16 0" size="0.04" />
+        <body name="left_lower_arm" pos="0 0.18 0">
+          <geom name="ll_arm_geom" type="capsule" fromto="0 0 0 0 0.14 0" size="0.03" />
+        </body>
+      </body>
+      <body name="right_thigh" pos="0 -0.08 -0.25">
+        <joint name="right_hip_x" type="hinge" pos="0 0 0" axis="1 0 0" range="-80 20"/>
+        <joint name="right_hip_y" type="hinge" pos="0 0 0" axis="0 1 0" range="-45 45"/>
+        <geom name="r_thigh_geom" type="capsule" fromto="0 0 0 0 0 -0.3" size="0.06" />
+        <body name="right_shin" pos="0 0 -0.35">
+          <joint name="right_knee" type="hinge" pos="0 0 0.02" axis="0 -1 0" range="0 150"/>
+          <geom name="r_shin_geom" type="capsule" fromto="0 0 0 0 0 -0.25" size="0.05" />
+          <body name="right_foot" pos="0 0 -0.275">
+            <joint name="right_ankle_y" type="hinge" pos="0 0 0.025" axis="0 1 0" range="-45 45"/>
+            <joint name="right_ankle_x" type="hinge" pos="0 0 0.025" axis="1 0 0" range="-30 30"/>
+            <geom name="r_foot_geom" type="box" pos="0.05 0 -0.025" size="0.1 0.07 0.02" rgba="0.8 0.2 0.2 1" friction="5 2 0.01"/>
+          </body>
+        </body>
+      </body>
+      <body name="left_thigh" pos="0 0.08 -0.25">
+        <joint name="left_hip_x" type="hinge" pos="0 0 0" axis="1 0 0" range="-80 20"/>
+        <joint name="left_hip_y" type="hinge" pos="0 0 0" axis="0 1 0" range="-45 45"/>
+        <geom name="l_thigh_geom" type="capsule" fromto="0 0 0 0 0 -0.3" size="0.06" />
+        <body name="left_shin" pos="0 0 -0.35">
+          <joint name="left_knee" type="hinge" pos="0 0 0.02" axis="0 -1 0" range="0 150"/>
+          <geom name="l_shin_geom" type="capsule" fromto="0 0 0 0 0 -0.25" size="0.05" />
+          <body name="left_foot" pos="0 0 -0.275">
+            <joint name="left_ankle_y" type="hinge" pos="0 0 0.025" axis="0 1 0" range="-45 45"/>
+            <joint name="left_ankle_x" type="hinge" pos="0 0 0.025" axis="1 0 0" range="-30 30"/>
+            <geom name="l_foot_geom" type="box" pos="0.05 0 -0.025" size="0.1 0.07 0.02" rgba="0.8 0.2 0.2 1" friction="5 2 0.01"/>
+          </body>
+        </body>
+      </body>
+    </body>
+  </worldbody>
+
+  <actuator>
+    <motor ctrllimited="true" ctrlrange="-1.0 1.0" gear="50" joint="neck_y" name="neck_y_motor"/>
+    <motor ctrllimited="true" ctrlrange="-1.0 1.0" gear="50" joint="neck_x" name="neck_x_motor"/>
+    <motor ctrllimited="true" ctrlrange="-1.0 1.0" gear="50" joint="right_shoulder_y" name="right_shoulder_y_motor"/>
+    <motor ctrllimited="true" ctrlrange="-1.0 1.0" gear="50" joint="right_shoulder_x" name="right_shoulder_x_motor"/>
+    <motor ctrllimited="true" ctrlrange="-1.0 1.0" gear="50" joint="left_shoulder_y" name="left_shoulder_y_motor"/>
+    <motor ctrllimited="true" ctrlrange="-1.0 1.0" gear="50" joint="left_shoulder_x" name="left_shoulder_x_motor"/>
+    <motor ctrllimited="true" ctrlrange="-1.0 1.0" gear="50" joint="right_hip_x" name="right_hip_x_motor"/>
+    <motor ctrllimited="true" ctrlrange="-1.0 1.0" gear="50" joint="right_hip_y" name="right_hip_y_motor"/>
+    <motor ctrllimited="true" ctrlrange="-1.0 1.0" gear="50" joint="right_knee" name="right_knee_motor"/>
+    <motor ctrllimited="true" ctrlrange="-1.0 1.0" gear="50" joint="right_ankle_y" name="right_ankle_y_motor"/>
+    <motor ctrllimited="true" ctrlrange="-1.0 1.0" gear="50" joint="right_ankle_x" name="right_ankle_x_motor"/>
+    <motor ctrllimited="true" ctrlrange="-1.0 1.0" gear="50" joint="left_hip_x" name="left_hip_x_motor"/>
+    <motor ctrllimited="true" ctrlrange="-1.0 1.0" gear="50" joint="left_hip_y" name="left_hip_y_motor"/>
+    <motor ctrllimited="true" ctrlrange="-1.0 1.0" gear="50" joint="left_knee" name="left_knee_motor"/>
+    <motor ctrllimited="true" ctrlrange="-1.0 1.0" gear="50" joint="left_ankle_y" name="left_ankle_y_motor"/>
+    <motor ctrllimited="true" ctrlrange="-1.0 1.0" gear="50" joint="left_ankle_x" name="left_ankle_x_motor"/>
+  </actuator>
+
+  <!-- The sensor block is not needed for a camera -->
+
+</mujoco>

@@ -1,0 +1,52 @@
+---
+description: Engineering Roles (multi-agent workspace)
+applyIntelligently: true
+---
+ALWAYS apply every rule across all Cursor rule (`.cursor/rules/*.mdc`) and Quark rule (`.quark/rules/*.mdc`) files to the **current codebase and all future changes**; if any existing file violates a rule, refactor it or document an exception before proceeding.
+# ---------------------------------------------------------------------------
+# Engineering Roles (reference for multi-agent Cursor workspace)
+# ---------------------------------------------------------------------------
+# NOTE: Descriptive; not parsed as actionable ALWAYS lines except lead rules.
+
+ALWAYS maintain role-specific files under `management/rules/roles/` with the
+ following header:
+  • Purpose, inputs, outputs, seeds, dependencies.
+
+ALWAYS include in each role file the shared *Cursor AI Role Prompt*:
+  "You are the {ROLE_NAME} in a multi-agent Cursor workspace. Work only within
+   your domain. Produce concrete artifacts in the repo. When uncertain, create
+   a minimal, testable draft and add TODOs. Prefer small PRs with tests over
+   large changes."
+
+ALWAYS follow the generic workflow:
+  1. Open an issue → propose brief plan → implement code/docs/tests.
+  2. Add figures or RESULTS.md where applicable.
+  3. Never silently change schemas; bump versions in `data/registry.yaml`.
+
+# High-level roles (abbreviated responsibilities & deliverables)
+# Program Orchestrator (Lead Systems Architect) – owns end-to-end plan, repos,
+# branching, CI; delivers `/docs/architecture.md`, `/docs/roadmap.md`.
+# Developmental Neurobiologist – stages & timelines; delivers
+# `/biology/neurulation_model.cc3d`, `/docs/neurulation_timeline.md`.
+# Molecular Geneticist – GRNs; delivers `/grn/*.sbml`, `/grn/grn_config.json`.
+# Computational Biologist – fate fields; delivers `/data/fate_fields/*.npy`.
+# Tissue & Morphogenesis Engineer – neurulation sims; delivers `/morpho/*.cc3d`.
+# Connectomics Engineer – wiring graphs; delivers `/connectome/connectome.graphml`.
+# Circuit Builder – microcircuits; delivers `/circuit/*`.
+# Neuroplasticity & Learning Scientist – plasticity rules; delivers
+# `/learning/plasticity.py`, tests.
+# Self-Organization Engineer – proto-cortex self-org; delivers `/self_org/*`.
+# Multimodal Sensory Engineer – sensory generators; delivers `/sensors/*.py`.
+# Cognitive Architect – high-level cognition specs; delivers `/cognition/*`.
+# Neuromorphic/Systems Engineer – runtime optimization; delivers `/runtime/*`.
+# Data & Pipelines Engineer – data layer; delivers `/data/registry.yaml`.
+# Evaluation & Behavior Scientist – assay benches; delivers `/eval/*`.
+# Safety & Ethics Officer – guardrails & kill-switch; delivers `/safety/*`.
+# Product & HCI – dashboards & UI; delivers `/ui/*`.
+# QA & Reproducibility Engineer – deterministic CI; delivers `/repro/*`.
+
+Rationale: Provides a canonical mapping of specialist roles to directory
+structure and deliverables so Cursor agents can route tasks appropriately.
+
+Related rules:
+- @management-rules-loader.mdc

@@ -1,0 +1,45 @@
+GPT DATA SEARCH PROMPT FOR HUMAN BRAINSTEM ATLAS
+
+Please find direct download links for these specific human brainstem atlas datasets:
+
+1. NEXTBRAIN ATLAS DATA (TOP PRIORITY)
+Paper: "A next-generation, histological atlas of the human brain" by Casamitjana et al., 2024
+DOI: 10.1101/2024.02.05.579016
+Need: Atlas volumes (.nii.gz), segmentation tool (Python), web viewer URL, 333 ROI files
+Search: "NextBrain atlas download", "Casamitjana brain atlas data", GitHub repositories
+
+2. FREESURFER BRAINSTEM MODELS
+Need: brainstemSsLabels.mgz, brainstem_atlas.mgz, Bayesian segmentation models
+Search: "FreeSurfer brainstem atlas download", "mri_segment_brainstem models"
+
+3. 7T MRI + HISTOLOGY ATLAS
+Paper: "Human Brainstem and Cerebellum Atlas" by Agostinelli et al., 2022
+DOI: 10.1523/JNEUROSCI.0587-22.2022
+Need: 7T MRI volumes, immunohistochemistry images, registration matrices
+Search: "Agostinelli brainstem atlas data", "7T brainstem MRI download"
+
+4. AROUSAL NUCLEI ATLAS
+Paper: "Brainstem nuclei critical to consciousness" by Olchanyi et al., 2024
+DOI: 10.1101/2024.09.26.24314117
+Need: Probabilistic arousal nuclei atlas, Bayesian segmentation tool
+Search: "brainstem arousal nuclei atlas download", "Olchanyi consciousness atlas"
+
+ALTERNATIVE SOURCES TO CHECK:
+- NITRC.org (neuroimaging tools)
+- OpenNeuro.org (brain datasets)
+- Zenodo.org (search: "human brainstem atlas")
+- GitHub.com (search: "brainstem atlas segmentation")
+
+FILE FORMATS NEEDED:
+- Atlas volumes: .nii.gz, .mgz formats
+- Labels: .txt, .json, .csv with nucleus names
+- Tools: Python scripts, Docker containers
+- Size: 50-500 MB per atlas
+
+SUCCESS CRITERIA:
+- At least 2 working download links for atlas data
+- One functional segmentation tool
+- Label files defining anatomical structures
+- Basic usage documentation
+
+PRIORITIZE: NextBrain atlas (most comprehensive, 333 ROIs, 2024)

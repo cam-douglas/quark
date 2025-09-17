@@ -1,0 +1,21 @@
+2cf24dba5fb0a30e:
+  approved: true
+  integrated_path: /Users/camdouglas/quark/brain/brain/externals/file/file.txt
+  license: null
+  path: /private/var/folders/y6/f2fclry11_ddrlqt4d9fhq480000gn/T/pytest-of-camdouglas/pytest-3/test_listener_receives_event0/file.txt
+  size_bytes: 5
+2ea47bed30a11f8a:
+  path: /private/var/folders/y6/f2fclry11_ddrlqt4d9fhq480000gn/T/pytest-of-camdouglas/pytest-3/test_gpl_block0/lib.py
+  size_bytes: 41
+3a6eb0790f39ac87:
+  path: /private/var/folders/y6/f2fclry11_ddrlqt4d9fhq480000gn/T/pytest-of-camdouglas/pytest-3/test_plugin_intercepts0/special.txt
+  size_bytes: 4
+583a4d54a8161169:
+  path: /private/var/folders/y6/f2fclry11_ddrlqt4d9fhq480000gn/T/pytest-of-camdouglas/pytest-3/test_sandbox_compile_failure0/bad.py
+  size_bytes: 19
+b94d27b9934d3e08:
+  approved: true
+  integrated_path: /Users/camdouglas/quark/brain/brain/externals/dummy/dummy.txt
+  license: null
+  path: /private/var/folders/y6/f2fclry11_ddrlqt4d9fhq480000gn/T/pytest-of-camdouglas/pytest-3/test_register_and_approve0/dummy.txt
+  size_bytes: 11

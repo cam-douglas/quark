@@ -1,0 +1,73 @@
+# Core
+pydantic>=2.6
+pyyaml>=6.0
+requests>=2.31.0
+urllib3>=1.26.18
+
+# ML & Experiment Tracking
+mlflow>=2.12.0
+
+# Brain Simulation / Control
+brian2
+mujoco
+stable-baselines3>=2.3.0
+cloudpickle>=2.2.1
+
+# Data / Science Stack
+numpy<2.3.0
+scipy
+pandas
+matplotlib
+seaborn
+h5py
+natsort
+anndata
+
+# NLP / HF
+huggingface_hub>=0.23.0
+transformers
+datasets
+accelerate
+sentence-transformers
+sentencepiece
+
+# LLM Providers
+openai
+anthropic
+google-generativeai
+
+# AWS / Cloud
+boto3
+botocore
+
+# API / Web
+fastapi
+uvicorn
+websockets
+plotly
+
+# Vision / Robotics
+opencv-python
+roboticstoolbox-python
+
+# Tools / Validation
+spacy
+tqdm
+immutabledict
+werkzeug>=2.3.0
+
+# Optional / Specialized
+amazon-braket-sdk
+jaxtyping
+typeguard
+ml-dtypes
+intervaltree
+smplx
+kaggle
+beautifulsoup4
+
+aiofiles>=23.0.0
+aiohttp>=3.9.0
+moto[s3]==5.*  # pinned for mock_aws support
+prometheus-client>=0.20.0
+python-multipart>=0.0.20

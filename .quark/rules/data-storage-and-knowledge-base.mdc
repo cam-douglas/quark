@@ -1,0 +1,27 @@
+---
+description: Data Storage & Knowledge Base Placement
+alwaysApply: true
+---
+ALWAYS apply every rule across all Cursor rule (`.cursor/rules/*.mdc`) and Quark rule (`.quark/rules/*.mdc`) files to the **current codebase and all future changes**; if any existing file violates a rule, refactor it or document an exception before proceeding.
+
+# ---------------------------------------------------------------------------
+# Data Storage & Knowledge Base Placement
+# ---------------------------------------------------------------------------
+ALWAYS store any single file or directory exceeding 200 MB inside an
+ appropriate subdirectory of `data/` (e.g., `data/datasets/`, `data/models/`).
+
+ALWAYS keep core source code lightweight; when a module depends on large data
+ (>200 MB) it MUST reference the asset via a relative path under `data/` and
+ document this linkage in the module docstring or README.
+
+ALWAYS place Quark’s knowledge base exclusively under
+ `data/knowledge/`.  Any dependency or linked asset ≤200 MB that forms
+ part of the knowledge base lives there; auxiliary scripts, configs, or docs
+ belong in their normal directories and should reference the knowledge files
+ via relative links.
+
+NEVER commit large binaries to other top-level directories; instead move them
+ into `data/` and update all paths accordingly.
+
+Related rules:
+- @model-retrieval-and-loading.mdc

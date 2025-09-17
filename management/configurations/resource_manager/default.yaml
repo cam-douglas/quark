@@ -1,0 +1,24 @@
+# Default configuration for Quark Resource Manager
+registry_path: management/configurations/resource_manager/registry.yaml
+log_level: INFO
+auto_scan:
+  enabled: false
+  interval_sec: 3600
+placement:
+  large_threshold_mb: 200
+  domain_keywords:
+    dataset: datasets
+    model: models
+    mesh: meshes
+    memory: memories
+sandbox:
+  enabled: true
+  cpu_limit_sec: 120
+  mem_limit_mb: 1024
+licensing:
+  allowed:
+    - MIT
+    - Apache-2.0
+    - BSD-3-Clause
+  blocked:
+    - GPL-3.0

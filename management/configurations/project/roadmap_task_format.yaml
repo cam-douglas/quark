@@ -1,0 +1,7 @@
+roadmap_task_format:
+  use_markers: true
+  task_template: |
+    Task: {milestone}
+    • Biological Goal: {goal}
+    • Acceptance KPI: {kpi}
+    • Suggested Method (SOTA ML): {method}

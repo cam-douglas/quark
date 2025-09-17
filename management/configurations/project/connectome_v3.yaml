@@ -1,0 +1,56 @@
+# Connectome Configuration v3 (with curriculum)
+architecture_agent:
+  role: "Global coordinator and entry point of consciousness"
+  sleep_period: 20
+  sleep_length: 6
+
+modules:
+  pfc:
+    type: "Executive Control Module"
+    inputs: ["working_memory", "hippocampus", "thalamus"]
+    outputs: ["working_memory", "basal_ganglia", "architecture_agent"]
+    description: "Abstract reasoning, planning, and executive function."
+
+  basal_ganglia:
+    type: "Gating & Selection Module"
+    inputs: ["pfc"]
+    outputs: ["thalamus"]
+    description: "Reinforcement-driven gating of WM/expert activation."
+
+  thalamus:
+    type: "Relay Hub"
+    inputs: ["pfc", "basal_ganglia", "working_memory"]
+    outputs: ["pfc", "working_memory"]
+    description: "Routing and contextual relay."
+
+  working_memory:
+    type: "Short-Term Buffer"
+    slots: 3
+    inputs: ["pfc", "thalamus", "sleeper"]
+    outputs: ["pfc", "architecture_agent"]
+    description: "Active maintenance for internal tokens."
+
+  hippocampus:
+    type: "Episodic Memory System"
+    inputs: ["pfc"]
+    outputs: ["pfc", "dmn"]
+    description: "Stores episodic traces; supports replay."
+
+  dmn:
+    type: "Internal Simulation Module"
+    inputs: ["hippocampus", "pfc", "sleeper"]
+    outputs: ["pfc", "architecture_agent"]
+    description: "Self-talk, counterfactual imagination."
+
+attention:
+  type: "Internal Attention Networks (DAN/VAN)"
+  inputs: ["pfc", "thalamus"]
+  outputs: ["architecture_agent"]
+  description: "Task bias for thalamic gain and routing."
+
+curriculum:
+  ticks_per_week: 50
+  schedule:
+    - { at_week: 0, stage: "F",  wm_slots: 3, moe_k: 1 }
+    - { at_week: 1, stage: "N0", wm_slots: 3, moe_k: 2 }
+    - { at_week: 3, stage: "N1", wm_slots: 4, moe_k: 2 }

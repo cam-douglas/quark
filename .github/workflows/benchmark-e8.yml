@@ -1,0 +1,60 @@
+name: E8 Memory Benchmarks
+
+on:
+  push:
+    paths:
+      - 'brain/**'
+      - 'tests/benchmarks/**'
+  pull_request:
+    paths:
+      - 'brain/**'
+      - 'tests/benchmarks/**'
+
+jobs:
+  tests-fast:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt pytest
+      - name: Run fast test suite (skip heavy)
+        run: pytest -m "not heavy" -q
+
+  tests-heavy:
+    needs: tests-fast
+    runs-on: ubuntu-latest
+    env:
+      USE_E8_MEMORY: 'true'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt pytest
+      - name: Run heavy brain-simulator import test
+        run: pytest -m heavy -q tests/brain_simulator
+
+  benchmark:
+    needs: tests-fast
+    runs-on: ubuntu-latest
+    env:
+      USE_E8_MEMORY: 'true'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt pytest pytest-benchmark
+      - name: Run benchmarks
+        run: pytest -q tests/benchmarks

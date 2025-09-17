@@ -1,0 +1,55 @@
+{
+  "standard_models": [
+    {
+      "name": "brain_language_model",
+      "type": "huggingface",
+      "size_gb": 1.2,
+      "priority": "high",
+      "description": "Language processing for brain regions"
+    },
+    {
+      "name": "neural_dynamics_model",
+      "type": "pytorch",
+      "size_gb": 0.5,
+      "priority": "high",
+      "description": "Neural dynamics simulation"
+    },
+    {
+      "name": "consciousness_integration_model",
+      "type": "custom",
+      "size_gb": 2.0,
+      "priority": "medium",
+      "description": "Global workspace theory implementation"
+    },
+    {
+      "name": "quantum_brain_model",
+      "type": "braket",
+      "size_gb": 0.8,
+      "priority": "medium",
+      "description": "Quantum-enhanced neural networks"
+    }
+  ],
+  "standard_datasets": [
+    {
+      "name": "brain_connectivity_atlas",
+      "type": "brain_data",
+      "size_gb": 5.0,
+      "format": "hdf5",
+      "description": "Human brain connectivity data"
+    },
+    {
+      "name": "cognitive_benchmarks",
+      "type": "benchmark",
+      "size_gb": 1.5,
+      "format": "numpy",
+      "description": "Cognitive science validation tasks"
+    },
+    {
+      "name": "neural_training_corpus",
+      "type": "training",
+      "size_gb": 8.0,
+      "format": "pytorch",
+      "description": "Large-scale neural training data"
+    }
+  ]
+}

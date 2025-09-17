@@ -1,0 +1,32 @@
+{
+  "name": "cline-mcp-server",
+  "version": "1.0.0",
+  "description": "MCP Server bridge for Cline autonomous coding agent integration with Cursor",
+  "main": "cline_mcp_server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node cline_mcp_server.js",
+    "dev": "tsx cline_mcp_server.ts",
+    "build": "tsc cline_mcp_server.ts --outDir dist --target es2020 --module esnext --moduleResolution node",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^0.5.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "tsx": "^4.0.0",
+    "typescript": "^5.0.0",
+    "jest": "^29.0.0",
+    "@types/jest": "^29.0.0"
+  },
+  "keywords": [
+    "cline",
+    "mcp",
+    "cursor",
+    "autonomous-coding",
+    "quark-brain"
+  ],
+  "author": "Quark Brain Architecture Team",
+  "license": "MIT"
+}

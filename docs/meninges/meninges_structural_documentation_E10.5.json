@@ -1,0 +1,60 @@
+{
+  "documentation_metadata": {
+    "generation_date": "2025-09-05T15:03:43.089451",
+    "developmental_stage": "E8.5-E10.5",
+    "documentation_type": "structural_measurements",
+    "version": "1.0.0"
+  },
+  "layer_thickness_measurements": {
+    "dura_mater": {
+      "base_thickness_um": 50.0,
+      "thickness_range_um": [
+        25.0,
+        75.0
+      ],
+      "mechanical_role": "Primary structural protection"
+    },
+    "arachnoid_mater": {
+      "base_thickness_um": 20.0,
+      "trabecular_structure": "Present with CSF space",
+      "mechanical_role": "CSF space maintenance"
+    },
+    "pia_mater": {
+      "base_thickness_um": 5.0,
+      "neural_interface": "Direct tissue contact",
+      "mechanical_role": "Metabolic exchange interface"
+    }
+  },
+  "mechanical_property_specifications": {
+    "dura_mater": {
+      "elastic_modulus_mpa": 1.5,
+      "poisson_ratio": 0.45,
+      "tensile_strength_mpa": 0.2,
+      "density_kg_m3": 1050.0
+    },
+    "arachnoid_mater": {
+      "elastic_modulus_mpa": 0.5,
+      "poisson_ratio": 0.4,
+      "tensile_strength_mpa": 0.1,
+      "density_kg_m3": 1020.0
+    },
+    "pia_mater": {
+      "elastic_modulus_mpa": 0.2,
+      "poisson_ratio": 0.35,
+      "tensile_strength_mpa": 0.05,
+      "density_kg_m3": 1010.0
+    }
+  },
+  "vascular_pathway_mappings": {
+    "arachnoid_integration_points": 6,
+    "pia_vessel_pathways": 6,
+    "total_vascular_volume_mm3": 0.002,
+    "pathway_connectivity": "Arachnoid \u2192 Pia \u2192 Neural interface"
+  },
+  "atlas_validation_context": {
+    "real_data_integration": "1.91GB BrainSpan + Allen Atlas",
+    "dice_coefficient_baseline": 0.267,
+    "target_dice_coefficient": 0.8,
+    "validation_framework": "Operational"
+  }
+}

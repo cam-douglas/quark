@@ -1,0 +1,6 @@
+[submodule "external/hrm"]
+	path = external/hrm
+	url = https://github.com/sapientinc/HRM
+[submodule "brain/architecture/data/HumanML3D"]
+	path = brain/architecture/data/HumanML3D
+	url = https://github.com/EricGuo5513/HumanML3D

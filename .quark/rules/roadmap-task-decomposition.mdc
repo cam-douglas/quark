@@ -1,0 +1,25 @@
+---
+description: Quark roadmap task decomposition
+alwaysApply: true
+---
+ALWAYS apply every rule across all Cursor rule (`.cursor/rules/*.mdc`) and Quark rule (`.quark/rules/*.mdc`) files to the **current codebase and all future changes**; if any existing file violates a rule, refactor it or document an exception before proceeding.
+### 🧬 BIOLOGICALLY COMPLIANT ROADMAP TASK DECOMPOSITION
+
+ALWAYS break every roadmap **Task** (or higher-level Objective/Epic) into **10–20 biologically compliant Sub-Tasks** that collectively satisfy the parent goal.  Each Sub-Task MUST:
+
+1. Represent a discrete, testable unit of biological or computational work (e.g., "simulate gene-regulatory network for limb bud", "validate protein-ligand docking scores against benchmark dataset").
+2. Maintain clear lineage to its parent Task, using the Phase ▸ Objective ▸ Task numbering convention (e.g., "Phase 2▸Batch B▸Task 7-Sub 3").
+3. Include explicit success-criteria grounded in quantitative or literature-supported biological metrics (e.g., accuracy ≥ 95 % vs in-vivo data, RMSD ≤ 2 Å).
+4. Specify required datasets, models, or wet-lab validations, and cite sources or protocols where applicable.
+5. Adhere to all existing global rules (architecture, testing, documentation, performance, safety).
+
+#### Enforcement
+
+• The planning pipeline MUST refuse to mark a Task as *defined* until exactly 10–20 compliant Sub-Tasks are listed.
+• CI pipelines MUST validate that every roadmap YAML (`tasks_*`) and generated `chat_tasks.yaml` obey this decomposition before merging.
+• Any deviation (fewer than 10 or more than 20 Sub-Tasks, or missing biological linkage) triggers a blocking error labelled `BIO-DECOMP-VIOLATION`.
+
+#### Rationale
+
+Granular, biologically contextualised sub-tasks ensure scientific rigour, parallelisability, and traceability of deliverables, reducing integration risk and enabling fine-grained scheduling across multidisciplinary teams.### 🧬 BIOLOGICALLY COMPLIANT ROADMAP TASK DECOMPOSITION
+

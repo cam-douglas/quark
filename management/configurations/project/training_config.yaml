@@ -1,0 +1,28 @@
+# training_config.yaml – template
+# Fill in the TODO fields before launching training.
+
+# ---------------------------------------------------------------------------
+# Dataset settings
+# ---------------------------------------------------------------------------
+# --- Updated for Tokyo bucket streaming ---
+bucket: "s3://tokyo-bucket"
+# Leave prefix blank to auto-discover via dataset_discovery helper
+train_prefix: ""
+data_mode: streaming
+
+# ---------------------------------------------------------------------------
+# Model / optimisation
+# ---------------------------------------------------------------------------
+model_name: gpt2-small
+hidden_size: 768
+lr: 3e-4
+batch_size: 16
+epochs: 5
+
+# ---------------------------------------------------------------------------
+# SageMaker-specific overrides (used only when --backend cloud)
+# ---------------------------------------------------------------------------
+sm_instances: 1
+sm_instance_type: ml.g5.2xlarge
+sm_max_run: 28800   # 8 hours
+# image_uri: ""  # optional custom Docker image

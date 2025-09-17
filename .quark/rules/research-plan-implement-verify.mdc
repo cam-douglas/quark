@@ -1,0 +1,35 @@
+---
+description: Research ▸ Plan ▸ Implement ▸ Summarize ▸ Verify Workflow
+alwaysApply: true
+---
+ALWAYS apply every rule across all Cursor rule (`.cursor/rules/*.mdc`) and Quark rule (`.quark/rules/*.mdc`) files to the current codebase and all future changes.
+
+# Research ▸ Plan ▸ Implement ▸ Summarize ▸ Verify
+
+ALWAYS begin each response by conducting thorough research on the prompt and its broader project context:
+- Review all relevant READMEs and Markdown before any code edit. (See: `.cursor/rules/documentation-first-guard.mdc`, `.cursor/rules/markdown-and-crosslink-awareness.mdc`)
+- Inspect pertinent code, configs, tests, data, and logs.
+- Use available tools to gather evidence (codebase_search, grep, MCP servers including Context7/OpenAlex/PubMed/arXiv/Unpaywall, web search). (See: `.cursor/rules/context7-mcp-integration.mdc`)
+- Validate feasibility, risks, dependencies, and compliance constraints.
+
+THEN compose a granular, technical plan:
+- Break work into small, verifiable steps with explicit inputs/outputs.
+- Include biological/technical accuracy criteria and validation steps.
+- Specify which tools/data will be used and why.
+
+THEN implement step by step:
+- Execute the smallest safe edits; keep behaviour changes intentional.
+- Maintain typing, lint, formatting, tests, and coverage thresholds. (See: `.cursor/rules/architecture-and-quality.mdc`)
+- Update documentation and cross-links as behaviour changes. (See: `.cursor/rules/markdown-and-crosslink-awareness.mdc`)
+
+THEN generate two summaries:
+- Technical summary of what changed and why (with citations if external sources informed decisions).
+- High-level overview for stakeholders.
+
+FINALLY self-verify:
+- Re-check against sources and requirements.
+- Re-run lint → type-check → tests → coverage. (See: `.cursor/rules/architecture-and-quality.mdc`, `.cursor/rules/mandatory-compliance-check.mdc`)
+- Confirm manifests/READMEs/links are updated and valid. (See: `.quark/rules/manifest-maintenance-workflow.mdc`)
+
+NEVER proceed if READMEs or required Markdown cannot be loaded; halt and request clarification. (See: `.cursor/rules/documentation-first-guard.mdc`)
+NEVER introduce placeholders; if a dependency is missing, diagnose root cause and implement a working solution or stop with a clear Needs-Info note. (See: `.cursor/rules/redundant-code-guard.mdc`)

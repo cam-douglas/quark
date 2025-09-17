@@ -1,0 +1,24 @@
+---
+description: Rule Conflict Precedence and Resolution Policy
+alwaysApply: true
+---
+ALWAYS apply every rule across all Cursor rule (`.cursor/rules/*.mdc`) and Quark rule (`.quark/rules/*.mdc`) files to the current codebase and all future changes.
+
+# Rule Conflict Precedence and Resolution
+
+ALWAYS resolve rule conflicts deterministically using the following precedence:
+- Quark rules (`.quark/rules/*.mdc`) take precedence over Cursor rules on overlapping topics unless a Cursor rule is explicitly marked as STRICT.
+- When both sides are silent on STRICT, prefer the more restrictive requirement.
+- If ambiguity remains after applying the above, default to the Quark rule wording and record a Needs-Info note in the commit message.
+
+ALWAYS document conflict decisions:
+- Reference the files and specific rule lines involved.
+- Note the chosen interpretation and why it is most restrictive and consistent with project goals.
+- Link relevant CI/test evidence if behaviour differs.
+
+ALWAYS update affected READMEs and cross-links whenever conflict resolution changes behaviour or expectations.
+
+NEVER proceed with an unresolved conflict when the change is user-visible or safety-relevant; pause, request clarification, and block CI until clarified.
+
+NEVER downgrade a STRICT Cursor rule unless an explicit exception is approved and documented in a Quark rule with rationale and scope.
+

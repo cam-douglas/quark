@@ -1,0 +1,23 @@
+---
+description: Manifest location & archiving rules
+alwaysApply: true
+---
+ALWAYS apply every rule across all Cursor rule (`.cursor/rules/*.mdc`) and Quark rule (`.quark/rules/*.mdc`) files to the **current codebase and all future changes**; if any existing file violates a rule, refactor it or document an exception before proceeding.
+
+# ---------------------------------------------------------------------------
+# Manifest Location & Archiving
+# ---------------------------------------------------------------------------
+ALWAYS keep the **current** manifests at the repository top level:
+  • `INDEX.md`
+  • `brain_manifest.json`
+  • `repo_index.json`
+
+ALWAYS move or generate *archived* or timestamped indexes under
+ `repo_indexes/` (e.g., `repo_indexes/repo_index_YYYYMMDD.json`).  Current
+ top-level manifests should never be duplicated inside `repo_indexes/` to
+ avoid confusion.
+
+ALWAYS ensure that **any** update mechanism (nightly CI job, Quark State System sync, or Git pre-push hook) regenerates a fresh snapshot and moves the previous version into `repo_indexes/` with a date suffix **before** overwriting the top-level files.
+
+Related rules:
+- @manifest-maintenance-workflow.mdc

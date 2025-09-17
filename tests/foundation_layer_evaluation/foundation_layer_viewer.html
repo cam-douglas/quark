@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foundation Layer Evaluation - Quark Brain</title>
+    <link rel="stylesheet" href="foundation_layer_styles.css">
+</head>
+<body>
+    <div class="header">
+        <h1>🧠 Foundation Layer Evaluation</h1>
+        <p>Embryonic Development (E8.5-E10.5) - Spatial Structure Assessment</p>
+    </div>
+
+    <div class="status-bar">
+        <div class="status-item">
+            <div>Foundation Layer</div>
+            <div class="status-value" id="completion-status">100%</div>
+        </div>
+        <div class="status-item">
+            <div>Dice Coefficient</div>
+            <div class="status-value" id="dice-score">0.267</div>
+        </div>
+        <div class="status-item">
+            <div>Atlas Data</div>
+            <div class="status-value" id="atlas-size">1.91 GB</div>
+        </div>
+        <div class="status-item">
+            <div>Simulation Time</div>
+            <div class="status-value" id="sim-time">0.0s</div>
+        </div>
+        <div class="status-item">
+            <div>Active Systems</div>
+            <div class="status-value" id="active-systems">7/7</div>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <div class="brain-viewer">
+            <h3>🧠 Foundation Layer Brain Visualization</h3>
+            <div class="brain-3d">
+                <div class="brain-slice slice-sagittal"></div>
+                <div class="brain-slice slice-coronal"></div>
+                <div class="brain-slice slice-axial"></div>
+                
+                <div class="ventricular-system">
+                    <div class="ventricle lateral-left" title="Lateral Ventricle (Left)"></div>
+                    <div class="ventricle lateral-right" title="Lateral Ventricle (Right)"></div>
+                    <div class="ventricle third-ventricle" title="Third Ventricle"></div>
+                    <div class="ventricle fourth-ventricle" title="Fourth Ventricle"></div>
+                </div>
+            </div>
+            
+            <div class="legend">
+                <div><span style="color: #00ff88;">Green</span>: Neural tissue</div>
+                <div><span style="color: #0088ff;">Blue</span>: Ventricular system</div>
+                <div><span style="color: #ff8800;">Orange</span>: Meninges layers</div>
+                <div><span style="color: #ff0088;">Pink</span>: Morphogen gradients</div>
+            </div>
+        </div>
+
+        <div class="metrics-panel">
+            <h3>📊 Foundation Layer Metrics</h3>
+            <div class="metric-item">
+                <span>Ventricular Volume</span>
+                <span class="metric-value" id="ventricular-volume">0.021 mm³</span>
+                <div class="metric-bar"><div class="metric-fill" style="width: 85%"></div></div>
+            </div>
+            <div class="metric-item">
+                <span>Meninges Integrity</span>
+                <span class="metric-value" id="meninges-integrity">0.89</span>
+                <div class="metric-bar"><div class="metric-fill" style="width: 89%"></div></div>
+            </div>
+            <div class="metric-item">
+                <span>CSF Flow Rate</span>
+                <span class="metric-value" id="csf-flow">1.2 μL/min</span>
+                <div class="metric-bar"><div class="metric-fill" style="width: 75%"></div></div>
+            </div>
+            <div class="metric-item">
+                <span>Atlas Validation</span>
+                <span class="metric-value" id="segmentation-dice">0.267</span>
+                <div class="metric-bar"><div class="metric-fill" style="width: 33%"></div></div>
+            </div>
+            <div class="metric-item">
+                <span>ML Enhancement</span>
+                <span class="metric-value" id="ml-accuracy">0.78</span>
+                <div class="metric-bar"><div class="metric-fill" style="width: 78%"></div></div>
+            </div>
+            <div class="metric-item">
+                <span>Compute Efficiency</span>
+                <span class="metric-value" id="compute-efficiency">1.8s/step</span>
+                <div class="metric-bar"><div class="metric-fill" style="width: 90%"></div></div>
+            </div>
+        </div>
+
+        <div class="metrics-panel morphogen-panel">
+            <h3>🧬 Foundation Layer Morphogens</h3>
+            
+            <div style="margin: 15px 0;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span>SHH (Ventral Patterning)</span>
+                    <span class="metric-value" id="shh-max">1.00 nM</span>
+                </div>
+                <div class="morphogen-gradient shh-gradient"></div>
+            </div>
+
+            <div style="margin: 15px 0;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span>BMP (Dorsal Patterning)</span>
+                    <span class="metric-value" id="bmp-max">0.98 nM</span>
+                </div>
+                <div class="morphogen-gradient bmp-gradient"></div>
+            </div>
+
+            <div style="margin: 15px 0;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span>WNT (A-P Patterning)</span>
+                    <span class="metric-value" id="wnt-max">0.98 nM</span>
+                </div>
+                <div class="morphogen-gradient wnt-gradient"></div>
+            </div>
+
+            <div style="margin: 15px 0;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span>FGF (Neural Maintenance)</span>
+                    <span class="metric-value" id="fgf-max">1.00 nM</span>
+                </div>
+                <div class="morphogen-gradient fgf-gradient"></div>
+            </div>
+
+            <div style="margin-top: 20px; padding-top: 15px; border-top: 1px solid rgba(255, 255, 255, 0.2);">
+                <div class="metric-item">
+                    <span>Cross-regulation</span>
+                    <span class="metric-value" id="cross-regulation">Active</span>
+                </div>
+                <div class="metric-item">
+                    <span>Gene Expression</span>
+                    <span class="metric-value" id="gene-expression">Mapped</span>
+                </div>
+                <div class="metric-item">
+                    <span>Cell Fate Spec</span>
+                    <span class="metric-value" id="cell-fate">6 types</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="controls">
+        <h4>🎮 Foundation Layer Controls</h4>
+        <button onclick="toggleSimulation()">⏯️ Play/Pause</button>
+        <button onclick="resetSimulation()">🔄 Reset</button>
+        <button onclick="exportFoundationData()">💾 Export</button>
+        <button onclick="toggleFoundationView()">🔄 Switch View</button>
+        <div style="margin-top: 10px;">
+            <label>Speed: </label>
+            <input type="range" id="speed-slider" min="0.1" max="3.0" step="0.1" value="1.0" onchange="updateSpeed(this.value)">
+            <span id="speed-display">1.0x</span>
+        </div>
+    </div>
+
+    <script src="foundation_layer_simulation.js"></script>
+</body>
+</html>

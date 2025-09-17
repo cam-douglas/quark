@@ -1,0 +1,244 @@
+/* Foundation Layer Evaluation Styles */
+
+body {
+    margin: 0;
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 100%);
+    color: #ffffff;
+    overflow-x: hidden;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #00ff88;
+    padding-bottom: 20px;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 2.5em;
+    background: linear-gradient(45deg, #00ff88, #0088ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+}
+
+.status-bar {
+    display: flex;
+    justify-content: space-between;
+    background: rgba(0, 255, 136, 0.1);
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #00ff88;
+}
+
+.status-item {
+    text-align: center;
+    flex: 1;
+}
+
+.status-value {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #00ff88;
+}
+
+.main-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 20px;
+    height: 80vh;
+}
+
+.brain-viewer {
+    grid-column: 1 / 2;
+    grid-row: 1 / 3;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+    padding: 20px;
+    border: 2px solid #0088ff;
+    position: relative;
+    overflow: hidden;
+}
+
+.metrics-panel {
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+    padding: 20px;
+    border: 2px solid #ff8800;
+}
+
+.morphogen-panel {
+    border-color: #ff0088;
+}
+
+.brain-3d {
+    width: 100%;
+    height: 400px;
+    background: radial-gradient(circle, #001122 0%, #000011 100%);
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #0088ff;
+}
+
+.brain-slice {
+    position: absolute;
+    width: 80%;
+    height: 80%;
+    top: 10%;
+    left: 10%;
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.slice-sagittal {
+    background: radial-gradient(ellipse, rgba(0, 255, 136, 0.3) 0%, rgba(0, 136, 255, 0.2) 50%, transparent 70%);
+}
+
+.slice-coronal {
+    background: radial-gradient(ellipse, rgba(255, 136, 0, 0.3) 0%, rgba(255, 0, 136, 0.2) 50%, transparent 70%);
+    animation-delay: 0.5s;
+}
+
+.slice-axial {
+    background: radial-gradient(ellipse, rgba(136, 0, 255, 0.3) 0%, rgba(0, 255, 255, 0.2) 50%, transparent 70%);
+    animation-delay: 1s;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.05); opacity: 0.6; }
+}
+
+.morphogen-gradient {
+    height: 30px;
+    margin: 10px 0;
+    border-radius: 15px;
+    position: relative;
+    overflow: hidden;
+}
+
+.shh-gradient {
+    background: linear-gradient(90deg, #ff0000 0%, #ff4400 30%, #ffaa00 70%, #ffff00 100%);
+    animation: flow-ventral 3s ease-in-out infinite;
+}
+
+.bmp-gradient {
+    background: linear-gradient(90deg, #0000ff 0%, #0044ff 30%, #00aaff 70%, #00ffff 100%);
+    animation: flow-dorsal 3s ease-in-out infinite reverse;
+}
+
+.wnt-gradient {
+    background: linear-gradient(90deg, #00ff00 0%, #44ff00 30%, #aaff00 70%, #ffff00 100%);
+    animation: flow-posterior 4s ease-in-out infinite;
+}
+
+.fgf-gradient {
+    background: linear-gradient(90deg, #ff00ff 0%, #ff44ff 20%, #ffaaff 40%, #ffffff 60%, #ffaaff 80%, #ff44ff 100%);
+    animation: flow-isthmus 2.5s ease-in-out infinite;
+}
+
+@keyframes flow-ventral {
+    0%, 100% { transform: translateX(0%); }
+    50% { transform: translateX(-10%); }
+}
+
+@keyframes flow-dorsal {
+    0%, 100% { transform: translateX(0%); }
+    50% { transform: translateX(10%); }
+}
+
+@keyframes flow-posterior {
+    0%, 100% { transform: translateX(0%); }
+    50% { transform: translateX(-5%); }
+}
+
+@keyframes flow-isthmus {
+    0%, 100% { transform: scaleX(1); }
+    50% { transform: scaleX(1.1); }
+}
+
+.metric-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.metric-value {
+    font-weight: bold;
+    color: #00ff88;
+}
+
+.metric-bar {
+    width: 100px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-left: 10px;
+}
+
+.metric-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #ff0000, #ffff00, #00ff00);
+    transition: width 0.5s ease;
+}
+
+.ventricular-system {
+    position: absolute;
+    top: 20%;
+    left: 20%;
+    width: 60%;
+    height: 60%;
+}
+
+.ventricle {
+    position: absolute;
+    background: rgba(0, 200, 255, 0.4);
+    border-radius: 50%;
+    animation: csf-flow 1.5s ease-in-out infinite;
+}
+
+.lateral-left { top: 20%; left: 10%; width: 25%; height: 15%; }
+.lateral-right { top: 20%; right: 10%; width: 25%; height: 15%; }
+.third-ventricle { top: 40%; left: 45%; width: 10%; height: 20%; }
+.fourth-ventricle { bottom: 20%; left: 40%; width: 20%; height: 15%; }
+
+@keyframes csf-flow {
+    0%, 100% { box-shadow: 0 0 10px rgba(0, 200, 255, 0.5); }
+    50% { box-shadow: 0 0 20px rgba(0, 200, 255, 0.8); }
+}
+
+.controls {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #00ff88;
+}
+
+button {
+    background: linear-gradient(45deg, #00ff88, #0088ff);
+    border: none;
+    color: white;
+    padding: 8px 15px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+}

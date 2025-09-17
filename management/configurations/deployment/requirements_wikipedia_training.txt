@@ -1,0 +1,54 @@
+# Wikipedia Training Pipeline Requirements
+# For training models on Wikipedia data
+
+# Core ML libraries
+torch>=2.0.0
+transformers>=4.30.0
+datasets>=2.12.0
+tokenizers>=0.13.0
+
+# Data processing
+numpy>=1.24.0
+pandas>=2.0.0
+scikit-learn>=1.3.0
+
+# Web requests and parsing
+requests>=2.31.0
+beautifulsoup4>=4.12.0
+lxml>=4.9.0
+
+# XML processing for Wikipedia dumps
+xmltodict>=0.13.0
+
+# Compression for Wikipedia dumps
+bz2file>=0.98
+
+# Progress bars and logging
+tqdm>=4.65.0
+rich>=13.0.0
+
+# Optional: Wikipedia2Vec for embeddings
+# wikipedia2vec>=1.1.0
+
+# Optional: For advanced NLP tasks
+# nltk>=3.8.0
+# spacy>=3.6.0
+
+# Development and testing
+pytest>=7.4.0
+black>=23.0.0
+flake8>=6.0.0
+
+# Jupyter for interactive development
+jupyter>=1.0.0
+ipykernel>=6.25.0
+
+# Visualization
+matplotlib>=3.7.0
+seaborn>=0.12.0
+plotly>=5.15.0
+
+# Utilities
+python-dotenv>=1.0.0
+pyyaml>=6.0.0
+click>=8.1.0

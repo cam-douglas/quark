@@ -1,0 +1,26 @@
+{
+  "created": "2025-09-17T16:45:59.724932",
+  "data_shape": [
+    256,
+    256,
+    128
+  ],
+  "label_shape": [
+    256,
+    256,
+    128
+  ],
+  "num_classes": 6,
+  "unique_labels": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "target_dice": 0.87,
+  "expected_epochs": 350,
+  "expected_training_time": "1.5-2 hours on T4 GPU",
+  "notes": "Upload all files to Google Colab and run colab_training_package.py"
+}

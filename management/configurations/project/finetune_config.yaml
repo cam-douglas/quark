@@ -1,0 +1,25 @@
+# finetune_config.yaml – template for fine-tuning from a checkpoint
+
+# ---------------------------------------------------------------------------
+# Dataset / bucket
+# ---------------------------------------------------------------------------
+# Updated bucket and streaming mode
+bucket: "s3://tokyo-bucket"
+train_prefix: ""
+data_mode: streaming
+
+# ---------------------------------------------------------------------------
+# Optimisation tweaks (lower LR, fewer epochs)
+# ---------------------------------------------------------------------------
+model_name: gpt2-small
+hidden_size: 768
+lr: 1e-4
+batch_size: 8
+epochs: 3
+
+# ---------------------------------------------------------------------------
+# SageMaker overrides
+# ---------------------------------------------------------------------------
+sm_instances: 1
+sm_instance_type: ml.g5.2xlarge
+sm_max_run: 14400   # 4 hours
