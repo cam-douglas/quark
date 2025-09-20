@@ -1,0 +1,16 @@
+{
+  "working_mcp_servers": [
+    "context7",
+    "figma",
+    "cline"
+  ],
+  "fallback_apis_available": [
+    "ArXiv",
+    "PubMed",
+    "OpenAlex",
+    "Crossref",
+    "DOAJ"
+  ],
+  "fallback_validator": "/Users/camdouglas/quark/tools_utilities/fallback_validator.py",
+  "working_config": "/Users/camdouglas/quark/tools_utilities/working_mcp_config.json"
+}

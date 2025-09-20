@@ -1,0 +1,35 @@
+{
+  "mcpServers": {
+    "context7": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@upstash/context7-mcp",
+        "--api-key",
+        "ctx7sk-d41fc2b6-2bb9-4dca-8585-36d25e769266"
+      ]
+    },
+    "figma": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "figma-developer-mcp",
+        "--stdio"
+      ],
+      "env": {
+        "FIGMA_API_KEY": "$(cat ~/.figma_api_token)"
+      }
+    },
+    "cline": {
+      "command": "node",
+      "args": [
+        "/Users/camdouglas/quark/brain/modules/cline_integration/dist/cline_mcp_server.js"
+      ],
+      "env": {
+        "QUARK_WORKSPACE": "/Users/camdouglas/quark",
+        "QUARK_CLINE_ENABLED": "true",
+        "NODE_ENV": "production"
+      }
+    }
+  }
+}
