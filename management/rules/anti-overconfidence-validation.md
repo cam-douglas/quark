@@ -8,6 +8,80 @@ ALWAYS express uncertainty and validate EVERY claim against authoritative resour
 NEVER make assertions without explicit evidence citations.
 ALWAYS assume you might be wrong until proven otherwise through multiple validation sources.
 
+## 🔄 MANDATORY EXHAUSTIVE ATTEMPT RULE
+
+### NEVER Declare Failure Without Exhaustive Testing
+ALWAYS attempt ALL possible solutions before declaring something broken, non-functional, or ready for removal:
+- **Minimum Attempts Required**: At least 5 different approaches
+- **Documentation Required**: Log every attempt with specific error messages
+- **Time Investment**: Spend at least 30 minutes troubleshooting before giving up
+- **Seek Alternatives**: Try workarounds, wrappers, and fallbacks before removal
+
+### Exhaustive Attempt Checklist
+Before declaring ANY component broken or removing it:
+1. **Try Multiple Installation Methods**
+   - Direct installation from source
+   - Package manager variations (npm, pip, cargo, etc.)
+   - Manual compilation/building
+   - Docker containers or virtual environments
+   - Alternative repositories or mirrors
+
+2. **Attempt Various Configurations**
+   - Different dependency versions
+   - Alternative configuration files
+   - Environment variable adjustments
+   - Permission and path modifications
+   - Compatibility mode or legacy settings
+
+3. **Create Workarounds**
+   - Write wrapper scripts
+   - Build compatibility layers
+   - Use mock implementations
+   - Create fallback alternatives
+   - Implement partial functionality
+
+4. **Document Every Attempt**
+   ```
+   Attempt #[N]: [Description]
+   - Command/Action: [Exact command or steps]
+   - Result: [Specific error or outcome]
+   - Error Message: [Full error text]
+   - Time Spent: [Minutes]
+   - Next Approach: [What to try next]
+   ```
+
+### Real Example: MCP Server Overconfidence Failure
+**What Happened**: Removed MCP servers after single failed attempt
+**The Mistake**: 
+- Assumed servers were broken after one "not found" error
+- Removed them from config without trying installation
+- Failed to create workarounds or wrappers
+
+**What Should Have Happened**:
+1. Try installing missing dependencies
+2. Create Python/Node wrappers as fallbacks
+3. Check multiple repository sources
+4. Build mock implementations
+5. Only remove after ALL options exhausted
+
+### Removal Decision Matrix
+Only proceed with removal when ALL conditions are met:
+- [ ] Attempted at least 5 different fix approaches
+- [ ] Spent minimum 30 minutes troubleshooting
+- [ ] Created and tested workaround attempts
+- [ ] Documented all attempts with specific errors
+- [ ] Confirmed with user that removal is acceptable
+- [ ] No partial functionality can be salvaged
+
+### The "One More Try" Rule
+When you think you've tried everything:
+1. **STOP** and list what you haven't tried
+2. **IDENTIFY** one more approach, no matter how unlikely
+3. **ATTEMPT** that approach before declaring failure
+4. **REPEAT** until truly exhausted ALL options
+
+**REMEMBER**: Premature removal due to overconfidence causes more harm than spending extra time on exhaustive attempts. When in doubt, keep trying.
+
 ## 📊 CONFIDENCE SCORING SYSTEM
 
 ### MANDATORY Confidence Expression
