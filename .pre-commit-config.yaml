@@ -3,7 +3,7 @@ repos:
     hooks:
       - id: quark-rules
         name: Quark Cursor Rules Enforcement
-        entry: python -m management.rules.rules_orchestrator --advisory
+        entry: python3 -m management.rules.rules_orchestrator --advisory --rules-dir /Users/camdouglas/quark/.cursor/rules
         language: system
         pass_filenames: true
         files: ''

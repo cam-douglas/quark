@@ -191,6 +191,7 @@ def _watch_loop(repo_root: Path, rules: Sequence[LoadedRule], interval_s: float)
 def main(argv: Optional[Sequence[str]] = None) -> int:
     parser = argparse.ArgumentParser(description="Quark Rules Orchestrator")
     parser.add_argument("--repo-root", default=os.getcwd())
+    parser.add_argument("--rules-dir", default=None, help="Override rules directory path")
     parser.add_argument("--changed", nargs="*", help="Changed files (default: scan all)")
     parser.add_argument("--json", action="store_true", help="Output diagnostics as JSON")
     parser.add_argument("--advisory", action="store_true", help="Never exit non-zero")
@@ -199,6 +200,10 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
 
     args = parser.parse_args(argv)
     repo_root = Path(args.repo_root)
+
+    # Optional override of rules dir via CLI
+    if args.rules_dir:
+        os.environ["QUARK_RULES_DIR"] = args.rules_dir
 
     rules = load_rules(repo_root)
     if not rules:
