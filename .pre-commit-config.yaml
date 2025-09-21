@@ -1,0 +1,9 @@
+repos:
+  - repo: local
+    hooks:
+      - id: quark-rules
+        name: Quark Cursor Rules Enforcement
+        entry: python -m management.rules.rules_orchestrator --advisory
+        language: system
+        pass_filenames: true
+        files: ''

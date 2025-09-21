@@ -15,6 +15,7 @@ noop = "brain.architecture.neural_core.cognitive_systems.plugins.noop_plugin:NoO
 
 [project.scripts]
 quark-brain = "brain.brain_main:main"
+quark-rules = "management.rules.rules_orchestrator:main"
 
 [project.optional-dependencies]
 dev = [
