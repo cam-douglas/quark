@@ -151,7 +151,13 @@ result = quick_validate("Your claim here")
 result = validate_claim("Your claim", method='auto')
 ```
 
-#### **Available Validation Sources** (from `/Users/camdouglas/quark/data/credentials/all_api_keys.json`):
+#### **MAIN VALIDATION SOURCE CONFIGURATION**
+**CRITICAL**: All API credentials and endpoints are centrally managed in:
+```
+/Users/camdouglas/quark/data/credentials/all_api_keys.json
+```
+
+This file contains **14 API sources** with full configuration (~90% confidence):
 - **Protein/Structure**: AlphaFold, RCSB PDB, UniProt, BLAST
 - **Genomics**: Ensembl, NCBI E-utilities  
 - **Chemistry**: PubChem
@@ -161,7 +167,10 @@ result = validate_claim("Your claim", method='auto')
 - **Computational**: Wolfram Alpha
 - **AI Validation**: OpenAI, Claude, Gemini, OpenRouter
 - **Code/Docs**: Context7, GitHub
+
+#### **Additional Literature Sources**
 - **Plus 79+ open access sources** from `/Users/camdouglas/quark/data/knowledge/validation_system/open_access_literature_sources.json`
+- **Plus 40+ specialized databases** via Quark Literature Integration
 
 #### **Specialized Methods** (when literature system available):
 ```python
@@ -187,10 +196,11 @@ ALWAYS before providing ANY technical answer:
    result = validate_claim(claim, method='auto')
    # Check: result['confidence'], result['consensus'], result['sources_checked']
    ```
-2. **Intelligent Source Selection**: System automatically selects best sources based on query category
-3. **Minimum 3 Sources**: ALWAYS validate against AT LEAST 3 independent sources
-4. **Cross-reference** all results and document consensus level
-5. **Document uncertainty**: List what you DON'T know or can't verify
+2. **Credential-Based Source Access**: System automatically loads all 14 API sources from `/Users/camdouglas/quark/data/credentials/all_api_keys.json`
+3. **Intelligent Source Selection**: System automatically selects best sources based on query category
+4. **Minimum 3 Sources**: ALWAYS validate against AT LEAST 3 independent sources
+5. **Cross-reference** all results and document consensus level
+6. **Document uncertainty**: List what you DON'T know or can't verify
 
 ### Phase 2: MID-IMPLEMENTATION VALIDATION
 ALWAYS during code implementation:

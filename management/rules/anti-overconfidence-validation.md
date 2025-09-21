@@ -106,7 +106,9 @@ Confidence = MIN(
 
 ### CRITICAL: COMPREHENSIVE VALIDATION SYSTEM
 **MANDATORY**: Use the Comprehensive Validation System at `/Users/camdouglas/quark/tools_utilities/comprehensive_validation_system.py`
-This system intelligently selects from ALL 20+ validation sources in `/Users/camdouglas/quark/data/credentials/all_api_keys.json`:
+
+**MAIN VALIDATION SOURCE**: `/Users/camdouglas/quark/data/credentials/all_api_keys.json`
+This central credentials file contains ALL 14 API validation sources with full configuration. The system intelligently selects from these sources:
 - **Protein/Structure**: AlphaFold, RCSB PDB, UniProt
 - **Genomics**: Ensembl, NCBI E-utilities, BLAST
 - **Chemistry**: PubChem
