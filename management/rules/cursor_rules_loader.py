@@ -17,19 +17,49 @@ from typing import List
 
 
 def discover_rule_files(repo_root: str | Path) -> List[Path]:
-    """Return all *.mdc files under .quark/rules or .cursor/rules."""
+    """Return all *.mdc files under known rules directories.
+
+    Search order (first existing directories are scanned):
+      1) $QUARK_RULES_DIR
+      2) .quark/rules
+      3) .cursor/rules
+      4) management/rules
+      5) management/rules/archive
+      6) management/rules/roadmap
+
+    The result is a deterministic, alphabetically sorted list without duplicates.
+    """
     root = Path(repo_root)
-    quark_dir = root / ".quark" / "rules"
-    cursor_dir = root / ".cursor" / "rules"
 
-    if quark_dir.is_dir():
-        search_root = quark_dir
-    elif cursor_dir.is_dir():
-        search_root = cursor_dir
-    else:
-        return []
+    # Environment override to point at an external rules directory if desired
+    env_dir = os.environ.get("QUARK_RULES_DIR")
 
-    return sorted(search_root.glob("*.mdc"))
+    candidate_dirs: List[Path] = []
+    if env_dir:
+        candidate_dirs.append(Path(env_dir))
+
+    candidate_dirs.extend(
+        [
+            root / ".quark" / "rules",
+            root / ".cursor" / "rules",
+            root / "management" / "rules",
+            root / "management" / "rules" / "archive",
+            root / "management" / "rules" / "roadmap",
+        ]
+    )
+
+    seen: set[Path] = set()
+    results: List[Path] = []
+    for directory in candidate_dirs:
+        if not directory.is_dir():
+            continue
+        for path in sorted(directory.rglob("*.mdc")):
+            # De-duplicate while preserving order
+            if path not in seen:
+                seen.add(path)
+                results.append(path)
+
+    return results
 
 
 def load_concatenated_rules(repo_root: str | Path, include_metadata: bool = True) -> str:
