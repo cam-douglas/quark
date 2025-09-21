@@ -21,8 +21,11 @@ Date: 2025-01-20
 import json
 import logging
 import sys
+import re
 from pathlib import Path
-from typing import Dict, List, Any, Optional, Union
+from typing import Dict, List, Any, Optional, Union, Tuple
+from dataclasses import dataclass
+from enum import Enum
 import time
 
 # Set up logging
@@ -34,18 +37,26 @@ sys.path.insert(0, str(Path(__file__).parent))
 sys.path.insert(0, str(Path(__file__).parent.parent / "data" / "knowledge" / "validation_system"))
 
 try:
-    from comprehensive_validation_system import ComprehensiveValidationSystem, mandatory_validate
+    from .comprehensive_validation_system import ComprehensiveValidationSystem, mandatory_validate
     COMPREHENSIVE_AVAILABLE = True
-except ImportError as e:
-    logger.warning(f"Comprehensive validation system not available: {e}")
-    COMPREHENSIVE_AVAILABLE = False
+except ImportError:
+    try:
+        from comprehensive_validation_system import ComprehensiveValidationSystem, mandatory_validate
+        COMPREHENSIVE_AVAILABLE = True
+    except ImportError as e:
+        logger.warning(f"Comprehensive validation system not available: {e}")
+        COMPREHENSIVE_AVAILABLE = False
 
 try:
-    from frictionless_validation import FrictionlessValidator
+    from .frictionless_validation import FrictionlessValidator
     FRICTIONLESS_AVAILABLE = True
-except ImportError as e:
-    logger.warning(f"Frictionless validation not available: {e}")
-    FRICTIONLESS_AVAILABLE = False
+except ImportError:
+    try:
+        from frictionless_validation import FrictionlessValidator
+        FRICTIONLESS_AVAILABLE = True
+    except ImportError as e:
+        logger.warning(f"Frictionless validation not available: {e}")
+        FRICTIONLESS_AVAILABLE = False
 
 try:
     from quark_literature_integration import QuarkLiteratureValidator
@@ -60,6 +71,47 @@ try:
 except ImportError as e:
     logger.warning(f"Core literature validation not available: {e}")
     LITERATURE_CORE_AVAILABLE = False
+
+try:
+    from .confidence_validator import ConfidenceValidator
+    CONFIDENCE_AVAILABLE = True
+except ImportError:
+    try:
+        from confidence_validator import ConfidenceValidator
+        CONFIDENCE_AVAILABLE = True
+    except ImportError as e:
+        logger.warning(f"Confidence validator not available: {e}")
+        CONFIDENCE_AVAILABLE = False
+
+# Import task completion validator
+try:
+    from .task_completion_validator import TaskCompletionValidator, validate_task_completion_claim, should_mark_task_complete
+    TASK_COMPLETION_AVAILABLE = True
+except ImportError:
+    try:
+        from task_completion_validator import TaskCompletionValidator, validate_task_completion_claim, should_mark_task_complete
+        TASK_COMPLETION_AVAILABLE = True
+    except ImportError as e:
+        logger.warning(f"Task completion validator not available: {e}")
+        TASK_COMPLETION_AVAILABLE = False
+
+
+class OverconfidenceLevel(Enum):
+    """Severity levels of overconfidence detected"""
+    CRITICAL = "CRITICAL"      # Absolute claims, 100% confidence
+    HIGH = "HIGH"              # Very confident language without evidence
+    MODERATE = "MODERATE"      # Confident language with weak evidence
+    LOW = "LOW"                # Minor confidence issues
+
+
+@dataclass
+class OverconfidenceDetection:
+    """Represents a detected overconfidence issue"""
+    level: OverconfidenceLevel
+    pattern: str
+    context: str
+    suggested_replacement: str
+    confidence_claim: Optional[float] = None
 
 
 class UnifiedValidationSystem:
@@ -78,6 +130,14 @@ class UnifiedValidationSystem:
         """Initialize all available validation systems"""
         self.systems = {}
         self.total_sources = 0
+        
+        # Initialize overconfidence prevention patterns
+        self.overconfident_patterns = self._load_overconfident_patterns()
+        self.prevention_stats = {
+            'detections': 0,
+            'blocks': 0,
+            'corrections': 0
+        }
         
         # Initialize comprehensive system (API sources + open access)
         if COMPREHENSIVE_AVAILABLE:
@@ -104,10 +164,31 @@ class UnifiedValidationSystem:
             except Exception as e:
                 logger.error(f"❌ Failed to load literature system: {e}")
         
+        # Initialize confidence validator (anti-overconfidence system)
+        if CONFIDENCE_AVAILABLE:
+            try:
+                self.systems['confidence'] = ConfidenceValidator()
+                self.total_sources += 67  # From confidence validator (11 MCP + 56 APIs + 20 open access)
+                logger.info("✅ Confidence validation system loaded (anti-overconfidence)")
+            except Exception as e:
+                logger.error(f"❌ Failed to load confidence system: {e}")
+        
+        # Initialize task completion validator
+        if TASK_COMPLETION_AVAILABLE:
+            try:
+                self.task_completion_validator = TaskCompletionValidator()
+                logger.info("✅ Task completion validation system loaded (anti-overconfidence for tasks)")
+            except Exception as e:
+                logger.error(f"❌ Failed to load task completion system: {e}")
+                self.task_completion_validator = None
+        else:
+            self.task_completion_validator = None
+        
         if not self.systems:
             raise RuntimeError("❌ CRITICAL: No validation systems could be loaded!")
         
         logger.info(f"🔍 Unified Validation System initialized with {len(self.systems)} subsystems (confidence: ~85% based on available systems)")
+        logger.info("🚨 MANDATORY overconfidence prevention ACTIVE - all responses will be validated")
     
     def validate_claim(self, claim: str, method: str = 'auto', max_sources: int = 10) -> Dict[str, Any]:
         """
@@ -115,7 +196,7 @@ class UnifiedValidationSystem:
         
         Args:
             claim: Statement to validate
-            method: 'auto', 'comprehensive', 'frictionless', 'literature', or 'all'
+            method: 'auto', 'comprehensive', 'frictionless', 'literature', 'confidence', or 'all'
             max_sources: Maximum sources to use
             
         Returns:
@@ -149,20 +230,27 @@ class UnifiedValidationSystem:
                 result = self._validate_frictionless(claim, max_sources)
             elif method == 'literature' and 'literature' in self.systems:
                 result = self._validate_literature(claim, max_sources)
+            elif method == 'confidence' and 'confidence' in self.systems:
+                result = self._validate_confidence(claim, max_sources)
             else:
                 # Fallback to best available system
                 result = self._validate_fallback(claim, max_sources)
             
             result['processing_time'] = time.time() - start_time
             
+            # MANDATORY: Apply uncertainty enforcement to ALL results
+            result = self._enforce_uncertainty_principles(result)
+            
         except Exception as e:
             logger.error(f"❌ Validation failed: {e}")
             result.update({
                 'confidence': 0.0,
-                'consensus': 'ERROR',
-                'evidence': [f"Validation error: {str(e)}"],
+                'consensus': 'VALIDATION_ERROR',
+                'evidence': [f"Validation encountered issues: {str(e)}"],
                 'processing_time': time.time() - start_time
             })
+            # Apply uncertainty principles even to errors
+            result = self._enforce_uncertainty_principles(result)
         
         return result
     
@@ -358,13 +446,44 @@ class UnifiedValidationSystem:
             logger.error(f"❌ Literature validation failed: {e}")
             return self._error_result(claim, 'literature', str(e))
     
+    def _validate_confidence(self, claim: str, max_sources: int) -> Dict[str, Any]:
+        """Validate using confidence system (anti-overconfidence validation)"""
+        try:
+            # Use the anti-overconfidence validation method
+            raw_result = self.systems['confidence'].perform_anti_overconfidence_validation(claim)
+            
+            return {
+                'claim': claim,
+                'method_used': 'confidence',
+                'confidence': raw_result.get('final_confidence', 0.0),
+                'consensus': 'LIKELY_SUPPORTED' if raw_result.get('validated', False) else 'UNCERTAIN',
+                'evidence': [s['name'] for s in raw_result.get('sources_consulted', [])],
+                'sources_checked': len(raw_result.get('sources_consulted', [])),
+                'systems_used': ['confidence'],
+                'supporting_sources': len([s for s in raw_result.get('sources_consulted', []) if s.get('is_open_access', False)]),
+                'uncertainty_level': raw_result.get('uncertainty_level', 'UNKNOWN'),
+                'user_correction_needed': raw_result.get('user_correction_needed', False),
+                'anti_overconfidence_report': raw_result.get('anti_overconfidence_report', ''),
+                'details': {
+                    'anti_overconfidence': True,
+                    'uncertainty_triggers': raw_result.get('uncertainty_triggers', []),
+                    'validation_gaps': raw_result.get('validation_gaps', []),
+                    'open_access_sources': len([s for s in raw_result.get('sources_consulted', []) if s.get('is_open_access', False)]),
+                    'total_resources': 67,  # MCP + APIs + Open Access
+                    'confidence_capped_at_90': raw_result.get('final_confidence', 0.0) <= 0.9
+                }
+            }
+        except Exception as e:
+            logger.error(f"❌ Confidence validation failed: {e}")
+            return self._error_result(claim, 'confidence', str(e))
+    
     def _validate_with_all_systems(self, claim: str, max_sources: int) -> Dict[str, Any]:
         """Validate using ALL available systems and aggregate results"""
         results = []
         systems_used = []
         
         # Try each system
-        for system_name in ['comprehensive', 'frictionless', 'literature']:
+        for system_name in ['comprehensive', 'frictionless', 'literature', 'confidence']:
             if system_name in self.systems:
                 try:
                     if system_name == 'comprehensive':
@@ -373,6 +492,8 @@ class UnifiedValidationSystem:
                         result = self._validate_frictionless(claim, max_sources)
                     elif system_name == 'literature':
                         result = self._validate_literature(claim, max_sources)
+                    elif system_name == 'confidence':
+                        result = self._validate_confidence(claim, max_sources)
                     
                     results.append(result)
                     systems_used.append(system_name)
@@ -392,13 +513,29 @@ class UnifiedValidationSystem:
             else:
                 all_evidence.append(str(r['evidence']))
         
-        # Calculate aggregate confidence (weighted average)
+        # Calculate aggregate confidence with natural skepticism
         if confidences:
-            aggregate_confidence = sum(confidences) / len(confidences)
-            # Boost for multiple system agreement
+            # Use weighted average but stay naturally conservative
+            base_aggregate = sum(confidences) / len(confidences)
+            
+            # Multiple system agreement provides modest boost, not automatic high confidence
             if len(confidences) > 1:
-                agreement_bonus = min(0.1, (len(confidences) - 1) * 0.05)
-                aggregate_confidence = min(0.90, aggregate_confidence + agreement_bonus)
+                # Agreement bonus is smaller and has diminishing returns
+                agreement_factor = min(0.05, (len(confidences) - 1) * 0.02)
+                base_aggregate += agreement_factor
+                logger.info(f"🤝 Multi-system agreement bonus: +{agreement_factor:.1%}")
+            
+            # Natural ceiling for aggregated results - even multiple systems shouldn't easily exceed 75%
+            if base_aggregate > 0.75:
+                # Compress high aggregate confidence
+                excess = base_aggregate - 0.75
+                aggregate_confidence = 0.75 + (excess * 0.3)  # Heavily compress
+                logger.info(f"🤔 Aggregate confidence naturally reduced from {base_aggregate:.1%} to {aggregate_confidence:.1%}")
+            else:
+                aggregate_confidence = base_aggregate
+                
+            # Apply final hard cap (should rarely be needed)
+            aggregate_confidence = min(aggregate_confidence, 0.90)
         else:
             aggregate_confidence = 0.0
         
@@ -442,6 +579,372 @@ class UnifiedValidationSystem:
                     return self._validate_literature(claim, max_sources)
         
         return self._error_result(claim, 'fallback', "No systems available")
+    
+    def _enforce_uncertainty_principles(self, result: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        MANDATORY: Enforce anti-overconfidence principles on any validation result
+        
+        - Hard cap confidence at 90%
+        - Add uncertainty qualifiers to consensus
+        - Ensure doubt is expressed appropriately
+        """
+        # HARD CAP: Never allow >90% confidence
+        if result.get('confidence', 0.0) > 0.90:
+            logger.warning(f"⚠️ OVERCONFIDENCE DETECTED: Capping {result['confidence']:.1%} at 90%")
+            result['confidence'] = 0.90
+            
+        # Add uncertainty markers to consensus
+        consensus_mapping = {
+            'VALIDATED': 'LIKELY_SUPPORTED',
+            'CONFIRMED': 'APPEARS_SUPPORTED', 
+            'PROVEN': 'EVIDENCE_SUGGESTS',
+            'CERTAIN': 'REASONABLY_CONFIDENT',
+            'DEFINITIVE': 'PROBABLE',
+            'ABSOLUTE': 'STRONG_INDICATION',
+            'GUARANTEED': 'WELL_SUPPORTED',
+            'PERFECT': 'GOOD_EVIDENCE'
+        }
+        
+        original_consensus = result.get('consensus', '')
+        for overconfident, uncertain in consensus_mapping.items():
+            if overconfident in original_consensus:
+                result['consensus'] = original_consensus.replace(overconfident, uncertain)
+                logger.info(f"🤔 Replaced overconfident '{overconfident}' with '{uncertain}'")
+        
+        # Add explicit uncertainty markers based on confidence level
+        confidence = result.get('confidence', 0.0)
+        if confidence < 0.3:
+            result['uncertainty_qualifier'] = "⚠️ LOW CONFIDENCE - Significant uncertainty remains"
+        elif confidence < 0.6:
+            result['uncertainty_qualifier'] = "🟡 MODERATE CONFIDENCE - Some uncertainty present"  
+        elif confidence < 0.8:
+            result['uncertainty_qualifier'] = "✅ REASONABLE CONFIDENCE - Minor uncertainties noted"
+        else:
+            result['uncertainty_qualifier'] = "✅ HIGH CONFIDENCE - Still capped at 90% maximum"
+            
+        # Add mandatory uncertainty reminder
+        result['uncertainty_reminder'] = "Remember: No claim can be 100% certain. Always consider alternative explanations and seek additional validation."
+        
+        return result
+    
+    def _load_overconfident_patterns(self) -> Dict[OverconfidenceLevel, List[Dict[str, str]]]:
+        """Load patterns that indicate overconfidence - MANDATORY for prevention"""
+        return {
+            OverconfidenceLevel.CRITICAL: [
+                {
+                    "pattern": r"\b(100%|completely|absolutely|definitely|certainly|guaranteed|proven|perfect|exact|precise)\b",
+                    "replacement": "likely|probably|appears to|seems to|evidence suggests|reasonably confident",
+                    "context": "Absolute certainty claims"
+                },
+                {
+                    "pattern": r"\b(task\s+(?:is\s+)?complete|finished|done|accomplished)\b",
+                    "replacement": "task appears largely complete|likely finished|probably done",
+                    "context": "Task completion claims"
+                },
+                {
+                    "pattern": r"\b(test\s+passed|all\s+tests\s+pass|tests\s+successful)\b",
+                    "replacement": "tests appear to pass|tests likely successful|test results suggest success",
+                    "context": "Test execution claims"
+                },
+                {
+                    "pattern": r"\b(this\s+(?:will|is)\s+(?:work|correct|right|accurate))\b",
+                    "replacement": "this should work|this appears correct|this seems right|this is likely accurate",
+                    "context": "Technical correctness claims"
+                }
+            ],
+            OverconfidenceLevel.HIGH: [
+                {
+                    "pattern": r"\b(obviously|clearly|undoubtedly|without\s+question|no\s+doubt)\b",
+                    "replacement": "likely|probably|it appears|evidence suggests",
+                    "context": "High confidence qualifiers"
+                },
+                {
+                    "pattern": r"\b(always\s+works|never\s+fails|can't\s+go\s+wrong)\b",
+                    "replacement": "usually works|rarely fails|is generally reliable",
+                    "context": "Absolute behavioral claims"
+                },
+                {
+                    "pattern": r"\b(the\s+(?:best|only|correct)\s+(?:way|method|approach))\b",
+                    "replacement": "a good way|one effective method|a recommended approach",
+                    "context": "Singular solution claims"
+                }
+            ],
+            OverconfidenceLevel.MODERATE: [
+                {
+                    "pattern": r"\b(should\s+work|will\s+solve|fixes\s+the\s+problem)\b",
+                    "replacement": "might work|could solve|may help with the problem",
+                    "context": "Confident predictions"
+                },
+                {
+                    "pattern": r"\b(standard\s+practice|best\s+practice|recommended\s+approach)\b",
+                    "replacement": "common practice|often recommended|frequently used approach",
+                    "context": "Practice authority claims"
+                }
+            ],
+            OverconfidenceLevel.LOW: [
+                {
+                    "pattern": r"\b(simple|easy|straightforward|trivial)\b",
+                    "replacement": "relatively simple|can be manageable|appears straightforward|seems straightforward",
+                    "context": "Difficulty minimization"
+                }
+            ]
+        }
+    
+    def validate_response_before_output(self, response_content: str, context: Dict[str, Any] = None) -> Dict[str, Any]:
+        """
+        MANDATORY: Validate response content before it reaches the user.
+        
+        This method MUST be called before any response to prevent overconfident language.
+        
+        Returns:
+        - validated_content: Corrected content (if auto-correctable)
+        - should_block: True if response should be blocked entirely
+        - detections: List of overconfidence issues found
+        - required_actions: What must be done before response can be sent
+        """
+        logger.info("🔍 MANDATORY pre-response overconfidence validation")
+        
+        # Detect all overconfidence patterns
+        detections = self._detect_overconfidence_patterns(response_content)
+        
+        # Assess overall confidence claims
+        confidence_assessment = self._assess_confidence_claims(response_content, context)
+        
+        # Check for required uncertainty expressions
+        uncertainty_check = self._check_uncertainty_expression(response_content)
+        
+        # Determine if response should be blocked
+        should_block = self._should_block_response(detections, confidence_assessment, uncertainty_check)
+        
+        # Generate corrected content if possible
+        corrected_content = self._auto_correct_overconfidence(response_content, detections)
+        
+        # Generate required actions
+        required_actions = self._generate_required_actions(detections, confidence_assessment, uncertainty_check)
+        
+        # Update statistics
+        self.prevention_stats['detections'] += len(detections)
+        if should_block:
+            self.prevention_stats['blocks'] += 1
+        if corrected_content != response_content:
+            self.prevention_stats['corrections'] += 1
+        
+        result = {
+            "original_content": response_content,
+            "validated_content": corrected_content,
+            "should_block": should_block,
+            "detections": detections,
+            "confidence_assessment": confidence_assessment,
+            "uncertainty_check": uncertainty_check,
+            "required_actions": required_actions,
+            "validation_summary": self._generate_validation_summary(detections, should_block)
+        }
+        
+        # Log results
+        if should_block:
+            logger.error(f"🚨 RESPONSE BLOCKED: {len(detections)} overconfidence issues detected")
+            for detection in detections:
+                logger.error(f"   {detection.level.value}: {detection.pattern}")
+        elif detections:
+            logger.warning(f"⚠️ RESPONSE CORRECTED: {len(detections)} issues auto-fixed")
+        else:
+            logger.info("✅ Response passed overconfidence validation")
+        
+        return result
+    
+    def _detect_overconfidence_patterns(self, content: str) -> List[OverconfidenceDetection]:
+        """Detect overconfident language patterns in content"""
+        detections = []
+        
+        for level, patterns in self.overconfident_patterns.items():
+            for pattern_info in patterns:
+                pattern = pattern_info["pattern"]
+                matches = re.finditer(pattern, content, re.IGNORECASE)
+                
+                for match in matches:
+                    # Extract context around the match
+                    start = max(0, match.start() - 50)
+                    end = min(len(content), match.end() + 50)
+                    context = content[start:end]
+                    
+                    detection = OverconfidenceDetection(
+                        level=level,
+                        pattern=match.group(),
+                        context=context,
+                        suggested_replacement=pattern_info["replacement"]
+                    )
+                    detections.append(detection)
+        
+        return detections
+    
+    def _assess_confidence_claims(self, content: str, context: Dict[str, Any] = None) -> Dict[str, Any]:
+        """Assess any explicit or implicit confidence claims"""
+        assessment = {
+            "explicit_confidence": None,
+            "implicit_confidence": "unknown",
+            "evidence_provided": False,
+            "sources_cited": 0,
+            "uncertainty_expressed": False
+        }
+        
+        # Look for explicit confidence percentages
+        confidence_match = re.search(r'(\d+)%\s*confidence', content, re.IGNORECASE)
+        if confidence_match:
+            assessment["explicit_confidence"] = int(confidence_match.group(1))
+        
+        # Count citations and sources
+        citation_patterns = [
+            r'\[.*?\]',  # [source]
+            r'according\s+to',  # according to
+            r'based\s+on',  # based on
+            r'documented\s+in',  # documented in
+            r'https?://',  # URLs
+        ]
+        
+        for pattern in citation_patterns:
+            matches = re.findall(pattern, content, re.IGNORECASE)
+            assessment["sources_cited"] += len(matches)
+        
+        assessment["evidence_provided"] = assessment["sources_cited"] > 0
+        
+        # Check for uncertainty expressions
+        uncertainty_indicators = [
+            r'uncertain', r'not\s+sure', r'might\s+be', r'could\s+be',
+            r'appears\s+to', r'seems\s+to', r'likely', r'probably',
+            r'evidence\s+suggests', r'I\s+believe', r'my\s+understanding'
+        ]
+        
+        for indicator in uncertainty_indicators:
+            if re.search(indicator, content, re.IGNORECASE):
+                assessment["uncertainty_expressed"] = True
+                break
+        
+        return assessment
+    
+    def _check_uncertainty_expression(self, content: str) -> Dict[str, Any]:
+        """Check if appropriate uncertainty is expressed"""
+        mandatory_uncertainty_phrases = [
+            "I'm not entirely certain, but",
+            "Based on available evidence",
+            "This appears to be the case, though",
+            "Evidence suggests that",
+            "I have moderate confidence that",
+            "This seems likely, but",
+            "My understanding is that",
+            "According to current information",
+            "This approach appears promising, though",
+            "I believe this is correct, but"
+        ]
+        
+        return {
+            "has_uncertainty_qualifiers": any(
+                phrase.lower() in content.lower() 
+                for phrase in mandatory_uncertainty_phrases
+            ),
+            "confidence_level_stated": bool(re.search(r'confidence|certain|sure', content, re.IGNORECASE)),
+            "alternatives_acknowledged": bool(re.search(r'alternative|other\s+way|different\s+approach', content, re.IGNORECASE)),
+            "limitations_noted": bool(re.search(r'limitation|caveat|however|but|though', content, re.IGNORECASE))
+        }
+    
+    def _should_block_response(self, detections: List[OverconfidenceDetection], 
+                              confidence_assessment: Dict[str, Any], 
+                              uncertainty_check: Dict[str, Any]) -> bool:
+        """Determine if response should be blocked entirely"""
+        
+        # Block if critical overconfidence detected
+        critical_detections = [d for d in detections if d.level == OverconfidenceLevel.CRITICAL]
+        if len(critical_detections) > 2:
+            return True
+        
+        # Block if high confidence claimed without evidence
+        explicit_confidence = confidence_assessment.get("explicit_confidence", 0)
+        if (explicit_confidence is not None and explicit_confidence > 80 and 
+            not confidence_assessment.get("evidence_provided", False)):
+            return True
+        
+        # Block if no uncertainty expressed in technical claims
+        if (confidence_assessment.get("sources_cited", 0) == 0 and 
+            not uncertainty_check.get("has_uncertainty_qualifiers", False) and
+            len(detections) > 0):
+            return True
+        
+        return False
+    
+    def _auto_correct_overconfidence(self, content: str, detections: List[OverconfidenceDetection]) -> str:
+        """Automatically correct overconfident language where possible"""
+        corrected = content
+        
+        for detection in detections:
+            if detection.level in [OverconfidenceLevel.LOW, OverconfidenceLevel.MODERATE]:
+                # Auto-correct minor issues
+                replacements = detection.suggested_replacement.split("|")
+                if replacements:
+                    corrected = re.sub(
+                        detection.pattern, 
+                        replacements[0], 
+                        corrected, 
+                        flags=re.IGNORECASE
+                    )
+        
+        return corrected
+    
+    def _generate_required_actions(self, detections: List[OverconfidenceDetection],
+                                  confidence_assessment: Dict[str, Any],
+                                  uncertainty_check: Dict[str, Any]) -> List[str]:
+        """Generate list of actions required before response can be sent"""
+        actions = []
+        
+        # Critical overconfidence issues
+        critical_detections = [d for d in detections if d.level == OverconfidenceLevel.CRITICAL]
+        for detection in critical_detections:
+            actions.append(f"CRITICAL: Replace '{detection.pattern}' with uncertain language")
+        
+        # Evidence requirements
+        explicit_confidence = confidence_assessment.get("explicit_confidence", 0)
+        if explicit_confidence is not None and explicit_confidence > 70:
+            if not confidence_assessment.get("evidence_provided"):
+                actions.append("REQUIRED: Provide evidence for high confidence claim")
+            if confidence_assessment.get("sources_cited", 0) < 2:
+                actions.append("REQUIRED: Cite at least 2 independent sources")
+        
+        # Uncertainty requirements
+        if not uncertainty_check.get("has_uncertainty_qualifiers"):
+            actions.append("REQUIRED: Add explicit uncertainty qualifiers")
+        
+        if not uncertainty_check.get("confidence_level_stated"):
+            actions.append("REQUIRED: State explicit confidence level")
+        
+        return actions
+    
+    def _generate_validation_summary(self, detections: List[OverconfidenceDetection], blocked: bool) -> str:
+        """Generate human-readable validation summary"""
+        if not detections and not blocked:
+            return "✅ Response passed all overconfidence checks"
+        
+        summary_parts = []
+        
+        if blocked:
+            summary_parts.append("🚨 RESPONSE BLOCKED due to overconfidence")
+        
+        detection_counts = {}
+        for detection in detections:
+            detection_counts[detection.level] = detection_counts.get(detection.level, 0) + 1
+        
+        for level, count in detection_counts.items():
+            summary_parts.append(f"{level.value}: {count} issues")
+        
+        return " | ".join(summary_parts)
+    
+    def get_prevention_statistics(self) -> Dict[str, Any]:
+        """Get statistics about prevention system performance"""
+        total_checks = max(1, self.prevention_stats['detections'])
+        return {
+            "total_detections": self.prevention_stats['detections'],
+            "total_blocks": self.prevention_stats['blocks'],
+            "total_corrections": self.prevention_stats['corrections'],
+            "prevention_rate": self.prevention_stats['blocks'] / total_checks * 100,
+            "correction_rate": self.prevention_stats['corrections'] / total_checks * 100
+        }
     
     def _error_result(self, claim: str, method: str, error: str) -> Dict[str, Any]:
         """Create error result"""
@@ -518,6 +1021,92 @@ class UnifiedValidationSystem:
 Sources: {sources} checked via {systems}
 Consensus: {result['consensus']}
 Time: {result.get('processing_time', 0):.1f}s"""
+    
+    def validate_task_completion(self, 
+                               task_id: str,
+                               task_description: str,
+                               evidence: List[Dict[str, Any]],
+                               claimed_complete: bool = True) -> Dict[str, Any]:
+        """
+        Validate task completion with anti-overconfidence principles
+        
+        Args:
+            task_id: Unique identifier for the task
+            task_description: Description of what the task involves
+            evidence: List of evidence supporting completion
+            claimed_complete: Whether completion is being claimed
+            
+        Returns:
+            Detailed validation result with completion confidence
+        """
+        if not self.task_completion_validator:
+            logger.warning("⚠️ Task completion validator not available")
+            return {
+                'error': 'Task completion validation not available',
+                'confidence': 0.0,
+                'status': 'incomplete',
+                'should_mark_complete': False
+            }
+        
+        # Use the task completion validator
+        result = validate_task_completion_claim(task_id, task_description, evidence)
+        
+        # Apply uncertainty enforcement to the result
+        result = self._enforce_uncertainty_principles(result)
+        
+        # Add completion recommendation
+        should_complete, reason = should_mark_task_complete(result)
+        result['should_mark_complete'] = should_complete
+        result['completion_recommendation'] = reason
+        
+        logger.info(f"🔍 Task completion validation: {result['completion_confidence']:.1%} confidence")
+        logger.info(f"📋 Recommendation: {'✅ Mark complete' if should_complete else '❌ Do not mark complete'}")
+        
+        return result
+    
+    def check_task_completion_confidence(self, 
+                                       task_description: str,
+                                       completion_evidence: List[str]) -> Tuple[bool, float, str]:
+        """
+        Quick check if a task should be marked as complete
+        
+        Args:
+            task_description: What the task involves
+            completion_evidence: List of evidence descriptions
+            
+        Returns:
+            (should_mark_complete, confidence_score, reasoning)
+        """
+        # Convert evidence strings to evidence dictionaries
+        evidence = []
+        for i, evidence_desc in enumerate(completion_evidence):
+            evidence.append({
+                'type': 'functional_verification',
+                'description': evidence_desc,
+                'verification_method': 'self_reported',
+                'confidence_weight': 0.7,
+                'details': {}
+            })
+        
+        # Validate completion
+        result = self.validate_task_completion(
+            task_id=f"quick_check_{int(time.time())}",
+            task_description=task_description,
+            evidence=evidence
+        )
+        
+        confidence = result.get('completion_confidence', 0.0)
+        should_complete = result.get('should_mark_complete', False)
+        reasoning = result.get('completion_recommendation', 'Unknown')
+        
+        return should_complete, confidence, reasoning
+    
+    def generate_task_completion_report(self, task_id: str, validation_result: Dict[str, Any]) -> str:
+        """Generate detailed task completion report"""
+        if not self.task_completion_validator:
+            return "❌ Task completion validation not available"
+        
+        return self.task_completion_validator.generate_completion_report(task_id, validation_result)
 
 
 # Global instance for easy access
@@ -579,6 +1168,202 @@ def find_supporting_papers(topic: str, max_papers: int = 10) -> List[Dict[str, A
     """Find supporting papers for a research topic"""
     validator = get_validator()
     return validator.find_supporting_papers(topic, max_papers)
+
+def validate_with_anti_overconfidence(claim: str, user_statement: str = "", context: str = "") -> Dict[str, Any]:
+    """
+    MANDATORY anti-overconfidence validation - enforces strict uncertainty rules
+    
+    Args:
+        claim: The claim to validate
+        user_statement: Optional user statement to question for overconfident language
+        context: Additional context for validation
+        
+    Returns:
+        Comprehensive validation result with anti-overconfidence report
+    """
+    validator = get_validator()
+    return validator.validate_claim(claim, method='confidence')
+
+def mandatory_anti_overconfidence_check(claim: str, user_statement: str = "") -> str:
+    """
+    Quick anti-overconfidence check - returns formatted report
+    
+    Args:
+        claim: The claim to validate
+        user_statement: Optional user statement to check for overconfident language
+        
+    Returns:
+        Formatted anti-overconfidence report
+    """
+    result = validate_with_anti_overconfidence(claim, user_statement)
+    return result.get('anti_overconfidence_report', 'No report available')
+
+
+# MANDATORY PRE-RESPONSE VALIDATION FUNCTIONS
+def validate_response_before_output(response_content: str, context: Dict[str, Any] = None) -> Dict[str, Any]:
+    """
+    MANDATORY: Validate response content before it reaches the user.
+    
+    This function MUST be called before any response to prevent overconfident language.
+    
+    Args:
+        response_content: The response content to validate
+        context: Optional context for validation
+        
+    Returns:
+        Validation result with corrected content and blocking decision
+    """
+    validator = get_validator()
+    return validator.validate_response_before_output(response_content, context)
+
+
+def is_response_safe_to_send(validation_result: Dict[str, Any]) -> bool:
+    """Check if response is safe to send based on validation result"""
+    return not validation_result.get("should_block", False)
+
+
+def get_corrected_response(validation_result: Dict[str, Any]) -> str:
+    """Get the corrected response content"""
+    return validation_result.get("validated_content", "")
+
+
+def get_overconfidence_prevention_stats() -> Dict[str, Any]:
+    """Get statistics about overconfidence prevention system performance"""
+    validator = get_validator()
+    return validator.get_prevention_statistics()
+
+
+def mandatory_response_check(response_content: str) -> Tuple[bool, str, List[str]]:
+    """
+    MANDATORY check that returns simple decision for response safety
+    
+    Args:
+        response_content: The response to check
+        
+    Returns:
+        (is_safe_to_send, corrected_content, required_actions)
+    """
+    validation_result = validate_response_before_output(response_content)
+    
+    is_safe = is_response_safe_to_send(validation_result)
+    corrected = get_corrected_response(validation_result)
+    actions = validation_result.get("required_actions", [])
+    
+    return is_safe, corrected, actions
+
+
+# Task completion validation functions
+def validate_task_completion_with_evidence(task_id: str, 
+                                         task_description: str, 
+                                         evidence: List[Dict[str, Any]]) -> Dict[str, Any]:
+    """
+    Validate task completion with provided evidence
+    
+    Args:
+        task_id: Unique identifier for the task
+        task_description: What the task involves
+        evidence: List of evidence dictionaries
+        
+    Returns:
+        Validation result with completion confidence
+    """
+    validator = get_validator()
+    return validator.validate_task_completion(task_id, task_description, evidence)
+
+
+def should_task_be_marked_complete(task_description: str, 
+                                 completion_evidence: List[str]) -> Tuple[bool, float, str]:
+    """
+    Quick check if a task should be marked as complete
+    
+    Args:
+        task_description: Description of the task
+        completion_evidence: List of evidence descriptions
+        
+    Returns:
+        (should_mark_complete, confidence_score, reasoning)
+    """
+    validator = get_validator()
+    return validator.check_task_completion_confidence(task_description, completion_evidence)
+
+
+def generate_task_evidence_template(task_type: str = "general") -> List[Dict[str, Any]]:
+    """
+    Generate template for task completion evidence
+    
+    Args:
+        task_type: Type of task (general, coding, research, testing)
+        
+    Returns:
+        Template evidence list to fill out
+    """
+    templates = {
+        'coding': [
+            {
+                'type': 'test_results',
+                'description': 'All unit tests pass (X/X)',
+                'verification_method': 'automated_testing',
+                'confidence_weight': 0.9,
+                'details': {'test_count': 0, 'pass_rate': 0.0}
+            },
+            {
+                'type': 'functional_verification',
+                'description': 'Feature works as specified',
+                'verification_method': 'manual_testing',
+                'confidence_weight': 0.8,
+                'details': {'requirements_met': []}
+            },
+            {
+                'type': 'integration_verified',
+                'description': 'Integrates properly with existing system',
+                'verification_method': 'integration_testing',
+                'confidence_weight': 0.7,
+                'details': {'integration_points': []}
+            }
+        ],
+        'research': [
+            {
+                'type': 'documentation_complete',
+                'description': 'Research findings documented',
+                'verification_method': 'peer_review',
+                'confidence_weight': 0.8,
+                'details': {'document_count': 0}
+            },
+            {
+                'type': 'metrics_achieved',
+                'description': 'Research objectives met',
+                'verification_method': 'objective_assessment',
+                'confidence_weight': 0.9,
+                'details': {'objectives_met': []}
+            }
+        ],
+        'testing': [
+            {
+                'type': 'test_results',
+                'description': 'Test suite executed successfully',
+                'verification_method': 'automated_execution',
+                'confidence_weight': 0.95,
+                'details': {'tests_run': 0, 'failures': 0}
+            },
+            {
+                'type': 'metrics_achieved',
+                'description': 'Coverage and quality metrics met',
+                'verification_method': 'metrics_analysis',
+                'confidence_weight': 0.8,
+                'details': {'coverage_percent': 0.0}
+            }
+        ]
+    }
+    
+    return templates.get(task_type, [
+        {
+            'type': 'functional_verification',
+            'description': 'Task requirements fulfilled',
+            'verification_method': 'manual_verification',
+            'confidence_weight': 0.7,
+            'details': {}
+        }
+    ])
 
 
 def main():
