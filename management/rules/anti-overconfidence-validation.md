@@ -110,7 +110,7 @@ This system intelligently selects from ALL 20+ validation sources in `/Users/cam
 - **Protein/Structure**: AlphaFold, RCSB PDB, UniProt
 - **Genomics**: Ensembl, NCBI E-utilities, BLAST
 - **Chemistry**: PubChem
-- **Materials**: Materials Project (API key: O0oXYcZo6YumgKUOzDJCx9mFiAk9pP4l), OQMD
+- **Materials**: Materials Project, OQMD
 - **ML/Data Science**: OpenML, Hugging Face, Kaggle
 - **Literature**: ArXiv, PubMed Central
 - **Computational**: Wolfram Alpha
