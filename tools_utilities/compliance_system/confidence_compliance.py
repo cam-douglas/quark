@@ -30,6 +30,7 @@ class ConfidenceComplianceChecker:
         self.validator = ConfidenceValidator()
         self.violations = []
         self.warnings = []
+        self.resources_used = []
         
     def check_file_confidence(self, file_path: Path) -> Tuple[bool, List[str]]:
         """
@@ -127,6 +128,53 @@ class ConfidenceComplianceChecker:
                     issues.append(f"Unsourced claim: '{match.group()}'")
                     
         return len(issues) == 0, issues
+    
+    def perform_enhanced_validation(self, file_path: Path) -> Dict[str, Any]:
+        """
+        Perform enhanced validation using all available resources
+        
+        Args:
+            file_path: Path to file to validate
+            
+        Returns:
+            Enhanced validation results
+        """
+        try:
+            content = file_path.read_text()
+            
+            # Detect validation needs
+            categories = self.validator.detect_validation_needs(content)
+            
+            # Perform enhanced validation
+            validation_plan = self.validator.perform_enhanced_validation(content)
+            
+            # Track resources used
+            self.resources_used.extend(validation_plan['resources_selected'])
+            
+            # Check if sufficient resources were consulted
+            if len(validation_plan['resources_selected']) == 0:
+                self.warnings.append(
+                    f"{file_path}: No validation resources available for detected categories"
+                )
+            elif len(validation_plan['resources_selected']) < 2:
+                self.warnings.append(
+                    f"{file_path}: Limited validation resources ({len(validation_plan['resources_selected'])}) - consider manual verification"
+                )
+            
+            return {
+                'file': str(file_path),
+                'categories': validation_plan['categories'],
+                'resources': validation_plan['resources_selected'],
+                'instructions': validation_plan['validation_instructions'],
+                'confidence_boost': validation_plan['confidence_adjustment']
+            }
+            
+        except Exception as e:
+            logger.error(f"Error performing enhanced validation on {file_path}: {e}")
+            return {
+                'file': str(file_path),
+                'error': str(e)
+            }
         
     def generate_confidence_report(self, files_checked: List[Path]) -> str:
         """
@@ -140,7 +188,7 @@ class ConfidenceComplianceChecker:
         """
         report = """
 ═══════════════════════════════════════════════════════════════════
-           CONFIDENCE COMPLIANCE REPORT
+           ENHANCED CONFIDENCE COMPLIANCE REPORT
 ═══════════════════════════════════════════════════════════════════
 
 📊 SUMMARY:
@@ -150,6 +198,8 @@ class ConfidenceComplianceChecker:
 Files Checked: {len(files_checked)}
 Violations Found: {len(self.violations)}
 Warnings Issued: {len(self.warnings)}
+Resources Available: {len(self.validator.resources)}
+Resources Used: {len(set(r['name'] for r in self.resources_used))}
 """
         
         if self.violations:
@@ -168,7 +218,30 @@ Warnings Issued: {len(self.warnings)}
             for warning in self.warnings:
                 report += f"  ⚠️ {warning}\n"
                 
-        report += """
+        # Add resource usage details
+        if self.resources_used:
+            unique_resources = {}
+            for resource in self.resources_used:
+                name = resource['name']
+                if name not in unique_resources:
+                    unique_resources[name] = resource
+            
+            report += """
+📡 VALIDATION RESOURCES USED:
+-----------------------------
+"""
+            for name, resource in list(unique_resources.items())[:5]:
+                report += f"  • {name} ({resource['type']})\n"
+            if len(unique_resources) > 5:
+                report += f"  ... and {len(unique_resources)-5} more\n"
+        
+        report += f"""
+🔧 AVAILABLE RESOURCES:
+-----------------------
+MCP Servers: {sum(1 for r in self.validator.resources.values() if r.resource_type.value == 'mcp_server')}
+APIs: {sum(1 for r in self.validator.resources.values() if r.resource_type.value == 'api')}
+Credentials: {self.validator.credentials_path}
+
 📋 COMPLIANCE REQUIREMENTS:
 ---------------------------
 1. Never claim 100% confidence
@@ -176,6 +249,7 @@ Warnings Issued: {len(self.warnings)}
 3. Cite sources for all claims
 4. Validate before returning results
 5. Express confidence levels explicitly
+6. Use available MCP servers and APIs for validation
 
 🔍 ENFORCEMENT ACTIONS:
 -----------------------
@@ -183,6 +257,15 @@ Warnings Issued: {len(self.warnings)}
 - Overconfident language triggers immediate review
 - Missing validations block deployment
 - Unsourced claims require citation addition
+- Low confidence requires multi-resource validation
+
+💡 VALIDATION INSTRUCTIONS:
+---------------------------
+- When uncertain: Use MCP servers (Context7, arXiv, PubMed)
+- For biological data: Use AlphaFold, UniProt, BLAST APIs
+- For chemical data: Use PubChem API
+- For ML/datasets: Use OpenML API
+- For materials: Use Materials Project API
 
 ═══════════════════════════════════════════════════════════════════
 """
@@ -204,18 +287,34 @@ Warnings Issued: {len(self.warnings)}
             original_check = system.check_compliance_now
             
             def enhanced_check(target_files=None):
-                """Enhanced compliance check with confidence validation"""
+                """Enhanced compliance check with comprehensive validation"""
                 # Run original checks
                 result = original_check(target_files)
                 
-                # Add confidence checks
+                # Add confidence and resource validation checks
                 if target_files:
                     for file_path in target_files:
-                        if Path(file_path).exists():
-                            passes, violations = self.check_file_confidence(Path(file_path))
+                        path = Path(file_path)
+                        if path.exists():
+                            # Basic confidence checks
+                            passes, violations = self.check_file_confidence(path)
                             if not passes:
                                 self.violations.extend(violations)
                                 result = False
+                            
+                            # Enhanced validation for Python and Markdown files
+                            if path.suffix in ['.py', '.md']:
+                                validation_result = self.perform_enhanced_validation(path)
+                                
+                                # Log validation plan
+                                if validation_result.get('instructions'):
+                                    logger.info(f"Enhanced validation for {file_path}:")
+                                    for instruction in validation_result['instructions']:
+                                        logger.info(f"  • {instruction}")
+                                
+                                # Check for errors
+                                if 'error' in validation_result:
+                                    self.warnings.append(f"{file_path}: Validation error - {validation_result['error']}")
                                 
                 return result
                 

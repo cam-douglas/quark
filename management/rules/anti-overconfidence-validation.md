@@ -104,15 +104,32 @@ Confidence = MIN(
 
 ## 🔍 MANDATORY VALIDATION CHECKPOINTS
 
+### CRITICAL: COMPREHENSIVE VALIDATION SYSTEM
+**MANDATORY**: Use the Comprehensive Validation System at `/Users/camdouglas/quark/tools_utilities/comprehensive_validation_system.py`
+This system intelligently selects from ALL 20+ validation sources in `/Users/camdouglas/quark/data/credentials/all_api_keys.json`:
+- **Protein/Structure**: AlphaFold, RCSB PDB, UniProt
+- **Genomics**: Ensembl, NCBI E-utilities, BLAST
+- **Chemistry**: PubChem
+- **Materials**: Materials Project (API key: O0oXYcZo6YumgKUOzDJCx9mFiAk9pP4l), OQMD
+- **ML/Data Science**: OpenML, Hugging Face, Kaggle
+- **Literature**: ArXiv, PubMed Central
+- **Computational**: Wolfram Alpha
+- **AI Validation**: OpenAI, Claude, Gemini, OpenRouter
+- **Code/Docs**: Context7, GitHub
+- **Plus 79+ open access sources** from `/Users/camdouglas/quark/data/knowledge/validation_system/open_access_literature_sources.json`
+
 ### Phase 1: PRE-RESPONSE VALIDATION
 ALWAYS before providing ANY technical answer:
-1. **Search authoritative sources** using ALL available tools:
-   - Context7 MCP for library documentation
-   - Academic MCP servers (OpenAlex, PubMed, arXiv) for scientific validation
-   - Web search for current best practices
-   - Codebase search for existing implementations
-2. **Cross-reference** at least 3 independent sources
-3. **Document uncertainty**: List what you DON'T know or can't verify
+1. **Use Comprehensive Validation System** - MANDATORY:
+   ```python
+   from tools_utilities.comprehensive_validation_system import mandatory_validate
+   result = mandatory_validate(claim, context)
+   # Check: result['confidence'], result['consensus'], result['sources_checked']
+   ```
+2. **Intelligent Source Selection**: System automatically selects best sources based on query category
+3. **Minimum 3 Sources**: ALWAYS validate against AT LEAST 3 independent sources
+4. **Cross-reference** all results and document consensus level
+5. **Document uncertainty**: List what you DON'T know or can't verify
 
 ### Phase 2: MID-IMPLEMENTATION VALIDATION
 ALWAYS during code implementation:
