@@ -14,6 +14,7 @@ import os
 import subprocess
 import json
 import shutil
+import tempfile
 from pathlib import Path
 from typing import Dict, List, Tuple, Set
 import argparse
@@ -30,6 +31,9 @@ class QuarkDataSync:
     def __init__(self, project_root: str = "/Users/camdouglas/quark"):
         self.project_root = Path(project_root)
         self.data_dir = self.project_root / "data"
+        
+        # Configure gsutil for maximum performance
+        self._configure_gsutil_performance()
         
         # Heavy directories to clean up after successful sync (size threshold in MB)
         self.heavy_directories = {
@@ -101,6 +105,28 @@ class QuarkDataSync:
             }
         }
     
+    def _configure_gsutil_performance(self):
+        """Configure gsutil for maximum upload performance."""
+        try:
+            # Set performance configurations
+            performance_configs = [
+                ('GSUtil:parallel_composite_upload_threshold', '150M'),
+                ('GSUtil:parallel_thread_count', '24'),
+                ('GSUtil:parallel_process_count', '12'),
+                ('GSUtil:sliced_object_download_threshold', '150M'),
+                ('GSUtil:sliced_object_download_max_components', '8'),
+                ('GSUtil:check_hashes', 'if_fast_else_skip'),  # Skip slow hash checks
+                ('GSUtil:use_magicfile', 'False'),  # Skip MIME type detection for speed
+            ]
+            
+            for config_name, config_value in performance_configs:
+                cmd = ['gsutil', 'config', '-o', f'{config_name}={config_value}']
+                subprocess.run(cmd, capture_output=True, check=False)  # Don't fail if config fails
+            
+            logger.info("⚡ Configured gsutil for maximum performance")
+        except Exception as e:
+            logger.warning(f"⚠️ Could not configure gsutil performance: {e}")
+    
     def classify_file(self, file_path: Path) -> str:
         """Classify a file into the appropriate bucket category."""
         relative_path = file_path.relative_to(self.data_dir)
@@ -142,7 +168,7 @@ class QuarkDataSync:
         return files_by_bucket
     
     def sync_to_bucket(self, files: List[Path], bucket: str, dry_run: bool = False) -> bool:
-        """Sync files to a specific GCS bucket with progress monitoring."""
+        """Sync files to a specific GCS bucket using incremental rsync."""
         if not files:
             return True
         
@@ -156,38 +182,77 @@ class QuarkDataSync:
             logger.info(f"DRY RUN: Would sync {len(files)} files ({total_size_mb:.1f} MB) to {bucket}")
             return True
         
-        # Sync files with progress updates
-        uploaded_count = 0
-        uploaded_size = 0
-        
-        for i, file_path in enumerate(files, 1):
-            relative_path = file_path.relative_to(self.data_dir)
-            target_path = f"{bucket}/{relative_path}"
+        # Create temporary directory structure for rsync
+        with tempfile.TemporaryDirectory() as temp_dir:
+            temp_path = Path(temp_dir)
             
-            # Get file size for progress tracking
-            file_size = file_path.stat().st_size if file_path.exists() else 0
-            file_size_mb = file_size / (1024 * 1024)
+            # Copy files maintaining relative structure
+            logger.info("📋 Preparing files for incremental sync...")
+            for file_path in files:
+                rel_path = file_path.relative_to(self.data_dir)
+                dest_path = temp_path / rel_path
+                dest_path.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy2(file_path, dest_path)
             
-            sync_cmd = ["gsutil", "cp", str(file_path), target_path]
-            result = subprocess.run(sync_cmd, capture_output=True, text=True)
-            
-            if result.returncode != 0:
-                logger.error(f"❌ Failed to sync {file_path}: {result.stderr}")
+            # Use gsutil rsync for incremental sync with maximum speed optimizations
+            try:
+                logger.info(f"🚀 Starting high-speed incremental sync to {bucket}...")
+                cmd = [
+                    'gsutil', 
+                    '-m',                    # Multi-threaded operations
+                    '-o', 'GSUtil:parallel_composite_upload_threshold=150M',  # Parallel uploads for large files
+                    '-o', 'GSUtil:parallel_thread_count=24',                  # Max parallel threads
+                    '-o', 'GSUtil:parallel_process_count=12',                 # Max parallel processes
+                    '-o', 'GSUtil:sliced_object_download_threshold=150M',     # Sliced downloads
+                    '-o', 'GSUtil:sliced_object_download_max_components=8',   # Max download slices
+                    'rsync', 
+                    '-r',                    # Recursive
+                    '-d',                    # Delete extra files in destination
+                    '-C',                    # Continue on errors
+                    '-x', '.*\\.tmp$',       # Exclude temp files
+                    str(temp_path), bucket
+                ]
+                
+                # Run with real-time output for progress
+                process = subprocess.Popen(
+                    cmd, 
+                    stdout=subprocess.PIPE, 
+                    stderr=subprocess.STDOUT, 
+                    text=True, 
+                    universal_newlines=True
+                )
+                
+                # Monitor output for progress
+                files_processed = 0
+                while True:
+                    output = process.stdout.readline()
+                    if output == '' and process.poll() is not None:
+                        break
+                    if output:
+                        line = output.strip()
+                        # Show relevant progress info
+                        if 'Copying' in line or 'Uploading' in line:
+                            files_processed += 1
+                            if files_processed % 50 == 0:  # Show progress every 50 files
+                                logger.info(f"📤 Processed {files_processed} files...")
+                        elif 'Building synchronization state' in line:
+                            logger.info("🔍 Checking for changes...")
+                        elif 'Starting synchronization' in line:
+                            logger.info("🔄 Synchronizing changes...")
+                        elif any(keyword in line for keyword in ['completed', 'Operations completed']):
+                            logger.info(f"📤 {line}")
+                
+                return_code = process.poll()
+                if return_code == 0:
+                    logger.info(f"✅ Successfully synced to {bucket} (only new/changed files uploaded)")
+                    return True
+                else:
+                    logger.error(f"❌ Failed to sync to {bucket} (exit code: {return_code})")
+                    return False
+                    
+            except Exception as e:
+                logger.error(f"❌ Failed to sync to {bucket}: {str(e)}")
                 return False
-            else:
-                uploaded_count += 1
-                uploaded_size += file_size
-                uploaded_size_mb = uploaded_size / (1024 * 1024)
-                
-                # Show progress every 10 files or for large files
-                if i % 10 == 0 or file_size_mb > 10 or i == len(files):
-                    progress_pct = (uploaded_size / total_size * 100) if total_size > 0 else 0
-                    logger.info(f"📤 Progress: {uploaded_count}/{len(files)} files ({uploaded_size_mb:.1f}/{total_size_mb:.1f} MB, {progress_pct:.1f}%)")
-                
-                logger.debug(f"✅ Synced: {file_path} → {target_path}")
-        
-        logger.info(f"✅ Successfully synced {uploaded_count} files ({uploaded_size_mb:.1f} MB) to {bucket}")
-        return True
     
     def download_from_buckets(self, target_dir: Path = None, dry_run: bool = False) -> bool:
         """Download and merge all bucket contents back to local data directory."""
