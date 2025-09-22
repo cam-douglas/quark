@@ -291,33 +291,37 @@ class GraphNeuralNetwork(nn.Module):
         
         return x
     
-    def _graph_conv(self, x: torch.Tensor, edge_index: torch.Tensor, 
+    def _graph_conv(self, x: torch.Tensor, edge_index: torch.Tensor,
                    linear_layer: nn.Linear) -> torch.Tensor:
-        """Simplified graph convolution operation."""
-        # Apply linear transformation
+        """Vectorized and efficient graph convolution operation."""
+        # Apply linear transformation to all nodes
         x_transformed = linear_layer(x)
-        
+
         # Message passing (aggregate neighbor features)
         if edge_index.shape[1] > 0:
-            source_nodes = edge_index[0]
-            target_nodes = edge_index[1]
+            source_nodes, target_nodes = edge_index
             
-            # Aggregate messages from neighbors
+            # Gather features from source nodes
+            source_features = x_transformed[source_nodes]
+            
+            # Initialize aggregated features tensor
             num_nodes = x_transformed.shape[0]
-            aggregated = torch.zeros_like(x_transformed)
+            aggregated = torch.zeros_like(x_transformed, device=x.device)
             
-            # Simple mean aggregation
-            for i in range(num_nodes):
-                neighbor_mask = target_nodes == i
-                if neighbor_mask.any():
-                    neighbor_indices = source_nodes[neighbor_mask]
-                    neighbor_features = x_transformed[neighbor_indices]
-                    aggregated[i] = torch.mean(neighbor_features, dim=0)
-                else:
-                    aggregated[i] = x_transformed[i]  # Self-loop
+            # Use scatter_add_ for efficient aggregation
+            aggregated.scatter_add_(0, target_nodes.unsqueeze(1).expand_as(source_features), source_features)
             
-            return aggregated
+            # Normalize by node degree
+            node_degrees = torch.zeros(num_nodes, device=x.device).unsqueeze(1)
+            ones = torch.ones_like(source_nodes, dtype=torch.float)
+            node_degrees.scatter_add_(0, target_nodes.unsqueeze(1), ones.unsqueeze(1))
+            
+            # Avoid division by zero for isolated nodes
+            node_degrees[node_degrees == 0] = 1
+            
+            return aggregated / node_degrees
         else:
+            # For graphs with no edges, return the transformed features
             return x_transformed
     
     def predict_regional_boundaries(self, node_embeddings: torch.Tensor,

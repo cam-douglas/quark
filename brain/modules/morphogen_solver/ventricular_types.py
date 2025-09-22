@@ -14,6 +14,7 @@ from enum import Enum
 
 class VentricleType(Enum):
     """Types of ventricular cavities in embryonic brain."""
+    NEURAL_TUBE = "neural_tube"
     LATERAL_LEFT = "lateral_left"
     LATERAL_RIGHT = "lateral_right"
     THIRD = "third"

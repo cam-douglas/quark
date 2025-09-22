@@ -57,10 +57,10 @@ class ValidationCategory(Enum):
 
 class ResourceType(Enum):
     """Types of resources available for validation"""
-    API = "api"
+    API_DIRECT = "api_direct"
     MCP_SERVER = "mcp_server"
-    LOCAL_TOOL = "local_tool"
-    WEB_SERVICE = "web_service"
+    OPEN_ACCESS = "open_access"
+    WEB_SEARCH = "web_search"
 
 
 class ValidationResource:
@@ -77,6 +77,25 @@ class ValidationResource:
         self.success_count = 0
         self.failure_count = 0
         
+    @property
+    def authority_level(self) -> float:
+        """Calculate authority level based on resource type and reliability"""
+        # Base authority by resource type
+        type_authority = {
+            ResourceType.MCP_SERVER: 0.85,
+            ResourceType.API_DIRECT: 0.90,
+            ResourceType.OPEN_ACCESS: 0.95,  # Peer-reviewed sources get highest authority
+            ResourceType.WEB_SEARCH: 0.60
+        }
+        
+        base_authority = type_authority.get(self.resource_type, 0.70)
+        
+        # Adjust by reliability
+        reliability = self.reliability_score
+        
+        # Combine base authority with reliability
+        return base_authority * (0.7 + 0.3 * reliability)  # 70% base, 30% reliability
+    
     @property
     def reliability_score(self) -> float:
         """Calculate reliability based on success/failure ratio"""
@@ -271,7 +290,7 @@ class ConfidenceValidator:
                 # Create resource for this service
                 resources[f'api_{service_name}'] = ValidationResource(
                     name=service_data.get('service', service_name.replace('_', ' ').title()),
-                    resource_type=ResourceType.API,
+                    resource_type=ResourceType.API_DIRECT,
                     categories=categories,
                     config={
                         'service_data': service_data,
@@ -307,7 +326,7 @@ class ConfidenceValidator:
                 if key_name in self.credentials and f'root_{key_name}' not in resources:
                     resources[f'root_{key_name}'] = ValidationResource(
                         name=f'{service_name} (Root Key)',
-                        resource_type=ResourceType.API,
+                        resource_type=ResourceType.API_DIRECT,
                         categories=categories,
                         config={
                             'key_name': key_name,
@@ -340,7 +359,7 @@ class ConfidenceValidator:
                     
                     resources[f'openaccess_{source_id}'] = ValidationResource(
                         name=source_data.get('name', source_id),
-                        resource_type=ResourceType.API,
+                        resource_type=ResourceType.API_DIRECT,
                         categories=categories,
                         config={
                             'source_type': 'preprint_server',
@@ -361,7 +380,7 @@ class ConfidenceValidator:
                 if source_data.get('status') == 'tested_accessible' or source_data.get('test_status') == 'tested_working':
                     resources[f'openaccess_{source_id}'] = ValidationResource(
                         name=source_data.get('name', source_id),
-                        resource_type=ResourceType.API,
+                        resource_type=ResourceType.API_DIRECT,
                         categories=[ValidationCategory.SCIENTIFIC_LITERATURE],
                         config={
                             'source_type': 'academic_database',
@@ -381,7 +400,7 @@ class ConfidenceValidator:
                 if source_data.get('status') == 'tested_accessible' or source_data.get('test_status') == 'tested_working':
                     resources[f'openaccess_{source_id}'] = ValidationResource(
                         name=source_data.get('name', source_id),
-                        resource_type=ResourceType.API,
+                        resource_type=ResourceType.API_DIRECT,
                         categories=[ValidationCategory.SCIENTIFIC_LITERATURE],
                         config={
                             'source_type': 'open_access_journal',
@@ -400,7 +419,7 @@ class ConfidenceValidator:
                 if source_data.get('status') == 'tested_accessible' or source_data.get('test_status') == 'tested_working':
                     resources[f'openaccess_{source_id}'] = ValidationResource(
                         name=source_data.get('name', source_id),
-                        resource_type=ResourceType.API,
+                        resource_type=ResourceType.API_DIRECT,
                         categories=[ValidationCategory.SCIENTIFIC_LITERATURE, ValidationCategory.BIOLOGICAL_SEQUENCE],
                         config={
                             'source_type': 'neuroscience_specific',
@@ -414,7 +433,7 @@ class ConfidenceValidator:
                     
         logger.info(f"Initialized ALL {len(resources)} validation resources")
         logger.info(f"  - MCP Servers: {sum(1 for r in resources.values() if r.resource_type == ResourceType.MCP_SERVER)}")
-        logger.info(f"  - APIs (including credentials): {sum(1 for r in resources.values() if r.resource_type == ResourceType.API and 'openaccess' not in r.name)}")
+        logger.info(f"  - APIs (including credentials): {sum(1 for r in resources.values() if r.resource_type == ResourceType.API_DIRECT and 'openaccess' not in r.name)}")
         logger.info(f"  - Open Access Literature Sources: {sum(1 for name in resources.keys() if 'openaccess' in name)}")
         
         return resources
@@ -844,9 +863,9 @@ class ConfidenceValidator:
             # Priority scoring for resource types
             type_priority = {
                 ResourceType.MCP_SERVER: 1.2,  # Prefer MCP servers for real-time data
-                ResourceType.API: 1.0,
-                ResourceType.LOCAL_TOOL: 0.8,
-                ResourceType.WEB_SERVICE: 0.6
+                ResourceType.API_DIRECT: 1.0,
+                ResourceType.OPEN_ACCESS: 1.3,  # Boost open access sources
+                ResourceType.WEB_SEARCH: 0.6
             }
             type_score = type_priority.get(resource.resource_type, 0.5)
             
@@ -1022,7 +1041,7 @@ class ConfidenceValidator:
                 validation_plan['validation_instructions'].append(instruction)
                 validation_plan['mcp_servers_to_use'].append(resource.config.get('mcp_name'))
                 
-            elif resource.resource_type == ResourceType.API:
+            elif resource.resource_type == ResourceType.API_DIRECT:
                 instruction = self.get_api_validation_instruction(resource, query or context[:100])
                 validation_plan['validation_instructions'].append(instruction)
                 
@@ -1073,7 +1092,7 @@ class ConfidenceValidator:
         
         # Add APIs
         api_available = [r for r in self.resources.values() 
-                        if r.resource_type == ResourceType.API]
+                        if r.resource_type == ResourceType.API_DIRECT]
         if api_available:
             checklist.append("")
             checklist.append("   APIs (For specialized validation):")
@@ -1190,30 +1209,92 @@ class ConfidenceValidator:
         
         validation_result['uncertainty_triggers'] = uncertainty_triggers
         
-        # Calculate confidence with strict caps
+        # REDESIGNED: Naturally encourage mid-tier confidence (40-70% range)
+        # Start with deep skepticism - assume we know very little
+        base_confidence = 0.15  # Start very skeptical
+        
+        # Add evidence incrementally with heavy diminishing returns
+        confidence_added = 0.0
+        evidence_quality_threshold = 0.0
+        
+        if resources:
+            # Each additional source provides less confidence (diminishing returns)
+            confidence_increments = [0.12, 0.08, 0.06, 0.04, 0.03]  # Rapidly diminishing
+            
+            for i, resource in enumerate(resources[:5]):  # Max 5 sources matter
+                if i < len(confidence_increments):
+                    # Quality adjustment (lower quality = much less confidence)
+                    quality_factor = max(resource.authority_level, 0.3)  # Minimum quality threshold
+                    source_boost = confidence_increments[i] * quality_factor
+                    confidence_added += source_boost
+                    evidence_quality_threshold += resource.authority_level
+                    
+                    logger.info(f"📊 Source {i+1} ({resource.name}): +{source_boost:.1%} confidence (quality: {quality_factor:.1f})")
+        
+        # Bonus for peer-reviewed sources, but modest
         if len(open_access_resources) > 0:
-            # Have peer-reviewed sources
-            base_confidence = 0.3
-        elif len(resources) > 0:
-            # Have some sources
-            base_confidence = 0.2
-        else:
-            # No sources
-            base_confidence = 0.0
+            peer_review_bonus = min(len(open_access_resources) * 0.05, 0.15)  # Max 15% bonus
+            confidence_added += peer_review_bonus
+            logger.info(f"📚 Peer-review bonus: +{peer_review_bonus:.1%}")
         
-        # Adjust confidence based on source count and quality
-        source_multiplier = min(len(resources) * 0.15, 0.6)  # Max 60% from sources
+        # HEAVY penalties for uncertainty triggers (stay humble!)
+        uncertainty_penalty = len(uncertainty_triggers) * 0.12  # Increased penalty
         
-        # Apply uncertainty penalties
-        uncertainty_penalty = len(uncertainty_triggers) * 0.1
+        # Additional skepticism penalties
+        complexity_penalty = 0.0
+        if len(validation_result.get('categories', [])) > 2:
+            complexity_penalty += 0.08  # Multi-domain = more uncertainty
+        if user_statement:
+            complexity_penalty += 0.08  # User claims = extra skepticism
+        if len(resources) < 3:
+            complexity_penalty += 0.05  # Insufficient sources = more uncertainty
         
-        # Calculate final confidence (NEVER exceed 90%)
-        final_confidence = min(
-            base_confidence + source_multiplier - uncertainty_penalty,
-            0.9  # HARD CAP at 90%
-        )
+        # Calculate raw confidence
+        raw_confidence = base_confidence + confidence_added - uncertainty_penalty - complexity_penalty
         
-        validation_result['final_confidence'] = max(final_confidence, 0.0)
+        # NATURAL confidence ceiling - make high confidence very rare
+        if raw_confidence > 0.70:
+            # Require exceptional evidence for >70% confidence
+            exceptional_criteria = [
+                len(resources) >= 4,  # Multiple sources
+                len(uncertainty_triggers) == 0,  # No uncertainty flags
+                evidence_quality_threshold / len(resources) >= 0.85,  # High average quality
+                len(open_access_resources) >= 2  # Multiple peer-reviewed sources
+            ]
+            
+            exceptional_count = sum(exceptional_criteria)
+            if exceptional_count < 3:  # Need at least 3/4 criteria
+                # Compress high confidence naturally
+                excess = raw_confidence - 0.70
+                raw_confidence = 0.70 + (excess * 0.2)  # Heavily compress excess
+                logger.info(f"🤔 Naturally reduced confidence to {raw_confidence:.1%} - insufficient evidence for high certainty")
+                logger.info(f"   Exceptional criteria met: {exceptional_count}/4")
+        
+        # The 90% hard cap should almost never be hit now
+        final_confidence = min(raw_confidence, 0.9)
+        
+        # Log if we somehow hit the hard cap (should be extremely rare)
+        if raw_confidence > 0.9:
+            logger.warning(f"🚨 EXTREMELY RARE: Hard cap applied {raw_confidence:.1%} → 90%")
+            logger.warning("   This suggests the confidence calculation needs review!")
+            validation_result['confidence_was_capped'] = True
+            validation_result['original_confidence'] = raw_confidence
+        
+        # Ensure reasonable minimum (but allow very low confidence)
+        validation_result['final_confidence'] = max(final_confidence, 0.05)
+        
+        # Add detailed justification for transparency
+        validation_result['confidence_breakdown'] = {
+            'base_skepticism': base_confidence,
+            'evidence_added': confidence_added,
+            'uncertainty_penalty': uncertainty_penalty,
+            'complexity_penalty': complexity_penalty,
+            'natural_ceiling_applied': raw_confidence > 0.70,
+            'sources_count': len(resources),
+            'peer_reviewed_count': len(open_access_resources),
+            'uncertainty_triggers': len(uncertainty_triggers),
+            'final_reasoning': f"Started skeptical ({base_confidence:.1%}), added evidence ({confidence_added:.1%}), applied penalties (-{uncertainty_penalty + complexity_penalty:.1%})"
+        }
         
         # Determine confidence level
         level, prefix = self.get_confidence_level(validation_result['final_confidence'])
@@ -1244,12 +1325,31 @@ class ConfidenceValidator:
         report = f"""
 {validation_result['confidence_level']}
 
-WHAT I'M CERTAIN ABOUT:
+WHAT I'M REASONABLY CONFIDENT ABOUT:
 """
-        if validation_result['final_confidence'] > 0.5:
-            report += f"- Claim has been partially validated by {len(validation_result['sources_consulted'])} sources\n"
+        confidence = validation_result['final_confidence']
+        breakdown = validation_result.get('confidence_breakdown', {})
+        
+        if confidence > 0.6:
+            report += f"- Strong evidence from {len(validation_result['sources_consulted'])} sources\n"
+            report += f"- {breakdown.get('peer_reviewed_count', 0)} peer-reviewed sources consulted\n"
+            report += f"- Confidence naturally earned through evidence quality\n"
+        elif confidence > 0.4:
+            report += f"- Moderate evidence from {len(validation_result['sources_consulted'])} sources\n"
+            report += f"- Some validation completed, but significant gaps remain\n"
         else:
-            report += "- Limited certainty due to insufficient validation\n"
+            report += "- Very limited certainty - extensive validation still needed\n"
+            
+        # Add confidence reasoning for transparency
+        if breakdown:
+            report += f"\n📊 CONFIDENCE CALCULATION TRANSPARENCY:\n"
+            report += f"- Started with deep skepticism: {breakdown.get('base_skepticism', 0):.1%}\n"
+            report += f"- Evidence gradually added: +{breakdown.get('evidence_added', 0):.1%}\n"
+            report += f"- Uncertainty penalties applied: -{breakdown.get('uncertainty_penalty', 0):.1%}\n"
+            report += f"- Complexity penalties applied: -{breakdown.get('complexity_penalty', 0):.1%}\n"
+            if breakdown.get('natural_ceiling_applied'):
+                report += f"- Natural ceiling applied (high confidence requires exceptional evidence)\n"
+            report += f"- Reasoning: {breakdown.get('final_reasoning', 'Standard calculation')}\n"
         
         report += """
 WHAT I'M UNCERTAIN ABOUT:
@@ -1272,9 +1372,21 @@ VALIDATION SOURCES CONSULTED:
 What you suggested: {user_statement[:100]}...
 
 My concerns:
+- Statement contains overconfident language (always, never, 100%, perfect)
 - Need to verify against authoritative sources
 - Multiple validation sources should be consulted
 - Alternative approaches may exist
+- Absolute claims rarely hold up under scrutiny
+
+What I found instead:
+- Evidence suggests more nuanced reality
+- Multiple factors and exceptions likely exist
+- Confidence should be appropriately qualified
+
+Should we:
+1. Proceed with your approach (with caveats: uncertainty remains)
+2. Consider alternatives (based on: available evidence)
+3. Investigate further before deciding?
 
 Recommended validation:
 """
@@ -1288,7 +1400,14 @@ RECOMMENDED ADDITIONAL VALIDATION:
 - Run empirical tests if applicable
 - Consider alternative interpretations
 
-⚠️ Remember: Maximum confidence is 90% - always maintain uncertainty
+🤔 MANDATORY UNCERTAINTY REMINDERS:
+- No claim can ever be 100% certain
+- Always consider alternative explanations  
+- Seek contradictory evidence actively
+- Question your own assumptions
+- Remember: Science advances through doubt, not certainty
+
+⚠️ CONFIDENCE HARD CAP: Maximum 90% - Absolute certainty is forbidden
 """
         return report
 
@@ -1325,7 +1444,7 @@ def main():
         for name, resource in validator.resources.items():
             if resource.resource_type == ResourceType.MCP_SERVER:
                 mcp_servers.append(resource)
-            elif resource.resource_type == ResourceType.API:
+            elif resource.resource_type == ResourceType.API_DIRECT:
                 apis.append(resource)
         
         print(f"\n📡 MCP Servers ({len(mcp_servers)} available):")

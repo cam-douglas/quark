@@ -57,6 +57,15 @@
     "sha1": "2e04efdde338d1912ca0d76e4ef02ca8fa704586"
   },
   {
+    "path": "simple_vm_training.py",
+    "type": "file",
+    "size": 7038,
+    "last_modified": "2025-09-22T06:52:50.853235+00:00",
+    "lang": "py",
+    "line_count": 201,
+    "sha1": "82b36732d4f74dffe230921c081cc53eb0da3c21"
+  },
+  {
     "path": "pytest.ini",
     "type": "file",
     "size": 261,
@@ -68,29 +77,92 @@
   {
     "path": "requirements.txt",
     "type": "file",
-    "size": 888,
-    "last_modified": "2025-09-17T07:46:11.564549+00:00",
+    "size": 946,
+    "last_modified": "2025-09-22T04:20:43.812425+00:00",
     "lang": "txt",
+    "line_count": 77,
+    "sha1": "d6f8d78d19ee2607b3b6af62c0e75a10d7237f16"
+  },
+  {
+    "path": "GCP_TRAINING_ROADBLOCK.md",
+    "type": "file",
+    "size": 3155,
+    "last_modified": "2025-09-21T14:13:39.066309+00:00",
+    "lang": "md",
     "line_count": 73,
-    "sha1": "d503f3b528c45e929a30d39d0fc6465751a017ed"
+    "sha1": "5e0976077e5531efb621f7c048847e6950a6b34b"
+  },
+  {
+    "path": ".sync_list_quark-data-raw.txt",
+    "type": "file",
+    "size": 5641280,
+    "last_modified": "2025-09-22T03:41:51.056212+00:00",
+    "lang": "txt",
+    "line_count": 44552,
+    "sha1": null
+  },
+  {
+    "path": ".pre-commit-config.yaml",
+    "type": "file",
+    "size": 298,
+    "last_modified": "2025-09-21T08:05:29.007087+00:00",
+    "lang": "yaml",
+    "line_count": 9,
+    "sha1": "3ed7aba24318519dc74f8a7e9621acea6054389c"
+  },
+  {
+    "path": "Dockerfile",
+    "type": "file",
+    "size": 443,
+    "last_modified": "2025-09-21T12:17:23.046322+00:00",
+    "lang": null,
+    "line_count": 15,
+    "sha1": "46c5bfade22d4de48f1a01e99499f8fd803daec9"
+  },
+  {
+    "path": "REQUEST_VERTEX_AI_QUOTA.md",
+    "type": "file",
+    "size": 1823,
+    "last_modified": "2025-09-22T01:36:13.783126+00:00",
+    "lang": "md",
+    "line_count": 57,
+    "sha1": "db235dd313bd5aa067c224851fe15a04c9d44709"
   },
   {
     "path": "pyproject.toml",
     "type": "file",
-    "size": 1018,
-    "last_modified": "2025-09-17T07:46:11.563462+00:00",
+    "size": 1075,
+    "last_modified": "2025-09-21T08:05:29.009419+00:00",
     "lang": "toml",
-    "line_count": 44,
-    "sha1": "2c0609555d295e5ec34f4d00ec1dfc68eeece484"
+    "line_count": 45,
+    "sha1": "ecb98f3e621f5ac8e9fe39673ef263ea25685733"
+  },
+  {
+    "path": "tmp_master.md",
+    "type": "file",
+    "size": 21,
+    "last_modified": "2025-09-22T03:55:12.738719+00:00",
+    "lang": "md",
+    "line_count": 1,
+    "sha1": "152007f74e7439af9ae2c7244618b71ec28d09a5"
+  },
+  {
+    "path": "fix_mcp_servers.sh",
+    "type": "file",
+    "size": 179,
+    "last_modified": "2025-09-21T00:12:29.681300+00:00",
+    "lang": "sh",
+    "line_count": 6,
+    "sha1": "c721756b30eee802792b3a16713baf69a631c126"
   },
   {
     "path": "repo_index.json",
     "type": "file",
-    "size": 367463,
-    "last_modified": "2025-09-18T08:00:02.888323+00:00",
+    "size": 32097,
+    "last_modified": "2025-09-22T03:52:47.103012+00:00",
     "lang": "json",
-    "line_count": 12827,
-    "sha1": "5ca7c8d134e0044b789aa6b18a9483865a1b4926"
+    "line_count": 498,
+    "sha1": "9ce34c7881e56aee1bdf2b800acd97c5325d367e"
   },
   {
     "path": ".gitmodules",
@@ -102,22 +174,31 @@
     "sha1": "7ba247fbeb4f3783c1ee4f4cd48e7dda270866fa"
   },
   {
+    "path": "DATA_SYNC_GUIDE.md",
+    "type": "file",
+    "size": 6967,
+    "last_modified": "2025-09-22T03:51:04.792143+00:00",
+    "lang": "md",
+    "line_count": 210,
+    "sha1": "c7f39882901a4f90b3d0750ac08cbac9d4bc0a45"
+  },
+  {
     "path": "README.md",
     "type": "file",
     "size": 2182,
-    "last_modified": "2025-09-17T09:08:55.928429+00:00",
+    "last_modified": "2025-09-22T03:52:47.103579+00:00",
     "lang": "md",
     "line_count": 65,
-    "sha1": "1e4dbc502c10f53a22c320078dda37dcfbeaa0ba"
+    "sha1": "27fa65d53eb5c89f0365ca07f4e1c3e0431909c9"
   },
   {
     "path": "brain_manifest.json",
     "type": "file",
-    "size": 31105,
-    "last_modified": "2025-09-17T09:08:55.927383+00:00",
+    "size": 32097,
+    "last_modified": "2025-09-22T03:52:47.102718+00:00",
     "lang": "json",
-    "line_count": 483,
-    "sha1": "fb71217b7b18a5027f5de8bd21c217c62ccdf573"
+    "line_count": 498,
+    "sha1": "9ce34c7881e56aee1bdf2b800acd97c5325d367e"
   },
   {
     "path": "brain_specification.json",
@@ -129,6 +210,15 @@
     "sha1": "35bb6adffb4d818ea696ae09615bcb117a306f76"
   },
   {
+    "path": ".dockerignore",
+    "type": "file",
+    "size": 172,
+    "last_modified": "2025-09-21T12:11:19.335579+00:00",
+    "lang": null,
+    "line_count": 24,
+    "sha1": "39a925d67d2d7b606fafba5589a5f6bed47094a2"
+  },
+  {
     "path": ".gitignore",
     "type": "file",
     "size": 1808,
@@ -136,6 +226,69 @@
     "lang": null,
     "line_count": 146,
     "sha1": "4008da451dd8d33146f25d0648a1a2a1415bc605"
+  },
+  {
+    "path": "simple_local_training.py",
+    "type": "file",
+    "size": 3037,
+    "last_modified": "2025-09-21T19:08:43.581619+00:00",
+    "lang": "py",
+    "line_count": 90,
+    "sha1": "40a5a6344b34b9841ec5887a21fa729fad70e652"
+  },
+  {
+    "path": "GCP_QUOTA_REQUIREMENTS.md",
+    "type": "file",
+    "size": 3843,
+    "last_modified": "2025-09-21T14:39:10.700593+00:00",
+    "lang": "md",
+    "line_count": 124,
+    "sha1": "7ecf1ea6a0d0c459304f1333abf152261a152236"
+  },
+  {
+    "path": "GCP_TRAINING_GUIDE.md",
+    "type": "file",
+    "size": 5804,
+    "last_modified": "2025-09-21T13:02:54.319410+00:00",
+    "lang": "md",
+    "line_count": 128,
+    "sha1": "5436381d1010b16992109796a670cd272b67a3c7"
+  },
+  {
+    "path": "GCP_TRAINING_SUCCESS_SUMMARY.md",
+    "type": "file",
+    "size": 4304,
+    "last_modified": "2025-09-21T14:34:26.334153+00:00",
+    "lang": "md",
+    "line_count": 114,
+    "sha1": "ab87cfdc8c5ffefe96fcf384b26f6e88380dda47"
+  },
+  {
+    "path": "..html",
+    "type": "file",
+    "size": 582859,
+    "last_modified": "2025-09-21T09:14:59.313514+00:00",
+    "lang": "html",
+    "line_count": 8228,
+    "sha1": "283b8faceb5cd91fc7c8e28a1a9b8d7b2af6519e"
+  },
+  {
+    "path": "setup_vm_training.sh",
+    "type": "file",
+    "size": 1945,
+    "last_modified": "2025-09-22T06:26:45.747542+00:00",
+    "lang": "sh",
+    "line_count": 55,
+    "sha1": "3b1b3076703941b0f8600657550ed454c123d13c"
+  },
+  {
+    "path": "requirements-ci.txt",
+    "type": "file",
+    "size": 380,
+    "last_modified": "2025-09-22T04:20:43.825766+00:00",
+    "lang": "txt",
+    "line_count": 23,
+    "sha1": "1afd75e4d7e22452f0b7156de30c7fac5c7e7948"
   },
   {
     "path": ".ruff.toml",
@@ -147,6 +300,15 @@
     "sha1": "4ca8aa0207478614559f45240e73f5cc4ef557dc"
   },
   {
+    "path": "research_csf.py",
+    "type": "file",
+    "size": 1151,
+    "last_modified": "2025-09-21T09:19:45.524461+00:00",
+    "lang": "py",
+    "line_count": 32,
+    "sha1": "7e3febc33d6283b4ffc5bfb9a3b23da5734cce48"
+  },
+  {
     "path": "quark_state_system_launcher.py",
     "type": "file",
     "size": 6207,
@@ -154,6 +316,438 @@
     "lang": "py",
     "line_count": 149,
     "sha1": "ce3526094aeb588c07071bc1fa309a858538a0e0"
+  },
+  {
+    "path": "complete_gcp_training_setup.py",
+    "type": "file",
+    "size": 7681,
+    "last_modified": "2025-09-22T05:45:05.814263+00:00",
+    "lang": "py",
+    "line_count": 208,
+    "sha1": "f759090f2095740a6d1113398f977601b85844e3"
+  },
+  {
+    "path": "gcs_sync_google_cloud_service.sh",
+    "type": "file",
+    "size": 279,
+    "last_modified": "2025-09-22T03:48:24.367771+00:00",
+    "lang": "sh",
+    "line_count": 11,
+    "sha1": "fdfaa036056b16fcfd4e0957f2dedfc81aff0f14"
+  },
+  {
+    "path": "authenticate_now.sh",
+    "type": "file",
+    "size": 1217,
+    "last_modified": "2025-09-20T23:11:24.714595+00:00",
+    "lang": "sh",
+    "line_count": 32,
+    "sha1": "4e75e2a2f6d6cbe386490088349e66502221f0a6"
+  },
+  {
+    "path": "tools_utilities/google_cloud_integration.py",
+    "type": "file",
+    "size": 12274,
+    "last_modified": "2025-09-20T22:55:35.995385+00:00",
+    "lang": "py",
+    "line_count": 352,
+    "sha1": "c2da34d8aaefca8121ad77035c0befe53b38a8d4"
+  },
+  {
+    "path": "tools_utilities/enhanced_todo_system.py",
+    "type": "file",
+    "size": 21341,
+    "last_modified": "2025-09-21T04:40:21.402537+00:00",
+    "lang": "py",
+    "line_count": 553,
+    "sha1": "671ea940910f69b39a8747e713bae4a3625a61d6"
+  },
+  {
+    "path": "tools_utilities/dura_mater_research.py",
+    "type": "file",
+    "size": 3297,
+    "last_modified": "2025-09-21T10:08:18.979485+00:00",
+    "lang": "py",
+    "line_count": 93,
+    "sha1": "556f3043765db0255835ecfc291ca33ba96d236a"
+  },
+  {
+    "path": "tools_utilities/ARXIV_API_INTEGRATION.md",
+    "type": "file",
+    "size": 7968,
+    "last_modified": "2025-09-21T00:45:36.895146+00:00",
+    "lang": "md",
+    "line_count": 308,
+    "sha1": "65631335df3546c38fd26b2623f42899079d97dc"
+  },
+  {
+    "path": "tools_utilities/unified_validation_system.py",
+    "type": "file",
+    "size": 62985,
+    "last_modified": "2025-09-21T05:27:24.683710+00:00",
+    "lang": "py",
+    "line_count": 1432,
+    "sha1": "38e3f3c14ada59b125da88390a06804aa48fdbde"
+  },
+  {
+    "path": "tools_utilities/search_dura_mater.py",
+    "type": "file",
+    "size": 2428,
+    "last_modified": "2025-09-21T09:29:25.389999+00:00",
+    "lang": "py",
+    "line_count": 70,
+    "sha1": "e3018040c968bf7e01ab87f4eb42ce27244b500e"
+  },
+  {
+    "path": "tools_utilities/test_execution_validator.py",
+    "type": "file",
+    "size": 30045,
+    "last_modified": "2025-09-21T04:45:29.641688+00:00",
+    "lang": "py",
+    "line_count": 705,
+    "sha1": "8efd298847a038f219714c38dccf0c5b50ebdb94"
+  },
+  {
+    "path": "tools_utilities/FRESH_AUTH_NEEDED.md",
+    "type": "file",
+    "size": 1713,
+    "last_modified": "2025-09-20T23:06:36.472684+00:00",
+    "lang": "md",
+    "line_count": 33,
+    "sha1": "d9437376f48801d1a7b0829ffe1c583319bbda8b"
+  },
+  {
+    "path": "tools_utilities/MATERIALS_PROJECT_API_INTEGRATION.md",
+    "type": "file",
+    "size": 6678,
+    "last_modified": "2025-09-21T00:25:22.525433+00:00",
+    "lang": "md",
+    "line_count": 216,
+    "sha1": "fde092777e4f15f9efe5b7454c6f8471b8a612b0"
+  },
+  {
+    "path": "tools_utilities/async_http_client.py",
+    "type": "file",
+    "size": 17795,
+    "last_modified": "2025-09-21T03:26:29.170892+00:00",
+    "lang": "py",
+    "line_count": 484,
+    "sha1": "e162a9c2a55b0ba036440a111f95b01724d44fcc"
+  },
+  {
+    "path": "tools_utilities/working_mcp_config.json",
+    "type": "file",
+    "size": 741,
+    "last_modified": "2025-09-20T23:52:42.164163+00:00",
+    "lang": "json",
+    "line_count": 35,
+    "sha1": "81cd07e1ac29fbefbcdbc0f2f4f73cafb75fa32b"
+  },
+  {
+    "path": "tools_utilities/alphafold_integration.py",
+    "type": "file",
+    "size": 17630,
+    "last_modified": "2025-09-20T23:31:16.397802+00:00",
+    "lang": "py",
+    "line_count": 498,
+    "sha1": "860c50ad1dd6fa2b4082e34c63fb7ccd69ace521"
+  },
+  {
+    "path": "tools_utilities/memory_manager.py",
+    "type": "file",
+    "size": 17887,
+    "last_modified": "2025-09-21T03:40:47.959666+00:00",
+    "lang": "py",
+    "line_count": 457,
+    "sha1": "193c3b6a2a11cd740a34311d0c8723afab12ad74"
+  },
+  {
+    "path": "tools_utilities/rcsb_brain_proteins_example.py",
+    "type": "file",
+    "size": 6875,
+    "last_modified": "2025-09-20T23:24:46.004623+00:00",
+    "lang": "py",
+    "line_count": 225,
+    "sha1": "a23a9c733f9fa64ff98096bd2632239a7c291aeb"
+  },
+  {
+    "path": "tools_utilities/OQMD_API_INTEGRATION.md",
+    "type": "file",
+    "size": 5142,
+    "last_modified": "2025-09-21T00:25:22.519897+00:00",
+    "lang": "md",
+    "line_count": 177,
+    "sha1": "7838de74151e0825a614fe5117a5bada4a213111"
+  },
+  {
+    "path": "tools_utilities/pubchem_integration.py",
+    "type": "file",
+    "size": 16507,
+    "last_modified": "2025-09-21T00:08:45.953644+00:00",
+    "lang": "py",
+    "line_count": 475,
+    "sha1": "e205d016e0bcf514e2c22c93b9c48b69a6a03a0f"
+  },
+  {
+    "path": "tools_utilities/confidence_validator.py",
+    "type": "file",
+    "size": 71855,
+    "last_modified": "2025-09-21T04:30:20.375657+00:00",
+    "lang": "py",
+    "line_count": 1575,
+    "sha1": "eef910b2c69d61c8c4f39e14b4b628ee01ec7caf"
+  },
+  {
+    "path": "tools_utilities/ENHANCED_VALIDATION_INTEGRATION.md",
+    "type": "file",
+    "size": 6428,
+    "last_modified": "2025-09-21T00:51:45.625407+00:00",
+    "lang": "md",
+    "line_count": 202,
+    "sha1": "a5ba1b193d023e02f232a17f4e4661a7d8ca77b9"
+  },
+  {
+    "path": "tools_utilities/SECURITY_AUDIT_REPORT.md",
+    "type": "file",
+    "size": 5642,
+    "last_modified": "2025-09-20T23:32:05.475452+00:00",
+    "lang": "md",
+    "line_count": 141,
+    "sha1": "577555498195e00f309e07d116baa18889c01fa0"
+  },
+  {
+    "path": "tools_utilities/COMPLETE_AUTH_IN_TERMINAL.md",
+    "type": "file",
+    "size": 1384,
+    "last_modified": "2025-09-20T23:08:22.612689+00:00",
+    "lang": "md",
+    "line_count": 58,
+    "sha1": "3ec72d27cc952b6550475981d7bfdbceab1ebb00"
+  },
+  {
+    "path": "tools_utilities/kaggle_integration.py",
+    "type": "file",
+    "size": 11690,
+    "last_modified": "2025-09-20T23:21:02.666826+00:00",
+    "lang": "py",
+    "line_count": 317,
+    "sha1": "2805fbde8ad63f41151c0d781d30d386d9a1bc71"
+  },
+  {
+    "path": "tools_utilities/fallback_validator.py",
+    "type": "file",
+    "size": 3780,
+    "last_modified": "2025-09-20T23:52:33.892415+00:00",
+    "lang": "py",
+    "line_count": 107,
+    "sha1": "43b29591cb5de3b1ba3294cd8acf39a2cbf37657"
+  },
+  {
+    "path": "tools_utilities/exhaustive_source_test.py",
+    "type": "file",
+    "size": 23629,
+    "last_modified": "2025-09-21T03:40:47.959878+00:00",
+    "lang": "py",
+    "line_count": 578,
+    "sha1": "1b0673ee3923aa7493f21347ac228dc639db6d5f"
+  },
+  {
+    "path": "tools_utilities/arxiv_integration.py",
+    "type": "file",
+    "size": 15857,
+    "last_modified": "2025-09-21T00:45:36.894994+00:00",
+    "lang": "py",
+    "line_count": 465,
+    "sha1": "573cd045f694a57d96fb187481a7767828c772ac"
+  },
+  {
+    "path": "tools_utilities/test_mcp_servers.py",
+    "type": "file",
+    "size": 9689,
+    "last_modified": "2025-09-20T23:54:15.460756+00:00",
+    "lang": "py",
+    "line_count": 246,
+    "sha1": "38fc44f6cc18ae5d61ff179b9462679a6988ad36"
+  },
+  {
+    "path": "tools_utilities/mcp_status_report.json",
+    "type": "file",
+    "size": 357,
+    "last_modified": "2025-09-20T23:52:42.164504+00:00",
+    "lang": "json",
+    "line_count": 16,
+    "sha1": "bfc063e0da9fa8eea999f7eb3bdd73b6934a6e3a"
+  },
+  {
+    "path": "tools_utilities/ventricle_research.py",
+    "type": "file",
+    "size": 3992,
+    "last_modified": "2025-09-21T09:59:15.831007+00:00",
+    "lang": "py",
+    "line_count": 106,
+    "sha1": "29f4ad67034e4e6c290cf60ea8298b1fa05d0885"
+  },
+  {
+    "path": "tools_utilities/RCSB_PDB_API_INTEGRATION.md",
+    "type": "file",
+    "size": 4232,
+    "last_modified": "2025-09-20T23:24:46.004541+00:00",
+    "lang": "md",
+    "line_count": 129,
+    "sha1": "8fece928a4385238bc02c236bd75f030c966569c"
+  },
+  {
+    "path": "tools_utilities/bmp_gradient_research.py",
+    "type": "file",
+    "size": 3177,
+    "last_modified": "2025-09-21T10:19:21.758735+00:00",
+    "lang": "py",
+    "line_count": 91,
+    "sha1": "608e888b644c57d5b106aee1c2b3edab46d02a66"
+  },
+  {
+    "path": "tools_utilities/UNIPROT_API_INTEGRATION.md",
+    "type": "file",
+    "size": 5386,
+    "last_modified": "2025-09-21T00:45:36.895036+00:00",
+    "lang": "md",
+    "line_count": 186,
+    "sha1": "3deb3609799f598c0713e3090a51b27d3ce4fbc0"
+  },
+  {
+    "path": "tools_utilities/NCBI_EUTILITIES_API_INTEGRATION.md",
+    "type": "file",
+    "size": 6977,
+    "last_modified": "2025-09-20T23:36:51.501650+00:00",
+    "lang": "md",
+    "line_count": 221,
+    "sha1": "5f0e686d3d979130939d75b9f87591cbf8bdf08e"
+  },
+  {
+    "path": "tools_utilities/api_key_manager.py",
+    "type": "file",
+    "size": 20299,
+    "last_modified": "2025-09-21T03:40:47.959748+00:00",
+    "lang": "py",
+    "line_count": 513,
+    "sha1": "d08d1a80f0442fb87628e43ac1b3d58840443ff8"
+  },
+  {
+    "path": "tools_utilities/test_comprehensive_validation.py",
+    "type": "file",
+    "size": 6128,
+    "last_modified": "2025-09-21T01:07:43.344688+00:00",
+    "lang": "py",
+    "line_count": 167,
+    "sha1": "4dfae2e9e499d36379d8384e27fe036c57815cf3"
+  },
+  {
+    "path": "tools_utilities/gcs_sync_to_google_cloud.py",
+    "type": "file",
+    "size": 22983,
+    "last_modified": "2025-09-22T03:51:04.792192+00:00",
+    "lang": "py",
+    "line_count": 533,
+    "sha1": "2455cd27fde780993b29c8be6b583198a873691c"
+  },
+  {
+    "path": "tools_utilities/ANTI_OVERCONFIDENCE_INTEGRATION_COMPLETE.md",
+    "type": "file",
+    "size": 6434,
+    "last_modified": "2025-09-21T01:03:16.473166+00:00",
+    "lang": "md",
+    "line_count": 183,
+    "sha1": "0a8a592152daaf972559cdb016b492e2fa5a3d9d"
+  },
+  {
+    "path": "tools_utilities/gnn_vit_research.py",
+    "type": "file",
+    "size": 2128,
+    "last_modified": "2025-09-21T10:57:03.772665+00:00",
+    "lang": "py",
+    "line_count": 58,
+    "sha1": "50925a999548a1507c67fb4b221350e84c93316f"
+  },
+  {
+    "path": "tools_utilities/rcsb_pdb_integration.py",
+    "type": "file",
+    "size": 14606,
+    "last_modified": "2025-09-20T23:24:46.004490+00:00",
+    "lang": "py",
+    "line_count": 437,
+    "sha1": "1f4947d73e93a4ded88dcab2e109499e3f47e8a1"
+  },
+  {
+    "path": "tools_utilities/api_enabler.py",
+    "type": "file",
+    "size": 2872,
+    "last_modified": "2025-09-20T23:15:49.868828+00:00",
+    "lang": "py",
+    "line_count": 84,
+    "sha1": "212828ed704b20378d382032613abcb624ecda17"
+  },
+  {
+    "path": "tools_utilities/google_cloud_api_manager.py",
+    "type": "file",
+    "size": 14607,
+    "last_modified": "2025-09-20T23:01:16.739420+00:00",
+    "lang": "py",
+    "line_count": 415,
+    "sha1": "3b97919bf684208c7e5e354396b72aff317a61fc"
+  },
+  {
+    "path": "tools_utilities/ensembl_integration.py",
+    "type": "file",
+    "size": 18016,
+    "last_modified": "2025-09-20T23:59:04.156206+00:00",
+    "lang": "py",
+    "line_count": 541,
+    "sha1": "3cdbc4403967dd2c1f23ab28cd9734ac7362d8da"
+  },
+  {
+    "path": "tools_utilities/api_key_expiration_checker.py",
+    "type": "file",
+    "size": 8336,
+    "last_modified": "2025-09-21T04:11:37.126530+00:00",
+    "lang": "py",
+    "line_count": 210,
+    "sha1": "756dca178fdb70b72ea286ef573d41b5481e80b0"
+  },
+  {
+    "path": "tools_utilities/auth_with_code.py",
+    "type": "file",
+    "size": 3134,
+    "last_modified": "2025-09-20T23:08:22.612576+00:00",
+    "lang": "py",
+    "line_count": 98,
+    "sha1": "5c0b4c70e7682e91511fb1444f856c5d9d920027"
+  },
+  {
+    "path": "tools_utilities/ENSEMBL_API_INTEGRATION.md",
+    "type": "file",
+    "size": 7037,
+    "last_modified": "2025-09-20T23:59:04.156024+00:00",
+    "lang": "md",
+    "line_count": 233,
+    "sha1": "35989f158fcea0fb34533b6d11c99d0cf37de795"
+  },
+  {
+    "path": "tools_utilities/wnt_fgf_gradient_research.py",
+    "type": "file",
+    "size": 3526,
+    "last_modified": "2025-09-21T10:20:59.381661+00:00",
+    "lang": "py",
+    "line_count": 96,
+    "sha1": "ea53908df9fa754e964fb06550097831e64cc2ae"
+  },
+  {
+    "path": "tools_utilities/task_completion_validator.py",
+    "type": "file",
+    "size": 28159,
+    "last_modified": "2025-09-21T04:45:29.641743+00:00",
+    "lang": "py",
+    "line_count": 636,
+    "sha1": "0b97f3fc3b368133c4f24c6a82471889c520ee21"
   },
   {
     "path": "tools_utilities/README.md",
@@ -165,6 +759,15 @@
     "sha1": "5000827166d81ed206a489bb624a13d600623025"
   },
   {
+    "path": "tools_utilities/GOOGLE_CLOUD_STATUS.md",
+    "type": "file",
+    "size": 5554,
+    "last_modified": "2025-09-20T23:15:49.868943+00:00",
+    "lang": "md",
+    "line_count": 183,
+    "sha1": "246fc5abf0d3adefc7126a87702380cbed7025c5"
+  },
+  {
     "path": "tools_utilities/compliance_system.py",
     "type": "file",
     "size": 782,
@@ -174,6 +777,159 @@
     "sha1": "1438c7be9cfa24bdf375423df534df64ba514361"
   },
   {
+    "path": "tools_utilities/test_production_validation.py",
+    "type": "file",
+    "size": 10162,
+    "last_modified": "2025-09-21T03:26:29.171057+00:00",
+    "lang": "py",
+    "line_count": 242,
+    "sha1": "ce8c67d348edc4c1169f82879202bfd7d565bb11"
+  },
+  {
+    "path": "tools_utilities/install_working_mcp_servers.sh",
+    "type": "file",
+    "size": 4344,
+    "last_modified": "2025-09-20T23:57:34.799177+00:00",
+    "lang": "sh",
+    "line_count": 140,
+    "sha1": "66f64d8ec335da962ee0848ed3b1d49a0daa3eb7"
+  },
+  {
+    "path": "tools_utilities/quick_mcp_fix.py",
+    "type": "file",
+    "size": 9605,
+    "last_modified": "2025-09-20T23:54:15.460783+00:00",
+    "lang": "py",
+    "line_count": 288,
+    "sha1": "0bd635756387e68f5d09b091bd29931614dc9b5f"
+  },
+  {
+    "path": "tools_utilities/ncbi_eutilities_integration.py",
+    "type": "file",
+    "size": 16024,
+    "last_modified": "2025-09-20T23:36:51.501554+00:00",
+    "lang": "py",
+    "line_count": 479,
+    "sha1": "a25b78b12b235b4d9ddb55127ac0d217b25d5ffb"
+  },
+  {
+    "path": "tools_utilities/KAGGLE_API_STATUS.md",
+    "type": "file",
+    "size": 4618,
+    "last_modified": "2025-09-20T23:21:02.666905+00:00",
+    "lang": "md",
+    "line_count": 186,
+    "sha1": "a184f8c38f9ea57e1c389d916fec89cd6be5c439"
+  },
+  {
+    "path": "tools_utilities/VALIDATION_SYSTEM_MAIN_ENTRY_POINT.md",
+    "type": "file",
+    "size": 7585,
+    "last_modified": "2025-09-21T03:44:14.020804+00:00",
+    "lang": "md",
+    "line_count": 209,
+    "sha1": "fd4533d60a9318c7c39cc14cc96d3a9d046f9437"
+  },
+  {
+    "path": "tools_utilities/install_academic_mcp_servers.sh",
+    "type": "file",
+    "size": 6911,
+    "last_modified": "2025-09-20T23:54:15.460716+00:00",
+    "lang": "sh",
+    "line_count": 240,
+    "sha1": "bdd86a04f935df4b592bd887c5dd4d5f31a2af6c"
+  },
+  {
+    "path": "tools_utilities/shh_gradient_research.py",
+    "type": "file",
+    "size": 3046,
+    "last_modified": "2025-09-21T10:16:58.869722+00:00",
+    "lang": "py",
+    "line_count": 88,
+    "sha1": "b6f20a115539583fe44c3509c0675859aa593035"
+  },
+  {
+    "path": "tools_utilities/auth_quark_project.sh",
+    "type": "file",
+    "size": 1496,
+    "last_modified": "2025-09-20T23:03:46.526522+00:00",
+    "lang": "sh",
+    "line_count": 28,
+    "sha1": "2c9bf5ebf9384c49aaf6f46ceaf927dcd0ebdbe8"
+  },
+  {
+    "path": "tools_utilities/auth_interactive.py",
+    "type": "file",
+    "size": 2472,
+    "last_modified": "2025-09-20T23:06:36.472754+00:00",
+    "lang": "py",
+    "line_count": 71,
+    "sha1": "cdf9e64569740e41e0f5651903f6a24f35c690bf"
+  },
+  {
+    "path": "tools_utilities/citation_finder.py",
+    "type": "file",
+    "size": 4123,
+    "last_modified": "2025-09-21T10:30:45.953748+00:00",
+    "lang": "py",
+    "line_count": 110,
+    "sha1": "929e54b564aa5077dffd2c9f59f168aa333c3ca8"
+  },
+  {
+    "path": "tools_utilities/materials_project_integration.py",
+    "type": "file",
+    "size": 18621,
+    "last_modified": "2025-09-21T00:25:22.519203+00:00",
+    "lang": "py",
+    "line_count": 545,
+    "sha1": "53f4789628205e8db27d24332f43145a048971a4"
+  },
+  {
+    "path": "tools_utilities/comprehensive_validator.py",
+    "type": "file",
+    "size": 9788,
+    "last_modified": "2025-09-20T23:59:50.612258+00:00",
+    "lang": "py",
+    "line_count": 257,
+    "sha1": "6b97708c19b64a5e7e72a4c9b6334f4a81ab337e"
+  },
+  {
+    "path": "tools_utilities/comprehensive_validation_system.py",
+    "type": "file",
+    "size": 57260,
+    "last_modified": "2025-09-21T03:52:04.688442+00:00",
+    "lang": "py",
+    "line_count": 1320,
+    "sha1": "a85050830e246eaaf0b78589c4f791b46916945b"
+  },
+  {
+    "path": "tools_utilities/GOOGLE_CLOUD_SETUP.md",
+    "type": "file",
+    "size": 5256,
+    "last_modified": "2025-09-20T22:57:10.139601+00:00",
+    "lang": "md",
+    "line_count": 199,
+    "sha1": "7af9c4fb894c084358c2577e826f6e9d23e41dc1"
+  },
+  {
+    "path": "tools_utilities/AUTHENTICATE_NOW.md",
+    "type": "file",
+    "size": 2100,
+    "last_modified": "2025-09-20T23:01:16.739450+00:00",
+    "lang": "md",
+    "line_count": 76,
+    "sha1": "b3702287c414bc367a4ccc387b8f37826c2fb958"
+  },
+  {
+    "path": "tools_utilities/BLAST_API_INTEGRATION.md",
+    "type": "file",
+    "size": 6928,
+    "last_modified": "2025-09-21T00:45:36.895075+00:00",
+    "lang": "md",
+    "line_count": 242,
+    "sha1": "b7038a77bd6f4627c44bd73af1cc0dfa730a45ce"
+  },
+  {
     "path": "tools_utilities/unified_agent_system.py",
     "type": "file",
     "size": 923,
@@ -181,6 +937,150 @@
     "lang": "py",
     "line_count": 34,
     "sha1": "a4f54a6bc2d2a509a94c7cb80d2c7d179bc53e2d"
+  },
+  {
+    "path": "tools_utilities/uniprot_integration.py",
+    "type": "file",
+    "size": 15430,
+    "last_modified": "2025-09-21T00:36:48.842329+00:00",
+    "lang": "py",
+    "line_count": 467,
+    "sha1": "c3f4d5f974719b9986012de80a4b5625da5180bf"
+  },
+  {
+    "path": "tools_utilities/blast_integration.py",
+    "type": "file",
+    "size": 15105,
+    "last_modified": "2025-09-21T00:36:48.841858+00:00",
+    "lang": "py",
+    "line_count": 460,
+    "sha1": "274ab3b3a7a5585dfde5049d745c801fa293ee71"
+  },
+  {
+    "path": "tools_utilities/complete_auth.sh",
+    "type": "file",
+    "size": 797,
+    "last_modified": "2025-09-20T23:06:36.472828+00:00",
+    "lang": "sh",
+    "line_count": 28,
+    "sha1": "3bec08684bc85edbab0fcf646f7dec41c714e536"
+  },
+  {
+    "path": "tools_utilities/CDX_SERVER_API_INTEGRATION.md",
+    "type": "file",
+    "size": 8286,
+    "last_modified": "2025-09-21T03:21:04.711094+00:00",
+    "lang": "md",
+    "line_count": 331,
+    "sha1": "e3803cef31c5f1bdb5538724aa5428f7039bbbab"
+  },
+  {
+    "path": "tools_utilities/cdx_server_integration.py",
+    "type": "file",
+    "size": 18382,
+    "last_modified": "2025-09-21T03:21:04.675808+00:00",
+    "lang": "py",
+    "line_count": 623,
+    "sha1": "6ddcc4065e76d019caa0674e45ecfe7eab3ec1d1"
+  },
+  {
+    "path": "tools_utilities/test_antioverconfidence.py",
+    "type": "file",
+    "size": 3674,
+    "last_modified": "2025-09-21T01:03:16.473094+00:00",
+    "lang": "py",
+    "line_count": 92,
+    "sha1": "cb282e0b819daedac416b045f10f4c711b9b6143"
+  },
+  {
+    "path": "tools_utilities/AUTHENTICATE_QUARK_NOW.md",
+    "type": "file",
+    "size": 2288,
+    "last_modified": "2025-09-20T23:03:46.526400+00:00",
+    "lang": "md",
+    "line_count": 65,
+    "sha1": "a06448eae1361ab8675506aa219a481e496892a0"
+  },
+  {
+    "path": "tools_utilities/PUBCHEM_API_INTEGRATION.md",
+    "type": "file",
+    "size": 4720,
+    "last_modified": "2025-09-21T00:08:45.954952+00:00",
+    "lang": "md",
+    "line_count": 156,
+    "sha1": "9f024d1ece352767f9b08922d72bd7cfb8baa1e4"
+  },
+  {
+    "path": "tools_utilities/frictionless_validation.py",
+    "type": "file",
+    "size": 21201,
+    "last_modified": "2025-09-21T03:38:06.865030+00:00",
+    "lang": "py",
+    "line_count": 513,
+    "sha1": "039b3569f5ceb967da036919d6da5b4c62a04c37"
+  },
+  {
+    "path": "tools_utilities/test_enhanced_validation.py",
+    "type": "file",
+    "size": 6393,
+    "last_modified": "2025-09-21T00:51:45.633675+00:00",
+    "lang": "py",
+    "line_count": 200,
+    "sha1": "eb69bd1081609886f5b8c0e57da56d1f4dcc9d5b"
+  },
+  {
+    "path": "tools_utilities/fix_all_mcp_servers.sh",
+    "type": "file",
+    "size": 14027,
+    "last_modified": "2025-09-21T00:14:55.846100+00:00",
+    "lang": "sh",
+    "line_count": 475,
+    "sha1": "d17fe6732c7d5f0b77b79ccfeb7ee6ef0187e8c3"
+  },
+  {
+    "path": "tools_utilities/OPENML_API_INTEGRATION.md",
+    "type": "file",
+    "size": 4686,
+    "last_modified": "2025-09-21T00:08:45.954930+00:00",
+    "lang": "md",
+    "line_count": 177,
+    "sha1": "5d8e88ef806c527390d04f82f6b1ef56d59a2abe"
+  },
+  {
+    "path": "tools_utilities/ALPHAFOLD_API_INTEGRATION.md",
+    "type": "file",
+    "size": 6006,
+    "last_modified": "2025-09-20T23:31:16.397878+00:00",
+    "lang": "md",
+    "line_count": 183,
+    "sha1": "59b719901981a9cf61acf54cd3a333bce713681c"
+  },
+  {
+    "path": "tools_utilities/openml_integration.py",
+    "type": "file",
+    "size": 17256,
+    "last_modified": "2025-09-21T00:08:45.955218+00:00",
+    "lang": "py",
+    "line_count": 531,
+    "sha1": "0d1d4df4246d103da94e509c79f6dd4a212b6618"
+  },
+  {
+    "path": "tools_utilities/oqmd_integration.py",
+    "type": "file",
+    "size": 16688,
+    "last_modified": "2025-09-21T00:25:22.519158+00:00",
+    "lang": "py",
+    "line_count": 490,
+    "sha1": "6df909291abcb67e71a39648e0388d6d1173ef70"
+  },
+  {
+    "path": "tools_utilities/VALIDATION_SYSTEM_COMPLETE.md",
+    "type": "file",
+    "size": 6808,
+    "last_modified": "2025-09-21T00:56:44.631817+00:00",
+    "lang": "md",
+    "line_count": 235,
+    "sha1": "a2eb031b73920febc1ee0fa3b54ebc69378cac7e"
   },
   {
     "path": "tools_utilities/agent_delegation/__init__.py",
@@ -203,11 +1103,11 @@
   {
     "path": "tools_utilities/agent_delegation/agent_workers.py",
     "type": "file",
-    "size": 7093,
-    "last_modified": "2025-09-17T07:46:11.578758+00:00",
+    "size": 7172,
+    "last_modified": "2025-09-21T09:17:20.403147+00:00",
     "lang": "py",
-    "line_count": 208,
-    "sha1": "a1ccc5646117ebd899a3fc46160de1148347e4e2"
+    "line_count": 212,
+    "sha1": "dafe12f2fcf093a74ffcf17973a3203332a3cbec"
   },
   {
     "path": "tools_utilities/agent_delegation/agent_types.py",
@@ -239,11 +1139,11 @@
   {
     "path": "tools_utilities/compliance_system/core_system.py",
     "type": "file",
-    "size": 10893,
-    "last_modified": "2025-09-17T07:46:11.580928+00:00",
+    "size": 10906,
+    "last_modified": "2025-09-21T09:00:43.207126+00:00",
     "lang": "py",
     "line_count": 292,
-    "sha1": "2d06a6e7414be2902fcef8bb126e45caa0b60d62"
+    "sha1": "a8cc880f81f674a7c951d8f507551758b61bb9a3"
   },
   {
     "path": "tools_utilities/compliance_system/README.md",
@@ -253,6 +1153,15 @@
     "lang": "md",
     "line_count": 113,
     "sha1": "89ce23a4dd02d690fede0168c65b5029033aeef0"
+  },
+  {
+    "path": "tools_utilities/compliance_system/confidence_compliance.py",
+    "type": "file",
+    "size": 14966,
+    "last_modified": "2025-09-21T00:51:45.625318+00:00",
+    "lang": "py",
+    "line_count": 384,
+    "sha1": "85c757acdec8060369d111916bd5652d4495d108"
   },
   {
     "path": "tools_utilities/compliance_system/compliance_launcher/__init__.py",
@@ -595,11 +1504,11 @@
   {
     "path": "tools_utilities/scripts/pre_commit_rule_guard.sh",
     "type": "file",
-    "size": 883,
-    "last_modified": "2025-09-17T08:02:58.459206+00:00",
+    "size": 1720,
+    "last_modified": "2025-09-20T23:48:18.163303+00:00",
     "lang": "sh",
-    "line_count": 27,
-    "sha1": "5af206f68b33c187abe91734f877a19337f34609"
+    "line_count": 48,
+    "sha1": "5846b9e141310a3fb43b0bee2ab3379756209388"
   },
   {
     "path": "tools_utilities/scripts/generate_readme.py",
@@ -717,15 +1626,6 @@
     "lang": "py",
     "line_count": 69,
     "sha1": "4e6e75551ec6c2a0e592334eb91aa2d9258f9b69"
-  },
-  {
-    "path": "tools_utilities/scripts/s3_sync.py",
-    "type": "file",
-    "size": 2425,
-    "last_modified": "2025-09-17T07:46:11.583798+00:00",
-    "lang": "py",
-    "line_count": 84,
-    "sha1": "bd237c0419c506da4501b5ac895f91bc7c5995e4"
   },
   {
     "path": "tools_utilities/scripts/doc_utils.py",
@@ -904,9 +1804,216 @@
     "excluded": true
   },
   {
+    "path": "wnt_gradient_research/article_38580174.xml",
+    "type": "file",
+    "size": 7589,
+    "last_modified": "2025-09-21T10:21:14.262407+00:00",
+    "lang": "xml",
+    "line_count": 2,
+    "sha1": "4c46a7130bc30073b9e3f17cce964cf37c765810"
+  },
+  {
+    "path": "wnt_gradient_research/article_40373768.xml",
+    "type": "file",
+    "size": 12224,
+    "last_modified": "2025-09-21T10:21:14.258090+00:00",
+    "lang": "xml",
+    "line_count": 2,
+    "sha1": "8e723729a804ddbbc1a3eb8ed82aef879db231f0"
+  },
+  {
+    "path": "wnt_gradient_research/article_38405970.xml",
+    "type": "file",
+    "size": 34075,
+    "last_modified": "2025-09-21T10:21:14.263487+00:00",
+    "lang": "xml",
+    "line_count": 2,
+    "sha1": "fe6b40b78427e60052bd9cfa9b55f8ec2d26f305"
+  },
+  {
+    "path": "wnt_gradient_research/article_39829904.xml",
+    "type": "file",
+    "size": 33478,
+    "last_modified": "2025-09-21T10:21:14.260673+00:00",
+    "lang": "xml",
+    "line_count": 2,
+    "sha1": "6354a0e360c66bf72979baf90548c3d3a3447caf"
+  },
+  {
+    "path": "wnt_gradient_research/article_38511989.xml",
+    "type": "file",
+    "size": 6657,
+    "last_modified": "2025-09-21T10:21:14.262705+00:00",
+    "lang": "xml",
+    "line_count": 2,
+    "sha1": "231c0661d1e1d5d342b6bbfbfd5b9f7fcbe1cc04"
+  },
+  {
+    "path": "wnt_gradient_research/article_38729677.xml",
+    "type": "file",
+    "size": 7424,
+    "last_modified": "2025-09-21T10:21:14.262071+00:00",
+    "lang": "xml",
+    "line_count": 2,
+    "sha1": "ca03a440d47844a747f99f2b424db905aaa80199"
+  },
+  {
+    "path": "wnt_gradient_research/article_40315847.xml",
+    "type": "file",
+    "size": 62848,
+    "last_modified": "2025-09-21T10:21:14.259652+00:00",
+    "lang": "xml",
+    "line_count": 2,
+    "sha1": "0fbc0398a57ee3ababff4445874ef87cb94f931e"
+  },
+  {
+    "path": "wnt_gradient_research/article_40883608.xml",
+    "type": "file",
+    "size": 52723,
+    "last_modified": "2025-09-21T10:21:14.257214+00:00",
+    "lang": "xml",
+    "line_count": 2,
+    "sha1": "6bafc41250861c006d0d79f71a98798dd9dc8ba2"
+  },
+  {
+    "path": "wnt_gradient_research/article_39164046.xml",
+    "type": "file",
+    "size": 36787,
+    "last_modified": "2025-09-21T10:21:14.261677+00:00",
+    "lang": "xml",
+    "line_count": 2,
+    "sha1": "371f2d84d6e35e3346a68d5e9b44aed8fd0158c4"
+  },
+  {
+    "path": "wnt_gradient_research/article_38171360.xml",
+    "type": "file",
+    "size": 56088,
+    "last_modified": "2025-09-21T10:21:14.264763+00:00",
+    "lang": "xml",
+    "line_count": 2,
+    "sha1": "78eaad6d9f86037edbfcce9e732d53d947e2df4c"
+  },
+  {
     "path": ".cursor/rules/",
     "type": "dir",
     "excluded": true
+  },
+  {
+    "path": "shh_gradient_research/article_26619365.xml",
+    "type": "file",
+    "size": 24103,
+    "last_modified": "2025-09-21T10:17:14.527863+00:00",
+    "lang": "xml",
+    "line_count": 2,
+    "sha1": "6fd3995b8a3590cd5dbd4dfbc9f2a8d5fbadf02e"
+  },
+  {
+    "path": "shh_gradient_research/article_40848721.xml",
+    "type": "file",
+    "size": 4691,
+    "last_modified": "2025-09-21T10:17:14.527063+00:00",
+    "lang": "xml",
+    "line_count": 2,
+    "sha1": "c310e8246a788fc1b52370d288234081a01ce93d"
+  },
+  {
+    "path": "shh_gradient_research/article_16452094.xml",
+    "type": "file",
+    "size": 6680,
+    "last_modified": "2025-09-21T10:17:14.528239+00:00",
+    "lang": "xml",
+    "line_count": 2,
+    "sha1": "9d9e42d49b5a6119c2f873b6a8eb3e31fcc5dd5c"
+  },
+  {
+    "path": "bmp_gradient_research/article_27144312.xml",
+    "type": "file",
+    "size": 52930,
+    "last_modified": "2025-09-21T10:19:36.824495+00:00",
+    "lang": "xml",
+    "line_count": 2,
+    "sha1": "cf7afa06dc06c8f07b131a8a22bdb87d0a0c6aee"
+  },
+  {
+    "path": "bmp_gradient_research/article_23073896.xml",
+    "type": "file",
+    "size": 7127,
+    "last_modified": "2025-09-21T10:19:36.830379+00:00",
+    "lang": "xml",
+    "line_count": 2,
+    "sha1": "5c234bbc1423536d3cd7b96cd5129aadf22802a7"
+  },
+  {
+    "path": "bmp_gradient_research/article_23589857.xml",
+    "type": "file",
+    "size": 19308,
+    "last_modified": "2025-09-21T10:19:36.829056+00:00",
+    "lang": "xml",
+    "line_count": 2,
+    "sha1": "5c4546fd9dd675cb5d37b5e08854869a52b00813"
+  },
+  {
+    "path": "bmp_gradient_research/article_21799263.xml",
+    "type": "file",
+    "size": 20287,
+    "last_modified": "2025-09-21T10:19:36.831266+00:00",
+    "lang": "xml",
+    "line_count": 2,
+    "sha1": "61f26cfc852f3940eff7484c85eea1ea25b81691"
+  },
+  {
+    "path": "bmp_gradient_research/article_23462473.xml",
+    "type": "file",
+    "size": 20929,
+    "last_modified": "2025-09-21T10:19:36.829891+00:00",
+    "lang": "xml",
+    "line_count": 2,
+    "sha1": "04359874c106766ecf89ec5e990d615a2f9b1847"
+  },
+  {
+    "path": "bmp_gradient_research/article_29669275.xml",
+    "type": "file",
+    "size": 21292,
+    "last_modified": "2025-09-21T10:19:36.822858+00:00",
+    "lang": "xml",
+    "line_count": 2,
+    "sha1": "6db961282090fe57696e0a7856e05f398015931d"
+  },
+  {
+    "path": "bmp_gradient_research/article_39603235.xml",
+    "type": "file",
+    "size": 8231,
+    "last_modified": "2025-09-21T10:19:36.821076+00:00",
+    "lang": "xml",
+    "line_count": 2,
+    "sha1": "0ed0df8417a6b7e2b2f74ffc6af90b54b1e1493b"
+  },
+  {
+    "path": "bmp_gradient_research/article_31239243.xml",
+    "type": "file",
+    "size": 11335,
+    "last_modified": "2025-09-21T10:19:36.821933+00:00",
+    "lang": "xml",
+    "line_count": 2,
+    "sha1": "08255871c823c087036ec8f482f7fea55aa86d29"
+  },
+  {
+    "path": "bmp_gradient_research/article_26499851.xml",
+    "type": "file",
+    "size": 73099,
+    "last_modified": "2025-09-21T10:19:36.826677+00:00",
+    "lang": "xml",
+    "line_count": 2,
+    "sha1": "9b9dc6b4d474ae05db12ba74cb5ab03690c10ca0"
+  },
+  {
+    "path": "bmp_gradient_research/article_24671096.xml",
+    "type": "file",
+    "size": 29613,
+    "last_modified": "2025-09-21T10:19:36.828081+00:00",
+    "lang": "xml",
+    "line_count": 2,
+    "sha1": "9db0f665bb4273dca214e4c3f13f0e57a80df600"
   },
   {
     "path": ".pytest_cache/v/",
@@ -946,6 +2053,114 @@
     "excluded": true
   },
   {
+    "path": "research_articles/article_1.xml",
+    "type": "file",
+    "size": 6515,
+    "last_modified": "2025-09-21T09:59:29.575089+00:00",
+    "lang": "xml",
+    "line_count": 1,
+    "sha1": "f37704d4a1529c3801637dd21cd41d6c80be72d8"
+  },
+  {
+    "path": "research_articles/article_2.xml",
+    "type": "file",
+    "size": 6993,
+    "last_modified": "2025-09-21T09:59:29.575250+00:00",
+    "lang": "xml",
+    "line_count": 1,
+    "sha1": "89f6f5cf7863c8ed7ae93f9ed914654574efd4b4"
+  },
+  {
+    "path": "fgf_gradient_research/article_27144312.xml",
+    "type": "file",
+    "size": 52930,
+    "last_modified": "2025-09-21T10:21:17.005119+00:00",
+    "lang": "xml",
+    "line_count": 2,
+    "sha1": "cf7afa06dc06c8f07b131a8a22bdb87d0a0c6aee"
+  },
+  {
+    "path": "fgf_gradient_research/article_29488319.xml",
+    "type": "file",
+    "size": 41752,
+    "last_modified": "2025-09-21T10:21:17.001064+00:00",
+    "lang": "xml",
+    "line_count": 2,
+    "sha1": "8902dc07d56562a412e5dac228fcc47b17195b86"
+  },
+  {
+    "path": "fgf_gradient_research/article_37756583.xml",
+    "type": "file",
+    "size": 39742,
+    "last_modified": "2025-09-21T10:21:16.996028+00:00",
+    "lang": "xml",
+    "line_count": 2,
+    "sha1": "35a91c86ee335898318d6655ed4b8e6693b38ac5"
+  },
+  {
+    "path": "fgf_gradient_research/article_29669275.xml",
+    "type": "file",
+    "size": 21292,
+    "last_modified": "2025-09-21T10:21:16.999350+00:00",
+    "lang": "xml",
+    "line_count": 2,
+    "sha1": "6db961282090fe57696e0a7856e05f398015931d"
+  },
+  {
+    "path": "fgf_gradient_research/article_36264199.xml",
+    "type": "file",
+    "size": 35999,
+    "last_modified": "2025-09-21T10:21:16.997243+00:00",
+    "lang": "xml",
+    "line_count": 2,
+    "sha1": "b0bc09cbddb98d7daf1b4c89970c6a19a7927a48"
+  },
+  {
+    "path": "fgf_gradient_research/article_27508409.xml",
+    "type": "file",
+    "size": 6703,
+    "last_modified": "2025-09-21T10:21:17.001707+00:00",
+    "lang": "xml",
+    "line_count": 2,
+    "sha1": "3ee1073ec9ea30a9013308b5d63e6021a5acbbd9"
+  },
+  {
+    "path": "fgf_gradient_research/article_32390246.xml",
+    "type": "file",
+    "size": 28400,
+    "last_modified": "2025-09-21T10:21:16.997956+00:00",
+    "lang": "xml",
+    "line_count": 2,
+    "sha1": "f2b80bcbf7c9a91278b28fd44b567570f5a8ce37"
+  },
+  {
+    "path": "fgf_gradient_research/article_27321088.xml",
+    "type": "file",
+    "size": 10793,
+    "last_modified": "2025-09-21T10:21:17.002278+00:00",
+    "lang": "xml",
+    "line_count": 2,
+    "sha1": "18ec28adb6f28022680778321eff524f56138097"
+  },
+  {
+    "path": "fgf_gradient_research/article_27273333.xml",
+    "type": "file",
+    "size": 42603,
+    "last_modified": "2025-09-21T10:21:17.003653+00:00",
+    "lang": "xml",
+    "line_count": 2,
+    "sha1": "6439f2af0e28860d1a785c5a1c3fdc5c67f5b006"
+  },
+  {
+    "path": "fgf_gradient_research/article_30445565.xml",
+    "type": "file",
+    "size": 10564,
+    "last_modified": "2025-09-21T10:21:16.998495+00:00",
+    "lang": "xml",
+    "line_count": 2,
+    "sha1": "e6cda717b7c8822339528bf05a51465b95f3ab77"
+  },
+  {
     "path": "environments/train_env/",
     "type": "dir",
     "excluded": true
@@ -954,6 +2169,272 @@
     "path": ".ruff_cache/0.12.11/",
     "type": "dir",
     "excluded": true
+  },
+  {
+    "path": "gcp_env/pyvenv.cfg",
+    "type": "file",
+    "size": 277,
+    "last_modified": "2025-09-21T13:58:54.246987+00:00",
+    "lang": "cfg",
+    "line_count": 5,
+    "sha1": "58c72a6579be2e19689091047956fd3998bff5b0"
+  },
+  {
+    "path": "gcp_env/bin/pyrsa-sign",
+    "type": "file",
+    "size": 232,
+    "last_modified": "2025-09-21T13:59:18.891447+00:00",
+    "lang": null,
+    "line_count": 8,
+    "sha1": "b23a282145aae9addc089ae7b0d1976b9af778e1"
+  },
+  {
+    "path": "gcp_env/bin/markdown_py",
+    "type": "file",
+    "size": 240,
+    "last_modified": "2025-09-21T14:47:59.209616+00:00",
+    "lang": null,
+    "line_count": 8,
+    "sha1": "ca209094df094b0afacbcba8e20c5fbbbd27e540"
+  },
+  {
+    "path": "gcp_env/bin/Activate.ps1",
+    "type": "file",
+    "size": 9033,
+    "last_modified": "2025-09-21T13:58:56.486871+00:00",
+    "lang": "ps1",
+    "line_count": 247,
+    "sha1": "ea5cbdd1a49dbb45fe15e836c732c258c0cb094b"
+  },
+  {
+    "path": "gcp_env/bin/python3",
+    "type": "file",
+    "size": 33816,
+    "last_modified": "2025-08-02T09:29:42.935659+00:00",
+    "lang": null,
+    "line_count": null,
+    "sha1": "365a749960cf3b1e5f8c3602bff26ac7c71a61ed"
+  },
+  {
+    "path": "gcp_env/bin/pyrsa-priv2pub",
+    "type": "file",
+    "size": 259,
+    "last_modified": "2025-09-21T13:59:18.891286+00:00",
+    "lang": null,
+    "line_count": 8,
+    "sha1": "e947823bf58a36a4c12e530c48aed00fbe4cda7d"
+  },
+  {
+    "path": "gcp_env/bin/python",
+    "type": "file",
+    "size": 33816,
+    "last_modified": "2025-08-02T09:29:42.935659+00:00",
+    "lang": null,
+    "line_count": null,
+    "sha1": "365a749960cf3b1e5f8c3602bff26ac7c71a61ed"
+  },
+  {
+    "path": "gcp_env/bin/pip3",
+    "type": "file",
+    "size": 247,
+    "last_modified": "2025-09-21T13:58:56.440370+00:00",
+    "lang": null,
+    "line_count": 8,
+    "sha1": "2b9746aca072cc3d4980e2e3d72d6272261e701d"
+  },
+  {
+    "path": "gcp_env/bin/activate.fish",
+    "type": "file",
+    "size": 2210,
+    "last_modified": "2025-09-21T13:58:56.486036+00:00",
+    "lang": "fish",
+    "line_count": 69,
+    "sha1": "a6309ce300c3231950ed006c526bcc178306420a"
+  },
+  {
+    "path": "gcp_env/bin/isympy",
+    "type": "file",
+    "size": 231,
+    "last_modified": "2025-09-21T14:47:58.170602+00:00",
+    "lang": null,
+    "line_count": 8,
+    "sha1": "c3387cc2bd7367c22e758ea94ac7db21d1f36389"
+  },
+  {
+    "path": "gcp_env/bin/torchrun",
+    "type": "file",
+    "size": 246,
+    "last_modified": "2025-09-21T14:48:05.271026+00:00",
+    "lang": null,
+    "line_count": 8,
+    "sha1": "d4cff00fde733e7a5bbf48cb75574a1c56fb8051"
+  },
+  {
+    "path": "gcp_env/bin/websockets",
+    "type": "file",
+    "size": 239,
+    "last_modified": "2025-09-21T13:59:16.908967+00:00",
+    "lang": null,
+    "line_count": 8,
+    "sha1": "7e0babe2304c1aedbfed49a8ff7b19faf7e58aff"
+  },
+  {
+    "path": "gcp_env/bin/python3.11",
+    "type": "file",
+    "size": 33816,
+    "last_modified": "2025-08-02T09:29:42.935659+00:00",
+    "lang": "11",
+    "line_count": null,
+    "sha1": "365a749960cf3b1e5f8c3602bff26ac7c71a61ed"
+  },
+  {
+    "path": "gcp_env/bin/pyrsa-keygen",
+    "type": "file",
+    "size": 236,
+    "last_modified": "2025-09-21T13:59:18.891159+00:00",
+    "lang": null,
+    "line_count": 8,
+    "sha1": "1946415b5500dc42c483ef87641766316d06024c"
+  },
+  {
+    "path": "gcp_env/bin/f2py",
+    "type": "file",
+    "size": 242,
+    "last_modified": "2025-09-21T13:59:18.537114+00:00",
+    "lang": null,
+    "line_count": 8,
+    "sha1": "9a2995d98ff132d42b54a7a6d2511945d2d874f9"
+  },
+  {
+    "path": "gcp_env/bin/pip",
+    "type": "file",
+    "size": 247,
+    "last_modified": "2025-09-21T13:58:56.440207+00:00",
+    "lang": null,
+    "line_count": 8,
+    "sha1": "2b9746aca072cc3d4980e2e3d72d6272261e701d"
+  },
+  {
+    "path": "gcp_env/bin/httpx",
+    "type": "file",
+    "size": 230,
+    "last_modified": "2025-09-21T13:59:19.624269+00:00",
+    "lang": null,
+    "line_count": 8,
+    "sha1": "0006369917ce95f6b07bf69af9774926cef5a09a"
+  },
+  {
+    "path": "gcp_env/bin/tb-gcp-uploader",
+    "type": "file",
+    "size": 282,
+    "last_modified": "2025-09-21T14:04:21.882187+00:00",
+    "lang": null,
+    "line_count": 8,
+    "sha1": "a8c49e5f8b8ac033f28aedc1a88d464952c16e43"
+  },
+  {
+    "path": "gcp_env/bin/pyrsa-decrypt",
+    "type": "file",
+    "size": 238,
+    "last_modified": "2025-09-21T13:59:18.890796+00:00",
+    "lang": null,
+    "line_count": 8,
+    "sha1": "7ce43eca83dec8369225500fc35ef4f95e559c81"
+  },
+  {
+    "path": "gcp_env/bin/pip3.11",
+    "type": "file",
+    "size": 247,
+    "last_modified": "2025-09-21T13:58:56.440495+00:00",
+    "lang": "11",
+    "line_count": 8,
+    "sha1": "2b9746aca072cc3d4980e2e3d72d6272261e701d"
+  },
+  {
+    "path": "gcp_env/bin/tensorboard",
+    "type": "file",
+    "size": 249,
+    "last_modified": "2025-09-21T14:48:05.576214+00:00",
+    "lang": null,
+    "line_count": 8,
+    "sha1": "2a7cdb6d2425685c420a509ae5dc74cb288c4308"
+  },
+  {
+    "path": "gcp_env/bin/pyrsa-encrypt",
+    "type": "file",
+    "size": 238,
+    "last_modified": "2025-09-21T13:59:18.890988+00:00",
+    "lang": null,
+    "line_count": 8,
+    "sha1": "83cb47a47bab8969caa578011bafd31cd54eb144"
+  },
+  {
+    "path": "gcp_env/bin/torchfrtrace",
+    "type": "file",
+    "size": 255,
+    "last_modified": "2025-09-21T14:48:05.270869+00:00",
+    "lang": null,
+    "line_count": 8,
+    "sha1": "f6556957ff024b1e941fc50cb1804b18dd3ab663"
+  },
+  {
+    "path": "gcp_env/bin/activate",
+    "type": "file",
+    "size": 1706,
+    "last_modified": "2025-09-21T13:58:56.487157+00:00",
+    "lang": null,
+    "line_count": 63,
+    "sha1": "eea30a45ee70e914cdeb16a83cbfa70abcdddd68"
+  },
+  {
+    "path": "gcp_env/bin/normalizer",
+    "type": "file",
+    "size": 259,
+    "last_modified": "2025-09-21T13:59:18.650502+00:00",
+    "lang": null,
+    "line_count": 8,
+    "sha1": "eeeafd31b89b0b80c59c0d436ec361b08dbde069"
+  },
+  {
+    "path": "gcp_env/bin/numpy-config",
+    "type": "file",
+    "size": 242,
+    "last_modified": "2025-09-21T13:59:18.537240+00:00",
+    "lang": null,
+    "line_count": 8,
+    "sha1": "ad4b9b05cf21ed05792f5b169f5577c25e353fe8"
+  },
+  {
+    "path": "gcp_env/bin/pyrsa-verify",
+    "type": "file",
+    "size": 236,
+    "last_modified": "2025-09-21T13:59:18.891566+00:00",
+    "lang": null,
+    "line_count": 8,
+    "sha1": "72c37d2e8ee66868a9264bd8fa0be31f1cde6b36"
+  },
+  {
+    "path": "gcp_env/bin/activate.csh",
+    "type": "file",
+    "size": 930,
+    "last_modified": "2025-09-21T13:58:56.486431+00:00",
+    "lang": "csh",
+    "line_count": 26,
+    "sha1": "e4016200d24dad90aae38f308d24401cc8b9e584"
+  },
+  {
+    "path": "gcp_env/lib/python3.11/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "gcp_env/share/man/man1/isympy.1",
+    "type": "file",
+    "size": 6659,
+    "last_modified": "2025-09-21T14:47:54.799956+00:00",
+    "lang": "1",
+    "line_count": 188,
+    "sha1": "4da89d73108de69f826b0d9f6fe4f9cea47d972e"
   },
   {
     "path": "tests/__pycache__/",
@@ -1104,6 +2585,69 @@
     "lang": "md",
     "line_count": 16,
     "sha1": "9e72b8009b6c0ace60768b4382561b85074f4f2c"
+  },
+  {
+    "path": "tests/unit/test_arachnoid_system.py",
+    "type": "file",
+    "size": 2975,
+    "last_modified": "2025-09-21T10:13:20.417775+00:00",
+    "lang": "py",
+    "line_count": 66,
+    "sha1": "d5386f9c6bba55d659390dffe4e0bc537ddd54fd"
+  },
+  {
+    "path": "tests/unit/test_ventricular_morphogenesis.py",
+    "type": "file",
+    "size": 2131,
+    "last_modified": "2025-09-21T10:02:36.511738+00:00",
+    "lang": "py",
+    "line_count": 61,
+    "sha1": "b7713b823a2bca9dda7dbcd8d515fdc30e38e835"
+  },
+  {
+    "path": "tests/unit/test_synthetic_data_generator.py",
+    "type": "file",
+    "size": 2743,
+    "last_modified": "2025-09-21T10:36:48.154765+00:00",
+    "lang": "py",
+    "line_count": 60,
+    "sha1": "5d2b88b3fdb06788f01b3153c2c663bf1073f942"
+  },
+  {
+    "path": "tests/unit/test_gnn_vit_hybrid.py",
+    "type": "file",
+    "size": 4883,
+    "last_modified": "2025-09-21T10:55:17.072852+00:00",
+    "lang": "py",
+    "line_count": 115,
+    "sha1": "f954563e314f4379c59d091f3b95aa3fe163c2c5"
+  },
+  {
+    "path": "tests/unit/test_pia_mater_system.py",
+    "type": "file",
+    "size": 2643,
+    "last_modified": "2025-09-21T10:14:52.962475+00:00",
+    "lang": "py",
+    "line_count": 56,
+    "sha1": "ec5f87157d7d9b4dc3b4d3357a0ddbeffdf43936"
+  },
+  {
+    "path": "tests/unit/test_atlas_validation_system.py",
+    "type": "file",
+    "size": 4810,
+    "last_modified": "2025-09-21T11:00:37.003002+00:00",
+    "lang": "py",
+    "line_count": 104,
+    "sha1": "7f342a4cffe0746049cf7492de640b7248ff9f1c"
+  },
+  {
+    "path": "tests/unit/test_dura_mater_system.py",
+    "type": "file",
+    "size": 1562,
+    "last_modified": "2025-09-21T10:09:50.938648+00:00",
+    "lang": "py",
+    "line_count": 49,
+    "sha1": "e1fd54b6f8ecd6aff5f079aa44fcbdfee318968b"
   },
   {
     "path": "tests/roadmap_pipeline/__pycache__/",
@@ -1688,11 +3232,20 @@
   {
     "path": "management/rules/cursor_rules_loader.py",
     "type": "file",
-    "size": 2182,
-    "last_modified": "2025-09-17T07:46:11.560870+00:00",
+    "size": 3093,
+    "last_modified": "2025-09-21T08:05:29.008425+00:00",
     "lang": "py",
-    "line_count": 67,
-    "sha1": "693343294c048e85926afd02bb033c037f7b0ef5"
+    "line_count": 97,
+    "sha1": "083b9528c8bbc5c63f005f4a297075596524a794"
+  },
+  {
+    "path": "management/rules/__init__.py",
+    "type": "file",
+    "size": 112,
+    "last_modified": "2025-09-21T08:32:48.896939+00:00",
+    "lang": "py",
+    "line_count": 5,
+    "sha1": "ed1afefdd4e16452e1a909ef904c436fa30566fd"
   },
   {
     "path": "management/rules/README.md",
@@ -1820,7 +3373,7 @@
     "path": "management/rules/roadmap/MASTER_ROADMAP.md",
     "type": "file",
     "size": 1314,
-    "last_modified": "2025-09-17T09:08:55.661670+00:00",
+    "last_modified": "2025-09-22T03:52:46.843268+00:00",
     "lang": "md",
     "line_count": 19,
     "sha1": "7bb49775e085c3f25ad76e0390f22508f4a0494e"
@@ -2195,6 +3748,33 @@
     "sha1": "e31921cd9e5050ac36ea5c0dadc53024c5d6c858"
   },
   {
+    "path": "docs/API_KEY_PRE_PUSH_GUIDE.md",
+    "type": "file",
+    "size": 5219,
+    "last_modified": "2025-09-21T04:11:37.127130+00:00",
+    "lang": "md",
+    "line_count": 198,
+    "sha1": "daaa384a61938b90999ca17c039788618de9b7e8"
+  },
+  {
+    "path": "docs/GOOGLE_CLOUD_PROGRAMMATIC_ANALYSIS.md",
+    "type": "file",
+    "size": 4851,
+    "last_modified": "2025-09-21T06:19:44.061341+00:00",
+    "lang": "md",
+    "line_count": 157,
+    "sha1": "76ccd5dba4e92c75e84a668b5c4ce1346895095b"
+  },
+  {
+    "path": "docs/PRODUCTION_VALIDATION_GUIDE.md",
+    "type": "file",
+    "size": 8624,
+    "last_modified": "2025-09-21T03:26:29.165232+00:00",
+    "lang": "md",
+    "line_count": 278,
+    "sha1": "a7af3ea62f437b817adbb76af98512ca78f79f39"
+  },
+  {
     "path": "docs/readme_2.rst",
     "type": "file",
     "size": 491,
@@ -2301,6 +3881,15 @@
     "lang": "md",
     "line_count": 334,
     "sha1": "d33925e1e868ee79196aff1a1d44bcf3393942a9"
+  },
+  {
+    "path": "docs/ANTI_OVERCONFIDENCE_GUIDE.md",
+    "type": "file",
+    "size": 8672,
+    "last_modified": "2025-09-20T23:41:32.378197+00:00",
+    "lang": "md",
+    "line_count": 290,
+    "sha1": "8d91fe913cadc2b59a3202d54c5341ae5498486e"
   },
   {
     "path": "docs/README.md",
@@ -2411,6 +4000,15 @@
     "sha1": "da401484db33ca3772910c5420c99163b54b3193"
   },
   {
+    "path": "docs/COMPREHENSIVE_VALIDATION_REFERENCE.md",
+    "type": "file",
+    "size": 7483,
+    "last_modified": "2025-09-21T01:09:06.886284+00:00",
+    "lang": "md",
+    "line_count": 165,
+    "sha1": "1791889ace705d7e53f4a5f1e0ab0463f1f7ea7a"
+  },
+  {
     "path": "docs/ACADEMIC_MCP_INTEGRATION.md",
     "type": "file",
     "size": 9942,
@@ -2519,6 +4117,15 @@
     "sha1": "5cca1ed553365938f4635b199a055739e2c45e42"
   },
   {
+    "path": "docs/CLOUD_STORAGE_SPEED_COMPARISON.md",
+    "type": "file",
+    "size": 2716,
+    "last_modified": "2025-09-21T06:31:12.850054+00:00",
+    "lang": "md",
+    "line_count": 83,
+    "sha1": "3d5358f0e510ea447a57e1ce744fe5ac8d9bdf7d"
+  },
+  {
     "path": "docs/zapier_integration.md",
     "type": "file",
     "size": 3988,
@@ -2571,6 +4178,15 @@
     "lang": "md",
     "line_count": 143,
     "sha1": "4b567b4eca7236b7d52333c5591fea1662311a33"
+  },
+  {
+    "path": "docs/research/ventricular_system/research_and_planning.md",
+    "type": "file",
+    "size": 2112,
+    "last_modified": "2025-09-21T10:00:24.017771+00:00",
+    "lang": "md",
+    "line_count": 24,
+    "sha1": "58ae04717f6edbc34e8799e8c14722ef1e583e38"
   },
   {
     "path": "docs/plans/foundation_layer_morphogen_solver_plan.md",
@@ -5294,17 +6910,17 @@
   {
     "path": "state/tasks/roadmap_tasks/brainstem_segmentation_tasks.md",
     "type": "file",
-    "size": 12162,
-    "last_modified": "2025-09-17T07:55:36.291352+00:00",
+    "size": 14417,
+    "last_modified": "2025-09-21T05:56:17.626730+00:00",
     "lang": "md",
-    "line_count": 200,
-    "sha1": "edc1329dba9be1877e36994397cbff4fdd84c72b"
+    "line_count": 241,
+    "sha1": "286ddf7e32dbd2646678a71c92d063eb34e64bbc"
   },
   {
     "path": "state/tasks/roadmap_tasks/cerebellum_tasks.md",
     "type": "file",
     "size": 26618,
-    "last_modified": "2025-09-17T08:56:56.119550+00:00",
+    "last_modified": "2025-09-21T07:28:22.047947+00:00",
     "lang": "md",
     "line_count": 468,
     "sha1": "3e64be20f3a16ccf3cbd12c1d89d06e04502ff8b"
@@ -5312,11 +6928,11 @@
   {
     "path": "state/tasks/roadmap_tasks/foundation_layer_tasks.md",
     "type": "file",
-    "size": 22875,
-    "last_modified": "2025-09-17T07:55:36.292491+00:00",
+    "size": 30706,
+    "last_modified": "2025-09-22T07:09:59.606734+00:00",
     "lang": "md",
-    "line_count": 434,
-    "sha1": "31c2f35c06b440fa1589fa53eaae3ba67937098d"
+    "line_count": 502,
+    "sha1": "de059499cdde401ad92b84a31a5d82b74648d1c0"
   },
   {
     "path": "state/tasks/roadmap_tasks/README.md",
@@ -5632,11 +7248,11 @@
   {
     "path": "state/quark_state_system/s3/s3_infrastructure.py",
     "type": "file",
-    "size": 6312,
-    "last_modified": "2025-09-17T07:46:11.568728+00:00",
+    "size": 6317,
+    "last_modified": "2025-09-21T06:12:15.966166+00:00",
     "lang": "py",
     "line_count": 175,
-    "sha1": "5ea904fb466507e0b99be940cbcd4900acd3fe6c"
+    "sha1": "ea0bb28f91672d500829868696af287d63586fde"
   },
   {
     "path": "state/quark_state_system/s3/__init__.py",
@@ -5845,11 +7461,11 @@
   {
     "path": ".github/workflows/streaming-tests.yml",
     "type": "file",
-    "size": 501,
-    "last_modified": "2025-09-17T07:55:35.862647+00:00",
+    "size": 743,
+    "last_modified": "2025-09-22T04:20:43.812642+00:00",
     "lang": "yml",
-    "line_count": 20,
-    "sha1": "39d57f77b2b808057faa73ef1f796120e56e45a1"
+    "line_count": 28,
+    "sha1": "f7584cc2974b39492afe4f10b6490dd2ac8c7959"
   },
   {
     "path": ".github/workflows/reorg-safety-check.yml",
@@ -5863,20 +7479,20 @@
   {
     "path": ".github/workflows/resource-manager.yml",
     "type": "file",
-    "size": 722,
-    "last_modified": "2025-09-17T07:55:35.862138+00:00",
+    "size": 797,
+    "last_modified": "2025-09-22T04:20:43.812664+00:00",
     "lang": "yml",
-    "line_count": 27,
-    "sha1": "9343f9ef56728ef96a6ba6ad38fd27cb6dc44c19"
+    "line_count": 30,
+    "sha1": "a60c6337c2c0f4068821926d1c381db223b5650b"
   },
   {
     "path": ".github/workflows/benchmark-e8.yml",
     "type": "file",
-    "size": 1504,
-    "last_modified": "2025-09-17T07:55:35.860936+00:00",
+    "size": 1693,
+    "last_modified": "2025-09-22T04:20:43.813905+00:00",
     "lang": "yml",
-    "line_count": 60,
-    "sha1": "63ba451d68564ead499f39a094c6d53ebffd9be6"
+    "line_count": 66,
+    "sha1": "8cdb3101f248900dcea8971f9fbc2eb7525571f1"
   },
   {
     "path": ".github/workflows/README.md",
@@ -5899,16 +7515,25 @@
   {
     "path": ".github/workflows/pre_push.yml",
     "type": "file",
-    "size": 842,
-    "last_modified": "2025-09-17T09:14:57.356063+00:00",
+    "size": 887,
+    "last_modified": "2025-09-22T04:20:43.812675+00:00",
     "lang": "yml",
-    "line_count": 30,
-    "sha1": "c938d5716b09494a7a2f71eb0f32081a2e5f843e"
+    "line_count": 31,
+    "sha1": "1036d4580c7741ffafd1f2cced8fee02670a0aa5"
   },
   {
     "path": "brain/__pycache__/",
     "type": "dir",
     "excluded": true
+  },
+  {
+    "path": "brain/gcp_training_manager.py",
+    "type": "file",
+    "size": 7441,
+    "last_modified": "2025-09-21T14:34:26.334096+00:00",
+    "lang": "py",
+    "line_count": 186,
+    "sha1": "c9e10197d5f9eefa0aec1f35d0eb7dbdd69642c2"
   },
   {
     "path": "brain/_bootstrap.py",
@@ -10330,11 +11955,20 @@
   {
     "path": "brain/modules/brainstem_segmentation/diagnose_training_issue.py",
     "type": "file",
-    "size": 12193,
-    "last_modified": "2025-09-19T01:18:52.852367+00:00",
+    "size": 12194,
+    "last_modified": "2025-09-20T15:50:23.263525+00:00",
     "lang": "py",
-    "line_count": 361,
-    "sha1": "eb28fb2aecf575383ad186143a60d7c98369657a"
+    "line_count": 362,
+    "sha1": "15ca8837a7efbcf39bb61dab5dc04aab9bab57a4"
+  },
+  {
+    "path": "brain/modules/brainstem_segmentation/multi_scale_attention.py",
+    "type": "file",
+    "size": 21764,
+    "last_modified": "2025-09-21T05:55:11.761165+00:00",
+    "lang": "py",
+    "line_count": 581,
+    "sha1": "ac877c4892bcabae0fb7b2552c8c7ea0b4249fcd"
   },
   {
     "path": "brain/modules/brainstem_segmentation/metrics.py",
@@ -10366,11 +12000,20 @@
   {
     "path": "brain/modules/brainstem_segmentation/quick_integrate.sh",
     "type": "file",
-    "size": 2061,
-    "last_modified": "2025-09-19T01:14:42.324853+00:00",
+    "size": 2062,
+    "last_modified": "2025-09-20T15:50:23.132762+00:00",
     "lang": "sh",
-    "line_count": 70,
-    "sha1": "51d9d9245a4b2760125c00718113edb5b63447a4"
+    "line_count": 71,
+    "sha1": "efca24a84863feba1f46cd6340fb9529bfa9450b"
+  },
+  {
+    "path": "brain/modules/brainstem_segmentation/RISK_MITIGATION_COMPLETE_REPORT.md",
+    "type": "file",
+    "size": 11524,
+    "last_modified": "2025-09-21T05:55:11.761244+00:00",
+    "lang": "md",
+    "line_count": 268,
+    "sha1": "b67ecd768b2f889e8085012ea5161287b5b1969d"
   },
   {
     "path": "brain/modules/brainstem_segmentation/inference_engine.py",
@@ -10418,6 +12061,15 @@
     "sha1": "a6c79e790ee49b5afe2ccad555a7dcf57de6b3d5"
   },
   {
+    "path": "brain/modules/brainstem_segmentation/requirements.txt",
+    "type": "file",
+    "size": 55,
+    "last_modified": "2025-09-21T13:44:06.336901+00:00",
+    "lang": "txt",
+    "line_count": 4,
+    "sha1": "042342b37f4f8a1fbdaf2b10d3e88aa1b741f56f"
+  },
+  {
     "path": "brain/modules/brainstem_segmentation/inference_notebook.md",
     "type": "file",
     "size": 7560,
@@ -10452,6 +12104,15 @@
     "lang": "py",
     "line_count": 356,
     "sha1": "06f9bab385ebd86c89bdff758dfde09cb66a61b2"
+  },
+  {
+    "path": "brain/modules/brainstem_segmentation/validate_integrated_model.py",
+    "type": "file",
+    "size": 714,
+    "last_modified": "2025-09-20T22:34:27.183462+00:00",
+    "lang": "py",
+    "line_count": 21,
+    "sha1": "98564f9f5afa9e41b462fa9d93fe6d7763e8b8c8"
   },
   {
     "path": "brain/modules/brainstem_segmentation/colab_training_notebook.ipynb",
@@ -10634,6 +12295,24 @@
     "sha1": "6ba36630ee4f1a1e66e951e10f3a9684e48e7212"
   },
   {
+    "path": "brain/modules/brainstem_segmentation/expert_scheduling_system.py",
+    "type": "file",
+    "size": 26859,
+    "last_modified": "2025-09-21T05:55:11.767011+00:00",
+    "lang": "py",
+    "line_count": 705,
+    "sha1": "4706f606fcae42794356dba42496ebd1d76f4b94"
+  },
+  {
+    "path": "brain/modules/brainstem_segmentation/annotation_tools.py",
+    "type": "file",
+    "size": 26001,
+    "last_modified": "2025-09-21T05:55:11.761201+00:00",
+    "lang": "py",
+    "line_count": 761,
+    "sha1": "91c69db6020e39a84e9011d047d8219bf75d24ec"
+  },
+  {
     "path": "brain/modules/brainstem_segmentation/onnx_production_exporter.py",
     "type": "file",
     "size": 16365,
@@ -10733,6 +12412,15 @@
     "sha1": "f58d6c1741c08b952a01080eb614bc055d45943f"
   },
   {
+    "path": "brain/modules/brainstem_segmentation/synthetic_data_generator.py",
+    "type": "file",
+    "size": 21499,
+    "last_modified": "2025-09-21T05:31:04.078778+00:00",
+    "lang": "py",
+    "line_count": 577,
+    "sha1": "f6a4bfbf696964183ebfb83eeeba0bfbfac95176"
+  },
+  {
     "path": "brain/modules/brainstem_segmentation/human_brainstem_data_collector.py",
     "type": "file",
     "size": 16968,
@@ -10753,11 +12441,11 @@
   {
     "path": "brain/modules/brainstem_segmentation/colab_training_fixed.py",
     "type": "file",
-    "size": 21703,
-    "last_modified": "2025-09-19T01:18:52.854216+00:00",
+    "size": 21704,
+    "last_modified": "2025-09-20T15:50:23.298796+00:00",
     "lang": "py",
-    "line_count": 652,
-    "sha1": "7ccb019475d13a1a58c7008ca6f475236e44912c"
+    "line_count": 653,
+    "sha1": "aea30cd721a0a43c2aefc4a5d0b1e3f007a2f5ae"
   },
   {
     "path": "brain/modules/brainstem_segmentation/freesurfer_setup.py",
@@ -10781,7 +12469,7 @@
     "path": "brain/modules/brainstem_segmentation/training_results.json",
     "type": "file",
     "size": 429,
-    "last_modified": "2025-09-19T01:14:35.893201+00:00",
+    "last_modified": "2025-09-19T01:14:35.894067+00:00",
     "lang": "json",
     "line_count": 22,
     "sha1": "e248af54e44741ca869d6fa4211f94e86d17b423"
@@ -10794,6 +12482,33 @@
     "lang": "py",
     "line_count": 369,
     "sha1": "76da8046940b838b1d0e33a3399d4df2b4b6990b"
+  },
+  {
+    "path": "brain/modules/brainstem_segmentation/data_quality_validator.py",
+    "type": "file",
+    "size": 24692,
+    "last_modified": "2025-09-21T05:41:57.503830+00:00",
+    "lang": "py",
+    "line_count": 630,
+    "sha1": "9a09e316314ea488c044ef3beedf5dc50cc8a2e4"
+  },
+  {
+    "path": "brain/modules/brainstem_segmentation/data_augmentation_pipeline.py",
+    "type": "file",
+    "size": 20459,
+    "last_modified": "2025-09-21T05:41:57.503866+00:00",
+    "lang": "py",
+    "line_count": 542,
+    "sha1": "211e8aa4becdfebfed482fbaf2cf4eabcd3b8ea9"
+  },
+  {
+    "path": "brain/modules/brainstem_segmentation/expert_in_loop_framework.py",
+    "type": "file",
+    "size": 25872,
+    "last_modified": "2025-09-21T05:55:11.761129+00:00",
+    "lang": "py",
+    "line_count": 697,
+    "sha1": "c71d7d6e51551c16d598ae2baf1ebc25d6c1d6f9"
   },
   {
     "path": "brain/modules/brainstem_segmentation/export_final_onnx.py",
@@ -10821,6 +12536,15 @@
     "lang": "py",
     "line_count": 486,
     "sha1": "98f06f1aad96112217345d15a2d6d3dc437c5ff5"
+  },
+  {
+    "path": "brain/modules/brainstem_segmentation/DATA_AVAILABILITY_MITIGATION_REPORT.md",
+    "type": "file",
+    "size": 10017,
+    "last_modified": "2025-09-21T05:41:57.503940+00:00",
+    "lang": "md",
+    "line_count": 241,
+    "sha1": "7f5258f0b171082d860dc442ad4f04e645a0f3fa"
   },
   {
     "path": "brain/modules/brainstem_segmentation/download_links.md",
@@ -10857,6 +12581,15 @@
     "lang": "py",
     "line_count": 619,
     "sha1": "74d4d8be56b50b1b4c2faedf6e575428939cd3f2"
+  },
+  {
+    "path": "brain/modules/brainstem_segmentation/imaging_partnerships.py",
+    "type": "file",
+    "size": 15479,
+    "last_modified": "2025-09-21T05:33:21.050878+00:00",
+    "lang": "py",
+    "line_count": 415,
+    "sha1": "8244265e193c9ffc11cfdc6100033508fd867edc"
   },
   {
     "path": "brain/modules/brainstem_segmentation/boundary_metrics.py",
@@ -10920,6 +12653,15 @@
     "lang": "py",
     "line_count": 144,
     "sha1": "9fbe846d32521a63ef0a5ef20acbdc08572fd3d9"
+  },
+  {
+    "path": "brain/modules/brainstem_segmentation/run_gcp_training.py",
+    "type": "file",
+    "size": 7039,
+    "last_modified": "2025-09-21T19:08:43.951169+00:00",
+    "lang": "py",
+    "line_count": 146,
+    "sha1": "48f8c8414df869475080d6474a998cb59afd9030"
   },
   {
     "path": "brain/modules/brainstem_segmentation/comprehensive_data_search.py",
@@ -12206,11 +13948,11 @@
   {
     "path": "brain/modules/morphogen_solver/shh_dynamics_engine.py",
     "type": "file",
-    "size": 14148,
-    "last_modified": "2025-09-17T07:46:11.474695+00:00",
+    "size": 12378,
+    "last_modified": "2025-09-21T10:44:40.067069+00:00",
     "lang": "py",
-    "line_count": 360,
-    "sha1": "74b02b0753e760f7acfb42829d3ff408d42fce5d"
+    "line_count": 316,
+    "sha1": "430018b719e34ec4164e3f68a2551a4a794b03c7"
   },
   {
     "path": "brain/modules/morphogen_solver/biological_parameters.py",
@@ -12224,11 +13966,11 @@
   {
     "path": "brain/modules/morphogen_solver/voxel_excavation.py",
     "type": "file",
-    "size": 10529,
-    "last_modified": "2025-09-17T07:46:11.476023+00:00",
+    "size": 173,
+    "last_modified": "2025-09-21T10:00:44.868339+00:00",
     "lang": "py",
-    "line_count": 241,
-    "sha1": "e70e6596291420281b2c83309eb35c04cfac9cf5"
+    "line_count": 3,
+    "sha1": "f635b6e2cba24ada70c1665f15bf48a10174abe6"
   },
   {
     "path": "brain/modules/morphogen_solver/integration_context_docs.py",
@@ -12278,29 +14020,29 @@
   {
     "path": "brain/modules/morphogen_solver/excavation_validator.py",
     "type": "file",
-    "size": 8132,
-    "last_modified": "2025-09-17T07:46:11.472145+00:00",
+    "size": 174,
+    "last_modified": "2025-09-21T10:00:56.636211+00:00",
     "lang": "py",
-    "line_count": 197,
-    "sha1": "b9819e55859db875b559bd3460ed514ccbf55987"
+    "line_count": 3,
+    "sha1": "f5aca035a21c9db13c3db2c66b5fabee9a784a18"
   },
   {
     "path": "brain/modules/morphogen_solver/morphogen_solver.py",
     "type": "file",
-    "size": 12208,
-    "last_modified": "2025-09-17T07:46:11.473880+00:00",
+    "size": 15346,
+    "last_modified": "2025-09-21T10:37:30.104760+00:00",
     "lang": "py",
-    "line_count": 313,
-    "sha1": "8098e64e086bff4baa970f547bdf8f660a3a4298"
+    "line_count": 375,
+    "sha1": "30b0987ea2bee41e4646e6375989ccc40e769ffd"
   },
   {
     "path": "brain/modules/morphogen_solver/gnn_vit_hybrid.py",
     "type": "file",
-    "size": 12301,
-    "last_modified": "2025-09-17T07:46:11.472763+00:00",
+    "size": 13468,
+    "last_modified": "2025-09-22T01:09:20.375996+00:00",
     "lang": "py",
-    "line_count": 315,
-    "sha1": "13f187350ef1787d79e454f749547cbd2911bef1"
+    "line_count": 337,
+    "sha1": "0b30ddcb3925e9e703b05581e7519c0d3fd3ef35"
   },
   {
     "path": "brain/modules/morphogen_solver/fate_rule_engine.py",
@@ -12332,11 +14074,11 @@
   {
     "path": "brain/modules/morphogen_solver/gnn_spatial_graph.py",
     "type": "file",
-    "size": 14077,
-    "last_modified": "2025-09-17T07:46:11.472652+00:00",
+    "size": 14396,
+    "last_modified": "2025-09-21T10:53:58.734205+00:00",
     "lang": "py",
-    "line_count": 350,
-    "sha1": "89fc68a1b1edb003fbf81ad6bda4821c685c51c4"
+    "line_count": 354,
+    "sha1": "2875b62312ec722943503727ad8cfb98193c597a"
   },
   {
     "path": "brain/modules/morphogen_solver/wnt_fgf_analyzer.py",
@@ -12359,11 +14101,11 @@
   {
     "path": "brain/modules/morphogen_solver/excavation_parameters.py",
     "type": "file",
-    "size": 1407,
-    "last_modified": "2025-09-17T07:46:11.472031+00:00",
+    "size": 174,
+    "last_modified": "2025-09-21T10:01:08.278909+00:00",
     "lang": "py",
-    "line_count": 33,
-    "sha1": "39edb892a80d86a9a2c4eab173de0be891732e48"
+    "line_count": 3,
+    "sha1": "f5aca035a21c9db13c3db2c66b5fabee9a784a18"
   },
   {
     "path": "brain/modules/morphogen_solver/wnt_fgf_integration.py",
@@ -12395,11 +14137,11 @@
   {
     "path": "brain/modules/morphogen_solver/pia_mater_system.py",
     "type": "file",
-    "size": 9903,
-    "last_modified": "2025-09-17T07:46:11.474191+00:00",
+    "size": 9878,
+    "last_modified": "2025-09-21T10:14:38.744769+00:00",
     "lang": "py",
     "line_count": 230,
-    "sha1": "4f92dbf973c30ec891877258d875d902cb4b55ad"
+    "sha1": "e9ed27f68e9d0466bc72202febfd42ca68ae7443"
   },
   {
     "path": "brain/modules/morphogen_solver/__init__.py",
@@ -12422,11 +14164,11 @@
   {
     "path": "brain/modules/morphogen_solver/atlas_data_downloader.py",
     "type": "file",
-    "size": 27093,
-    "last_modified": "2025-09-17T07:46:11.469655+00:00",
+    "size": 27017,
+    "last_modified": "2025-09-21T10:59:44.022883+00:00",
     "lang": "py",
     "line_count": 607,
-    "sha1": "48ae2a6e6b73c3063d65c5d01140fdce8131d338"
+    "sha1": "dfde531c847f075f6f5d1625f482e33a03b8373a"
   },
   {
     "path": "brain/modules/morphogen_solver/fgf8_gradient_solver.py",
@@ -12440,11 +14182,11 @@
   {
     "path": "brain/modules/morphogen_solver/dura_mater_system.py",
     "type": "file",
-    "size": 9674,
-    "last_modified": "2025-09-17T07:46:11.471725+00:00",
+    "size": 9661,
+    "last_modified": "2025-09-21T10:09:25.957778+00:00",
     "lang": "py",
     "line_count": 239,
-    "sha1": "058a2e6a45ef1c483ebf369994e01718236b1474"
+    "sha1": "c39af20d727aa13b83377a00cb15fb42475e3e38"
   },
   {
     "path": "brain/modules/morphogen_solver/parameter_types.py",
@@ -12467,11 +14209,11 @@
   {
     "path": "brain/modules/morphogen_solver/atlas_validation_system.py",
     "type": "file",
-    "size": 15232,
-    "last_modified": "2025-09-17T07:46:11.469897+00:00",
+    "size": 15425,
+    "last_modified": "2025-09-21T10:59:45.142050+00:00",
     "lang": "py",
-    "line_count": 341,
-    "sha1": "0e7b172465e8f11a8e03470f65e962cacf1314fb"
+    "line_count": 345,
+    "sha1": "f7d00a150155e48c4912b2302f39b9cda5b77dad"
   },
   {
     "path": "brain/modules/morphogen_solver/shh_gene_expression.py",
@@ -12528,6 +14270,15 @@
     "sha1": "5aed89d077401e36efe055c0b3480d7704343e9b"
   },
   {
+    "path": "brain/modules/morphogen_solver/ventricular_morphogenesis.py",
+    "type": "file",
+    "size": 1124,
+    "last_modified": "2025-09-21T10:01:21.187984+00:00",
+    "lang": "py",
+    "line_count": 35,
+    "sha1": "b8d9bf36eedf5776b62c5badd657c817fba28b4a"
+  },
+  {
     "path": "brain/modules/morphogen_solver/csf_boundary_manager.py",
     "type": "file",
     "size": 7159,
@@ -12539,20 +14290,20 @@
   {
     "path": "brain/modules/morphogen_solver/morphogen_parameters.py",
     "type": "file",
-    "size": 11273,
-    "last_modified": "2025-09-17T07:46:11.473768+00:00",
+    "size": 11260,
+    "last_modified": "2025-09-21T10:18:01.968234+00:00",
     "lang": "py",
     "line_count": 287,
-    "sha1": "562ee70f44db524bd46d49c244995ff1ac67388e"
+    "sha1": "722024b86e5d11afbd31f0a94e796a98f111a2d0"
   },
   {
     "path": "brain/modules/morphogen_solver/fgf_gradient_system.py",
     "type": "file",
-    "size": 9732,
-    "last_modified": "2025-09-17T07:46:11.472456+00:00",
+    "size": 10149,
+    "last_modified": "2025-09-21T10:43:39.651393+00:00",
     "lang": "py",
-    "line_count": 216,
-    "sha1": "74e31a0e8dd6479a452f02dbd2549085cd867ecb"
+    "line_count": 224,
+    "sha1": "6d6c2ad389e26059da6fe57311b97799e006bbbe"
   },
   {
     "path": "brain/modules/morphogen_solver/integration_tests.py",
@@ -12566,11 +14317,11 @@
   {
     "path": "brain/modules/morphogen_solver/vit3d_encoder.py",
     "type": "file",
-    "size": 11657,
-    "last_modified": "2025-09-17T07:46:11.475907+00:00",
+    "size": 11695,
+    "last_modified": "2025-09-21T10:55:36.292114+00:00",
     "lang": "py",
-    "line_count": 333,
-    "sha1": "83e10d9acfca0049f61c93874a26956e5e247386"
+    "line_count": 334,
+    "sha1": "decce37a5e501e6eff33f09c345f1828da65c058"
   },
   {
     "path": "brain/modules/morphogen_solver/unet3d_backbone.py",
@@ -12602,38 +14353,38 @@
   {
     "path": "brain/modules/morphogen_solver/synthetic_data_generator.py",
     "type": "file",
-    "size": 13197,
-    "last_modified": "2025-09-17T07:46:11.475441+00:00",
+    "size": 14047,
+    "last_modified": "2025-09-21T10:45:01.192232+00:00",
     "lang": "py",
-    "line_count": 304,
-    "sha1": "eb18da852a2fc189da13c405fe38af859f2d9cae"
+    "line_count": 322,
+    "sha1": "b4ba65182b0a06d73bf460c5ee8177eac1829594"
   },
   {
     "path": "brain/modules/morphogen_solver/csf_flow_types.py",
     "type": "file",
-    "size": 1854,
-    "last_modified": "2025-09-17T07:46:11.471124+00:00",
+    "size": 1545,
+    "last_modified": "2025-09-21T10:04:08.326871+00:00",
     "lang": "py",
-    "line_count": 46,
-    "sha1": "92267c284a8a6c8016443a6c7596ba2fb1495765"
+    "line_count": 42,
+    "sha1": "b7d93f80e7c1b63c18346346bbc39ed8485e8eb8"
   },
   {
     "path": "brain/modules/morphogen_solver/ventricular_types.py",
     "type": "file",
-    "size": 1186,
-    "last_modified": "2025-09-17T07:46:11.475799+00:00",
+    "size": 1218,
+    "last_modified": "2025-09-21T10:03:08.401905+00:00",
     "lang": "py",
-    "line_count": 31,
-    "sha1": "1a098b66f6231953b9d82a48a44364953f61c188"
+    "line_count": 32,
+    "sha1": "af9845f468be8727c04a85f5da1a289bcb2fcdf8"
   },
   {
     "path": "brain/modules/morphogen_solver/wnt_gradient_system.py",
     "type": "file",
-    "size": 11700,
-    "last_modified": "2025-09-17T07:46:11.476469+00:00",
+    "size": 12166,
+    "last_modified": "2025-09-21T10:43:38.463278+00:00",
     "lang": "py",
-    "line_count": 269,
-    "sha1": "65db3811b07590eb44e226470c4f133fe75ae7de"
+    "line_count": 277,
+    "sha1": "acd04a6aaa89c11ea36d6ab3aa282f21b9fe2f3d"
   },
   {
     "path": "brain/modules/morphogen_solver/gene_thresholds_database.py",
@@ -12656,11 +14407,11 @@
   {
     "path": "brain/modules/morphogen_solver/csf_flow_dynamics.py",
     "type": "file",
-    "size": 13757,
-    "last_modified": "2025-09-17T07:46:11.471040+00:00",
+    "size": 4085,
+    "last_modified": "2025-09-21T10:03:28.394720+00:00",
     "lang": "py",
-    "line_count": 299,
-    "sha1": "20bb3f72a56cea5ae5516c5c7d36b66cd96c88ee"
+    "line_count": 104,
+    "sha1": "b99d5dbe9192df7b721665e8c8d73a8fb5cc850b"
   },
   {
     "path": "brain/modules/morphogen_solver/cell_fate_specifier.py",
@@ -12683,11 +14434,11 @@
   {
     "path": "brain/modules/morphogen_solver/spatial_grid.py",
     "type": "file",
-    "size": 12572,
-    "last_modified": "2025-09-17T07:46:11.475345+00:00",
+    "size": 12632,
+    "last_modified": "2025-09-21T19:08:43.786298+00:00",
     "lang": "py",
     "line_count": 318,
-    "sha1": "41149677a1501b1ec247e723ff702c9e6cccc5a9"
+    "sha1": "544e24d774c802458816bb07b8b294c5fc08caed"
   },
   {
     "path": "brain/modules/morphogen_solver/parameter_calculator.py",
@@ -12728,20 +14479,20 @@
   {
     "path": "brain/modules/morphogen_solver/ventricular_topology.py",
     "type": "file",
-    "size": 9731,
-    "last_modified": "2025-09-17T07:46:11.475726+00:00",
+    "size": 4760,
+    "last_modified": "2025-09-21T10:01:53.551333+00:00",
     "lang": "py",
-    "line_count": 229,
-    "sha1": "3e2f80965a29ddd9d48924ccf02ee9ffee1e727d"
+    "line_count": 118,
+    "sha1": "867e140e0acb5d8a115814ac8a66b9b4dde26b4c"
   },
   {
     "path": "brain/modules/morphogen_solver/bmp_dynamics_engine.py",
     "type": "file",
-    "size": 14246,
-    "last_modified": "2025-09-17T07:46:11.470219+00:00",
+    "size": 12191,
+    "last_modified": "2025-09-21T10:44:41.391201+00:00",
     "lang": "py",
-    "line_count": 360,
-    "sha1": "e50b51c326d2fb72bbb19602841178ae71b6d86a"
+    "line_count": 312,
+    "sha1": "38a090936ed32f82b875227a467aef84eebee4f3"
   },
   {
     "path": "brain/modules/morphogen_solver/shh_source_manager.py",
@@ -12755,11 +14506,11 @@
   {
     "path": "brain/modules/morphogen_solver/pia_vascular_network.py",
     "type": "file",
-    "size": 8955,
-    "last_modified": "2025-09-17T07:46:11.474308+00:00",
+    "size": 8961,
+    "last_modified": "2025-09-21T10:15:32.048804+00:00",
     "lang": "py",
     "line_count": 212,
-    "sha1": "691a22ea4e115a61d292cb8c5812a270356c8306"
+    "sha1": "480405af8c6795e67f58d130e2a18fd5f0e36aec"
   },
   {
     "path": "brain/modules/morphogen_solver/meninges_documentation.py",
@@ -12800,11 +14551,11 @@
   {
     "path": "brain/modules/morphogen_solver/arachnoid_system.py",
     "type": "file",
-    "size": 11232,
-    "last_modified": "2025-09-17T07:46:11.469226+00:00",
+    "size": 11115,
+    "last_modified": "2025-09-21T10:13:48.794810+00:00",
     "lang": "py",
-    "line_count": 253,
-    "sha1": "9352de9954ec76e58a45c60b8b5d4e25fbeb8f32"
+    "line_count": 252,
+    "sha1": "897f59ec71326d1b549eadb22bd91db46bafaa3b"
   },
   {
     "path": "brain/modules/morphogen_solver/wnt_fgf_types.py",
@@ -12868,5 +14619,2438 @@
     "lang": "py",
     "line_count": 69,
     "sha1": "a0d0aa2fd95813285de70b48970bce17eb8cf876"
+  },
+  {
+    "path": "dura_mater_research/article_6.xml",
+    "type": "file",
+    "size": 108094,
+    "last_modified": "2025-09-21T10:08:41.533036+00:00",
+    "lang": "xml",
+    "line_count": 84,
+    "sha1": "a357738fa4c1a0cbb60de94b95efb3d041c8e777"
+  },
+  {
+    "path": "dura_mater_research/article_7.xml",
+    "type": "file",
+    "size": 56049,
+    "last_modified": "2025-09-21T10:08:41.533156+00:00",
+    "lang": "xml",
+    "line_count": 182,
+    "sha1": "dc5023105ff134b4ebd553e2ed6a922b8cdbb39c"
+  },
+  {
+    "path": "dura_mater_research/article_5.xml",
+    "type": "file",
+    "size": 31043,
+    "last_modified": "2025-09-21T10:08:41.532911+00:00",
+    "lang": "xml",
+    "line_count": 12,
+    "sha1": "07e6bdde47937c222fbbeb332fb20933a0c5b7b7"
+  },
+  {
+    "path": "dura_mater_research/article_4.xml",
+    "type": "file",
+    "size": 299431,
+    "last_modified": "2025-09-21T10:08:41.532752+00:00",
+    "lang": "xml",
+    "line_count": 73,
+    "sha1": "8a75a16ecd086b4c3b3cab0ea6201b64c9011e61"
+  },
+  {
+    "path": "dura_mater_research/article_10.xml",
+    "type": "file",
+    "size": 79205,
+    "last_modified": "2025-09-21T10:08:41.533503+00:00",
+    "lang": "xml",
+    "line_count": 23,
+    "sha1": "4a4d1af86f4f76746dade1b3cfa8a6f80ba6471f"
+  },
+  {
+    "path": "dura_mater_research/article_1.xml",
+    "type": "file",
+    "size": 89874,
+    "last_modified": "2025-09-21T10:08:41.532312+00:00",
+    "lang": "xml",
+    "line_count": 96,
+    "sha1": "327efe6cf780c0e658ec9c87dc0bfec7432419e7"
+  },
+  {
+    "path": "dura_mater_research/article_3.xml",
+    "type": "file",
+    "size": 48266,
+    "last_modified": "2025-09-21T10:08:41.532578+00:00",
+    "lang": "xml",
+    "line_count": 2,
+    "sha1": "df71129d4b7cfa9ec72db4ac4162d36025050ed1"
+  },
+  {
+    "path": "dura_mater_research/article_2.xml",
+    "type": "file",
+    "size": 11468,
+    "last_modified": "2025-09-21T10:08:41.532455+00:00",
+    "lang": "xml",
+    "line_count": 1,
+    "sha1": "5ae953426a3eae492e7fe13b779beaa3139a412e"
+  },
+  {
+    "path": "dura_mater_research/article_9.xml",
+    "type": "file",
+    "size": 6883,
+    "last_modified": "2025-09-21T10:08:41.533390+00:00",
+    "lang": "xml",
+    "line_count": 1,
+    "sha1": "653edb5961a9582e7ec9df7237b6e525f8be8636"
+  },
+  {
+    "path": "dura_mater_research/article_8.xml",
+    "type": "file",
+    "size": 87955,
+    "last_modified": "2025-09-21T10:08:41.533277+00:00",
+    "lang": "xml",
+    "line_count": 20,
+    "sha1": "ce5db9f89bbaa14e83ff92571bc27b7dafc99006"
+  },
+  {
+    "path": "apps/vercel-social/next.config.mjs",
+    "type": "file",
+    "size": 164,
+    "last_modified": "2025-09-21T10:05:46.146532+00:00",
+    "lang": "mjs",
+    "line_count": 9,
+    "sha1": "4175f3a6d7e7fe706826a662f8e266145afd29bb"
+  },
+  {
+    "path": "apps/vercel-social/next-env.d.ts",
+    "type": "file",
+    "size": 201,
+    "last_modified": "2025-09-21T10:07:05.853549+00:00",
+    "lang": "ts",
+    "line_count": 5,
+    "sha1": "06e5b053de5e90cae065a2ac8a57758316aeb8ea"
+  },
+  {
+    "path": "apps/vercel-social/README.md",
+    "type": "file",
+    "size": 542,
+    "last_modified": "2025-09-21T10:02:38.207269+00:00",
+    "lang": "md",
+    "line_count": 31,
+    "sha1": "f1ee29548669820339e594d8addbd86e0604fb9f"
+  },
+  {
+    "path": "apps/vercel-social/package.json",
+    "type": "file",
+    "size": 519,
+    "last_modified": "2025-09-21T10:00:59.313019+00:00",
+    "lang": "json",
+    "line_count": 25,
+    "sha1": "e8227bc6638b5817de0708719576147fdcbf3c4b"
+  },
+  {
+    "path": "apps/vercel-social/tsconfig.json",
+    "type": "file",
+    "size": 713,
+    "last_modified": "2025-09-21T10:07:05.851654+00:00",
+    "lang": "json",
+    "line_count": 39,
+    "sha1": "954e1e83af2c4c2f6226e58eb0279729f26e52ef"
+  },
+  {
+    "path": "apps/vercel-social/deploy.sh",
+    "type": "file",
+    "size": 377,
+    "last_modified": "2025-09-21T10:36:08.567888+00:00",
+    "lang": "sh",
+    "line_count": 17,
+    "sha1": "d42543190d496d42468e16573372d7ef2f4df59c"
+  },
+  {
+    "path": "apps/vercel-social/.env.deploy",
+    "type": "file",
+    "size": 97,
+    "last_modified": "2025-09-21T10:38:11.574627+00:00",
+    "lang": "deploy",
+    "line_count": 2,
+    "sha1": "efdd6ca69949a6b8243b9fc5a06543990df87b53"
+  },
+  {
+    "path": "apps/vercel-social/.vercel/project.json",
+    "type": "file",
+    "size": 98,
+    "last_modified": "2025-09-21T10:08:47.330142+00:00",
+    "lang": "json",
+    "line_count": 4,
+    "sha1": "78d9ddae67e3f1a8b6a87a47b15ff3be66197226"
+  },
+  {
+    "path": "apps/vercel-social/app/layout.tsx",
+    "type": "file",
+    "size": 323,
+    "last_modified": "2025-09-21T10:01:16.332458+00:00",
+    "lang": "tsx",
+    "line_count": 15,
+    "sha1": "700c7098ff5190d2378dbd5d8d9df812fb5fb8e7"
+  },
+  {
+    "path": "apps/vercel-social/app/page.tsx",
+    "type": "file",
+    "size": 2342,
+    "last_modified": "2025-09-21T10:01:41.433003+00:00",
+    "lang": "tsx",
+    "line_count": 73,
+    "sha1": "e199ade3e3f8e269eab4d2e2c6a65acb9f0b0f8c"
+  },
+  {
+    "path": "apps/vercel-social/app/globals.css",
+    "type": "file",
+    "size": 925,
+    "last_modified": "2025-09-21T10:01:22.977967+00:00",
+    "lang": "css",
+    "line_count": 11,
+    "sha1": "6e1f6fe1162e6f4843402d89356e31c2adcd3582"
+  },
+  {
+    "path": "apps/vercel-social/app/api/posts/route.ts",
+    "type": "file",
+    "size": 1163,
+    "last_modified": "2025-09-21T10:02:22.016019+00:00",
+    "lang": "ts",
+    "line_count": 33,
+    "sha1": "c237717dbb6de48e644b0d022f8e4cb6d5051acc"
+  },
+  {
+    "path": "apps/vercel-social/node_modules/queue-microtask/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/tinyglobby/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/callsites/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/styled-jsx/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/reusify/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/@pkgjs/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/define-data-property/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/is-bigint/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/which-boxed-primitive/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/@types/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/globals/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/shebang-regex/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/path-is-absolute/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/functions-have-names/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/next/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/.bin/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/is-array-buffer/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/has-property-descriptors/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/@emnapi/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/csstype/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/string.prototype.trimend/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/ts-api-utils/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/path-type/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/strip-ansi/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/tsconfig-paths/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/react-is/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/is-typed-array/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/function.prototype.name/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/flatted/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/loose-envify/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/es-errors/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/has-proto/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/string.prototype.trimstart/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/ms/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/possible-typed-array-names/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/call-bind/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/math-intrinsics/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/prelude-ls/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/escape-string-regexp/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/has-tostringtag/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/strip-json-comments/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/lru-cache/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/imurmurhash/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/language-tags/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/eslint-scope/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/type-fest/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/punycode/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/array.prototype.flat/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/eslint-config-next/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/string.prototype.trim/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/text-table/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/rimraf/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/side-channel-list/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/fast-json-stable-stringify/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/eslint-plugin-import/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/object.values/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/balanced-match/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/path-exists/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/resolve/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/@eslint/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/data-view-byte-offset/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/call-bind-apply-helpers/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/is-number-object/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/aria-query/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/nanoid/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/acorn/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/file-entry-cache/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/@nodelib/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/signal-exit/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/wrap-ansi/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/own-keys/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/once/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/reflect.getprototypeof/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/is-generator-function/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/async-function/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/is-negative-zero/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/ignore/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/esrecurse/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/tslib/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/argparse/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/picomatch/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/jsx-ast-utils/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/is-symbol/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/function-bind/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/is-glob/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/is-async-function/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/is-weakref/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/axe-core/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/is-fullwidth-code-point/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/typescript/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/flat-cache/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/inherits/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/is-date-object/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/array-includes/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/dir-glob/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/color-name/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/es-define-property/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/@swc/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/postcss/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/p-locate/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/get-intrinsic/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/eslint-import-resolver-node/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/object.entries/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/keyv/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/@typescript-eslint/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/es-to-primitive/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/es-abstract/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/@tybys/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/@ungap/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/js-yaml/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/eslint-visitor-keys/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/jackspeak/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/call-bound/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/typed-array-length/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/scheduler/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/eslint-plugin-react-hooks/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/strip-ansi-cjs/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/napi-postinstall/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/set-function-name/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/parent-module/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/@humanwhocodes/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/eslint-module-utils/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/dunder-proto/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/hasown/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/side-channel-weakmap/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/is-path-inside/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/run-parallel/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/p-limit/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/data-view-buffer/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/typed-array-byte-length/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/undici-types/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/strip-bom/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/json-schema-traverse/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/@isaacs/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/natural-compare/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/minimist/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/regexp.prototype.flags/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/string.prototype.includes/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/iterator.prototype/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/eslint-plugin-jsx-a11y/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/esutils/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/find-up/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/chalk/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/ansi-regex/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/damerau-levenshtein/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/has-flag/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/supports-color/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/wrap-ansi-cjs/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/unbox-primitive/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/is-shared-array-buffer/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/supports-preserve-symlinks-flag/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/typed-array-byte-offset/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/color-convert/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/path-key/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/is-bun-module/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/stable-hash/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/array-buffer-byte-length/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/brace-expansion/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/foreground-child/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/fill-range/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/json-stable-stringify-without-jsonify/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/react-dom/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/word-wrap/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/path-parse/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/has-symbols/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/picocolors/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/string.prototype.repeat/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/arraybuffer.prototype.slice/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/@napi-rs/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/internal-slot/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/set-proto/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/json-buffer/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/which-builtin-type/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/slash/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/safe-array-concat/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/doctrine/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/eastasianwidth/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/@nolyfill/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/array.prototype.tosorted/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/semver/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/is-finalizationregistry/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/define-properties/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/minimatch/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/is-weakset/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/estraverse/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/ansi-styles/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/is-core-module/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/graphemer/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/is-map/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/js-tokens/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/acorn-jsx/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/client-only/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/is-number/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/ast-types-flow/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/fs.realpath/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/levn/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/stop-iteration-iterator/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/yocto-queue/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/lodash.merge/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/has-bigints/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/@rtsao/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/side-channel/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/concat-map/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/axobject-query/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/json5/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/set-function-length/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/es-shim-unscopables/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/safe-regex-test/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/optionator/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/get-symbol-description/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/uri-js/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/object-assign/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/get-proto/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/unrs-resolver/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/cross-spawn/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/is-data-view/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/prop-types/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/espree/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/is-boolean-object/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/which-collection/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/is-regex/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/eslint/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/glob/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/esquery/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/import-fresh/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/fast-levenshtein/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/to-regex-range/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/streamsearch/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/@next/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/array-union/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/object-keys/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/gopd/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/busboy/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/safe-push-apply/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/for-each/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/which-typed-array/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/array.prototype.findlast/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/string-width/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/minipass/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/is-callable/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/is-weakmap/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/data-view-byte-length/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/isarray/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/eslint-import-resolver-typescript/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/micromatch/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/is-set/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/wrappy/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/eslint-plugin-react/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/fast-glob/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/array.prototype.findlastindex/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/resolve-from/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/is-extglob/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/fastq/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/available-typed-arrays/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/es-iterator-helpers/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/string.prototype.matchall/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/caniuse-lite/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/@rushstack/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/merge2/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/deep-is/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/es-set-tostringtag/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/is-string/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/globalthis/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/react/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/@unrs/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/braces/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/array.prototype.flatmap/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/which/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/side-channel-map/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/string-width-cjs/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/ajv/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/emoji-regex/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/object-inspect/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/@eslint-community/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/typed-array-buffer/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/type-check/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/object.fromentries/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/resolve-pkg-maps/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/locate-path/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/object.assign/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/graceful-fs/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/globby/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/fast-deep-equal/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/shebang-command/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/debug/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/glob-parent/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/source-map-js/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/isexe/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/es-object-atoms/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/language-subtag-registry/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/get-tsconfig/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/inflight/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/path-scurry/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/node_modules/object.groupby/",
+    "type": "dir",
+    "excluded": true
+  },
+  {
+    "path": "apps/vercel-social/.next/prerender-manifest.js",
+    "type": "file",
+    "size": 573,
+    "last_modified": "2025-09-21T10:38:27.310827+00:00",
+    "lang": "js",
+    "line_count": 1,
+    "sha1": "b88147cd34b34ae33f3fb54c53328e1b7cad9415"
+  },
+  {
+    "path": "apps/vercel-social/.next/trace",
+    "type": "file",
+    "size": 31369,
+    "last_modified": "2025-09-21T10:38:29.489525+00:00",
+    "lang": null,
+    "line_count": 2,
+    "sha1": "81638540641a64fbb5dff2c89c00ee696c6a96a4"
+  },
+  {
+    "path": "apps/vercel-social/.next/images-manifest.json",
+    "type": "file",
+    "size": 511,
+    "last_modified": "2025-09-21T10:38:27.329054+00:00",
+    "lang": "json",
+    "line_count": 1,
+    "sha1": "d4679b784f1e8a6d461b6ebb975a456d698e4e26"
+  },
+  {
+    "path": "apps/vercel-social/.next/react-loadable-manifest.json",
+    "type": "file",
+    "size": 2,
+    "last_modified": "2025-09-21T10:38:25.796125+00:00",
+    "lang": "json",
+    "line_count": 1,
+    "sha1": "bf21a9e8fbc5a3846fb05b4fa0859e0917b2202f"
+  },
+  {
+    "path": "apps/vercel-social/.next/required-server-files.json",
+    "type": "file",
+    "size": 4532,
+    "last_modified": "2025-09-21T10:38:26.768076+00:00",
+    "lang": "json",
+    "line_count": 1,
+    "sha1": "c463a954dfa593ec8583a272827c2a76c8f7441d"
+  },
+  {
+    "path": "apps/vercel-social/.next/build-manifest.json",
+    "type": "file",
+    "size": 967,
+    "last_modified": "2025-09-21T10:38:25.798020+00:00",
+    "lang": "json",
+    "line_count": 32,
+    "sha1": "1bd59f8f21b1d071c812fdc0f29f3eec01bbca22"
+  },
+  {
+    "path": "apps/vercel-social/.next/BUILD_ID",
+    "type": "file",
+    "size": 21,
+    "last_modified": "2025-09-21T10:38:26.766197+00:00",
+    "lang": null,
+    "line_count": 1,
+    "sha1": "3fdc236a85feef01d802240f2d3de144fc5bcd29"
+  },
+  {
+    "path": "apps/vercel-social/.next/package.json",
+    "type": "file",
+    "size": 20,
+    "last_modified": "2025-09-21T10:38:23.899376+00:00",
+    "lang": "json",
+    "line_count": 1,
+    "sha1": "8d886b5ebeac6a48f7f2dd839b808c3fcf463b58"
+  },
+  {
+    "path": "apps/vercel-social/.next/export-marker.json",
+    "type": "file",
+    "size": 94,
+    "last_modified": "2025-09-21T10:38:27.334846+00:00",
+    "lang": "json",
+    "line_count": 1,
+    "sha1": "2808f56297d96b951269e5688de6e69d8fa863bd"
+  },
+  {
+    "path": "apps/vercel-social/.next/prerender-manifest.json",
+    "type": "file",
+    "size": 526,
+    "last_modified": "2025-09-21T10:38:27.303602+00:00",
+    "lang": "json",
+    "line_count": 1,
+    "sha1": "25c66bd35fb075319c11e25eb69cb750de692260"
+  },
+  {
+    "path": "apps/vercel-social/.next/routes-manifest.json",
+    "type": "file",
+    "size": 721,
+    "last_modified": "2025-09-21T10:38:23.900189+00:00",
+    "lang": "json",
+    "line_count": 1,
+    "sha1": "23ae3913e0183de6ba6871925fbbf87de1fd7acc"
+  },
+  {
+    "path": "apps/vercel-social/.next/app-path-routes-manifest.json",
+    "type": "file",
+    "size": 78,
+    "last_modified": "2025-09-21T10:38:26.566998+00:00",
+    "lang": "json",
+    "line_count": 1,
+    "sha1": "0ea5bed55f92e29fa9a7d1e207abb3160efae411"
+  },
+  {
+    "path": "apps/vercel-social/.next/app-build-manifest.json",
+    "type": "file",
+    "size": 908,
+    "last_modified": "2025-09-21T10:38:25.798207+00:00",
+    "lang": "json",
+    "line_count": 26,
+    "sha1": "4caad4ede4a1215cc41a4a42090445c8d8683bbb"
+  },
+  {
+    "path": "apps/vercel-social/.next/next-server.js.nft.json",
+    "type": "file",
+    "size": 30127,
+    "last_modified": "2025-09-21T10:38:29.479755+00:00",
+    "lang": "json",
+    "line_count": 1,
+    "sha1": "b5c93746a3a25e41da2721fa3ff6c152ba3548f8"
+  },
+  {
+    "path": "apps/vercel-social/.next/next-minimal-server.js.nft.json",
+    "type": "file",
+    "size": 4643,
+    "last_modified": "2025-09-21T10:38:29.479753+00:00",
+    "lang": "json",
+    "line_count": 1,
+    "sha1": "18af7e5c2ed782831466386ab95e90d195889959"
+  },
+  {
+    "path": "apps/vercel-social/.next/types/package.json",
+    "type": "file",
+    "size": 18,
+    "last_modified": "2025-09-21T10:38:24.664886+00:00",
+    "lang": "json",
+    "line_count": 1,
+    "sha1": "e7e7227d4aebd45c08a3793228648a08f060edb5"
+  },
+  {
+    "path": "apps/vercel-social/.next/types/link.d.ts",
+    "type": "file",
+    "size": 3050,
+    "last_modified": "2025-09-21T10:38:24.664790+00:00",
+    "lang": "ts",
+    "line_count": 103,
+    "sha1": "9c80d0c8d9447971c1ab6e96a5e52f407a27818a"
+  },
+  {
+    "path": "apps/vercel-social/.next/types/app/page.ts",
+    "type": "file",
+    "size": 3474,
+    "last_modified": "2025-09-21T10:38:24.664973+00:00",
+    "lang": "ts",
+    "line_count": 79,
+    "sha1": "df4e9fc3831f07d1ef25a5ee2c43c330e80e2a8d"
+  },
+  {
+    "path": "apps/vercel-social/.next/types/app/layout.ts",
+    "type": "file",
+    "size": 3486,
+    "last_modified": "2025-09-21T10:38:24.664958+00:00",
+    "lang": "ts",
+    "line_count": 79,
+    "sha1": "e649ab9202595eddd299318b6981e54fc923da49"
+  },
+  {
+    "path": "apps/vercel-social/.next/types/app/api/posts/route.ts",
+    "type": "file",
+    "size": 8467,
+    "last_modified": "2025-09-21T10:38:24.665129+00:00",
+    "lang": "ts",
+    "line_count": 343,
+    "sha1": "c8279b363b7092223d4b143c9510e4448d40cf06"
+  },
+  {
+    "path": "apps/vercel-social/.next/cache/.tsbuildinfo",
+    "type": "file",
+    "size": 62437,
+    "last_modified": "2025-09-21T10:28:10.973563+00:00",
+    "lang": null,
+    "line_count": 1,
+    "sha1": "15f6e7250892908faf28bdedbd8fe831431189dc"
+  },
+  {
+    "path": "apps/vercel-social/.next/cache/webpack/client-production/index.pack",
+    "type": "file",
+    "size": 1923665,
+    "last_modified": "2025-09-21T10:38:25.811182+00:00",
+    "lang": "pack",
+    "line_count": null,
+    "sha1": "2e1057a5e7b63193baccdbe599f66db2441568b9"
+  },
+  {
+    "path": "apps/vercel-social/.next/cache/webpack/client-production/3.pack",
+    "type": "file",
+    "size": 1824,
+    "last_modified": "2025-09-21T10:38:25.809838+00:00",
+    "lang": "pack",
+    "line_count": null,
+    "sha1": "9587ce77a92fdfa95521fbd99815de871737aa48"
+  },
+  {
+    "path": "apps/vercel-social/.next/cache/webpack/client-production/2.pack",
+    "type": "file",
+    "size": 40102,
+    "last_modified": "2025-09-21T10:28:10.077073+00:00",
+    "lang": "pack",
+    "line_count": null,
+    "sha1": "a9488c5a61dd07194041309376bc26bc4fb94691"
+  },
+  {
+    "path": "apps/vercel-social/.next/cache/webpack/client-production/1.pack",
+    "type": "file",
+    "size": 792,
+    "last_modified": "2025-09-21T10:38:25.810899+00:00",
+    "lang": "pack",
+    "line_count": null,
+    "sha1": "405d4f871b8296d8d961a578cdf4bc7467c5ccd3"
+  },
+  {
+    "path": "apps/vercel-social/.next/cache/webpack/client-production/index.pack.old",
+    "type": "file",
+    "size": 1923292,
+    "last_modified": "2025-09-21T10:28:10.077288+00:00",
+    "lang": "old",
+    "line_count": null,
+    "sha1": "bcf1f8ae4169803c78b06c7213b9ac38413bb651"
+  },
+  {
+    "path": "apps/vercel-social/.next/cache/webpack/client-production/0.pack",
+    "type": "file",
+    "size": 12048178,
+    "last_modified": "2025-09-21T10:28:10.078605+00:00",
+    "lang": "pack",
+    "line_count": null,
+    "sha1": null
+  },
+  {
+    "path": "apps/vercel-social/.next/cache/webpack/edge-server-production/index.pack",
+    "type": "file",
+    "size": 8783,
+    "last_modified": "2025-09-21T10:07:03.904479+00:00",
+    "lang": "pack",
+    "line_count": null,
+    "sha1": "59f6114b24ec3f09c92450786fff5d140bd559d4"
+  },
+  {
+    "path": "apps/vercel-social/.next/cache/webpack/edge-server-production/0.pack",
+    "type": "file",
+    "size": 274,
+    "last_modified": "2025-09-21T10:07:03.904474+00:00",
+    "lang": "pack",
+    "line_count": null,
+    "sha1": "a6ca59440878f3e81c5bcc1ed7ade1b91e58b466"
+  },
+  {
+    "path": "apps/vercel-social/.next/cache/webpack/server-production/index.pack",
+    "type": "file",
+    "size": 1296275,
+    "last_modified": "2025-09-21T10:07:03.327216+00:00",
+    "lang": "pack",
+    "line_count": null,
+    "sha1": "a5f85fb333e28710e05580e8c33e8da92ca720a0"
+  },
+  {
+    "path": "apps/vercel-social/.next/cache/webpack/server-production/0.pack",
+    "type": "file",
+    "size": 7971898,
+    "last_modified": "2025-09-21T10:07:03.327984+00:00",
+    "lang": "pack",
+    "line_count": null,
+    "sha1": null
+  },
+  {
+    "path": "apps/vercel-social/.next/server/pages-manifest.json",
+    "type": "file",
+    "size": 111,
+    "last_modified": "2025-09-21T10:38:27.287002+00:00",
+    "lang": "json",
+    "line_count": 1,
+    "sha1": "76ee8eb12a3ac60fe87650bb429c8e817c7d12f2"
+  },
+  {
+    "path": "apps/vercel-social/.next/server/next-font-manifest.js",
+    "type": "file",
+    "size": 106,
+    "last_modified": "2025-09-21T10:38:25.798255+00:00",
+    "lang": "js",
+    "line_count": 1,
+    "sha1": "c580621e53f59269792c9c752c4d3f95acd86825"
+  },
+  {
+    "path": "apps/vercel-social/.next/server/interception-route-rewrite-manifest.js",
+    "type": "file",
+    "size": 48,
+    "last_modified": "2025-09-21T10:38:25.158788+00:00",
+    "lang": "js",
+    "line_count": 1,
+    "sha1": "fb25a94bbec70ae883a6d923c37d0933cfc4b027"
+  },
+  {
+    "path": "apps/vercel-social/.next/server/server-reference-manifest.js",
+    "type": "file",
+    "size": 121,
+    "last_modified": "2025-09-21T10:38:24.664778+00:00",
+    "lang": "js",
+    "line_count": 1,
+    "sha1": "0d6d328e14344fb738281fa0c0cfcc47c070fa2d"
+  },
+  {
+    "path": "apps/vercel-social/.next/server/functions-config-manifest.json",
+    "type": "file",
+    "size": 28,
+    "last_modified": "2025-09-21T10:38:26.757275+00:00",
+    "lang": "json",
+    "line_count": 1,
+    "sha1": "9f22b7e927ed221afadd24efcbdaf49108af0825"
+  },
+  {
+    "path": "apps/vercel-social/.next/server/middleware-manifest.json",
+    "type": "file",
+    "size": 83,
+    "last_modified": "2025-09-21T10:38:25.158778+00:00",
+    "lang": "json",
+    "line_count": 6,
+    "sha1": "86d36e07840587eb2c94ea4a3ab22c0009d0c2ed"
+  },
+  {
+    "path": "apps/vercel-social/.next/server/middleware-react-loadable-manifest.js",
+    "type": "file",
+    "size": 36,
+    "last_modified": "2025-09-21T10:38:25.796712+00:00",
+    "lang": "js",
+    "line_count": 1,
+    "sha1": "103c24e4f43fd59a8d9fb1e270246186bf94a545"
+  },
+  {
+    "path": "apps/vercel-social/.next/server/app-paths-manifest.json",
+    "type": "file",
+    "size": 124,
+    "last_modified": "2025-09-21T10:38:25.148415+00:00",
+    "lang": "json",
+    "line_count": 5,
+    "sha1": "0e8225492d34521c55509fc57b8a917e5bf28093"
+  },
+  {
+    "path": "apps/vercel-social/.next/server/webpack-runtime.js",
+    "type": "file",
+    "size": 1469,
+    "last_modified": "2025-09-21T10:38:24.663926+00:00",
+    "lang": "js",
+    "line_count": 1,
+    "sha1": "b2059b3058aa81abe8b5a00208a2c6c299102b3e"
+  },
+  {
+    "path": "apps/vercel-social/.next/server/font-manifest.json",
+    "type": "file",
+    "size": 2,
+    "last_modified": "2025-09-21T10:38:24.663945+00:00",
+    "lang": "json",
+    "line_count": 1,
+    "sha1": "97d170e1550eee4afc0af065b78cda302a97674c"
+  },
+  {
+    "path": "apps/vercel-social/.next/server/middleware-build-manifest.js",
+    "type": "file",
+    "size": 822,
+    "last_modified": "2025-09-21T10:38:25.798121+00:00",
+    "lang": "js",
+    "line_count": 1,
+    "sha1": "d1f02043f21205e81955b773224fa64bfb39da10"
+  },
+  {
+    "path": "apps/vercel-social/.next/server/server-reference-manifest.json",
+    "type": "file",
+    "size": 84,
+    "last_modified": "2025-09-21T10:38:24.664815+00:00",
+    "lang": "json",
+    "line_count": 1,
+    "sha1": "86bf7e4b63a9b2eabf9275f02e4ce0b0cd187ece"
+  },
+  {
+    "path": "apps/vercel-social/.next/server/next-font-manifest.json",
+    "type": "file",
+    "size": 77,
+    "last_modified": "2025-09-21T10:38:25.798284+00:00",
+    "lang": "json",
+    "line_count": 1,
+    "sha1": "c297ae777f2bbac5fbf96f88988b60489fec416c"
+  },
+  {
+    "path": "apps/vercel-social/.next/server/app/_not-found.rsc",
+    "type": "file",
+    "size": 3608,
+    "last_modified": "2025-09-21T10:38:27.060224+00:00",
+    "lang": "rsc",
+    "line_count": 9,
+    "sha1": "95ac11b2a162a621fcfb9e9efb35d2d2468118b7"
+  },
+  {
+    "path": "apps/vercel-social/.next/server/app/index.html",
+    "type": "file",
+    "size": 4404,
+    "last_modified": "2025-09-21T10:38:27.053171+00:00",
+    "lang": "html",
+    "line_count": 1,
+    "sha1": "93bf08ec28a6f3d0aadf2c7d388ad12759dcde14"
+  },
+  {
+    "path": "apps/vercel-social/.next/server/app/index.meta",
+    "type": "file",
+    "size": 80,
+    "last_modified": "2025-09-21T10:38:27.053476+00:00",
+    "lang": "meta",
+    "line_count": 5,
+    "sha1": "55ad162b9deb1d2ad61a7ce5b9598ba371d0a658"
+  },
+  {
+    "path": "apps/vercel-social/.next/server/app/page.js",
+    "type": "file",
+    "size": 4474,
+    "last_modified": "2025-09-21T10:38:24.664013+00:00",
+    "lang": "js",
+    "line_count": 1,
+    "sha1": "f6147db5ffb38fbaf57630ebae5d68f5f7c05bb6"
+  },
+  {
+    "path": "apps/vercel-social/.next/server/app/page_client-reference-manifest.js",
+    "type": "file",
+    "size": 3078,
+    "last_modified": "2025-09-21T10:38:25.798298+00:00",
+    "lang": "js",
+    "line_count": 1,
+    "sha1": "73fdb320cac4171f109bce81a9303bf77046ced0"
+  },
+  {
+    "path": "apps/vercel-social/.next/server/app/_not-found.meta",
+    "type": "file",
+    "size": 142,
+    "last_modified": "2025-09-21T10:38:27.061086+00:00",
+    "lang": "meta",
+    "line_count": 6,
+    "sha1": "931411fbe22e251a4cf9a99336a71caad29e45b1"
+  },
+  {
+    "path": "apps/vercel-social/.next/server/app/_not-found.html",
+    "type": "file",
+    "size": 6492,
+    "last_modified": "2025-09-21T10:38:27.060705+00:00",
+    "lang": "html",
+    "line_count": 1,
+    "sha1": "3b5afdcd8f62b9489ee5a168dac12518c62e6c2e"
+  },
+  {
+    "path": "apps/vercel-social/.next/server/app/index.rsc",
+    "type": "file",
+    "size": 2227,
+    "last_modified": "2025-09-21T10:38:27.052764+00:00",
+    "lang": "rsc",
+    "line_count": 7,
+    "sha1": "bf232073eb6d8c3c9a95e508dbc77176e470252f"
+  },
+  {
+    "path": "apps/vercel-social/.next/server/app/page.js.nft.json",
+    "type": "file",
+    "size": 1168,
+    "last_modified": "2025-09-21T10:38:29.474681+00:00",
+    "lang": "json",
+    "line_count": 1,
+    "sha1": "51e58113d8bb1abc78665d5793802bf2cf76ba0e"
+  },
+  {
+    "path": "apps/vercel-social/.next/server/app/api/posts/route.js",
+    "type": "file",
+    "size": 39609,
+    "last_modified": "2025-09-21T10:38:24.664243+00:00",
+    "lang": "js",
+    "line_count": 12,
+    "sha1": "d33af9408434b8fd48400880ad9b052896edef62"
+  },
+  {
+    "path": "apps/vercel-social/.next/server/app/api/posts/route.js.nft.json",
+    "type": "file",
+    "size": 1302,
+    "last_modified": "2025-09-21T10:38:29.474750+00:00",
+    "lang": "json",
+    "line_count": 1,
+    "sha1": "788df968a7b054edbb62ae6eed7b7d3ac8a099ad"
+  },
+  {
+    "path": "apps/vercel-social/.next/server/app/_not-found/page.js",
+    "type": "file",
+    "size": 3637,
+    "last_modified": "2025-09-21T10:38:24.664232+00:00",
+    "lang": "js",
+    "line_count": 1,
+    "sha1": "b3a42cc00508556e1694e9ffbceebb2d940f095f"
+  },
+  {
+    "path": "apps/vercel-social/.next/server/app/_not-found/page_client-reference-manifest.js",
+    "type": "file",
+    "size": 3157,
+    "last_modified": "2025-09-21T10:38:25.798264+00:00",
+    "lang": "js",
+    "line_count": 1,
+    "sha1": "994ceb2cf81f2d34e344ed0aa4127f71a8cc818f"
+  },
+  {
+    "path": "apps/vercel-social/.next/server/app/_not-found/page.js.nft.json",
+    "type": "file",
+    "size": 1195,
+    "last_modified": "2025-09-21T10:38:29.474644+00:00",
+    "lang": "json",
+    "line_count": 1,
+    "sha1": "dcfa84fd9e6d21d0adaaa1d5844e7621619ea756"
+  },
+  {
+    "path": "apps/vercel-social/.next/server/chunks/471.js",
+    "type": "file",
+    "size": 93594,
+    "last_modified": "2025-09-21T10:38:24.663884+00:00",
+    "lang": "js",
+    "line_count": 2,
+    "sha1": "6c42fa107e99a79eb15f35be9ccc9f0b247c0450"
+  },
+  {
+    "path": "apps/vercel-social/.next/server/chunks/682.js",
+    "type": "file",
+    "size": 33789,
+    "last_modified": "2025-09-21T10:38:24.663866+00:00",
+    "lang": "js",
+    "line_count": 6,
+    "sha1": "4551fb15780500493d58859922c39a792cd759aa"
+  },
+  {
+    "path": "apps/vercel-social/.next/server/chunks/948.js",
+    "type": "file",
+    "size": 55186,
+    "last_modified": "2025-09-21T10:38:24.663850+00:00",
+    "lang": "js",
+    "line_count": 2,
+    "sha1": "479894e0eff02c875c462fbaf170d80730b653cc"
+  },
+  {
+    "path": "apps/vercel-social/.next/server/chunks/font-manifest.json",
+    "type": "file",
+    "size": 2,
+    "last_modified": "2025-09-21T10:38:24.663554+00:00",
+    "lang": "json",
+    "line_count": 1,
+    "sha1": "97d170e1550eee4afc0af065b78cda302a97674c"
+  },
+  {
+    "path": "apps/vercel-social/.next/server/pages/_error.js",
+    "type": "file",
+    "size": 8619,
+    "last_modified": "2025-09-21T10:38:24.663937+00:00",
+    "lang": "js",
+    "line_count": 1,
+    "sha1": "8d029b0b2ce3eaa16184e4a4feadbb38b4f04c48"
+  },
+  {
+    "path": "apps/vercel-social/.next/server/pages/_app.js.nft.json",
+    "type": "file",
+    "size": 517,
+    "last_modified": "2025-09-21T10:38:29.474646+00:00",
+    "lang": "json",
+    "line_count": 1,
+    "sha1": "b4123faed0f44284ef9167b13623487e5f415207"
+  },
+  {
+    "path": "apps/vercel-social/.next/server/pages/_app.js",
+    "type": "file",
+    "size": 3291,
+    "last_modified": "2025-09-21T10:38:24.663949+00:00",
+    "lang": "js",
+    "line_count": 1,
+    "sha1": "c87ca4980447129abe80c1d9ea084c4f2b03d3a9"
+  },
+  {
+    "path": "apps/vercel-social/.next/server/pages/_document.js.nft.json",
+    "type": "file",
+    "size": 1932,
+    "last_modified": "2025-09-21T10:38:29.474682+00:00",
+    "lang": "json",
+    "line_count": 1,
+    "sha1": "e863f3a0765c2ac5450c43b84f539978d1b03d18"
+  },
+  {
+    "path": "apps/vercel-social/.next/server/pages/500.html",
+    "type": "file",
+    "size": 1995,
+    "last_modified": "2025-09-21T10:38:27.044703+00:00",
+    "lang": "html",
+    "line_count": 1,
+    "sha1": "d5aeef3703fb091eedf8ad8188e501fa7e5811c4"
+  },
+  {
+    "path": "apps/vercel-social/.next/server/pages/404.html",
+    "type": "file",
+    "size": 6492,
+    "last_modified": "2025-09-21T10:38:27.102199+00:00",
+    "lang": "html",
+    "line_count": 1,
+    "sha1": "3b5afdcd8f62b9489ee5a168dac12518c62e6c2e"
+  },
+  {
+    "path": "apps/vercel-social/.next/server/pages/_error.js.nft.json",
+    "type": "file",
+    "size": 1855,
+    "last_modified": "2025-09-21T10:38:29.474655+00:00",
+    "lang": "json",
+    "line_count": 1,
+    "sha1": "47cd81842955ff3e1f1bbcbdccfb25d67d6d12a6"
+  },
+  {
+    "path": "apps/vercel-social/.next/server/pages/_document.js",
+    "type": "file",
+    "size": 378,
+    "last_modified": "2025-09-21T10:38:24.664016+00:00",
+    "lang": "js",
+    "line_count": 1,
+    "sha1": "c74ed83e6fb663c36d7df2b725769502b48045b5"
+  },
+  {
+    "path": "apps/vercel-social/.next/static/OhSnbpHKhw_9mHT2kGR-m/_ssgManifest.js",
+    "type": "file",
+    "size": 80,
+    "last_modified": "2025-09-21T10:38:27.318976+00:00",
+    "lang": "js",
+    "line_count": 1,
+    "sha1": "011268d6627898dc2caac8b9678086cd9b9a7dfe"
+  },
+  {
+    "path": "apps/vercel-social/.next/static/OhSnbpHKhw_9mHT2kGR-m/_buildManifest.js",
+    "type": "file",
+    "size": 224,
+    "last_modified": "2025-09-21T10:38:25.798229+00:00",
+    "lang": "js",
+    "line_count": 1,
+    "sha1": "e9fc40c6a7a41f7efda64c7b304fa0f5e052bc39"
+  },
+  {
+    "path": "apps/vercel-social/.next/static/css/5d0d0892155621f1.css",
+    "type": "file",
+    "size": 761,
+    "last_modified": "2025-09-21T10:38:25.798337+00:00",
+    "lang": "css",
+    "line_count": 1,
+    "sha1": "5dc2deacd0b62f831331a3622ba679f9ef30273b"
+  },
+  {
+    "path": "apps/vercel-social/.next/static/chunks/fd9d1056-b6e16a5f15b47ad4.js",
+    "type": "file",
+    "size": 172831,
+    "last_modified": "2025-09-21T10:38:25.797518+00:00",
+    "lang": "js",
+    "line_count": 1,
+    "sha1": "afd673d3e1289070f4e66e592a58223d764c573e"
+  },
+  {
+    "path": "apps/vercel-social/.next/static/chunks/main-app-23092d87a81c3fc0.js",
+    "type": "file",
+    "size": 462,
+    "last_modified": "2025-09-21T10:38:25.797635+00:00",
+    "lang": "js",
+    "line_count": 1,
+    "sha1": "b8f9bb4f66f7cec209cd5cc3825f462718b95ecb"
+  },
+  {
+    "path": "apps/vercel-social/.next/static/chunks/framework-f66176bb897dc684.js",
+    "type": "file",
+    "size": 140942,
+    "last_modified": "2025-09-21T10:38:25.797431+00:00",
+    "lang": "js",
+    "line_count": 33,
+    "sha1": "249bf6933a68d57c9571dffbf9cc40f5d48c3795"
+  },
+  {
+    "path": "apps/vercel-social/.next/static/chunks/main-51e45af4a1778d79.js",
+    "type": "file",
+    "size": 109938,
+    "last_modified": "2025-09-21T10:38:25.797513+00:00",
+    "lang": "js",
+    "line_count": 1,
+    "sha1": "948c97f8882055a4b81cca91f9c72bf5af8b2177"
+  },
+  {
+    "path": "apps/vercel-social/.next/static/chunks/23-c61e312c20c04c5e.js",
+    "type": "file",
+    "size": 123350,
+    "last_modified": "2025-09-21T10:38:25.797435+00:00",
+    "lang": "js",
+    "line_count": 2,
+    "sha1": "e77d21b82dd7f24fe0e7bcfef2e0b9818b2fed65"
+  },
+  {
+    "path": "apps/vercel-social/.next/static/chunks/webpack-889906d2d9470bce.js",
+    "type": "file",
+    "size": 3446,
+    "last_modified": "2025-09-21T10:38:25.797521+00:00",
+    "lang": "js",
+    "line_count": 1,
+    "sha1": "69677c238d75ba8b3dc968859d270b9094bbb0fd"
+  },
+  {
+    "path": "apps/vercel-social/.next/static/chunks/polyfills-78c92fac7aa8fdd8.js",
+    "type": "file",
+    "size": 91381,
+    "last_modified": "2025-09-21T10:38:25.797512+00:00",
+    "lang": "js",
+    "line_count": 1,
+    "sha1": "17933ab2cc34f98e2f95b10a47a164eac892254f"
+  },
+  {
+    "path": "apps/vercel-social/.next/static/chunks/app/page-4e50511b3bfdce96.js",
+    "type": "file",
+    "size": 1963,
+    "last_modified": "2025-09-21T10:38:25.797807+00:00",
+    "lang": "js",
+    "line_count": 1,
+    "sha1": "aa2ed4a3821ca6d63f7ad7a122d2112862d4d504"
+  },
+  {
+    "path": "apps/vercel-social/.next/static/chunks/app/layout-c76689f4d2b7bd51.js",
+    "type": "file",
+    "size": 229,
+    "last_modified": "2025-09-21T10:38:25.797820+00:00",
+    "lang": "js",
+    "line_count": 1,
+    "sha1": "23997588fc96cbecc3b911fdb52eeeba771b458a"
+  },
+  {
+    "path": "apps/vercel-social/.next/static/chunks/app/_not-found/page-e1e7a70d57f01171.js",
+    "type": "file",
+    "size": 1744,
+    "last_modified": "2025-09-21T10:38:25.797990+00:00",
+    "lang": "js",
+    "line_count": 1,
+    "sha1": "c54fab65e53aa5e21b58b1b47a783d2f6644b065"
+  },
+  {
+    "path": "apps/vercel-social/.next/static/chunks/pages/_app-6a626577ffa902a4.js",
+    "type": "file",
+    "size": 280,
+    "last_modified": "2025-09-21T10:38:25.797867+00:00",
+    "lang": "js",
+    "line_count": 1,
+    "sha1": "928e972dbb417f898e050a80bb7b28aea98d8a69"
+  },
+  {
+    "path": "apps/vercel-social/.next/static/chunks/pages/_error-1be831200e60c5c0.js",
+    "type": "file",
+    "size": 247,
+    "last_modified": "2025-09-21T10:38:25.797839+00:00",
+    "lang": "js",
+    "line_count": 1,
+    "sha1": "5b7dc6ba01864da1d270c2042a01aa489bd20676"
   }
 ]

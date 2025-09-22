@@ -317,20 +317,24 @@ class AtlasValidationSystem:
         from pathlib import Path
         
         try:
-            # Load integration manifest from new location
-            manifest_file = Path("/Users/camdouglas/quark/data/datasets/allen_brain/atlas_integration_manifest.json")
+            # Load integration manifest from a relative path
+            manifest_file = self.data_downloader.data_dir / "atlas_integration_manifest.json"
             
+            if not manifest_file.exists():
+                logger.warning("Atlas integration manifest not found.")
+                return None
+
             with open(manifest_file, 'r') as f:
                 manifest = json.load(f)
             
             logger.info(f"Loaded existing atlas manifest: {manifest['total_datasets']} datasets, {manifest['total_size_mb']:.1f} MB")
             
-            # Create atlas reference using existing data
-            atlas_ref = self.data_downloader._create_synthetic_reference(self.developmental_stage)
-            
-            # Update with real integration info
-            atlas_ref.atlas_id = f"real_data_integrated_{self.developmental_stage}"
-            atlas_ref.reference_url = f"real_data://brainspan+allen_{self.developmental_stage}"
+            # This is a critical flaw. If the manifest exists, we should load the actual
+            # processed data, not create a new synthetic reference.
+            # This requires a more robust caching/loading mechanism than is present.
+            # For now, we will fail if we can't properly load a real pre-processed atlas.
+            logger.warning("Found manifest, but loading pre-processed atlas is not yet implemented. Failing.")
+            return None
             
             logger.info("Successfully loaded existing atlas data for validation")
             

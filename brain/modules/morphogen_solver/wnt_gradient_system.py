@@ -37,7 +37,7 @@ class WNTSourceManager:
         
         # Create posterior WNT source
         posterior_source = np.zeros((dims.x_size, dims.y_size, dims.z_size))
-        posterior_source[:, posterior_start:, :] = self.source_params.production_intensity
+        posterior_source[:, posterior_start:, :] = self.source_params.intensity
         
         self.source_regions['posterior'] = posterior_source
         self.grid.add_morphogen('WNT', initial_concentration=0.0)
@@ -105,23 +105,31 @@ class WNTDynamicsEngine:
     
     def _compute_interactions(self, wnt_concentration: np.ndarray, dt: float) -> np.ndarray:
         """Compute interaction terms with other morphogens."""
-        interaction_term = np.zeros_like(wnt_concentration)
+        total_interaction = np.zeros_like(wnt_concentration)
         
-        # WNT-FGF synergy (posterior enhancement)
-        if self.grid.has_morphogen('FGF'):
-            fgf_field = self.grid.get_morphogen_concentration('FGF')
-            # Synergistic interaction: WNT + FGF → enhanced posterior patterning
-            synergy_strength = 0.1  # nM⁻¹s⁻¹
-            interaction_term += synergy_strength * wnt_concentration * fgf_field * dt
-        
-        # WNT-BMP antagonism (dorsal-ventral cross-talk)
-        if self.grid.has_morphogen('BMP'):
-            bmp_field = self.grid.get_morphogen_concentration('BMP')
-            # Mild antagonism in dorsal regions
-            antagonism_strength = 0.05  # nM⁻¹s⁻¹
-            interaction_term -= antagonism_strength * wnt_concentration * bmp_field * dt
-        
-        return interaction_term
+        for interaction in self.interactions:
+            if not self.grid.has_morphogen(interaction.target_morphogen):
+                continue
+            
+            target_conc = self.grid.get_morphogen_concentration(interaction.target_morphogen)
+            
+            if interaction.interaction_type == 'activation':
+                hill = self._calculate_hill_function(target_conc, interaction.threshold, interaction.hill_coefficient)
+                total_interaction += interaction.strength * hill * dt
+            
+            elif interaction.interaction_type == 'inhibition':
+                hill = self._calculate_hill_function(target_conc, interaction.threshold, interaction.hill_coefficient)
+                total_interaction -= interaction.strength * hill * wnt_concentration * dt
+
+        return total_interaction
+
+    def _calculate_hill_function(self, concentration: np.ndarray, threshold: float,
+                               hill_coefficient: float) -> np.ndarray:
+        """Calculate Hill function for cooperative binding."""
+        safe_concentration = np.maximum(concentration, 1e-10)
+        numerator = safe_concentration ** hill_coefficient
+        denominator = (threshold ** hill_coefficient) + numerator
+        return numerator / denominator
 
 class WNTGeneExpressionMapper:
     """Gene expression mapper for WNT signaling."""
@@ -205,7 +213,7 @@ class WNTGradientSystem:
         self.source_manager.configure_posterior_sources(neural_tube_dimensions)
         logger.info("WNT sources configured for posterior patterning")
     
-    def simulate_gradient_timestep(self, dt: float) -> None:
+    def simulate_time_step(self, dt: float) -> None:
         """Simulate one timestep of WNT gradient dynamics."""
         self.dynamics_engine.simulate_timestep(dt)
     

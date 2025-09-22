@@ -15,6 +15,8 @@ import logging
 from .spatial_grid import SpatialGrid, GridDimensions
 from .morphogen_solver import MorphogenSolver
 from .ml_diffusion_types import SyntheticDataConfig
+from .parameter_types import DiffusionParameters
+from .parameter_calculator import ParameterCalculator
 
 logger = logging.getLogger(__name__)
 
@@ -35,6 +37,7 @@ class SyntheticEmbryoDataGenerator:
         """
         self.base_dims = base_grid_dimensions
         self.config = data_config
+        self.calculator = ParameterCalculator()
         
         # Parameter variation ranges
         self.parameter_ranges = self._initialize_parameter_ranges()
@@ -44,16 +47,23 @@ class SyntheticEmbryoDataGenerator:
         logger.info(f"Spatial resolution: {base_grid_dimensions.resolution} µm")
     
     def _initialize_parameter_ranges(self) -> Dict[str, Tuple[float, float]]:
-        """Initialize parameter variation ranges for synthetic data."""
+        """Initialize parameter variation ranges for synthetic data.
+        
+        Note: Ranges are +/- 50% of the validated defaults to ensure stability.
+        """
         return {
-            "shh_diffusion": (50.0, 150.0),      # µm²/s
-            "shh_degradation": (0.001, 0.01),    # s⁻¹
-            "bmp_diffusion": (30.0, 100.0),      # µm²/s
-            "bmp_degradation": (0.002, 0.015),   # s⁻¹
-            "wnt_diffusion": (20.0, 80.0),       # µm²/s
-            "wnt_degradation": (0.0015, 0.008),  # s⁻¹
-            "fgf_diffusion": (40.0, 120.0),      # µm²/s
-            "fgf_degradation": (0.003, 0.012),   # s⁻¹
+            # SHH: default diffusion=0.1, degradation=0.000128
+            "shh_diffusion": (0.05, 0.15),
+            "shh_degradation": (0.000064, 0.000192),
+            # BMP: default diffusion=0.5, degradation=0.002
+            "bmp_diffusion": (0.25, 0.75),
+            "bmp_degradation": (0.001, 0.003),
+            # WNT: default diffusion=0.3, degradation=0.0015
+            "wnt_diffusion": (0.15, 0.45),
+            "wnt_degradation": (0.00075, 0.00225),
+            # FGF: default diffusion=1.0, degradation=0.003
+            "fgf_diffusion": (0.5, 1.5),
+            "fgf_degradation": (0.0015, 0.0045),
         }
     
     def generate_synthetic_dataset(self) -> Dict[str, np.ndarray]:
@@ -128,51 +138,59 @@ class SyntheticEmbryoDataGenerator:
     
     def _simulate_morphogen_sample(self, varied_params: Dict[str, float]) -> Dict[str, np.ndarray]:
         """Simulate morphogen sample with varied parameters."""
-        # Create morphogen solver with varied parameters
+        # Create morphogen solver
         solver = MorphogenSolver(self.base_dims, species="mouse", stage="E8.5-E10.5")
-        
-        # Configure with varied parameters (simplified approach)
-        # In practice, would modify solver parameters based on varied_params
-        
-        # Configure neural tube
+
+        # Override parameters for this specific simulation run
+        for param_name, value in varied_params.items():
+            morphogen, param_type = param_name.split('_')
+            morphogen = morphogen.upper()
+            
+            # Create a new DiffusionParameters object with the varied value
+            original_params = solver.bio_params.get_diffusion_parameters(morphogen)
+            new_params_dict = original_params.__dict__.copy()
+            
+            if param_type == 'diffusion':
+                new_params_dict['diffusion_coefficient'] = value
+            elif param_type == 'degradation':
+                new_params_dict['degradation_rate'] = value
+                # Recalculate half-life to maintain consistency
+                if value > 0:
+                    new_params_dict['half_life'] = np.log(2) / value
+                else:
+                    new_params_dict['half_life'] = float('inf')
+            
+            new_diffusion_params = DiffusionParameters(**new_params_dict)
+            solver.override_diffusion_parameters(morphogen, new_diffusion_params)
+
+        # Configure neural tube geometry
         neural_tube_config = {
-            'length_um': self.base_dims.y_size * self.base_dims.resolution,
-            'width_um': self.base_dims.x_size * self.base_dims.resolution,
-            'height_um': self.base_dims.z_size * self.base_dims.resolution
+            'neural_tube_length': self.base_dims.y_size * self.base_dims.resolution,
+            'neural_tube_width': self.base_dims.x_size * self.base_dims.resolution,
+            'neural_tube_height': self.base_dims.z_size * self.base_dims.resolution
         }
+        solver.configure_neural_tube(**neural_tube_config)
         
-        solver.configure_neural_tube(neural_tube_config)
+        # Calculate a conservative, fixed timestep based on the fastest diffusing morphogen (FGF)
+        fgf_params = solver.bio_params.get_diffusion_parameters('FGF')
+        dt = self.calculator.optimize_time_step(
+            diffusion_coefficient=fgf_params.diffusion_coefficient,
+            grid_spacing=self.base_dims.resolution,
+            degradation_rate=fgf_params.degradation_rate,
+            safety_factor=0.1  # Use a very conservative safety factor
+        )
         
-        # Run simulation for short time to establish gradients
+        # Run simulation for a short time to establish gradients
         simulation_time = 3600.0  # 1 hour simulation
-        dt = 10.0  # 10 second timesteps
-        
         solver.simulate_morphogen_dynamics(simulation_time, dt)
         
-        # Extract concentration fields
+        # Extract all four simulated concentration fields
         morphogen_fields = {
             'SHH': solver.spatial_grid.get_morphogen_concentration('SHH'),
             'BMP': solver.spatial_grid.get_morphogen_concentration('BMP'),
-            'WNT': np.zeros_like(solver.spatial_grid.get_morphogen_concentration('SHH')),  # Placeholder
-            'FGF': np.zeros_like(solver.spatial_grid.get_morphogen_concentration('SHH'))   # Placeholder
+            'WNT': solver.spatial_grid.get_morphogen_concentration('WNT'),
+            'FGF': solver.spatial_grid.get_morphogen_concentration('FGF')
         }
-        
-        # Add WNT/FGF fields (simplified - would use actual WNT/FGF systems)
-        dims = self.base_dims
-        
-        # Simple WNT gradient (high posterior)
-        wnt_field = np.zeros((dims.x_size, dims.y_size, dims.z_size))
-        for y in range(dims.y_size):
-            wnt_field[:, y, :] = (y / dims.y_size) ** 2  # Quadratic posterior increase
-        morphogen_fields['WNT'] = wnt_field * varied_params.get('wnt_diffusion', 50.0) / 50.0
-        
-        # Simple FGF gradient (isthmus peak)
-        fgf_field = np.zeros((dims.x_size, dims.y_size, dims.z_size))
-        isthmus_pos = int(0.4 * dims.y_size)
-        for y in range(dims.y_size):
-            # Gaussian peak at isthmus
-            fgf_field[:, y, :] = np.exp(-((y - isthmus_pos) / (0.1 * dims.y_size))**2)
-        morphogen_fields['FGF'] = fgf_field * varied_params.get('fgf_diffusion', 80.0) / 80.0
         
         return morphogen_fields
     

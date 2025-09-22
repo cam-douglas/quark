@@ -16,6 +16,8 @@ from .spatial_grid import SpatialGrid, GridDimensions
 from .biological_parameters import BiologicalParameters
 from .shh_gradient_system import SHHGradientSystem
 from .bmp_gradient_system import BMPGradientSystem
+from .wnt_gradient_system import WNTGradientSystem
+from .fgf_gradient_system import FGFGradientSystem
 from .parameter_types import DiffusionParameters, SourceParameters
 
 logger = logging.getLogger(__name__)
@@ -57,6 +59,8 @@ class MorphogenSolver:
         # Initialize morphogen systems
         self._initialize_shh_system()
         self._initialize_bmp_system()
+        self._initialize_wnt_system()
+        self._initialize_fgf_system()
         
         # Simulation state
         self.current_time = 0.0  # seconds
@@ -100,6 +104,30 @@ class MorphogenSolver:
         )
         
         logger.info("Initialized BMP gradient system")
+
+    def _initialize_wnt_system(self) -> None:
+        """Initialize WNT gradient system."""
+        if 'WNT' in self.bio_params.get_all_morphogens():
+            wnt_diffusion = self.bio_params.get_diffusion_parameters('WNT')
+            wnt_source = self.bio_params.get_source_parameters('WNT')
+            wnt_interactions = self.bio_params.get_interaction_parameters('WNT')
+            
+            self.morphogen_systems['WNT'] = WNTGradientSystem(
+                self.spatial_grid, wnt_diffusion, wnt_source, wnt_interactions
+            )
+            logger.info("Initialized WNT gradient system")
+
+    def _initialize_fgf_system(self) -> None:
+        """Initialize FGF gradient system."""
+        if 'FGF' in self.bio_params.get_all_morphogens():
+            fgf_diffusion = self.bio_params.get_diffusion_parameters('FGF')
+            fgf_source = self.bio_params.get_source_parameters('FGF')
+            fgf_interactions = self.bio_params.get_interaction_parameters('FGF')
+            
+            self.morphogen_systems['FGF'] = FGFGradientSystem(
+                self.spatial_grid, fgf_diffusion, fgf_source, fgf_interactions
+            )
+            logger.info("Initialized FGF gradient system")
     
     def configure_neural_tube(self, neural_tube_length: float = 500.0,
                             neural_tube_height: float = 200.0,
@@ -129,6 +157,10 @@ class MorphogenSolver:
             self.morphogen_systems['SHH'].configure_sources(neural_tube_dims)
         if 'BMP' in self.morphogen_systems:
             self.morphogen_systems['BMP'].configure_sources(neural_tube_dims)
+        if 'WNT' in self.morphogen_systems:
+            self.morphogen_systems['WNT'].configure_sources(neural_tube_dims)
+        if 'FGF' in self.morphogen_systems:
+            self.morphogen_systems['FGF'].configure_sources(neural_tube_dims)
         
         self.is_configured = True
         
@@ -220,6 +252,36 @@ class MorphogenSolver:
         y_coords = np.arange(len(concentrations)) * self.grid_dimensions.resolution
         
         return y_coords, concentrations
+
+    def override_diffusion_parameters(self, morphogen: str, new_diffusion_params: DiffusionParameters):
+        """Overrides the diffusion parameters for a specific morphogen and re-initializes its system."""
+        if morphogen not in self.bio_params.get_all_morphogens():
+            raise ValueError(f"Unknown morphogen: {morphogen}")
+
+        # Update the parameters in the biological parameters database
+        param_set = self.bio_params.morphogen_db.get_parameter_set(morphogen)
+        param_set.diffusion = new_diffusion_params
+        self.bio_params.morphogen_db.add_parameter_set(param_set)
+
+        # Re-initialize the specific morphogen system to use the new parameters
+        if morphogen == 'SHH':
+            self._initialize_shh_system()
+        elif morphogen == 'BMP':
+            self._initialize_bmp_system()
+        elif morphogen == 'WNT':
+            self._initialize_wnt_system()
+        elif morphogen == 'FGF':
+            self._initialize_fgf_system()
+            
+        logger.info(f"Overrode diffusion parameters and re-initialized system for {morphogen}")
+    
+    def simulate_morphogen_dynamics(self, total_time: float, dt: float):
+        """Simulate all morphogen dynamics for a total duration."""
+        num_steps = int(total_time / dt)
+        for i in range(num_steps):
+            self.simulate_time_step(dt)
+            if (i * dt) % 300 == 0: # Log every 5 minutes
+                logger.debug(f"Simulation progress: {self.current_time_hours:.2f} hours")
     
     def simulate_time_step(self, dt: Optional[float] = None) -> Dict[str, Any]:
         """Simulate one time step for all morphogen systems.

@@ -28,7 +28,7 @@ class S3Infrastructure:
             "storage_gb": 200,
             "region": "ap-northeast-1",
             "public_ip": "57.180.65.95",
-            "s3_bucket": "quark-tokyo-bucket"
+            "s3_bucket": "quark-main-tokyo-bucket"
         }
 
     def get_s3_status(self) -> Dict[str, Any]:

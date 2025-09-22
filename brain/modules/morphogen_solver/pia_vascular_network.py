@@ -191,7 +191,7 @@ class PiaVascularNetwork:
         vessel_volume = np.sum(blood_vessel_network) * (self.dims.resolution ** 3) / 1e9  # mm³
         
         # Estimate exchange capacity based on surface area and permeability
-        exchange_capacity = interface_area * permeability * 1e6  # Normalized units
+        exchange_capacity = interface_area * permeability_m2 * 1e6  # Normalized units
         
         # Vascular density (vessels per unit brain volume)
         # Approximate brain volume as non-cavity space
@@ -203,7 +203,7 @@ class PiaVascularNetwork:
             "vessel_volume_mm3": float(vessel_volume),
             "exchange_capacity": float(exchange_capacity),
             "vascular_density": float(vascular_density),
-            "permeability_m2": float(permeability)
+            "permeability_m2": float(permeability_m2)
         }
         
         logger.info(f"Metabolic exchange: interface={interface_area:.3f} mm², "

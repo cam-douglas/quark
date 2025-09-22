@@ -68,17 +68,15 @@ class BMPDynamicsEngine:
         logger.info(f"Degradation rate: {self.diffusion_params.degradation_rate} s⁻¹")
         logger.info(f"Initial time step: {self.time_step} s")
     
-    def simulate_time_step(self, dt: Optional[float] = None) -> Dict[str, float]:
+    def simulate_time_step(self, dt: float) -> Dict[str, float]:
         """Simulate one time step of BMP dynamics.
         
         Args:
-            dt: Time step size (seconds). Uses adaptive if None.
+            dt: Time step size (seconds).
             
         Returns:
             Dictionary of simulation metrics
         """
-        if dt is None:
-            dt = self._calculate_adaptive_time_step()
         
         # Get current BMP concentration
         concentration = self.grid.concentrations['BMP'].copy()
@@ -179,24 +177,17 @@ class BMPDynamicsEngine:
             Interaction effect array
         """
         if interaction.interaction_type == 'inhibition':
-            # BMP inhibits target (e.g., SHH), which reduces target's inhibition of BMP
-            hill_values = self._calculate_hill_function(
-                source_conc, interaction.threshold, interaction.hill_coefficient
-            )
-            # Reduced inhibition from target due to BMP
-            return interaction.strength * hill_values * target_conc
-        
+            # Target (e.g. SHH) inhibits BMP.
+            hill = self._calculate_hill_function(target_conc, interaction.threshold, interaction.hill_coefficient)
+            return -interaction.strength * hill * source_conc # Inhibition reduces source
+            
         elif interaction.interaction_type == 'activation':
-            # BMP activates target, which increases target's positive effect on BMP
-            hill_values = self._calculate_hill_function(
-                source_conc, interaction.threshold, interaction.hill_coefficient
-            )
-            return interaction.strength * hill_values
-        
+            hill = self._calculate_hill_function(target_conc, interaction.threshold, interaction.hill_coefficient)
+            return interaction.strength * hill
+            
         elif interaction.interaction_type == 'competition':
-            # Competitive inhibition between BMP and target (e.g., SHH)
-            competitive_factor = target_conc / (interaction.threshold + target_conc)
-            return -interaction.strength * competitive_factor * source_conc
+            hill = self._calculate_hill_function(target_conc, interaction.threshold, interaction.hill_coefficient)
+            return -interaction.strength * hill * source_conc
         
         elif interaction.interaction_type == 'modulation':
             # Non-linear modulation
@@ -224,45 +215,6 @@ class BMPDynamicsEngine:
         denominator = (threshold ** hill_coefficient) + numerator
         
         return numerator / denominator
-    
-    def _calculate_adaptive_time_step(self) -> float:
-        """Calculate adaptive time step based on stability criteria.
-        
-        Returns:
-            Optimal time step size (seconds)
-        """
-        # CFL condition for diffusion stability
-        # dt < (dx²)/(2*D) for 3D diffusion
-        grid_spacing = self.grid.resolution  # µm
-        diffusion_dt = (grid_spacing ** 2) / (6 * self.diffusion_params.diffusion_coefficient)
-        
-        # Degradation stability condition
-        # dt < 1/k for stability
-        degradation_dt = 1.0 / self.diffusion_params.degradation_rate
-        
-        # Production stability condition
-        # Limit based on maximum production rate
-        max_production = self.diffusion_params.production_rate
-        production_dt = 1.0 / max_production if max_production > 0 else float('inf')
-        
-        # Take minimum of all stability conditions
-        stability_dt = min(diffusion_dt, degradation_dt, production_dt)
-        
-        # Apply bounds
-        optimal_dt = np.clip(stability_dt, self.min_time_step, self.max_time_step)
-        
-        # Adaptive adjustment based on recent concentration changes
-        if self.max_concentration_change > self.stability_threshold:
-            # Reduce time step if system is changing rapidly
-            optimal_dt *= 0.8
-        elif self.max_concentration_change < self.stability_threshold * 0.1:
-            # Increase time step if system is stable
-            optimal_dt *= 1.2
-        
-        # Final bounds check
-        optimal_dt = np.clip(optimal_dt, self.min_time_step, self.max_time_step)
-        
-        return optimal_dt
     
     def check_stability(self) -> Dict[str, Any]:
         """Check numerical stability of the simulation.

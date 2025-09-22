@@ -54,7 +54,7 @@ See docs/INDEX.md for a curated map of specifications, guides, and historical re
 
 <!-- ROADMAP_STATUS_START -->
 **Roadmap Status**  
-Date: 2025-09-17  
+Date: 2025-09-22  
 Roadmaps: 1 (✅ 0 · 🚧 0 · 📋 0)  
 Pending tasks: 0
 

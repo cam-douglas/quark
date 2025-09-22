@@ -95,9 +95,9 @@ class PiaMaterSystem:
         """Generate neural tissue interface for pia mater layer."""
         logger.info("Generating pia mater neural interface")
         
-        # Get brain tissue surface (inverse of cavity mask)
-        cavity_mask = self.topology.generate_cavity_topology()
-        brain_tissue = ~cavity_mask
+        # Get brain tissue surface (inverse of lumen mask)
+        lumen_mask = self.topology.get_lumen_mask()
+        brain_tissue = ~lumen_mask
         
         # Pia mater follows brain surface contours exactly
         dims = self.grid.dimensions
@@ -166,8 +166,8 @@ class PiaMaterSystem:
             return 0.0
         
         # Get brain tissue surface
-        cavity_mask = self.topology.generate_cavity_topology()
-        brain_tissue = ~cavity_mask
+        lumen_mask = self.topology.get_lumen_mask()
+        brain_tissue = ~lumen_mask
         
         # Calculate conformity as overlap between pia interface and brain boundary
         brain_boundary = brain_tissue & ~ndimage.binary_erosion(brain_tissue)

@@ -18,9 +18,9 @@ logger = logging.getLogger(__name__)
 @dataclass
 class GridDimensions:
     """3D grid dimensions specification."""
-    x_size: int  # Anterior-posterior axis (µm)
-    y_size: int  # Dorsal-ventral axis (µm) 
-    z_size: int  # Left-right axis (µm)
+    x_size: int  # Anterior-posterior axis (voxels)
+    y_size: int  # Dorsal-ventral axis (voxels)
+    z_size: int  # Left-right axis (voxels)
     resolution: float = 1.0  # µm per voxel
     
     @property
@@ -77,9 +77,9 @@ class SpatialGrid:
         # Y-axis: Dorsal (top) to Ventral (bottom) 
         # Z-axis: Left to Right
         
-        x_coords = np.arange(self.dimensions.x_size) * self.resolution
-        y_coords = np.arange(self.dimensions.y_size) * self.resolution  
-        z_coords = np.arange(self.dimensions.z_size) * self.resolution
+        x_coords = np.arange(self.dimensions.x_size, dtype=np.float64) * self.resolution
+        y_coords = np.arange(self.dimensions.y_size, dtype=np.float64) * self.resolution
+        z_coords = np.arange(self.dimensions.z_size, dtype=np.float64) * self.resolution
         
         self.x_coords, self.y_coords, self.z_coords = np.meshgrid(
             x_coords, y_coords, z_coords, indexing='ij'

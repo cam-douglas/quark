@@ -23,11 +23,7 @@ class FlowBoundaryType(Enum):
 @dataclass
 class FlowParameters:
     """Parameters for CSF flow dynamics."""
-    viscosity_pa_s: float = 1.0e-3        # CSF viscosity (Pa·s)
-    density_kg_m3: float = 1000.0         # CSF density (kg/m³)
-    production_rate_ml_min: float = 0.5    # CSF production rate (ml/min)
-    absorption_rate_ml_min: float = 0.5    # CSF absorption rate (ml/min)
-    pressure_gradient_pa_m: float = 100.0  # Baseline pressure gradient (Pa/m)
+    diffusion_coefficient: float = 1e-11 # m^2/s
 
 @dataclass
 class FlowBoundaryCondition:

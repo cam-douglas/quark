@@ -101,12 +101,12 @@ class DuraMaterSystem:
         if self.dura_layer is None:
             raise ValueError("Dura layer not initialized")
         
-        # Get ventricular cavity mask for inner boundary
-        cavity_mask = self.topology.generate_cavity_topology()
+        # Get neural tube lumen mask for inner boundary
+        lumen_mask = self.topology.get_lumen_mask()
         
         # Generate surface mesh
         self.surface_mesh = self.mesh_generator.generate_surface_mesh(
-            cavity_mask=cavity_mask,
+            cavity_mask=lumen_mask,
             thickness_um=self.dura_layer.mechanical_properties.thickness_um,
             attachment_points=self.dura_layer.attachment_points
         )

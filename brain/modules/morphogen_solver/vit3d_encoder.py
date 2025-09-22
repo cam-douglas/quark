@@ -9,9 +9,10 @@ Integration: ViT3D component for GNN-ViT hybrid segmentation system
 Rationale: Focused ViT3D encoder implementation for 3D spatial processing
 """
 
-from typing import Tuple, Optional
+from typing import Tuple, Optional, Dict
 import torch
 import torch.nn as nn
+import torch.nn.functional as F
 import math
 import logging
 

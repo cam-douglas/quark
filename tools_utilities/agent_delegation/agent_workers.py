@@ -9,6 +9,7 @@ Date: 2025-01-27
 
 import subprocess
 import logging
+import arxiv
 from datetime import datetime
 from pathlib import Path
 from typing import Dict, Any
@@ -175,31 +176,34 @@ class TestingAgentWorker(BaseAgentWorker):
 
 class DocumentationAgentWorker(BaseAgentWorker):
     """Worker for documentation agent"""
-    
+
     def execute_task(self, task: DelegatedTask) -> Dict[str, Any]:
         """Execute documentation generation task"""
         try:
             self.logger.info(f"Documentation agent executing: {task.title}")
-            
-            # Generate documentation
-            context = task.result.get("context", {}) if task.result else {}
-            target_path = context.get("target_path", ".")
-            
-            # Run documentation generation
-            result = subprocess.run(
-                ["python", "-m", "pydoc", "-w", target_path],
-                capture_output=True,
-                text=True,
-                cwd=str(self.workspace_root)
+
+            # Perform a search on arXiv
+            search = arxiv.Search(
+                query=task.description,
+                max_results=3,
+                sort_by=arxiv.SortCriterion.Relevance
             )
-            
+
+            # Process the search results
+            summary = ""
+            for result in search.results():
+                summary += f"Title: {result.title}\n"
+                summary += f"Authors: {', '.join(author.name for author in result.authors)}\n"
+                summary += f"URL: {result.entry_id}\n"
+                summary += f"Abstract: {result.summary}\n\n"
+
             return {
-                "documentation_generated": result.returncode == 0,
-                "output": result.stdout,
-                "error": result.stderr,
+                "documentation_generated": True,
+                "output": summary,
+                "error": "",
                 "timestamp": datetime.now().isoformat()
             }
-            
+
         except Exception as e:
             return {
                 "documentation_generation_failed": True,

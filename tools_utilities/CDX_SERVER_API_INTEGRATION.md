@@ -328,3 +328,4 @@ wb-manager reindex quark
 ## Status
 
 ✅ **Integration Configured**: CDX Server API is configured and ready. Server must be started locally to use. Archive structure created at `/data/web_archives/`.
+

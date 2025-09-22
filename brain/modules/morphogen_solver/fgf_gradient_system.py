@@ -36,8 +36,8 @@ class FGFSourceManager:
         border_width = max(1, int(0.1 * dims.x_size))  # 10% of width
         
         neural_border_source = np.zeros((dims.x_size, dims.y_size, dims.z_size))
-        neural_border_source[:border_width, :, :] = self.source_params.production_intensity * 0.8
-        neural_border_source[-border_width:, :, :] = self.source_params.production_intensity * 0.8
+        neural_border_source[:border_width, :, :] = self.source_params.intensity * 0.8
+        neural_border_source[-border_width:, :, :] = self.source_params.intensity * 0.8
         
         self.source_regions['neural_border'] = neural_border_source
         
@@ -48,7 +48,7 @@ class FGFSourceManager:
         isthmus_source = np.zeros((dims.x_size, dims.y_size, dims.z_size))
         y_start = max(0, isthmus_position - isthmus_width)
         y_end = min(dims.y_size, isthmus_position + isthmus_width)
-        isthmus_source[:, y_start:y_end, :] = self.source_params.production_intensity
+        isthmus_source[:, y_start:y_end, :] = self.source_params.intensity
         
         self.source_regions['isthmus'] = isthmus_source
         
@@ -118,23 +118,31 @@ class FGFDynamicsEngine:
     
     def _compute_interactions(self, fgf_concentration: np.ndarray, dt: float) -> np.ndarray:
         """Compute interaction terms with other morphogens."""
-        interaction_term = np.zeros_like(fgf_concentration)
-        
-        # FGF-WNT synergy (posterior enhancement)
-        if self.grid.has_morphogen('WNT'):
-            wnt_field = self.grid.get_morphogen_concentration('WNT')
-            # Synergistic interaction: FGF + WNT → enhanced neural maintenance
-            synergy_strength = 0.15  # nM⁻¹s⁻¹
-            interaction_term += synergy_strength * fgf_concentration * wnt_field * dt
-        
-        # FGF-SHH interaction (ventral enhancement)
-        if self.grid.has_morphogen('SHH'):
-            shh_field = self.grid.get_morphogen_concentration('SHH')
-            # FGF enhances SHH signaling in ventral regions
-            enhancement_strength = 0.1  # nM⁻¹s⁻¹
-            interaction_term += enhancement_strength * fgf_concentration * shh_field * dt
-        
-        return interaction_term
+        total_interaction = np.zeros_like(fgf_concentration)
+
+        for interaction in self.interactions:
+            if not self.grid.has_morphogen(interaction.target_morphogen):
+                continue
+            
+            target_conc = self.grid.get_morphogen_concentration(interaction.target_morphogen)
+            
+            if interaction.interaction_type == 'activation':
+                hill = self._calculate_hill_function(target_conc, interaction.threshold, interaction.hill_coefficient)
+                total_interaction += interaction.strength * hill * dt
+
+            elif interaction.interaction_type == 'inhibition':
+                hill = self._calculate_hill_function(target_conc, interaction.threshold, interaction.hill_coefficient)
+                total_interaction -= interaction.strength * hill * fgf_concentration * dt
+
+        return total_interaction
+
+    def _calculate_hill_function(self, concentration: np.ndarray, threshold: float,
+                               hill_coefficient: float) -> np.ndarray:
+        """Calculate Hill function for cooperative binding."""
+        safe_concentration = np.maximum(concentration, 1e-10)
+        numerator = safe_concentration ** hill_coefficient
+        denominator = (threshold ** hill_coefficient) + numerator
+        return numerator / denominator
 
 class FGFGeneExpressionMapper:
     """Gene expression mapper for FGF signaling."""
@@ -202,7 +210,7 @@ class FGFGradientSystem:
         self.source_manager.configure_neural_sources(neural_tube_dimensions)
         logger.info("FGF sources configured for neural maintenance")
     
-    def simulate_gradient_timestep(self, dt: float) -> None:
+    def simulate_time_step(self, dt: float) -> None:
         """Simulate one timestep of FGF gradient dynamics."""
         self.dynamics_engine.simulate_timestep(dt)
     

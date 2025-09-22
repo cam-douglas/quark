@@ -151,11 +151,11 @@ class AtlasDataDownloader:
             return atlas_ref
             
         except requests.RequestException as e:
-            logger.warning(f"Allen API download failed: {e}, creating synthetic reference")
-            return self._create_synthetic_reference(developmental_stage)
+            logger.error(f"Allen API download failed: {e}. Cannot proceed without real data.")
+            return None
         except Exception as e:
-            logger.error(f"Download processing failed: {e}")
-            return self._create_synthetic_reference(developmental_stage)
+            logger.error(f"Download processing failed: {e}. Cannot proceed without real data.")
+            return None
     
     def _process_downloaded_data(self, data_file: Path, developmental_stage: str) -> AtlasReference:
         """Process downloaded Allen Atlas data file."""
@@ -163,9 +163,9 @@ class AtlasDataDownloader:
         
         # For now, create synthetic reference as Allen data format is complex
         # In production, would implement full Allen data parser
-        logger.info("Creating synthetic reference based on Allen Atlas structure")
+        logger.error("Data processing not implemented. Cannot create a valid AtlasReference from downloaded file.")
         
-        return self._create_synthetic_reference(developmental_stage)
+        return None
     
     def download_rna_seq_data(self, dataset_name: str = "H0351.2001") -> Optional[Dict[str, Any]]:
         """Download RNA-Sequencing data from Allen Atlas.

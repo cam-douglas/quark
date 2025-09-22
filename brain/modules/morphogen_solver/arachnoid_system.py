@@ -135,9 +135,9 @@ class ArachnoidSystem:
         if self.dura_system.surface_mesh is None:
             self.dura_system.generate_dura_surface_mesh()
         
-        # Get brain surface as inner boundary (inverse of cavity mask)
-        cavity_mask = self.topology.generate_cavity_topology()
-        brain_surface = ~cavity_mask
+        # Get brain surface as inner boundary (inverse of lumen mask)
+        lumen_mask = self.topology.get_lumen_mask()
+        brain_surface = ~lumen_mask
         
         # Generate trabecular mesh
         self.trabecular_mesh = self.trabecular_generator.generate_trabecular_structure(
@@ -152,9 +152,9 @@ class ArachnoidSystem:
         """Create subarachnoid CSF space between arachnoid and pia."""
         logger.info("Creating subarachnoid CSF space")
         
-        # Get brain surface (inverse of cavity mask)
-        cavity_mask = self.topology.generate_cavity_topology()
-        brain_surface = ~cavity_mask
+        # Get brain surface (inverse of lumen mask)
+        lumen_mask = self.topology.get_lumen_mask()
+        brain_surface = ~lumen_mask
         
         # Get arachnoid surface (slightly inside dura)
         if self.dura_system.surface_mesh is None:
@@ -163,23 +163,22 @@ class ArachnoidSystem:
         # Create subarachnoid space between arachnoid and brain surface
         dims = self.grid.dimensions
         
-        # Erode dura surface slightly to create arachnoid position
-        arachnoid_thickness_voxels = int(10.0 / dims.resolution)  # 10 µm gap
-        structure = ndimage.generate_binary_structure(3, 1)
+        # Use distance transform to define layers accurately
+        dist_from_brain = ndimage.distance_transform_edt(~brain_surface)
+
+        # Arachnoid surface is a defined distance from the brain surface
+        arachnoid_dist_um = 15.0  # Approx. distance for subarachnoid space
+        arachnoid_dist_voxels = arachnoid_dist_um / dims.resolution
         
-        arachnoid_surface = self.dura_system.surface_mesh > 0.1 * np.max(self.dura_system.surface_mesh)
-        for _ in range(arachnoid_thickness_voxels):
-            arachnoid_surface = ndimage.binary_erosion(arachnoid_surface, structure=structure)
+        # Pia mater is directly on the brain surface (0 distance)
+        pia_dist_voxels = 1.0 # 1 voxel thick layer on the brain
         
-        # Subarachnoid space is between arachnoid and brain
-        # Erode brain surface slightly for pia position
-        pia_thickness_voxels = int(5.0 / dims.resolution)  # 5 µm pia thickness
-        pia_surface = brain_surface
-        for _ in range(pia_thickness_voxels):
-            pia_surface = ndimage.binary_dilation(pia_surface, structure=structure)
-        
-        # Subarachnoid space is between arachnoid and pia
-        subarachnoid_space = arachnoid_surface & ~pia_surface
+        # Define subarachnoid space using distance thresholds
+        subarachnoid_space = (dist_from_brain > pia_dist_voxels) & (dist_from_brain < arachnoid_dist_voxels)
+
+        # Constrain the space to be within the dura mater boundary
+        dura_mask = self.dura_system.surface_mesh > 0.1 * np.max(self.dura_system.surface_mesh)
+        subarachnoid_space &= dura_mask
         
         self.subarachnoid_space = subarachnoid_space
         

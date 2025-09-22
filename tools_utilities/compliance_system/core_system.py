@@ -12,7 +12,7 @@ import time
 import json
 import subprocess
 from pathlib import Path
-from typing import Dict, List, Optional, Set, Callable, Any
+from typing import Dict, List, Optional, Set, Callable, Any, Union
 from datetime import datetime
 from contextlib import contextmanager
 
@@ -215,7 +215,7 @@ class QuarkComplianceSystem:
 
         print("✅ Compliance system stopped")
     
-    def _save_status(self, status: str, background: bool | None = None):
+    def _save_status(self, status: str, background: Union[bool, None] = None):
         """Save system status to disk for cross-process visibility."""
         status_data = {
             "status": status,

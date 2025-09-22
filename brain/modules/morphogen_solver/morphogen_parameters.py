@@ -54,9 +54,9 @@ class MorphogenParametersDatabase:
         # SHH (Sonic Hedgehog) Parameters
         shh_diffusion = DiffusionParameters(
             diffusion_coefficient=0.1,    # µm²/s (slow, lipid-modified protein)
-            degradation_rate=0.001,       # 1/s (stable protein, t½ ≈ 12 min)
+            degradation_rate=0.000128,    # 1/s (t½ ≈ 1.5 hours)
             production_rate=10.0,         # nM/s (high production in floor plate)
-            half_life=720.0               # seconds (12 minutes)
+            half_life=5400.0              # seconds (90 minutes)
         )
         
         shh_source = SourceParameters(
