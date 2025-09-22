@@ -144,3 +144,5 @@ data/archive/**
 *.dng
 
 .config/
+brain/externals/vllm/
+gcp_env/
