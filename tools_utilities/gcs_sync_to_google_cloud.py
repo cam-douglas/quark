@@ -142,52 +142,52 @@ class QuarkDataSync:
         return files_by_bucket
     
     def sync_to_bucket(self, files: List[Path], bucket: str, dry_run: bool = False) -> bool:
-        """Sync files to a specific GCS bucket."""
+        """Sync files to a specific GCS bucket with progress monitoring."""
         if not files:
             return True
         
-        logger.info(f"Syncing {len(files)} files to {bucket}")
+        # Calculate total size for progress tracking
+        total_size = sum(f.stat().st_size for f in files if f.exists() and f.is_file())
+        total_size_mb = total_size / (1024 * 1024)
         
-        # Create temporary file list for gsutil
-        temp_file = self.project_root / f".sync_list_{bucket.split('/')[-1]}.txt"
+        logger.info(f"📤 Syncing {len(files)} files ({total_size_mb:.1f} MB) to {bucket}")
         
-        try:
-            with open(temp_file, 'w') as f:
-                for file_path in files:
-                    relative_path = file_path.relative_to(self.data_dir)
-                    f.write(f"{file_path}\n")
-            
-            # Build gsutil command
-            cmd = [
-                "gsutil", "-m", "cp", "-r"
-            ]
-            
-            if dry_run:
-                logger.info(f"DRY RUN: Would sync {len(files)} files to {bucket}")
-                return True
-            
-            # Sync each file maintaining directory structure
-            for file_path in files:
-                relative_path = file_path.relative_to(self.data_dir)
-                target_path = f"{bucket}/{relative_path}"
-                
-                sync_cmd = ["gsutil", "cp", str(file_path), target_path]
-                result = subprocess.run(sync_cmd, capture_output=True, text=True)
-                
-                if result.returncode != 0:
-                    logger.error(f"Failed to sync {file_path}: {result.stderr}")
-                    return False
-                else:
-                    logger.debug(f"Synced: {file_path} → {target_path}")
-            
+        if dry_run:
+            logger.info(f"DRY RUN: Would sync {len(files)} files ({total_size_mb:.1f} MB) to {bucket}")
             return True
+        
+        # Sync files with progress updates
+        uploaded_count = 0
+        uploaded_size = 0
+        
+        for i, file_path in enumerate(files, 1):
+            relative_path = file_path.relative_to(self.data_dir)
+            target_path = f"{bucket}/{relative_path}"
             
-        except Exception as e:
-            logger.error(f"Error syncing to {bucket}: {e}")
-            return False
-        finally:
-            if temp_file.exists():
-                temp_file.unlink()
+            # Get file size for progress tracking
+            file_size = file_path.stat().st_size if file_path.exists() else 0
+            file_size_mb = file_size / (1024 * 1024)
+            
+            sync_cmd = ["gsutil", "cp", str(file_path), target_path]
+            result = subprocess.run(sync_cmd, capture_output=True, text=True)
+            
+            if result.returncode != 0:
+                logger.error(f"❌ Failed to sync {file_path}: {result.stderr}")
+                return False
+            else:
+                uploaded_count += 1
+                uploaded_size += file_size
+                uploaded_size_mb = uploaded_size / (1024 * 1024)
+                
+                # Show progress every 10 files or for large files
+                if i % 10 == 0 or file_size_mb > 10 or i == len(files):
+                    progress_pct = (uploaded_size / total_size * 100) if total_size > 0 else 0
+                    logger.info(f"📤 Progress: {uploaded_count}/{len(files)} files ({uploaded_size_mb:.1f}/{total_size_mb:.1f} MB, {progress_pct:.1f}%)")
+                
+                logger.debug(f"✅ Synced: {file_path} → {target_path}")
+        
+        logger.info(f"✅ Successfully synced {uploaded_count} files ({uploaded_size_mb:.1f} MB) to {bucket}")
+        return True
     
     def download_from_buckets(self, target_dir: Path = None, dry_run: bool = False) -> bool:
         """Download and merge all bucket contents back to local data directory."""
