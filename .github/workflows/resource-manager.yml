@@ -1,16 +1,16 @@
 name: resource-manager
 
 on:
-  # Temporarily disabled due to dependency issues in CI
-  # push:
-  #   paths:
-  #     - 'brain/architecture/neural_core/cognitive_systems/**'
-  #     - 'tests/resource_manager/**'
-  #     - '.github/workflows/resource-manager.yml'
-  # pull_request:
-  #   paths:
-  #     - 'brain/architecture/neural_core/cognitive_systems/**'
-  #     - 'tests/resource_manager/**'
+  push:
+    paths:
+      - 'brain/architecture/neural_core/cognitive_systems/**'
+      - 'tests/resource_manager/**'
+      - 'requirements-ci.txt'
+      - '.github/workflows/resource-manager.yml'
+  pull_request:
+    paths:
+      - 'brain/architecture/neural_core/cognitive_systems/**'
+      - 'tests/resource_manager/**'
   workflow_dispatch:
 
 jobs:
@@ -24,7 +24,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
+          pip install -r requirements-ci.txt
           pip install -e .
-          pip install pytest
       - name: Run resource manager tests
         run: pytest tests/resource_manager -q

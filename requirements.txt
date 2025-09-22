@@ -6,6 +6,9 @@ urllib3>=1.26.18
 
 # ML & Experiment Tracking
 mlflow>=2.12.0
+tensorboard
+torch>=2.0.0
+torchvision>=0.15.0
 
 # Brain Simulation / Control
 brian2
@@ -39,6 +42,8 @@ google-generativeai
 # AWS / Cloud
 boto3
 botocore
+google-cloud-aiplatform
+google-auth
 
 # API / Web
 fastapi
@@ -48,7 +53,6 @@ plotly
 
 # Vision / Robotics
 opencv-python
-roboticstoolbox-python
 
 # Tools / Validation
 spacy

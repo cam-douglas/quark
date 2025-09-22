@@ -1,0 +1,23 @@
+# Minimal requirements for CI testing
+# Core dependencies
+pydantic>=2.6
+pyyaml>=6.0
+requests>=2.31.0
+urllib3>=1.26.18
+
+# PyTorch CPU-only for CI (faster installation)
+torch>=2.0.0+cpu
+torchvision>=0.15.0+cpu
+--extra-index-url https://download.pytorch.org/whl/cpu
+
+# Testing
+pytest>=8.4
+pytest-cov>=4.1
+
+# Basic ML stack
+numpy<2.3.0
+scipy
+pandas
+
+# For pre-push script
+tensorboard

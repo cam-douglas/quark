@@ -1,10 +1,13 @@
 name: streaming-tests
 
 on:
-  # Temporarily disabled due to dependency issues in CI
-  # pull_request:
-  # push:
-  #   branches: [ main ]
+  pull_request:
+  push:
+    branches: [ main ]
+    paths:
+      - 'tests/resource_manager/**'
+      - 'requirements-ci.txt'
+      - '.github/workflows/streaming-tests.yml'
   workflow_dispatch:
 
 jobs:
@@ -16,7 +19,10 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Install deps
-        run: pip install -r requirements.txt
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements-ci.txt
+          pip install -e .
       - name: Run streaming unit tests
         run: pytest -q tests/resource_manager/test_cli_integration.py tests/resource_manager/test_streaming.py
