@@ -12,6 +12,14 @@ from .api_clients import LanguageAPIClients
 from .expert_router import ExpertRouter
 from .model_selector import ModelSelector
 
+# Import speech integration
+try:
+    from ..speech_integration import get_speech_integration, speak
+    SPEECH_AVAILABLE = True
+except ImportError as e:
+    print(f"⚠️ Speech integration not available: {e}")
+    SPEECH_AVAILABLE = False
+
 # Main LanguageCortex class that uses the modular components
 class LanguageCortex:
     """
@@ -19,7 +27,7 @@ class LanguageCortex:
     Uses sentence embeddings to route prompts with secure API failover system.
     """
 
-    def __init__(self):
+    def __init__(self, enable_speech: bool = False):
         """Initialize the Language Cortex with modular components."""
 
         # System prompt for behavioral guardrails
@@ -35,6 +43,19 @@ class LanguageCortex:
         self.api_clients = LanguageAPIClients()
         self.expert_router = ExpertRouter()
         self.model_selector = ModelSelector(self.api_clients)
+
+        # Initialize speech integration if available
+        self.speech_enabled = False
+        if SPEECH_AVAILABLE and enable_speech:
+            try:
+                self.speech_integration = get_speech_integration()
+                self.speech_enabled = True
+                print("🔊 Speech integration initialized")
+            except Exception as e:
+                print(f"⚠️ Failed to initialize speech integration: {e}")
+                self.speech_integration = None
+        else:
+            self.speech_integration = None
 
         # Rate limiting and conversation state
         self._init_rate_limiters()
@@ -145,6 +166,14 @@ class LanguageCortex:
                     'selection_details': selection_details
                 })
 
+                # Text-to-speech output if enabled
+                if self.speech_enabled and self.speech_integration:
+                    try:
+                        self.speech_integration.speak_text(response)
+                        print("🔊 Response spoken via TTS")
+                    except Exception as e:
+                        print(f"⚠️ TTS failed: {e}")
+
                 # Final status log
                 response_length = len(response.split()) if response else 0
                 print(f"📊 Response Stats: {response_length} words | Total conversations: {len(self.conversation_history)}")
@@ -238,9 +267,72 @@ class LanguageCortex:
             # Ultimate fallback - simple contextual responses
             return self._query_local_model(prompt)
 
+    def enable_speech_output(self, provider: str = "system_tts") -> bool:
+        """Enable text-to-speech output for responses."""
+        if not SPEECH_AVAILABLE:
+            print("❌ Speech integration not available")
+            return False
+        
+        try:
+            if not self.speech_integration:
+                self.speech_integration = get_speech_integration()
+            
+            # Enable TTS with specified provider
+            from ..speech_integration import TTSProvider
+            provider_enum = TTSProvider(provider)
+            success = self.speech_integration.enable_tts(provider_enum)
+            
+            if success:
+                self.speech_enabled = True
+                print(f"🔊 Speech output enabled with provider: {provider}")
+            else:
+                print(f"❌ Failed to enable speech with provider: {provider}")
+            
+            return success
+            
+        except Exception as e:
+            print(f"❌ Error enabling speech: {e}")
+            return False
+    
+    def disable_speech_output(self) -> bool:
+        """Disable text-to-speech output for responses."""
+        try:
+            if self.speech_integration:
+                success = self.speech_integration.disable_tts()
+                if success:
+                    self.speech_enabled = False
+                    print("🔇 Speech output disabled")
+                return success
+            else:
+                self.speech_enabled = False
+                print("🔇 Speech output disabled (no integration)")
+                return True
+                
+        except Exception as e:
+            print(f"❌ Error disabling speech: {e}")
+            return False
+    
+    def get_speech_status(self) -> Dict[str, Any]:
+        """Get current speech integration status."""
+        if not SPEECH_AVAILABLE or not self.speech_integration:
+            return {
+                'available': False,
+                'enabled': False,
+                'reason': 'Speech integration not available'
+            }
+        
+        try:
+            return self.speech_integration.get_status()
+        except Exception as e:
+            return {
+                'available': False,
+                'enabled': False,
+                'error': str(e)
+            }
+
     def get_processing_status(self) -> Dict[str, Any]:
         """Get current language processing status with model selection analytics."""
-        return {
+        status = {
             'available_services': self.api_clients.get_available_services(),
             'conversation_turns': len(self.conversation_history),
             'rate_limit_status': {
@@ -250,6 +342,11 @@ class LanguageCortex:
             'intelligent_routing_enabled': True,
             'openrouter_integration': 'active'
         }
+        
+        # Add speech status
+        status['speech_integration'] = self.get_speech_status()
+        
+        return status
 
     def print_selection_analytics(self):
         """Print detailed model selection analytics to console."""
