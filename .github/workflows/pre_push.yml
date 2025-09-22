@@ -27,4 +27,4 @@ jobs:
       #     python tools_utilities/scripts/link_validate.py management/rules/roadmaps
       - name: Run tests
         run: |
-          pytest -q tests/hooks/test_pre_push_update.py
+          pytest -q tests/hooks/test_pre_push_update.py -m heavy
