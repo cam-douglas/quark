@@ -183,10 +183,19 @@ After successful sync, the script will:
 
 ### **🔄 Automatic Git Integration**
 The pre-push hook automatically:
-- Starts GCS sync in background when you push code
+- Opens new Terminal window showing real-time sync progress
 - Doesn't wait for sync to complete (push continues immediately)
-- Logs sync progress to `/tmp/quark_gcs_sync.log`
+- Only syncs files that are new or changed (incremental sync)
 - Only syncs if there's data to upload
+
+### **⚡ Maximum Speed Optimizations**
+The sync system is configured for fastest possible uploads:
+- **24 parallel threads** for concurrent file uploads
+- **12 parallel processes** for maximum throughput
+- **Incremental sync** - only uploads new/changed files
+- **Parallel composite uploads** for files >150MB
+- **Sliced downloads** with 8 components for large files
+- **Skip slow operations** - hash checks and MIME detection
 
 ### **📊 Updated Commands**
 ```bash
