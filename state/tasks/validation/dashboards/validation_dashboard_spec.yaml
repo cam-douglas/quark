@@ -1,0 +1,37 @@
+version: 1.0
+owner: Validation/QA Lead
+
+panels:
+  - id: kpi_overview
+    title: KPI Overview
+    type: table
+    source: state/tasks/validation/MASTER_VALIDATION_CHECKLIST.md
+    columns: [domain, kpi, target, status, evidence_link]
+  - id: calibration
+    title: Calibration & Selective Risk
+    type: timeseries
+    metrics: [ece, ci_coverage, selective_risk]
+    source: state/tasks/validation/evidence/*/metrics.json
+  - id: biological_fidelity
+    title: Biological Fidelity
+    type: table
+    metrics: [laminar_fidelity, small_world_sigma, odi]
+    source: state/tasks/validation/evidence/*/metrics.json
+  - id: performance
+    title: Performance & Cost
+    type: timeseries
+    metrics: [latency_p95_ms, throughput, utilization_pct, energy_per_inference]
+    source: state/tasks/validation/evidence/*/metrics.json
+  - id: robustness
+    title: Robustness & OOD
+    type: table
+    metrics: [ood_delta, adv_margin]
+    source: state/tasks/validation/evidence/*/metrics.json
+
+ci_gates:
+  - name: calibration_gate
+    condition: "ece <= 0.02 and ci_coverage >= 0.95"
+  - name: biological_gate
+    condition: "laminar_fidelity >= 0.88 and small_world_sigma >= 2.5"
+  - name: performance_gate
+    condition: "latency_p95_ms <= 100 and utilization_pct >= 90"

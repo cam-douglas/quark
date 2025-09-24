@@ -133,23 +133,15 @@ class GNNViTHybridModel(nn.Module):
             fusion_dim=fusion_dim
         )
         
-        # Segmentation head - reconstruct full 3D volume
-        # Use a more reasonable intermediate size to avoid memory issues
-        intermediate_size = 1024
-        output_size = num_classes * input_resolution * input_resolution * input_resolution
-        
-        self.segmentation_head = nn.Sequential(
-            nn.Linear(fusion_dim, intermediate_size),
+        # Node-wise classifier head: produce per-node class logits (num_nodes, num_classes)
+        self.node_classifier = nn.Sequential(
+            nn.Linear(fusion_dim, fusion_dim),
             nn.ReLU(),
             nn.Dropout(0.1),
-            nn.Linear(intermediate_size, intermediate_size // 2),
-            nn.ReLU(),
-            nn.Dropout(0.1),
-            nn.Linear(intermediate_size // 2, output_size),
-            nn.Sigmoid()  # Ensure output is in [0, 1] range like morphogen concentrations
+            nn.Linear(fusion_dim, num_classes)
         )
         
-        # Store dimensions for reshaping
+        # Store dimensions for reshaping (kept for compatibility)
         self.num_classes = num_classes
         self.input_resolution = input_resolution
         
@@ -201,22 +193,14 @@ class GNNViTHybridModel(nn.Module):
             fused_features = self.fusion(gnn_features_sample, vit_features_sample)
             fusion_outputs.append(fused_features.squeeze(0))
         
-        # Segmentation predictions
+        # Segmentation predictions (node-wise logits per sample)
         segmentation_outputs = []
         for fused_features in fusion_outputs:
-            # Flatten the fused features if they have extra dimensions
-            if len(fused_features.shape) > 1:
-                fused_features = fused_features.flatten()
-            
-            seg_logits = self.segmentation_head(fused_features)
-            
-            # Reshape to 3D volume: (num_classes, D, H, W)
-            seg_logits = seg_logits.view(self.num_classes, self.input_resolution, 
-                                       self.input_resolution, self.input_resolution)
-            segmentation_outputs.append(seg_logits)
-        
-        # Stack segmentation outputs into a single tensor: (batch_size, num_classes, D, H, W)
-        segmentation_tensor = torch.stack(segmentation_outputs, dim=0)
+            # Expect fused_features: (num_nodes, fusion_dim)
+            if fused_features.dim() != 2:
+                fused_features = fused_features.view(fused_features.size(0), -1)
+            node_logits = self.node_classifier(fused_features)  # (num_nodes, num_classes)
+            segmentation_outputs.append(node_logits)
         
         # Combine outputs
         outputs = {
@@ -224,7 +208,7 @@ class GNNViTHybridModel(nn.Module):
             "vit_global_features": vit_global_features,
             "gnn_features": gnn_outputs,
             "fused_features": fusion_outputs,
-            "segmentation_logits": segmentation_tensor
+            "segmentation_logits": segmentation_outputs  # list of (num_nodes, num_classes)
         }
         
         return outputs

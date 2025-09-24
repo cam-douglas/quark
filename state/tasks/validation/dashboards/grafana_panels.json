@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "panels": [
+    {
+      "id": "kpi_overview",
+      "title": "KPI Overview",
+      "type": "table",
+      "targets": [{"expr": "file://state/tasks/validation/MASTER_VALIDATION_CHECKLIST.md"}]
+    },
+    {
+      "id": "calibration",
+      "title": "Calibration & Selective Risk",
+      "type": "timeseries",
+      "targets": [{"expr": "json://state/tasks/validation/evidence/*/metrics.json[ece,ci_coverage,selective_risk]"}]
+    },
+    {
+      "id": "biological_fidelity",
+      "title": "Biological Fidelity",
+      "type": "table",
+      "targets": [{"expr": "json://state/tasks/validation/evidence/*/metrics.json[laminar_fidelity,small_world_sigma,odi]"}]
+    },
+    {
+      "id": "performance",
+      "title": "Performance & Cost",
+      "type": "timeseries",
+      "targets": [{"expr": "json://state/tasks/validation/evidence/*/metrics.json[latency_p95_ms,throughput,utilization_pct,energy_per_inference]"}]
+    },
+    {
+      "id": "robustness",
+      "title": "Robustness & OOD",
+      "type": "table",
+      "targets": [{"expr": "json://state/tasks/validation/evidence/*/metrics.json[ood_delta,adv_margin]"}]
+    }
+  ]
+}

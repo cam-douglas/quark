@@ -2,143 +2,150 @@
 
 **Path**: `brain/core/`
 
-**Purpose**: Core brain simulation engine and biological architecture construction system.
+**Purpose**: High-level orchestration and management layer for the brain system.
 
 ## 🎯 **Overview**
 
-The brain core provides the fundamental simulation infrastructure that orchestrates all neural architecture modules according to biological specifications from Alphagenome integration.
+The brain core directory contains high-level orchestration components that coordinate across all brain subsystems without disrupting their architectural organization. These components provide unified interfaces and coordination capabilities.
 
-## 🔧 **Core Components**
+## 📁 **Core Components**
 
-### **Primary Systems**
+### **`brain_orchestrator.py`** - Master Orchestrator
+- **Purpose**: High-level orchestration of all brain managers and subsystems
+- **Features**:
+  - Unified interface to all brain managers
+  - Coordinated multi-system operations
+  - Startup/shutdown orchestration
+  - Cross-system operation coordination
+  - Component lifecycle management
 
-| File | Purpose | Description |
-|------|---------|-------------|
-| **`brain_simulator_init.py`** | 🧠 **Main Controller** | The master `BrainSimulator` class that orchestrates all neural modules |
-| **`construct_brain.py`** | 🧬 **Biological Builder** | Constructs brain architecture based on Alphagenome cell type distributions |
-| **`brain_simulator_adapter.py`** | 📊 **Metrics Wrapper** | Ensures simulation steps return reward and loss metrics |
+### **`component_registry.py`** - Dynamic Component Registry
+- **Purpose**: Dynamic discovery and registration of brain components
+- **Features**:
+  - Automatic component discovery
+  - Dynamic module loading
+  - Component categorization
+  - Manager identification
+  - Lazy instantiation
 
-### **Simulation Lifecycle**
+## 🏗️ **Architecture Design**
 
-| File | Purpose | Description |
-|------|---------|-------------|
-| **`emb_init_sim_and_reset.py`** | ⚡ **Initialization** | MuJoCo simulation setup and reset logic |
-| **`step_part1.py`** | 🔄 **Processing Part 1** | First half of simulation step (sensory processing) |
-| **`step_part2.py`** | 🔄 **Processing Part 2** | Second half of simulation step (motor output) |
-| **`emb_run_and_main.py`** | 🚀 **Execution** | Main simulation loop coordination |
+```
+Brain Core Orchestration Layer
+==============================
 
-### **Specialized Processing**
-
-| File | Purpose | Description |
-|------|---------|-------------|
-| **`calculate_pose_error.py`** | 📐 **Pose Analysis** | Calculate pose error for imitation learning |
-| **`emb_curriculum_logic.py`** | 🎓 **Curriculum** | Developmental learning progression logic |
-| **`update_stage.py`** | 📈 **Progression** | Curriculum stage advancement |
-| **`generate_subtasks.py`** | 🎯 **Task Planning** | Decompose high-level goals into subtasks |
-
-### **LLM Integration Properties**
-
-| File | Purpose | Description |
-|------|---------|-------------|
-| **`llm_ik_property.py`** | 🤖 **IK Integration** | LLM-powered inverse kinematics property access |
-| **`llm_manipulation_property.py`** | 🦾 **Manipulation** | LLM manipulation planner property access |
-
-### **System Utilities**
-
-| File | Purpose | Description |
-|------|---------|-------------|
-| **`ask_method.py`** | 💬 **Query Interface** | Natural language query method for brain state |
-| **`get_status.py`** | 📊 **Status Reporting** | Comprehensive system status collection |
-| **`set_viewer.py`** | 👁️ **Viewer Setup** | MuJoCo viewer configuration |
-| **`load_training_datasets.py`** | 📚 **Data Loading** | Training dataset integration |
-| **`update_profiling.py`** | ⚙️ **Performance** | Performance profiling and optimization |
-
-### **Import Management**
-
-| File | Purpose | Description |
-|------|---------|-------------|
-| **`header_imports.py`** | 📦 **Core Imports** | Standard simulation imports |
-| **`emb_header_imports.py`** | 📦 **Embodied Imports** | MuJoCo-specific imports |
-| **`emb_init_and_io.py`** | 🔧 **I/O Setup** | Input/output system initialization |
-
-## 🧬 **Biological Architecture Construction**
-
-### **`construct_brain.py` Process**
-```python
-def _construct_brain_from_bio_spec(self, bio_spec: Dict[str, Any]):
-    # 1. Extract cell type distribution from AlphaGenome simulation
-    final_cell_dist = bio_spec["final_state"]["cell_type_distribution"]
-    
-    # 2. Instantiate modules based on biological presence
-    if final_cell_dist.get(CellType.NEURON.value, 0) > 0:
-        # Initialize neural modules only if neurons present
-        self.hippocampus = EpisodicMemory()
-        self.motor_cortex = MotorCortex(...)
-        # ... other neural modules
-    
-    # 3. Always instantiate general cognitive systems
-    self.meta_controller = MetaController(...)
-    self.limbic_system = LimbicSystem()
-    # ... executive systems
+┌─────────────────────────────────────────────┐
+│          Brain Orchestrator                 │  ← High-level coordination
+├─────────────────────────────────────────────┤
+│         Component Registry                  │  ← Dynamic discovery
+└─────────────────────────────────────────────┘
+                     ↓
+        Orchestrates and coordinates
+                     ↓
+┌─────────────────────────────────────────────┐
+│        Brain Architecture Components        │
+├─────────────────────────────────────────────┤
+│ • Resource Manager    (cognitive systems)   │
+│ • Knowledge Hub       (cognitive systems)   │
+│ • Meta Controller     (prefrontal cortex)   │
+│ • Persistence Manager (memory systems)      │
+│ • Curriculum Manager  (learning systems)    │
+│ • Motor Cortex        (motor control)       │
+│ • Visual Cortex       (sensory processing)  │
+└─────────────────────────────────────────────┘
 ```
 
-### **Module Mapping**
+## 🔧 **Key Benefits**
+
+1. **Non-Invasive Integration** - Works with existing architecture without refactoring
+2. **Unified Interface** - Single entry point for complex brain operations
+3. **Coordinated Operations** - Orchestrates multi-system operations
+4. **Dynamic Discovery** - Automatically finds and registers components
+5. **Lazy Loading** - Components loaded only when needed
+
+## 💡 **Usage Examples**
+
+### Basic Orchestration
 ```python
-MODULE_MAP = {
-    "cortex": [VisualCortex, SomatosensoryCortex, MotorCortex, LanguageCortex],
-    "hippocampus": [EpisodicMemory],  
-    "basal_ganglia": [QLearningAgent],
-    "thalamus": [ThalamicRelay],
-    "cerebellum": [Cerebellum],
-    "general": [MetaController, LimbicSystem, WorkingMemory, ...]
-}
+from brain.core.brain_orchestrator import BrainOrchestrator
+
+# Initialize orchestrator
+orchestrator = BrainOrchestrator(brain_dir)
+
+# Start brain systems
+orchestrator.orchestrate_startup("full")
+
+# Coordinate a complex operation
+result = orchestrator.coordinate_managers(
+    "store_knowledge",
+    {"content": "new information", "type": "episodic"}
+)
 ```
 
-## ⚡ **BrainSimulator Integration**
-
-### **Initialization Chain**
-1. **`brain_main.py`** → **`BrainSimulator`** → **`construct_brain.py`**
-2. **Biological specification** drives architecture instantiation
-3. **34 architecture modules** imported and configured
-4. **Alphagenome compliance** validated throughout
-
-### **Simulation Loop**
+### Component Discovery
 ```python
-# Each simulation step processes:
-sensory_input → neural_modules → motor_output
-      ↑              ↑              ↓
- embodiment    brain_architecture   actions
+from brain.core.component_registry import ComponentRegistry
+
+# Create registry
+registry = ComponentRegistry(brain_dir)
+
+# Get all memory managers
+memory_managers = registry.get_managers_by_category("memory")
+
+# Load a specific component
+knowledge_hub = registry.instantiate_component(
+    "architecture.neural_core.cognitive_systems.knowledge_hub"
+)
 ```
 
-## 🛡️ **Safety & Compliance**
+## 🔗 **Integration Points**
 
-### **Biological Constraints**
-- **Cell type validation** - Only instantiate modules for present cell types
-- **Developmental timing** - Respect biological development timelines
-- **Neural naming** - Use neuroanatomical terminology
-- **Constraint validation** - Compliance engine enforces rules
+The orchestrator integrates with:
 
-### **Safety Systems**
-- **Safety Guardian** - Monitor for persistent error states  
-- **Emergency shutdown** - Automatic termination on safety threshold
-- **Biological compliance** - Validate against Alphagenome constraints
+1. **TODO System** - Called by `state/todo/core/brain_handler.py`
+2. **Brain Main** - Can be used by `brain/brain_main.py` for startup
+3. **Simulation Engine** - Coordinates with `brain/simulation_engine/`
+4. **All Managers** - Provides unified access to all brain managers
 
-## 🔗 **Key Relationships**
+## 📊 **Coordinated Operations**
 
-- **→ Architecture**: Imports and orchestrates all 100 architecture modules
-- **→ Alphagenome**: Uses biological specification for architecture decisions
-- **→ MuJoCo**: Integrates with physical simulation for embodiment
-- **→ Brain Main**: Called by `brain_main.py` as primary entry point
+The orchestrator can coordinate complex operations across systems:
 
-## 📊 **System Metrics**
+### Knowledge Storage
+- Knowledge Hub → structures information
+- Episodic Memory → stores context
+- Persistence Manager → saves to disk
+- Meta Controller → updates world model
 
-- **Architecture Modules Integrated**: 34/100 directly imported
-- **Biological Compliance**: ✅ Alphagenome constraints enforced
-- **Safety Systems**: ✅ Multi-layer protection active
-- **Simulation Performance**: ✅ Real-time capable with MuJoCo integration
+### Action Planning
+- Meta Controller → sets goals
+- Motor Cortex → plans movements
+- Cerebellum → refines timing
+- Working Memory → maintains context
+
+### Sensory Processing
+- Thalamus → relays input
+- Sensory Cortices → process data
+- Cognitive Systems → interpret meaning
+- Attention Systems → filter stimuli
+
+### Skill Learning
+- Curriculum Manager → structures progression
+- Motor Systems → learn patterns
+- Memory Systems → store episodes
+- Meta Controller → monitors progress
+
+## 🚀 **Future Enhancements**
+
+- **Plugin System** - Dynamic loading of new brain components
+- **State Persistence** - Save/restore entire brain state
+- **Distributed Orchestration** - Coordinate across multiple machines
+- **Performance Monitoring** - Real-time component performance tracking
+- **Event Bus** - Publish/subscribe for component communication
 
 ## 🔗 **Related Documentation**
 
-- [Main Brain README](../README.md)
-- [Architecture Overview](../architecture/README.md)
-- [Alphagenome Integration](../modules/alphagenome_integration/README.md)
+- [Brain Handler](../../state/todo/core/brain_handler.py) - TODO system interface
+- [Architecture Overview](../architecture/README.md) - Neural architecture
+- [Simulation Engine](../simulation_engine/README.md) - Core simulation
+- [Main Brain README](../README.md) - Overall brain system

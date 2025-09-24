@@ -1,0 +1,107 @@
+name: Validation Gate
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # Full history for git diff
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+      
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pyyaml  # For validation modules
+      
+      - name: Run Rules Validation
+        run: |
+          python tools_utilities/validate_rules_index.py
+      
+      - name: Run Full CI Validation Pipeline
+        run: |
+          python quark_validate.py ci
+      
+      - name: Upload Evidence Artifacts
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: validation-evidence
+          path: state/tasks/validation/evidence/
+          retention-days: 30
+      
+      - name: Generate Validation Report
+        if: always()
+        run: |
+          python quark_validate.py metrics
+          python quark_validate.py dashboard
+      
+      - name: Upload Dashboard
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: validation-dashboard
+          path: state/tasks/validation/dashboards/validation_dashboard.html
+          retention-days: 30
+      
+      - name: Comment PR with Results
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const fs = require('fs');
+            const evidencePath = 'state/tasks/validation/evidence/';
+            
+            // Find latest run
+            const runs = fs.readdirSync(evidencePath).sort().reverse();
+            if (runs.length > 0) {
+              const latestRun = runs[0];
+              const metricsPath = `${evidencePath}${latestRun}/metrics.json`;
+              
+              if (fs.existsSync(metricsPath)) {
+                const metrics = JSON.parse(fs.readFileSync(metricsPath, 'utf8'));
+                
+                let comment = '## 🔍 Validation Results\n\n';
+                comment += `**Run ID**: ${latestRun}\n`;
+                comment += `**Status**: ${metrics.gate_passed ? '✅ Passed' : '❌ Failed'}\n\n`;
+                
+                if (metrics.kpis) {
+                  comment += '### KPIs\n';
+                  for (const [kpi, value] of Object.entries(metrics.kpis)) {
+                    comment += `- **${kpi}**: ${value}\n`;
+                  }
+                }
+                
+                comment += '\n[View Dashboard](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})';
+                
+                github.rest.issues.createComment({
+                  issue_number: context.issue.number,
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  body: comment
+                });
+              }
+            }

@@ -5,10 +5,18 @@
 
 ## Files
 
+### 🧠 Brain Simulation
+- [run_brain_simulation.py](./run_brain_simulation.py) - Brain simulation launcher with mutex fix - ✔ active (2025-01-27)
+
+### 🔐 Authentication & Setup
 - [authenticate_now.sh](./authenticate_now.sh) - Authentication script for services - ✔ active (2025-01-27)
 - [complete_gcp_training_setup.py](./complete_gcp_training_setup.py) - Complete GCP training environment setup - ✔ active (2025-01-27)
 - [fix_mcp_servers.sh](./fix_mcp_servers.sh) - MCP servers configuration fix script - ✔ active (2025-01-27)
+
+### ☁️ Google Cloud
 - [gcs_sync_google_cloud_service.sh](./gcs_sync_google_cloud_service.sh) - Google Cloud Storage sync script - ✔ active (2025-01-27)
+
+### 🧪 Research & Training
 - [research_csf.py](./research_csf.py) - CSF research analysis script - ✔ active (2025-01-27)
 - [setup_and_run_vm_training.sh](./setup_and_run_vm_training.sh) - VM training setup and execution script - ✔ active (2025-01-27)
 - [setup_vm_training.sh](./setup_vm_training.sh) - VM training environment setup script - ✔ active (2025-01-27)

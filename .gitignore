@@ -12,6 +12,9 @@ data/credentials/
 # Local caches/lockfiles from external tools
 data/knowledge/models_artifacts/huggingface/
 
+# Brain runtime cache
+brain/.cache/
+
 # OS/editor noise
 .DS_Store
 .idea/

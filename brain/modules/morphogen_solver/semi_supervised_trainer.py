@@ -63,6 +63,34 @@ class SemiSupervisedTrainer:
         logger.info("Initialized SemiSupervisedTrainer")
         logger.info(f"Device: {self.device}")
     
+    def _assert_dataset_contract(self, data: Dict[str, Any], dataset_name: str = "dataset") -> None:
+        """Validate that dataset matches biological and shape contracts.
+        
+        Ensures:
+        - inputs shape: (N, C, D, H, W) with C == model.input_channels
+        - optional metadata.morphogen_order == ["SHH","BMP","WNT","FGF"]
+        """
+        if "inputs" not in data:
+            raise ValueError(f"{dataset_name} missing 'inputs' tensor")
+        inputs = data["inputs"]
+        if not isinstance(inputs, torch.Tensor) or inputs.dim() != 5:
+            raise ValueError(f"{dataset_name} 'inputs' must be 5D tensor (N,C,D,H,W), got {type(inputs)} with dim {getattr(inputs, 'dim', lambda: 'N/A')()}")
+        if inputs.shape[1] != self.model.input_channels:
+            raise ValueError(
+                f"{dataset_name} channel mismatch: expected {self.model.input_channels} morphogen channels "
+                f"but got {inputs.shape[1]}"
+            )
+        meta = data.get("metadata")
+        if meta is not None:
+            morph_order = meta.get("morphogen_order")
+            expected = ["SHH", "BMP", "WNT", "FGF"]
+            if morph_order != expected:
+                raise ValueError(
+                    f"{dataset_name} metadata.morphogen_order must be {expected}, got {morph_order}"
+                )
+        else:
+            logger.warning(f"{dataset_name} has no 'metadata'; skipping morphogen_order verification")
+    
     def train_with_limited_labels(self, labeled_data: Dict[str, torch.Tensor],
                                  unlabeled_data: Dict[str, torch.Tensor],
                                  num_epochs: int = 100) -> Dict[str, Any]:
@@ -76,6 +104,10 @@ class SemiSupervisedTrainer:
         Returns:
             Training results dictionary
         """
+        # Enforce dataset contract before starting
+        self._assert_dataset_contract(labeled_data, dataset_name="labeled_data")
+        self._assert_dataset_contract(unlabeled_data, dataset_name="unlabeled_data")
+        
         logger.info("Starting semi-supervised training with limited labels")
         logger.info(f"Labeled samples: {labeled_data['inputs'].shape[0]}")
         logger.info(f"Unlabeled samples: {unlabeled_data['inputs'].shape[0]}")

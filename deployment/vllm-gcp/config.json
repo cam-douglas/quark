@@ -1,0 +1,16 @@
+{
+  "deployment_name": "quark-vllm-brain-server",
+  "project_id": "quark-469604",
+  "region": "us-central1",
+  "machine_type": "n1-standard-4",
+  "gpu_type": "nvidia-tesla-t4",
+  "gpu_count": 1,
+  "disk_size": "100GB",
+  "model_path": "gs://quark-brain-models/gpt2-small",
+  "vllm_config": {
+    "tensor_parallel_size": 1,
+    "gpu_memory_utilization": 0.8,
+    "max_model_len": 2048,
+    "port": 8000
+  }
+}

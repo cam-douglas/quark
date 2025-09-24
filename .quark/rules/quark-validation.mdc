@@ -1,0 +1,288 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+ALWAYS apply every rule across all Cursor rule (`.cursor/rules/*.mdc`) and Quark rule (`.quark/rules/*.mdc`) files to the **current codebase and all future changes**; if any existing file violates a rule, refactor it or document an exception before proceeding.
+
+# 🚨 GLOBAL PRIORITY RULE — Accuracy, Completeness, Detail over Speed (MAXIMUM STRICTNESS)
+
+Status: REQUIRED — Precedes all other rules
+Applies to: All agents, all environments, all operations (authoring, refactor, review, testing, release)
+
+PRINCIPLE (NON-NEGOTIABLE): Accuracy, gap-free completeness, and meticulous attention to detail SHALL take precedence over time efficiency and speed of response in every circumstance. Deadlines, latency targets, or perceived urgency SHALL NOT override correctness, thoroughness, or validation.
+
+MANDATES (MUST)
+- No Guessing: When verification is possible, DO NOT speculate. Validate against authoritative sources before asserting.
+- Close Gaps: Explicitly enumerate assumptions, unknowns, dependencies, and edge cases. Resolve or document and block until addressed.
+- Evidence Before Claims: Never claim outcomes without artefacts and citations. Include paths to: record (`state/tasks/validation/records/*.yaml`), rubric, evidence run ID, metrics file.
+- Validation Before Speed: Prefer slower, verified results over faster, under-validated outputs.
+- STRICT. Uncertainty Expression: State uncertainty level and residual risk where applicable; avoid absolute language.
+- STRICT. Checklist Compliance: Satisfy all relevant validation checklists prior to sign-off.
+- Anchor to Source of Truth: Validation MUST be anchored to `/Users/camdouglas/quark/state/tasks/validation` (see ANCHORING section).
+
+PROHIBITED (FAIL ON SIGHT)
+- Trading accuracy/completeness for speed or convenience.
+- Omitting edge cases, assumptions, or caveats in deliverables.
+- Uncited technical claims or unverifiable assertions.
+- "Probably correct" language without corroborating evidence.
+- Skipping calibration or reproducibility artefacts.
+- Proceeding with known gaps without an approved, time-bound exception.
+
+ENFORCEMENT (STRICT)
+- Cursor IDE: Violations are ERRORS and MUST be fixed prior to commit.
+- CI (pre-merge): Any violation blocks merge.
+- Exceptions: Only via `state/tasks/validation/exceptions/<id>.md` with scope, risk, compensating controls, expiry, approvers. Expired exceptions auto-fail CI.
+
+ACCEPTANCE CHECKLIST (ALL MUST BE TRUE)
+- [ ] All assertions are validated and cited; no speculative claims.
+- [ ] Assumptions, unknowns, and edge cases are surfaced and addressed or documented.
+- [ ] Validation artefacts exist and are anchored under `state/tasks/validation/**`.
+- [ ] Calibration and reproducibility evidence present and reviewed.
+- [ ] Relevant checklists satisfied; no Missing/Incomplete items.
+- [ ] No prohibited behavior detected; no expired/absent exceptions.
+
+# 🔒 QUARK VALIDATION GOLDEN RULE (MAXIMUM STRICTNESS)
+
+Status: REQUIRED — Highest Priority
+Applies to: All changes, all milestones, all agents, all environments (IDE, CLI, CI)
+
+PRINCIPLE (NON-NEGOTIABLE): No feature, refactor, or document may be considered ready or complete unless its outcomes are validated against predefined KPIs on recognized benchmarks, scored via a written rubric, with fully traceable, reproducible evidence. Partial credit is prohibited.
+
+SCOPE & ENFORCEMENT SURFACES
+- Cursor IDE: Violations MUST surface as errors. Treat all items below as MUST/FATAL.
+- Pre-commit/Local: Changes MUST pass local checks before commit.
+- CI (pre-merge): CI MUST block merges on any violation.
+- Release: A release MUST NOT proceed with any Missing/Incomplete/Uncalibrated item.
+
+DEFINITIONS
+- KPI: A measurable objective with a numeric target and acceptance threshold.
+- Benchmark: A named dataset/task with a stable identifier/version and license.
+- Rubric: A versioned document spelling out scoring, edge cases, failure modes, and abstention policy.
+- Evidence: Artefacts proving results, stored with run IDs and immutable metadata.
+
+ANCHORING (AUTHORITATIVE DIRECTORY)
+- ALL validation records, rubrics, evidence, dashboards, templates, checklists, and exceptions MUST be ANCHORED to the authoritative directory:
+  - `/Users/camdouglas/quark/state/tasks/validation`
+- Relative path usage throughout this document assumes repository root; absolute path above is the canonical anchor.
+- Any validation artefact located outside this directory MUST reference a corresponding anchor file inside it (symlink or index entry), else CI FAILS.
+
+MANDATES (MUST)
+1) KPIs & Benchmarks (Linkage & Targets)
+   - Each task/PR MUST link ≥1 KPI and ≥1 standard benchmark/dataset.
+   - KPIs MUST specify: metric name(s), target value(s), acceptance threshold(s), and rationale.
+   - Benchmarks MUST specify: dataset name, version/hash, split protocol, and license.
+   - Record location (required): `state/tasks/validation/records/<task-or-pr-id>.yaml`.
+   - Required fields: `kpis:[], benchmarks:[], thresholds:[], rationale:`.
+2) Documented Rubric (Versioned and Cited)
+   - A written rubric MUST exist and be cited from the record with exact path.
+   - Location: `state/tasks/validation/rubrics/<domain>/<rubric_id>.md`.
+   - Rubric MUST include: scoring criteria, edge cases, failure modes, abstention policy, version/date.
+3) Traceable Evidence (Run IDs & Artefacts)
+   - Store under: `state/tasks/validation/evidence/<run-id>/`.
+   - Required artefacts (all):
+     - `metrics.json` (raw and aggregated metrics; include confidence intervals where applicable)
+     - `config.yaml` (all hyperparams, toggles, seeds)
+     - `seeds.txt` (list of all seeds used across components)
+     - `logs.txt` (full run logs; timestamps)
+     - `plots/` (calibration curves, PR/ROC, error bars)
+     - `datasets_manifest.json` (dataset IDs, versions, splits, hashes, licenses)
+     - `environment.txt` (OS, Python, library versions; CUDA if relevant)
+     - `dataset_hashes.txt` (content-addressed hashes for all files used)
+4) Calibration & Uncertainty (Beyond Point Accuracy)
+   - MUST report: ECE (or equivalent calibration metric), NLL and/or Brier Score, CI coverage, selective risk curves (if selective prediction is used).
+   - Any claim of improvement MUST include uncertainty-aware comparisons.
+5) Reproducibility (Determinism & Provenance)
+   - MUST record: seeds, configs, environment, dataset hashes/versions, and exact invocation commands.
+   - Re-runs with same seeds/configs MUST reproduce results within tolerance bands stated in the rubric.
+6) STRICT. Gating & Sign-off (Pass/Fail)
+   - A checklist item is Complete ONLY IF: (a) KPIs ≥ thresholds AND (b) rubric PASS AND (c) evidence present & complete.
+   - Any Missing/Incomplete/Uncalibrated item = FAIL (merge block). No waivers without an exception record (see §8).
+7) Traceability in Claims (Citations)
+   - Every claim (docs/PR/commit) MUST cite artefact paths and rubric version.
+   - Minimum citation fields: `record_path`, `rubric_path`, `evidence_run_id`, `metrics_file`.
+8) Exceptions (Tightly Controlled)
+   - If a temporary exception is required, create: `state/tasks/validation/exceptions/<id>.md`.
+   - Exception file MUST include: scope, reason, risk assessment, compensating controls, expiry date, approvers.
+   - Exceptions MUST be time-bound; expired exceptions auto-fail CI.
+
+ENFORCEMENT (STRICT)
+- Cursor IDE Gate (authoring-time):
+  - Treat violations as errors (not warnings). Authors MUST resolve before commit.
+- CI Pre-merge Gate (blocking):
+  - CI MUST check all of the following for every PR touching code, configs, or docs:
+    1. Presence and validity of a validation record (`records/*.yaml`) with required fields populated.
+    2. At least one rubric referenced; file exists and includes mandatory sections.
+    3. Evidence directory for the current change present with all required artefacts.
+    4. KPI thresholds met per `metrics.json`; calibration metrics present.
+    5. No open/expired exceptions; any active exception file passes policy.
+    6. ANCHOR COMPLIANCE: All referenced files MUST reside under `state/tasks/validation/**` (or have an anchor/index there). Otherwise: FAIL.
+  - Non-compliant changes MUST be blocked until fixed.
+
+INTEGRATION (PATHS & INDEXES)
+- Master index: `state/tasks/validation/MASTER_VALIDATION_CHECKLIST.md`
+- Roadmap checklists: `state/tasks/validation/checklists/*`
+- Templates: `state/tasks/validation/templates/*`
+- Dashboards: `state/tasks/validation/dashboards/*`
+- Evidence store: `state/tasks/validation/evidence/*`
+- Records: `state/tasks/validation/records/*`
+- Rubrics: `state/tasks/validation/rubrics/*`
+- Exceptions: `state/tasks/validation/exceptions/*`
+
+STRICT. ACCEPTANCE CHECKLIST (ALL MUST BE TRUE)
+- [ ] Validation record exists with KPIs, benchmarks, thresholds, rationale.
+- [ ] Rubric file exists, versioned, with scoring, edge cases, failure modes, abstention policy.
+- [ ] Evidence directory exists with all required artefacts and run ID.
+- [ ] Calibration metrics present and within rubric-defined acceptance.
+- [ ] Reproducibility metadata complete (seeds, env, hashes, invocation).
+- [ ] KPIs meet or exceed thresholds; comparisons include uncertainty.
+- [ ] No missing/expired exceptions; if present, policy-compliant and time-bound.
+- [ ] ANCHOR COMPLIANT: All referenced validation artefacts live under `state/tasks/validation/**` or have an explicit anchor there.
+- [ ] CI and IDE show zero validation errors for this change.
+
+VERSIONING
+- File owner: Validation/QA lead
+- Version: 1.4 (2025-09-24)
+- Change control: Conventional Commits; changelog appended here.
+
+# 🤖 AUTOMATED VALIDATION SYSTEM INTEGRATION
+
+Status: ACTIVE — Auto-triggers on validation contexts
+Entry Point: `/Users/camdouglas/quark/quark_validate.py`
+Documentation: `/Users/camdouglas/quark/state/tasks/validation/VALIDATION_GUIDE.md`
+
+## AUTOMATIC VALIDATION TRIGGERS
+
+ALWAYS run validation when:
+1. User mentions any of these keywords: validate, validation, verify, verification, KPI, metrics, rubric, benchmark, calibration, evidence, checklist, milestone, gate
+2. Making changes to roadmap tasks or milestone files
+3. Completing any major feature or integration
+4. Before marking any task as complete
+5. When preparing for PR/merge
+
+## VALIDATION COMMANDS
+
+### Quick Validation (Auto-detect scope)
+```bash
+python quark_validate.py validate
+# OR
+make validate-quick
+```
+
+### Specific Domain Validation
+```bash
+# Using natural language
+python quark_validate.py verify --domain "foundation layer tasks"
+python quark_validate.py verify --domain "integration testing"
+
+# Using stage numbers
+python quark_validate.py verify --stage 1  # Foundation/Embryonic
+python quark_validate.py verify --stage 2  # Fetal
+
+# Using make with smart matching
+make validate foundation layer tasks
+make validate integration
+```
+
+### Interactive Sprint Validation
+```bash
+make validate  # Full interactive guide
+```
+
+### Generate Reports
+```bash
+make validate-dashboard  # HTML dashboard
+make validate-metrics    # Show metrics
+```
+
+## MANDATORY VALIDATION WORKFLOW
+
+When implementing ANY feature:
+1. **BEFORE**: Identify relevant validation scope
+2. **DURING**: Run KPI measurements as you work
+3. **AFTER**: Collect evidence and verify gates pass
+
+```bash
+# Example workflow for foundation layer work
+make validate foundation  # Run validation
+# If validation fails, fix issues
+# If validation passes, evidence is in state/tasks/validation/evidence/<run_id>/
+```
+
+## VALIDATION CONTEXT DETECTION
+
+ALWAYS check if validation is needed by looking for:
+- Changes in `brain/modules/morphogen/` → Run STAGE1_EMBRYONIC validation
+- Changes in `brain/modules/neural/` → Run STAGE2_FETAL validation  
+- Changes in `brain/ml/` → Run MAIN_INTEGRATIONS validation
+- Changes in deployment/infrastructure → Run SYSTEM_DESIGN validation
+
+## EVIDENCE REQUIREMENTS
+
+Every validation run MUST generate:
+- `evidence/<run_id>/metrics.json` - KPI measurements
+- `evidence/<run_id>/config.yaml` - Configuration used
+- `evidence/<run_id>/seeds.txt` - Random seeds for reproducibility
+- `evidence/<run_id>/environment.txt` - System information
+- `evidence/<run_id>/dataset_hashes.txt` - Data integrity hashes
+- `evidence/<run_id>/logs.txt` - Execution logs
+
+## VALIDATION GATE ENFORCEMENT
+
+STRICT: Before ANY task can be marked complete:
+```bash
+# Run validation for the relevant domain
+python quark_validate.py verify --domain <domain>
+
+# Check that gate passes
+# Gate will FAIL if:
+# - KPIs don't meet thresholds
+# - Evidence is incomplete
+# - Rubric requirements not met
+# - Calibration metrics exceed limits (ECE > 0.02)
+```
+
+## SMART DOMAIN MATCHING
+
+The validation system uses intelligent fuzzy matching:
+- Input: "foundation layer tasks" → Matches: STAGE1_EMBRYONIC
+- Input: "integration stuff" → Matches: MAIN_INTEGRATIONS
+- Input: "adult brain" → Matches: STAGE6_ADULT
+
+No need to remember exact names - the system finds the best match!
+
+## CI/CD INTEGRATION
+
+All PRs automatically trigger:
+```bash
+python tools_utilities/validation_gate.py
+```
+
+Merges are BLOCKED if validation fails.
+
+## VALIDATION STATUS CHECK
+
+To check current validation status:
+```bash
+python quark_validate.py metrics  # Show recent validation runs
+make validate-dashboard           # Generate visual dashboard
+```
+
+## CURSOR AGENT DIRECTIVE
+
+ALWAYS when working on Quark code:
+1. Check if changes affect validation domains (use git diff)
+2. Run appropriate validation before marking tasks complete
+3. Include validation evidence paths in commit messages
+4. Reference validation run IDs in PR descriptions
+
+Example commit message:
+```
+feat: implement morphogen gradient system
+
+Validation: STAGE1_EMBRYONIC passed
+Evidence: state/tasks/validation/evidence/20250924_145602/
+KPIs: segmentation_dice=0.89 (target ≥0.80)
+```
+
+STRICT: No feature is complete without validation evidence!

@@ -46,11 +46,16 @@ USE_E8_MEMORY=true mjpython brain_main.py
 
 ## 📁 **Directory Structure**
 
-### **[`core/`](core/)** - Brain Simulation Engine
+### **[`core/`](core/)** - Brain Management Layer
+High-level brain management and orchestration.
+- **`brain_manager.py`** - Central component management and orchestration
+
+### **[`simulation_engine/`](simulation_engine/)** - Brain Simulation Engine
 Core simulation infrastructure and biological architecture construction.
 - **`brain_simulator_init.py`** - Main `BrainSimulator` class
 - **`construct_brain.py`** - Biological specification compliance
-- **`brain_main.py`** - Unified entry point
+- **`emb_*` files** - Embodied simulation components
+- **`step_part1/2.py`** - Simulation step processing
 
 ### **[`architecture/`](architecture/)** - Neural Architecture (100 Files)
 Complete neural system following neuroanatomical organization:

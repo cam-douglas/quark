@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "quark"
+version = "0.0.0"
+authors = [ {name = "Quark Team"} ]
+description = "Quark neuroscience / ML framework"
+readme = "README.md"
+requires-python = ">=3.10"
+
+[project.entry-points."quark.resource_plugins"]
+noop = "brain.architecture.neural_core.cognitive_systems.plugins.noop_plugin:NoOpPlugin"
+
+[project.scripts]
+quark-brain = "brain.brain_main:main"
+quark-rules = "management.rules.rules_orchestrator:main"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.4",
+    "pytest-cov>=4.1"
+]
+
+[tool.setuptools]
+
+[tool.setuptools.package-dir]
+"" = "."
+
+# Include the nested brain namespace packages so editable install exposes
+# brain.architecture.* imports.
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["brain*"]
+
+[tool.black]
+line-length = 100
+target-version = ['py311']
+exclude = "(data|docs|backups|venv|.venv|repo_indexes)/"
+
+[tool.isort]
+profile = "black"
+line_length = 100
+skip = ["data", "docs", "backups", "venv", ".venv", "repo_indexes"]

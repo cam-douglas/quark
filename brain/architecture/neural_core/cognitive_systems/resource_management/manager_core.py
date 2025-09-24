@@ -45,9 +45,10 @@ except ImportError:
 # ---------------------------------------------------------------------------
 # Constants & Globals
 # ---------------------------------------------------------------------------
-_REPO_ROOT = Path(__file__).resolve().parents[4]  # /quark
+_REPO_ROOT = Path(__file__).resolve().parents[5]  # /quark
+_BRAIN_ROOT = Path(__file__).resolve().parents[4]  # /quark/brain
 _DATA_DIR = _REPO_ROOT / "data"
-_CONFIG_DIR = _REPO_ROOT / "management" / "configurations" / "resource_manager"
+_CONFIG_DIR = _BRAIN_ROOT / ".cache" / "resource_manager"
 _CONFIG_DIR.mkdir(parents=True, exist_ok=True)
 
 # Logging setup (moved after constants)

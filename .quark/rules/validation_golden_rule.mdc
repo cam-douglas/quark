@@ -1,0 +1,41 @@
+# 🔒 QUARK VALIDATION GOLDEN RULE (STRICT)
+
+Status: REQUIRED — Highest Priority
+Applies to: All changes, all milestones, all agents, all environments
+
+RULE: Everything we do must be verified and validated against predefined KPIs on standard benchmarks, evaluated via a documented rubric with traceable evidence. Only when the checklists and dashboards address all of these elements can any work be considered ready for development or marked complete.
+
+MANDATES
+1) Predefine KPIs & Benchmarks
+   - Each task links to one or more KPIs and one or more standard benchmarks/datasets.
+   - Targets and acceptance thresholds must be explicit and measurable.
+2) Documented Rubric
+   - A written rubric defines scoring criteria, edge cases, failure modes, and abstention policy.
+   - Rubrics must be versioned and linked in the evidence record.
+3) Traceable Evidence
+   - Store artefacts (metrics, plots, logs, configs, seeds) under state/tasks/validation/evidence/ with run IDs.
+   - Each claim must cite artefact paths and include a short rationale.
+4) Calibration & Uncertainty
+   - Report confidence metrics (ECE, CI coverage, selective risk), not just point accuracy.
+5) Reproducibility
+   - Seeds, configs, environment and dataset hashes recorded.
+6) Gating & Sign-off
+   - A checklist item is Complete only when: KPIs ≥ thresholds AND rubric shows Pass with Evidence present.
+   - CI blocks merges if any required item is Missing, Incomplete, or Uncalibrated.
+
+ENFORCEMENT
+- CI pre-merge gate checks the MASTER_VALIDATION_CHECKLIST and per-roadmap checklists for:
+  (a) KPI links + thresholds, (b) benchmark IDs, (c) rubric link, (d) evidence artefacts.
+- Non-compliant changes are blocked until fixed.
+
+INTEGRATION
+- Master index: state/tasks/validation/MASTER_VALIDATION_CHECKLIST.md
+- Roadmap checklists: state/tasks/validation/checklists/*
+- Templates: state/tasks/validation/templates/*
+- Dashboards: state/tasks/validation/dashboards/*
+- Evidence store: state/tasks/validation/evidence/*
+
+VERSIONING
+- File owner: Validation/QA lead
+- Version: 1.0 (2025-09-24)
+- Change control: Conventional Commits; changelog appended here.
